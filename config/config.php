@@ -2,7 +2,7 @@
 	define("DB_HOST", "localhost");
 	define("DB_USR", "root");
 	define("DB_PASS", "hola");
-	define("DB_DB", "framework");
+	define("DB_DB", "crowdfunding");
 	//define(DB_TYPE, "mysql");
 
 	$template_config = 
@@ -12,5 +12,5 @@
         'cache_dir' => 'libs/smarty/cache/',
         'config_dir' => 'libs/smarty/configs/',
         );
-    define ("URL_BASE","/ejemplos/framework/");
+    define ("URL_BASE","/ejemplos/luna/");
 ?>
