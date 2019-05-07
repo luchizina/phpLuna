@@ -7,10 +7,11 @@ class Propuesta extends ClaseBase {
 	public $FechaPublicada = date("Y-m-d");
 	public $Monto = 0;
 	public $MontoActual = 0;
-	public $NickUsuario = '';
-	public $Categoria = '';
-	public $Recompensa = 0;
-	public $EstadoActual = 0;
+	public $Usuario = null; //objeto usuario
+	public $Categoria = null; //objeto categoria
+	public $Recompensa = array(); //objetoRecompensa
+	public $EstadoActual = null; //objetoEstado
+	public $Comentarios = array();
 
 	public function __construct($obj=NULL) {
         if(isset($obj)){
@@ -20,6 +21,14 @@ class Propuesta extends ClaseBase {
         }
         $tabla="propuesta";
         parent::__construct($tabla);
+    }
+
+    public function getComentario(){
+    	return $this->Comentarios;
+    }
+
+    public function setComentario($Comentarios){
+    	$this->Comentarios=$Comentarios;
     }
 
 	public function getNombre(){
@@ -70,12 +79,12 @@ class Propuesta extends ClaseBase {
 		$this->MontoActual=$MontoActual;
 	}
 
-	public function getNickUsuario(){
-		return $this->NickUsuario;
+	public function getUsuario(){
+		return $this->Usuario;
 	}
 
-	public function setNickUsuario($NickUsuario){
-		$this->NickUsuario=$NickUsuario;
+	public function setUsuario($Usuario){
+		$this->Usuario=$Usuario;
 	}
 
 	public function getCategoria(){

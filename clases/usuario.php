@@ -8,6 +8,9 @@ class Usuario extends ClaseBase {
 	public $Correo = '';
 	public $Celular = '';
 	public $Imagen = null;
+	public $Comentarios = array();
+	public $PropuestasPropone = array();
+	public $PropuestasColabora = array();
 
 	public function __construct($obj=NULL) {
         if(isset($obj)){
@@ -18,6 +21,30 @@ class Usuario extends ClaseBase {
         $tabla="usuario";
         parent::__construct($tabla);
 
+    }
+
+    public function getPropuestasColabora(){
+        return $this->PropuestasColabora;
+    }
+
+    public function setPropuestasColabora($PropuestasColabora){
+        $this->PropuestasColabora=$PropuestasColabora;
+    }
+
+    public function getPropuestasPropone(){
+        return $this->PropuestasPropone;
+    }
+
+    public function setPropuestasPropone($PropuestasPropone){
+        $this->PropuestasPropone=$PropuestasPropone;
+    }
+
+    public function getComentarios(){
+        return $this->Comentarios;
+    }
+
+    public function setComentarios($Comentarios){
+        $this->Comentarios=$Comentarios;
     }
 
     public function getNombre(){
