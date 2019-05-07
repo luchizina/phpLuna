@@ -12,5 +12,5 @@
         'cache_dir' => 'libs/smarty/cache/',
         'config_dir' => 'libs/smarty/configs/',
         );
-    define ("URL_BASE","/ejemplos/luna/");
+    define ("URL_BASE","/phpLuna/");
 ?>

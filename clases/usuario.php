@@ -102,5 +102,111 @@ class Usuario extends ClaseBase {
     public function setImagen($Imagen){
     	$this->Imagen=$Imagen;
     }
+
+    public function getBusqueda($buscar){
+        $usuarios=array();
+        $stmt = $this->getDB()->prepare( 
+            "SELECT * FROM usuario 
+            WHERE Nombre like ? " );
+        // Le agrego % para busque los que empiezan con la letra o terminan
+        $buscar= '%'.$buscar.'%';
+        $stmt->bind_param( "s",$buscar);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        while ($fila=$resultado->fetch_object()) {
+            $persona= new Usuario($fila);
+                $usuarios[]=$persona;
+        }
+        return $usuarios;
+    }
+
+    public function agregar(){
+        
+        $nombre=$this->getNombre();
+        $ape=$this->getApellido();
+        $edad=$this->getEdad();
+        $ci=$this->getCI();
+        $password = sha1("123456");
+        $email=$this->getEmail();
+
+        $stmt = $this->getDB()->prepare( 
+            "INSERT INTO usuario 
+        (nombre, apellido,edad, ci, email,pass) 
+           VALUES (?,?,?,?,?,?)" );
+        $stmt->bind_param("ssisss",$nombre,
+            $ape,$edad,$ci,$email,$password);
+        return $stmt->execute();
+    
+    }
+
+   /* public function insertarFav($idLog,$idFav){
+
+        $stmt = $this->getDB()->prepare( 
+            "INSERT INTO favoritos 
+        (idLogueado,idFavorito) 
+           VALUES (?,?)" );
+        $stmt->bind_param("ii",$idLog,
+            $idFav);
+        return $stmt->execute();
+
+
+    }*/
+
+
+   /* public function modificar(){
+
+
+
+        $nombre=$this->getNombre();
+        $ape=$this->getApellido();
+        $edad=$this->getEdad();
+        $ci=$this->getCI();
+        $password = sha1("123456");
+        $email=$this->getEmail();
+        $id=$this->getid();
+
+        $stmt = $this->getDB()->prepare( 
+            "UPDATE usuario set nombre=?, apellido=?,edad=?, ci=?, email=?,pass=? WHERE id=?" );
+        $stmt->bind_param("ssissss",$nombre,
+            $ape,$edad,$ci,$email,$password,$id);
+        return $stmt->execute();
+        
+    }*/
+
+
+
+
+    public function login($email,$pass){
+        $stmt = $this->getDB()->prepare( "SELECT * from  usuario WHERE Nick=? AND Password=?" );
+        $stmt->bind_param("ss",$email,$pass);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        if($resultado->num_rows<1){
+            return false;
+        }    
+        $res=$resultado->fetch_object();
+        Session::init();
+        Session::set('usuario_logueado', true);
+        Session::set('usuario_id', $res->id);
+        Session::set('usuario_nombre', $res->nombre);
+        Session::set('usuario_email', $res->email);
+        return true;
+    }
+    
+   public function logout(){
+        Session::init();
+        Session::destroy();
+   } 
+
+
+
+
 }
+
+
+
+
+
+
+
  ?>
