@@ -55,6 +55,41 @@ class ControladorPropuesta extends ControladorIndex {
    
    }
 
+   function nuevo(){
+	$mensaje="";
+	if(isset($_POST["nombre"])){
+		$prop= new propuesta();
+		$prop->setNombre($_POST["nombre"]);
+		$prop->setDescripcion($_POST["desc"]);
+		$prop->setFechaPublicada($_POST["fechaP"]);
+		$prop->setMonto($_POST["monto"]);
+		$prop->setMontoActual(0);
+		$usr = new Usuario();
+		$prop->setUsuario($usr);
+		$cat = new Categoria();
+		$prop->setUsuario($cat);
+		$usr = new Usuario();
+		$prop->setUsuario($usr);
+		$Estad = new estados(estados::Publicada);
+		$prop->setEstadoActual($Estad);
+		
+		if($prop->agregar()){
+			$this->redirect("propuesta","listado");
+			exit;
+		}else{
+			$mensaje="Error! No se pudo agregar el usuario";
+		}
+
+		
+	}
+	$tpl = Template::getInstance();
+	$tpl->asignar('titulo',"Nueva propuesta");
+	$tpl->asignar('buscar',"");
+	$tpl->asignar('mensaje',$mensaje);
+	$tpl->mostrar('registrar_propuesta',array());
+
+}
+
 }
 
 
