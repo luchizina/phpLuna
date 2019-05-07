@@ -3,8 +3,8 @@ class Propuesta extends ClaseBase {
 
 	public $Nombre = '';
 	public $Descripcion = '';
-	public $FechaAgregada = date("Y-m-d");
-	public $FechaPublicada = date("Y-m-d");
+	public $FechaAgregada = null;
+	public $FechaPublicada = null;
 	public $Monto = 0;
 	public $MontoActual = 0;
 	public $Usuario = null; //objeto usuario
@@ -110,5 +110,9 @@ class Propuesta extends ClaseBase {
 	public function setEstadoActual($EstadoActual){
 		$this->EstadoActual=$EstadoActual;
 	}
+
+
+
+
 }
  ?>

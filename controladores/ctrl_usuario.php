@@ -83,13 +83,6 @@ function listadoMovil($params=array()){
            $usuarios=$usuario->getListado();  
         }
        
-     
-      /*  $datos = array(
-       'usuarios' => $usuarios,
-       'buscar' => $buscar,
-       'titulo' => $titulo,
-       'mensaje' => $mensaje,
-       );*/
 
        $arreglo=["status"=>"ok","message"=>$usuarios];
 
