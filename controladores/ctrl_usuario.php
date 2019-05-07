@@ -101,7 +101,7 @@ function multiplicidad($a = array())
 {
   $f = $a[0]*100;
   $c=["numerito"=>$f];
-$b=["status"=>"ok","message"=>$c];
+$b=["status"=>"ok","message"=>[$c]];
 $hola= json_encode($b);
 echo $hola;
 }
