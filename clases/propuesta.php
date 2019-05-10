@@ -115,19 +115,19 @@ class Propuesta extends ClaseBase {
       
         $nombre=$this->getNombre();
         $Descripcion=$this->getDescripcion();
-        $FechaAgregada=$this->getFechaAgregada();
+     //   $FechaAgregada=$this->getFechaAgregada();
         $FechaPublicada=$this->getFechaPublicada();
         $Monto = $this->getMonto();
         $MontoActual=0;
-        $Usuario = $this->getUsuario()->getNick();
+      /*  $Usuario = $this->getUsuario()->getNick();
         $Categoria = $this->getCategoria()->getNombreP();
-        $EstadoActual = $this->getEstadoActual()->getNombre();
+        $EstadoActual = $this->getEstadoActual()->getNombre();*/
         $stmt = $this->getDB()->prepare( 
             "INSERT INTO propuesta 
-        (Nombre,Descripcion, FechaAgregada,FechaPublicada,Monto,MontoActual,NickUsuario,Categoria, EstadoActual) 
-           VALUES (?,?,?,?,?,?,?,?,?)" );
-        $stmt->bind_param("ssssiisssi",$nombre,
-            $Descripcion,$FechaAgregada,$FechaPublicada,$Monto,$MontoActual,$Usuario,$Categoria,$EstadoActual,NULL);
+        (Nombre,Descripcion, FechaPublicada,Monto,MontoActual) 
+           VALUES (?,?,?,?,?)" );
+        $stmt->bind_param("sssii",$nombre,
+            $Descripcion,$FechaPublicada,$Monto,$MontoActual);
         return $stmt->execute();
     
     }

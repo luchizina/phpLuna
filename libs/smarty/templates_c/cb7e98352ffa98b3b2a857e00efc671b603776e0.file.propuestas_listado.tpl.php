@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-07 22:42:49
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-10 16:46:40
          compiled from "vistas\propuestas_listado.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:5400831795cd1edc9991dc1-28867327%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cb7e98352ffa98b3b2a857e00efc671b603776e0' => 
     array (
       0 => 'vistas\\propuestas_listado.tpl',
-      1 => 1557260679,
+      1 => 1557499593,
       2 => 'file',
     ),
   ),
@@ -15,20 +15,20 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cd1edcadfcb54_70187512',
   'variables' => 
   array (
     'url_base' => 0,
     'proyecto' => 0,
     'titulo' => 0,
-    'propuesta_nueva' => 0,
+    'registrar_propuesta' => 0,
     'mensaje' => 0,
     'propuestas' => 0,
     'prop' => 0,
     'propuesta' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cd1edcadfcb54_70187512',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5cd1edcadfcb54_70187512')) {function content_5cd1edcadfcb54_70187512($_smarty_tpl) {?>
 <!DOCTYPE html>
@@ -72,7 +72,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <div class="col-sm-12  col-md-12  main">
           <h1 class="page-header">Propuestas</h1>
           <h2 class="sub-header"><?php echo $_smarty_tpl->tpl_vars['titulo']->value;?>
- <button id="agregar" name="agregar" class="btn btn-success pull-right" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['propuesta_nueva']->value;?>
+ <button id="agregar" name="agregar" class="btn btn-success pull-right" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['registrar_propuesta']->value;?>
 '">Agregar</button></h2>
           <?php if ($_smarty_tpl->tpl_vars['mensaje']->value!='') {?>
             <div class="alert alert-danger" role="alert"><?php echo $_smarty_tpl->tpl_vars['mensaje']->value;?>
