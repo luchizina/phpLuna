@@ -1,7 +1,7 @@
 <?php  
 require "clases/clase_base.php";
 require "clases/propuesta.php";
-require "clases/estado.php";
+//require "clases/estados.php";
 //require "clases/list_estado.php";
 require "clases/recompensa.php";
 require_once('clases/template.php');
@@ -49,7 +49,7 @@ class ControladorPropuesta extends ControladorIndex {
        'mensaje' => $mensaje,
        );
    
-       $tpl->asignar('propuesta_nueva',$this->getUrl("propuesta","nueva"));
+       $tpl->asignar('registrar_propuesta',$this->getUrl("propuesta","nuevo"));
        $tpl->asignar('propuesta_modificada',$this->getUrl("propuesta","modificar"));
        $tpl->mostrar('propuestas_listado',$datos);
    
@@ -61,18 +61,11 @@ class ControladorPropuesta extends ControladorIndex {
 		$prop= new propuesta();
 		$prop->setNombre($_POST["nombre"]);
 		$prop->setDescripcion($_POST["desc"]);
-		$prop->setFechaPublicada($_POST["fechaP"]);
+    $fecha =  date("Y-m-d H:i:s");
+		$prop->setFechaPublicada('12/12/2019');
 		$prop->setMonto($_POST["monto"]);
 		$prop->setMontoActual(0);
-		$usr = new Usuario();
-		$prop->setUsuario($usr);
-		$cat = new Categoria();
-		$prop->setUsuario($cat);
-		$usr = new Usuario();
-		$prop->setUsuario($usr);
-		$Estad = new estados(estados::Publicada);
-		$prop->setEstadoActual($Estad);
-		
+
 		if($prop->agregar()){
 			$this->redirect("propuesta","listado");
 			exit;
