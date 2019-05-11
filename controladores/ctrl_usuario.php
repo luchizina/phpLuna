@@ -135,6 +135,39 @@ function nuevo(){
   $tpl->mostrar('usuarios_nuevo',array());
 }
 
+public function modificar($params = array())
+   {
+    $mensaje = "";
+     $usuario  = new Usuario();
+     $u = $usuario->obtenerPorId($params[0]);
+     if(isset($_POST["nombre"]))
+  { 
+    $u->setNombre($_POST["nombre"]);
+    $u->setNick($_POST["nick"])
+    $u->setApellido($_POST["apellido"]);
+    $u->setCI($_POST["ci"]);
+    $u->setCelular($_POST["celular"]);
+    $u->setCorreo($_POST["email"]);
+    $u->setArchivo($_FILES["archivo"]["tmp_name"]);
+    $u->setPassword($_POST["pass"]);
+    $usr->setTam($_FILES["archivo"]["size"]);
+    if($u->modificar())
+    {
+      $this->redirect("usuario","listado");
+      exit;
+    }else{
+      $mensaje="Error! No se pudo modificar el usuario";
+    }
+
+  }
+  $tpl = Template::getInstance();
+  $tpl->asignar('titulo',"Modificar Usuario");
+  $tpl->asignar('buscar',"");
+  $tpl->asignar('mensaje',$mensaje);
+  $tpl->asignar('usuario', $u);
+  $tpl->mostrar('modificar_usuario',$u);
+   }
+
 
 
 }

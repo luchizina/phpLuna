@@ -13,6 +13,8 @@ class Usuario extends ClaseBase {
 	public $Comentarios = array();
 	public $PropuestasPropone = array();
 	public $PropuestasColabora = array();
+    private $Cedula = '';
+    private $Activo = boolean;
 
 	public function __construct($obj=NULL) {
         if(isset($obj)){
@@ -121,6 +123,26 @@ class Usuario extends ClaseBase {
     	$this->Imagen=$Imagen;
     }
 
+    public function setCI($Cedula)
+    {
+        $this->Cedula=$Cedula;
+    }
+
+    public function getCI()
+    {
+        return $this->Cedula;
+    }
+
+    public function setActivo($activito)
+    {
+        $this->Activo = $activito;
+    }
+
+    public function isActivo()
+    {
+        return $this->Activo;
+    }
+
     public function getBusqueda($buscar){
         $usuarios=array();
         $stmt = $this->getDB()->prepare( 
@@ -172,26 +194,29 @@ public function agregar(){
 
     }*/
 
-
-   /* public function modificar(){
-
-
-
+public function modificar()
+   {
         $nombre=$this->getNombre();
         $ape=$this->getApellido();
-        $edad=$this->getEdad();
+        $nick=$this->getNick();
         $ci=$this->getCI();
-        $password = sha1("123456");
-        $email=$this->getEmail();
-        $id=$this->getid();
-
+        $password = sha1($this->getPassword);
+        $email=$this->getCorreo();
+        $cel = $this->getCelular();
+        $arch = $this->getArchivo();
+        $tama = $this->getTam();
+        $this->setImagen(addslashes(file_get_contents($arch)));
+        $lol = $this->getImagen();
         $stmt = $this->getDB()->prepare( 
-            "UPDATE usuario set nombre=?, apellido=?,edad=?, ci=?, email=?,pass=? WHERE id=?" );
-        $stmt->bind_param("ssissss",$nombre,
+            "UPDATE usuarios set
+        nombre=?, apellido=?,Nick=?, Correo=?, Password=?,Celular=?, Imagen=? WHERE id=?"); 
+           
+        $stmt->bind_param("ssisssi",$nombre,
             $ape,$edad,$ci,$email,$password,$id);
         return $stmt->execute();
-        
-    }*/
+   }
+
+   
 
 
 
