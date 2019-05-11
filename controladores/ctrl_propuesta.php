@@ -8,7 +8,8 @@ require_once('clases/template.php');
 require_once('clases/Utils.php');
 require_once('clases/session.php');
 require_once('clases/auth.php');
-
+ini_set('display_errors', 'On');
+error_reporting(E_ALL);
 class ControladorPropuesta extends ControladorIndex {
 
  function listado($params=array()){
