@@ -107,6 +107,33 @@ echo $hola;
 }
 
 
+function nuevo(){
+  $mensaje="";
+  if(isset($_POST["nick"])){
+    $usr= new Usuario();
+    $usr->setNick($_POST["nick"]);
+    $usr->setNombre($_POST["nombre"]);
+    $usr->setApellido($_POST["apellido"]);
+    $usr->setCelular($_POST["cel"]);
+    $usr->setCorreo($_POST["email"]);
+    $usr->setPassword($_POST["pass"]);
+    $usr->setArchivo($_FILES["archivo"]["tmp_name"]);
+    $usr->setTam($_FILES["archivo"]["size"]);
+    if($usr->agregar()){
+      $this->redirect("usuario","listado");
+      exit;
+    }else{
+      $mensaje="Error! No se pudo agregar el usuario";
+    }
+
+    
+  }
+  $tpl = Template::getInstance();
+  $tpl->asignar('titulo',"Registrarse");
+  $tpl->asignar('buscar',"");
+  $tpl->asignar('mensaje',$mensaje);
+  $tpl->mostrar('usuarios_nuevo',array());
+}
 
 
 

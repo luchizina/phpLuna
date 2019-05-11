@@ -8,6 +8,8 @@ class Usuario extends ClaseBase {
 	public $Correo = '';
 	public $Celular = '';
 	public $Imagen = null;
+    public $Archivo;
+    public $Tam;
 	public $Comentarios = array();
 	public $PropuestasPropone = array();
 	public $PropuestasColabora = array();
@@ -21,6 +23,22 @@ class Usuario extends ClaseBase {
         $tabla="usuario";
         parent::__construct($tabla);
 
+    }
+
+    public function getArchivo(){
+        return $this->Archivo;
+    }
+
+    public function setArchivo($Archivo){
+        $this->Archivo=$Archivo;
+    }
+
+    public function getTam(){
+        return $this->Tam;
+    }
+
+    public function setTam($Tam){
+        $this->Tam=$Tam;
     }
 
     public function getPropuestasColabora(){
@@ -120,24 +138,26 @@ class Usuario extends ClaseBase {
         return $usuarios;
     }
 
-    public function agregar(){
-        
+public function agregar(){ 
         $nombre=$this->getNombre();
         $ape=$this->getApellido();
-        $edad=$this->getEdad();
-        $ci=$this->getCI();
-        $password = sha1("123456");
-        $email=$this->getEmail();
-
+        $cel=$this->getCelular();
+        $nick=$this->getNick();
+        $password = sha1($this->getPassword());
+        $email=$this->getCorreo();
+        $arch = $this->getArchivo();
+        $tama = $this->getTam();
+        $this->setImagen(addslashes(file_get_contents($arch)));
+        $lol = $this->getImagen();
         $stmt = $this->getDB()->prepare( 
-            "INSERT INTO usuario 
-        (nombre, apellido,edad, ci, email,pass) 
-           VALUES (?,?,?,?,?,?)" );
-        $stmt->bind_param("ssisss",$nombre,
-            $ape,$edad,$ci,$email,$password);
+            "INSERT INTO usuario (Nombre, Apellido,Nick, Correo, Password,Celular, Imagen)
+           VALUES (?,?,?,?,?,?,?)" );
+        $null = NULL;
+        $stmt->bind_param("ssssssb", $nombre, $ape, $nick, $email, $password, $cel, $null);
+        $stmt->send_long_data(6, $lol);
         return $stmt->execute();
-    
     }
+
 
    /* public function insertarFav($idLog,$idFav){
 
