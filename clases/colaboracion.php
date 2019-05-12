@@ -2,7 +2,7 @@
 class Colaboracion extends ClaseBase{
 
 	public $id=0;
-	public $Fecha=date("Y-m-d");
+	public $Fecha;
 	public $Monto=0;
 	public $Usuario=null; //Objeto
 	public $Propuesta=null; //Objeto
@@ -60,6 +60,22 @@ class Colaboracion extends ClaseBase{
 
     public function setRecompensa($Recompensa){
     	$this->Recompensa = $Recompensa;
+    }
+
+    public function agregar(){
+        $nombre=$this->getNombre();
+        $Fecha=$this->getFecha();
+        $usu=$this->getUsuario()->getNick();
+        $prop=$this->getPropuesta()->getNombre();
+        $rec=$this->getRecompensa()->getId();
+        $stmt = $this->getDB()->prepare( 
+            "INSERT INTO colaboracion 
+        (Fecha, Monto,NickUsuario, TituloPropuesta, Recompensa) 
+           VALUES (?,?,?,?,?)" );
+        $stmt->bind_param("sissi",$nombre,
+            $Fecha,$usu,$prop,$rec);
+        return $stmt->execute();
+    
     }
 
 }

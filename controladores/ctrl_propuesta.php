@@ -31,6 +31,9 @@ class ControladorPropuesta extends ControladorIndex {
                     $mensaje="ERROR. No existe la propuesta";
                     $propuestas=$propuesta->getListado();	
                 }
+                if($params[0]=="colaborar"){
+                  $this->nuevaColaboracion($params=array());
+                }
            }else{
                 $propuesta=new Propuesta();
                $propuestas=$propuesta->getListado();	
@@ -80,6 +83,52 @@ class ControladorPropuesta extends ControladorIndex {
 	$tpl->asignar('buscar',"");
 	$tpl->asignar('mensaje',$mensaje);
 	$tpl->mostrar('registrar_propuesta',array());
+
+}
+
+public function recompensas($params=array()){
+  if(empty($params)){
+    $rec = new Recompensa();
+    $recs = $rec->getListado();
+  }
+  $tpl = Template::getInstance();
+        $datos = array(
+       'recompensas' => $recs,
+       );
+   
+       $tpl->mostrar('nueva_colaboracion',$datos);
+}
+
+function nuevaColaboracion($params=array()){
+  $mensaje="";
+  $col = new Colaboracion();
+  $Usuario = new Usuario();
+  $propuesta = new Propuesta();
+  $Recompensa = new Recompensa();
+  $rec = $Recompensa->obtenerPorId($_POST['rec']);
+  $usu = $Usuario->obtenerPorId($_SESSION['usuario_id']);
+  $prop=$propuesta->obtenerPorId($params[0]);
+  if(isset($_POST["monto"])){
+    $col->setMonto($_POST["monto"]);
+    $col->setFecha(date("Y-m-d"));
+    $col->setUsuario($usu);
+    $col->setTituloPropuesta($prop);
+    $col->setRecompensa($rec);
+    if($usr->agregar()){
+      $this->redirect("propuesta","listado");
+      exit;
+    }else{
+      $mensaje="Error! No se pudo agregar la colaboracion";
+    } 
+  }
+  $tpl = Template::getInstance();
+  $tpl->asignar('titulo',"Nueva colaboracion");
+  $tpl->asignar('buscar',"");
+  $tpl->asignar('mensaje',$mensaje);
+  $tpl->asignar('propuesta',$prop);
+  $tpl->asignar('usuario',$usu);
+  $tpl->asignar('recompensa',$rec);
+  $tpl->mostrar('nueva_colaboracion',array());
 
 }
 

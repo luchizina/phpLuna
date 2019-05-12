@@ -14,7 +14,7 @@ class Usuario extends ClaseBase {
 	public $PropuestasPropone = array();
 	public $PropuestasColabora = array();
     private $Cedula = '';
-    private $Activo = boolean;
+    private $Activo = 0;
 
 	public function __construct($obj=NULL) {
         if(isset($obj)){
@@ -169,15 +169,71 @@ public function agregar(){
         $email=$this->getCorreo();
         $arch = $this->getArchivo();
         $tama = $this->getTam();
-        $this->setImagen(addslashes(file_get_contents($arch)));
-        $lol = $this->getImagen();
+        $ci = $this->getCI();
+        $act = $this->isActivo();
+        if($arch != ""){
+            $this->setImagen(addslashes(file_get_contents($arch)));
+            $lol = $this->getImagen();
+        } else {
+            $lol = null;
+        }
         $stmt = $this->getDB()->prepare( 
-            "INSERT INTO usuario (Nombre, Apellido,Nick, Correo, Password,Celular, Imagen)
-           VALUES (?,?,?,?,?,?,?)" );
+            "INSERT INTO usuario (Nombre, Apellido,Nick, Correo, Password,Celular, Imagen, ci, activo)
+           VALUES (?,?,?,?,?,?,?,?,?)" );
         $null = NULL;
-        $stmt->bind_param("ssssssb", $nombre, $ape, $nick, $email, $password, $cel, $null);
+        $stmt->bind_param("ssssssbsi", $nombre, $ape, $nick, $email, $password, $cel, $null, $ci, $act);
         $stmt->send_long_data(6, $lol);
         return $stmt->execute();
+    }
+
+    public function agregarCel(){ 
+        $nombre=$this->getNombre();
+        $ape=$this->getApellido();
+        $cel=$this->getCelular();
+        $nick=$this->getNick();
+        $password = sha1($this->getPassword());
+        $email=$this->getCorreo();
+        $arch = $this->getArchivo();
+        $tama = $this->getTam();
+        $ci = $this->getCI();
+        $act = $this->isActivo();
+        $stmt = $this->getDB()->prepare( 
+            "INSERT INTO usuario (Nombre, Apellido,Nick, Correo, Password,Celular, Imagen, ci, activo)
+           VALUES (?,?,?,?,?,?,?,?,?)" );
+        $null = NULL;
+        $stmt->bind_param("ssssssbsi", $nombre, $ape, $nick, $email, $password, $cel, $null, $ci, $act);
+        return $stmt->execute();
+    }
+
+     public function getListadoUsus(){
+        $sql="select * from usuario ";
+        $resultados=array();
+
+        $resultado =$this->db->query($sql)   
+            or die ("Fallo en la consulta");
+
+        while ( $fila = $resultado->fetch_object() )
+        {
+            
+            $objeto= new $this->modelo($fila);
+            $resultados[]=$objeto;
+        } 
+     return $resultados;   
+    }
+
+    public function ci($ci){
+        $stmt = $this->getDB()->prepare( 
+            "SELECT ci FROM usuario 
+            WHERE ci =" );
+        $stmt->bind_param("s",$ci);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->fetch();
+        //$resultado = $stmt->get_result();
+        $row_cnt = $stmt->num_rows();
+        if($row_cnt > 0) {
+            return true;
+        }
     }
 
 
