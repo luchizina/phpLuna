@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-12 04:49:44
+=======
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-12 23:36:30
+>>>>>>> 4e11f7eb40998bd49df98310c16bdc5ee3d62bf3
          compiled from "vistas\propuestas_listado.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:5400831795cd1edc9991dc1-28867327%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +11,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cb7e98352ffa98b3b2a857e00efc671b603776e0' => 
     array (
       0 => 'vistas\\propuestas_listado.tpl',
+<<<<<<< HEAD
       1 => 1557629344,
+=======
+      1 => 1557696987,
+>>>>>>> 4e11f7eb40998bd49df98310c16bdc5ee3d62bf3
       2 => 'file',
     ),
   ),
@@ -26,7 +34,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'mensaje' => 0,
     'propuestas' => 0,
     'prop' => 0,
-    'propuesta' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -88,8 +95,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                   <th>Nombre</th>
                   <th>Descripcion</th>
                   <th>Monto</th>
-                  <th>Email</th>
                   <th>Fecha agregada</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -110,10 +117,13 @@ $_smarty_tpl->tpl_vars['prop']->_loop = true;
 </td>
                     <td>
                       <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-propuesta/listado/borrar/<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getId();?>
+propuesta/listado/borrar/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getId();?>
+/'"/>
+
+                      <input type="button" value="colaborar" id="colaborar" class="btn btn-success" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/listado/colaborar/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getId();?>
 /'"/>
                      
-                    <!--  <input type="button" value="Favoritos" class="btn btn-submit" onClick="cargarFavoritos();"/>-->
                     </td>
                   </tr>
                 <?php } ?>

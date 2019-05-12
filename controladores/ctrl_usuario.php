@@ -119,6 +119,8 @@ function nuevo(){
     $usr->setPassword($_POST["pass"]);
     $usr->setArchivo($_FILES["archivo"]["tmp_name"]);
     $usr->setTam($_FILES["archivo"]["size"]);
+    $usr->setCI($_POST["ci"]);
+    $usr->setActivo(1);
     if($usr->agregar()){
       $this->redirect("usuario","listado");
       exit;
@@ -143,7 +145,7 @@ public function modificar($params = array())
      if(isset($_POST["nombre"]))
   { 
     $u->setNombre($_POST["nombre"]);
-    $u->setNick($_POST["nick"])
+    $u->setNick($_POST["nick"]);
     $u->setApellido($_POST["apellido"]);
     $u->setCI($_POST["ci"]);
     $u->setCelular($_POST["celular"]);
@@ -168,7 +170,39 @@ public function modificar($params = array())
   $tpl->mostrar('modificar_usuario',$u);
    }
 
+public function existeCi(){
+  $eCi = "";
+  if(isset($_POST['ci'])){
+  $usuario  = new Usuario();
+  if($usuario->ci($_POST['ci'])){
+    $eCi="Cedula en uso";
+  }
+}
+  $tpl = Template::getInstance();
+  $tpl->asignar('eCi',$eCi);
+}
 
+public function existeCorreo(){
+  $co = $_POST['email'];
+  $usuario  = new Usuario();
+  $usuarios = $usuario->getListadoUsus();
+  foreach ($usuarios as $us => $usu) {
+    if($usu->Correo()==$co){
+      echo 'Correo en uso';
+    }
+  }
+}
+
+public function existeNick(){
+  $nick = $_POST['nick'];
+  $usuario  = new Usuario();
+  $usuarios = $usuario->getListadoUsus();
+  foreach ($usuarios as $us => $usu) {
+    if($usu->getNick()==$nick){
+      echo 'Nick en uso';
+    }
+  }
+}
 
 }
 ?>
