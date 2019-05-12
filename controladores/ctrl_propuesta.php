@@ -116,6 +116,7 @@ function nuevaColaboracion($params=array()){
     $col->setRecompensa($rec);
     if($usr->agregar()){
       array_push($usu->getPropuestasColabora(), $col);
+      $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
       $this->redirect("propuesta","listado");
       exit;
     }else{
