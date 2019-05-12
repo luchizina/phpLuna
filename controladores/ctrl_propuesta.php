@@ -115,6 +115,7 @@ function nuevaColaboracion($params=array()){
     $col->setTituloPropuesta($prop);
     $col->setRecompensa($rec);
     if($usr->agregar()){
+      array_push($usu->getPropuestasColabora(), $col);
       $this->redirect("propuesta","listado");
       exit;
     }else{
@@ -130,6 +131,7 @@ function nuevaColaboracion($params=array()){
   $tpl->asignar('recompensa',$rec);
   $tpl->mostrar('nueva_colaboracion',array());
 
+function favoritear(){
 }
 
 }
