@@ -2,6 +2,7 @@
 
 require_once('libs/smarty/Smarty.class.php');
 require_once('config/config.php');
+
  
 class Template{
      

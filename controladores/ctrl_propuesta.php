@@ -49,17 +49,32 @@ class ControladorPropuesta extends ControladorIndex {
        'titulo' => $titulo,
        'mensaje' => $mensaje,
        );
+    /*    for( $i=0; $i < count($propuestas); $i++){
+           $this->consolita($propuestas[$i]->getNombre());
+        }
+       */
    
        $tpl->asignar('registrar_propuesta',$this->getUrl("propuesta","nuevo"));
        $tpl->asignar('propuesta_modificada',$this->getUrl("propuesta","modificar"));
+     //  $tpl->asignar('propuestas',$propuestas);
        $tpl->mostrar('propuestas_listado',$datos);
    
    }
 
+
+function consolita( $data ) {
+    $output = $data;
+    if ( is_array( $output ) )
+        $output = implode( ',', $output);
+
+    echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
+}
+
+
    function nuevo(){
 	$mensaje="";
 	if(isset($_POST["nombre"])){
-		$prop= new propuesta();
+		$prop= new Propuesta();
 		$prop->setNombre($_POST["nombre"]);
 		$prop->setDescripcion($_POST["desc"]);
     $fecha =  date("Y-m-d H:i:s");

@@ -33,6 +33,9 @@
             <div class="alert alert-danger" role="alert">{$mensaje}</div>
           {/if}
           <div class="table-responsive">
+
+
+
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -45,6 +48,7 @@
               </thead>
               <tbody>
                 {foreach from=$propuestas item=prop}
+
                   <tr>
                     <td>{$prop->getNombre()|upper}</td>
                     <td>{$prop->getDescripcion()}</td>

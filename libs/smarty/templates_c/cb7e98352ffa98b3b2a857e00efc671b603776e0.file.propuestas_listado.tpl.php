@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-10 22:32:58
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-12 04:49:44
          compiled from "vistas\propuestas_listado.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:5400831795cd1edc9991dc1-28867327%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cb7e98352ffa98b3b2a857e00efc671b603776e0' => 
     array (
       0 => 'vistas\\propuestas_listado.tpl',
-      1 => 1557520138,
+      1 => 1557629344,
       2 => 'file',
     ),
   ),
@@ -79,6 +79,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 </div>
           <?php }?>
           <div class="table-responsive">
+
+
+
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -95,6 +98,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 foreach ($_from as $_smarty_tpl->tpl_vars['prop']->key => $_smarty_tpl->tpl_vars['prop']->value) {
 $_smarty_tpl->tpl_vars['prop']->_loop = true;
 ?>
+
                   <tr>
                     <td><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['prop']->value->getNombre(), 'UTF-8');?>
 </td>
