@@ -83,6 +83,10 @@ class ControladorPropuesta extends ControladorIndex {
 
 }
 
+function favoritear(){
+  
+}
+
 }
 
 

@@ -15,6 +15,7 @@ class Usuario extends ClaseBase {
 	public $PropuestasColabora = array();
     private $Cedula = '';
     private $Activo = boolean;
+    private $favoritos = array();
 
 	public function __construct($obj=NULL) {
         if(isset($obj)){
@@ -204,15 +205,18 @@ public function modificar()
         $email=$this->getCorreo();
         $cel = $this->getCelular();
         $arch = $this->getArchivo();
+        $activo = $this->isActivo();
         $tama = $this->getTam();
         $this->setImagen(addslashes(file_get_contents($arch)));
         $lol = $this->getImagen();
+        $null = null;
         $stmt = $this->getDB()->prepare( 
             "UPDATE usuarios set
-        nombre=?, apellido=?,Nick=?, Correo=?, Password=?,Celular=?, Imagen=? WHERE id=?"); 
+        nombre=?, apellido=?,Nick=?, Correo=?, Password=?,Celular=?, Imagen=?, ci=?, activo=? WHERE id=?"); 
            
-        $stmt->bind_param("ssisssi",$nombre,
-            $ape,$edad,$ci,$email,$password,$id);
+        $stmt->bind_param("ssssssbsi",$nombre,
+            $ape,$nick,$email,$password,$cel,$null,$ci,$activo);
+        $stmt->send_long_data(7, $lol);
         return $stmt->execute();
    }
 

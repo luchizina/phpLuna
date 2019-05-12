@@ -12,6 +12,7 @@ class Propuesta extends ClaseBase {
 	public $Recompensa = array(); //objetoRecompensa
 	public $EstadoActual = null; //objetoEstado
 	public $Comentarios = array();
+	public $favoritos = array();
 
 	public function __construct($obj=NULL) {
         if(isset($obj)){
