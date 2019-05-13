@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-10 22:33:04
 =======
 <?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-12 23:23:54
@@ -11,11 +11,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '01c181d3b7bf18d145777ee84d60c3f99164a3c8' => 
     array (
       0 => 'vistas\\registrar_propuesta.tpl',
-<<<<<<< HEAD
-      1 => 1557520138,
-=======
+
       1 => 1557587780,
->>>>>>> 4e11f7eb40998bd49df98310c16bdc5ee3d62bf3
       2 => 'file',
     ),
   ),

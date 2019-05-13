@@ -15,7 +15,6 @@ class Usuario extends ClaseBase {
 	public $PropuestasColabora = array();
     private $Cedula = '';
     private $Activo = 0;
-    private $Activo = boolean;
     private $favoritos = array();
 
 	public function __construct($obj=NULL) {
@@ -283,7 +282,7 @@ public function modificar()
 
 
     public function login($email,$pass){
-        $stmt = $this->getDB()->prepare( "SELECT * from  usuario WHERE Nick=? AND Password=?" );
+        $stmt = $this->getDB()->prepare( "SELECT * from  usuario WHERE Correo=? AND Password=?" );
         $stmt->bind_param("ss",$email,$pass);
         $stmt->execute();
         $resultado = $stmt->get_result();
@@ -296,6 +295,8 @@ public function modificar()
         Session::set('usuario_id', $res->id);
         Session::set('usuario_nombre', $res->nombre);
         Session::set('usuario_email', $res->email);
+        
+
         return true;
     }
     

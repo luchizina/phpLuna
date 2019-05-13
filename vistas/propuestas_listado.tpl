@@ -53,7 +53,7 @@
                     <td>{$prop->getNombre()|upper}</td>
                     <td>{$prop->getDescripcion()}</td>
                    <td>{$prop->getMonto()}</td>
-                    <td>{$prop->getFechaAgregada()}</td>
+                    <td>{$prop->getFechaPublicada()}</td>
                     <td>
                       <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='{$url_base}propuesta/listado/borrar/{$prop->getId()}/'"/>
 

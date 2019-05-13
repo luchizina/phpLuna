@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-12 04:49:44
-=======
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-12 23:36:30
->>>>>>> 4e11f7eb40998bd49df98310c16bdc5ee3d62bf3
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-13 00:42:58
          compiled from "vistas\propuestas_listado.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:5400831795cd1edc9991dc1-28867327%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -11,11 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cb7e98352ffa98b3b2a857e00efc671b603776e0' => 
     array (
       0 => 'vistas\\propuestas_listado.tpl',
-<<<<<<< HEAD
-      1 => 1557629344,
-=======
-      1 => 1557696987,
->>>>>>> 4e11f7eb40998bd49df98310c16bdc5ee3d62bf3
+      1 => 1557700975,
       2 => 'file',
     ),
   ),
@@ -113,7 +105,7 @@ $_smarty_tpl->tpl_vars['prop']->_loop = true;
 </td>
                    <td><?php echo $_smarty_tpl->tpl_vars['prop']->value->getMonto();?>
 </td>
-                    <td><?php echo $_smarty_tpl->tpl_vars['prop']->value->getFechaAgregada();?>
+                    <td><?php echo $_smarty_tpl->tpl_vars['prop']->value->getFechaPublicada();?>
 </td>
                     <td>
                       <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>

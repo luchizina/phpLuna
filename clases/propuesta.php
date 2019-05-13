@@ -134,5 +134,29 @@ class Propuesta extends ClaseBase {
     }
 
 
+public function modificar()
+   {
+        $nombre=$this->getNombre();
+        $desc=$this->getDescripcion();
+        $monto=$this->getMonto();
+        $fechaPub=$this->getFechaPublicada();
+        $this->setImagen(addslashes(file_get_contents($arch)));
+        $lol = $this->getImagen();
+        $null = null;
+        $stmt = $this->getDB()->prepare( 
+            "UPDATE propuesta set
+        Nombre=?, Descripcion=?, FechaPublicada=?, Monto=? WHERE id=?"); 
+           
+        $stmt->bind_param("sssi",$nombre,
+            $desc,$fechaPub,$monto);
+        return $stmt->execute();
+   }
+
+
+
+
+
+
+
 }
  ?>

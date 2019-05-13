@@ -56,6 +56,7 @@ class ControladorPropuesta extends ControladorIndex {
            $this->consolita($propuestas[$i]->getNombre());
         }
        */
+      
    
        $tpl->asignar('registrar_propuesta',$this->getUrl("propuesta","nuevo"));
        $tpl->asignar('propuesta_modificada',$this->getUrl("propuesta","modificar"));
@@ -101,6 +102,42 @@ function consolita( $data ) {
 	$tpl->mostrar('registrar_propuesta',array());
 
 }
+
+public function modificar($params = array())
+   {
+    $mensaje = "";
+     $propuesta  = new Propuesta();
+     $p = $propuesta->obtenerPorId($params[0]);
+     if(isset($_POST["nombre"]))
+  { 
+    $p->setNombre($_POST["nombre"]);
+    $p->setDescripcion($_POST["descripcion"]);
+    $p->setMonto($_POST["monto"]);
+    $p->setFechaPublicada($_POST["fechaPub"]);
+    $usr->setTam($_FILES["archivo"]["size"]);
+    if($p->modificar())
+    {
+      $this->redirect("propuesta","listado");
+      exit;
+    }else{
+      $mensaje="Error! No se pudo modificar la propuesta";
+    }
+
+  }
+  $tpl = Template::getInstance();
+  $tpl->asignar('titulo',"Modificar Propuesta");
+  $tpl->asignar('buscar',"");
+  $tpl->asignar('mensaje',$mensaje);
+  $tpl->asignar('propuesta', $u);
+  $tpl->mostrar('modificar_propuesta',$p);
+   }
+
+
+
+
+
+
+
 
 public function recompensas($params=array()){
   if(empty($params)){
@@ -153,5 +190,6 @@ function favoritear(){
 
 }
 
+}
 
 ?>
