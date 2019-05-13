@@ -187,8 +187,11 @@ public function agregar(){
         return $stmt->execute();
     }
 
+
     private $response = array();
+
     public function agregarCel(){ 
+        
         $nombre=$this->getNombre();
         $ape=$this->getApellido();
         $cel=$this->getCelular();
@@ -291,10 +294,11 @@ public function modificar()
         }    
         $res=$resultado->fetch_object();
         Session::init();
-        Session::set('usuario_logueado', true);
-        Session::set('usuario_nick', $res->nick);
-        Session::set('usuario_nombre', $res->nombre);
-        Session::set('usuario_email', $res->email);
+        Session::set('usuario_apellido',$res->Apellido);
+        Session::set('usuario_nick', $res->Nick);
+        Session::set('usuario_nombre', $res->Nombre);
+        Session::set('usuario_email', $res->Correo);
+
          return true;
 
     }

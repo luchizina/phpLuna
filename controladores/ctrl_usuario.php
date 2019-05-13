@@ -230,8 +230,6 @@ function login(){
     $pass=sha1($_POST["password"]);
 
     if($usr->login($email,$pass)){
-$tpl = Template::getInstance();
-  $tpl->asignar('usuLogueado',$_SESSION['usuario_nick']);
       $this->redirect("usuario","listado");
       exit;
     }else{
@@ -254,8 +252,9 @@ $tpl = Template::getInstance();
 function logout(){
   $usr= new Usuario();
   $usr->logout();
-  $this->redirect("usuario","login");
+  $this->redirect("usuario","listado");
 }
+
 
 
 
@@ -263,7 +262,10 @@ function logout(){
 
 private $inputJSON = file_get_contents('php://input');
 private $input = json_decode($inputJSON, TRUE); //convertir JSON en array
+
 public function nuevoUsuCel(){
+	$inputJSON = file_get_contents('php://input');
+ $input = json_decode($inputJSON, TRUE); 
   if(isset($input['nick']) && isset($input['cont']) && isset($input['nombre']) && isset($input['ape']) && isset($input['correo']) && isset($input['cel']) && isset($input['ci'])){
     $u  = new Usuario();
     $u->setNick($input['nick']);
@@ -277,5 +279,6 @@ public function nuevoUsuCel(){
     $u->agregarCel();
 }
 
+}
 }
 ?>

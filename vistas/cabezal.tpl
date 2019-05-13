@@ -11,9 +11,12 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
+            {if $usuLogueado == ""}
             <li><a href="{$url_login}">Iniciar sesión</a></li>
-            <li><a href="{$url_logout}">Cerrar</a></li>
-
+            {else}
+            <li><a href="{$url_logout}">Cerrar sesión</a></li>
+               <li><a href="{$url_logout}">¡Hola {$usuLogueado}!</a></li>
+               {/if}
           </ul>
           <form class="navbar-form navbar-right" method="post" action="{$url_base}usuario/buscar/">
             <input type="text" id="buscar" name="buscar" class="form-control" placeholder="Buscar..." value='{$buscar}'>

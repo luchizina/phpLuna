@@ -188,7 +188,7 @@ function nuevaColaboracion($params=array()){
 function favoritear(){
 }
 
-}
+
 
 
 ?>
