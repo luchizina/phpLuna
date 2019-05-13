@@ -1,30 +1,20 @@
-<<<<<<< HEAD
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-13 20:57:41
-=======
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-13 22:11:35
->>>>>>> d8e224327f0bb3a174f9e4e9bb2bf5a25cd6686c
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-13 23:02:35
          compiled from "vistas\cabezal.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:4226403555cd0bcb390b0b7-60355023%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:17814776785cd9db6b8f1ec2-01119817%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'fb05f10fe29da8a558e3c965866d6cd5dd601380' => 
     array (
       0 => 'vistas\\cabezal.tpl',
-<<<<<<< HEAD
-      1 => 1557773792,
-=======
-      1 => 1557778292,
->>>>>>> d8e224327f0bb3a174f9e4e9bb2bf5a25cd6686c
+      1 => 1557780896,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '4226403555cd0bcb390b0b7-60355023',
+  'nocache_hash' => '17814776785cd9db6b8f1ec2-01119817',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cd0bcb390cee0_10997146',
   'variables' => 
   array (
     'proyecto' => 0,
@@ -34,8 +24,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'buscar' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cd9db6bcc0ec9_39643861',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cd0bcb390cee0_10997146')) {function content_5cd0bcb390cee0_10997146($_smarty_tpl) {?><nav class="navbar navbar-inverse navbar-fixed-top">
+<?php if ($_valid && !is_callable('content_5cd9db6bcc0ec9_39643861')) {function content_5cd9db6bcc0ec9_39643861($_smarty_tpl) {?><nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">

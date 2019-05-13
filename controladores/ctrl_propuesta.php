@@ -136,21 +136,6 @@ public function modificar($params = array())
   $tpl->mostrar('modificar_propuesta',$p);
    }
 
-public function recompensas($params=array()){
-  if(empty($params)){
-    $rec = new Recompensa();
-    $recs = $rec->getListado();
-  }
-  $tpl = Template::getInstance();
-        $datos = array(
-       'recompensas' => $recs,
-       );
-   
-       $tpl->mostrar('nueva_colaboracion',$datos);
-}
-
-
-
 public function borrar($params = array()){
 $propuesta = new Propuesta();
   $this->consolita($params[0]);
@@ -169,17 +154,17 @@ function nuevaColaboracion($params=array()){
   $Usuario = new Usuario();
   $propuesta = new Propuesta();
   $Recompensa = new Recompensa();
-  $recs = $Recompensa->getListado();
+  $recs = $Recompensa->traerRecompensas($params[0]);
   $usu = $Usuario->obtenerPorNick("lu");
   $prop=$propuesta->obtenerPorNombreProp($params[0]);
+  //$rec = $Recompensa->obtenerPorId($_POST['rec']);
   if(isset($_POST["monto"])){
-    $rec = $Recompensa->obtenerPorId($_POST['rec']);
     $col->setMonto($_POST["monto"]);
     $col->setFecha(date("Y-m-d"));
     $col->setUsuario($usu);
     $col->setTituloPropuesta($prop);
-    $col->setRecompensa($rec);
-    if($usr->agregar()){
+    $col->setRecompensa($Recompensa->obtenerPorId($_POST['rec']));
+    if($col->agregar()){
       array_push($usu->getPropuestasColabora(), $col);
       $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
       $this->redirect("propuesta","listado");
@@ -194,15 +179,13 @@ function nuevaColaboracion($params=array()){
   $tpl->asignar('mensaje',$mensaje);
   $tpl->asignar('propuesta',$prop);
   $tpl->asignar('usuario',$usu);
-  $tpl->asignar('recompensa',$rec);
+  //$tpl->asignar('recompensa',$rec);
   $tpl->asignar('recompensas',$recs);
   $tpl->mostrar('nueva_colaboracion',array());
   //$_SESSION['usuario_id'];
 }
 
 function favoritear(){
-}
-
 }
 
 }

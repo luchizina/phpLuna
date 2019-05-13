@@ -261,8 +261,8 @@ function logout(){
 
 
 
-$inputJSON = file_get_contents('php://input');
-$input = json_decode($inputJSON, TRUE); //convertir JSON en array
+private $inputJSON = file_get_contents('php://input');
+private $input = json_decode($inputJSON, TRUE); //convertir JSON en array
 public function nuevoUsuCel(){
   if(isset($input['nick']) && isset($input['cont']) && isset($input['nombre']) && isset($input['ape']) && isset($input['correo']) && isset($input['cel']) && isset($input['ci'])){
     $u  = new Usuario();
