@@ -8,7 +8,18 @@ require_once('clases/auth.php');
 
 
 class ControladorUsuario extends ControladorIndex {
+  function redirigir(){
+     //Llamar a la vista
+        $tpl = Template::getInstance();
+        $usuarios = "hola";
+        $buscar = "buscar";
+        $datos = array(
+       'titulo' => $titulo,
+       'mensaje' => $mensaje,
+       );
+          $tpl->mostrar('inicio',$datos);
 
+  }
     function listado($params=array()){
 
        $buscar="";
@@ -52,6 +63,8 @@ class ControladorUsuario extends ControladorIndex {
        $tpl->mostrar('usuarios_listado',$datos);
    
    }
+
+
 
 
 function listadoMovil($params=array()){
