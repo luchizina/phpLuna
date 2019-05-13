@@ -14,7 +14,6 @@ class ControladorUsuario extends ControladorIndex {
         $usuarios = "hola";
         $buscar = "buscar";
         $datos = array(
-       'titulo' => $titulo,
        'mensaje' => $mensaje,
        );
           $tpl->mostrar('inicio',$datos);

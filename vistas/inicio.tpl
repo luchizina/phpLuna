@@ -17,9 +17,7 @@
     <![endif]-->
   </head>
   <body>
-    {include file="cabezal.tpl"}    
-           
-      
+    {include file="cabezal.tpl"}          
       <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg)"  data-stellar-background-ratio="0.5">
         <div class="container">
 
