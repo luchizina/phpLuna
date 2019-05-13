@@ -1,22 +1,28 @@
+<<<<<<< HEAD
 <?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-13 23:57:48
+=======
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-13 23:20:33
+>>>>>>> acfb9354e2bf8a0de8724502318a19981b249fdb
          compiled from "vistas\usuarios_listado.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:539885575cd0bcb142c081-44622580%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:3676791915cd9dfa138eea0-84242653%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'fc36a80b921661286b287e2df8d64e144a173838' => 
     array (
       0 => 'vistas\\usuarios_listado.tpl',
+<<<<<<< HEAD
       1 => 1557784633,
+=======
+      1 => 1557775905,
+>>>>>>> acfb9354e2bf8a0de8724502318a19981b249fdb
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '539885575cd0bcb142c081-44622580',
+  'nocache_hash' => '3676791915cd9dfa138eea0-84242653',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cd0bcb31b4d31_17012266',
   'variables' => 
   array (
     'url_base' => 0,
@@ -28,8 +34,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'persona' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cd9dfa1469a51_46291326',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cd0bcb31b4d31_17012266')) {function content_5cd0bcb31b4d31_17012266($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_5cd9dfa1469a51_46291326')) {function content_5cd9dfa1469a51_46291326($_smarty_tpl) {?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -105,7 +113,7 @@ $_smarty_tpl->tpl_vars['persona']->_loop = true;
 </td>
                     <td>
                       <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-usuario/listado/borrar/<?php echo $_smarty_tpl->tpl_vars['persona']->value->getId();?>
+usuario/listado/borrar/<?php echo $_smarty_tpl->tpl_vars['persona']->value->getNick();?>
 /'"/>
                      
                     <!--  <input type="button" value="Favoritos" class="btn btn-submit" onClick="cargarFavoritos();"/>-->

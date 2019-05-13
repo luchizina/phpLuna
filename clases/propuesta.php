@@ -12,6 +12,7 @@ class Propuesta extends ClaseBase {
 	public $Recompensa = array(); //objetoRecompensa
 	public $EstadoActual = null; //objetoEstado
 	public $Comentarios = array();
+	public $favoritos = array();
 
 	public function __construct($obj=NULL) {
         if(isset($obj)){
@@ -130,6 +131,39 @@ class Propuesta extends ClaseBase {
             $Descripcion,$FechaPublicada,$Monto,$MontoActual);
         return $stmt->execute();
     }
+
+ public function borrarProp($nombre){
+
+ $stmt = $this->getDB()->prepare("DELETE FROM propuesta WHERE Nombre=?");
+$stmt->bind_param("s",$nombre);
+    return $stmt->execute();
+    }
+
+
+
+
+public function modificar()
+   {
+        $nombre=$this->getNombre();
+        $desc=$this->getDescripcion();
+        $monto=$this->getMonto();
+        $fechaPub=$this->getFechaPublicada();
+        $this->setImagen(addslashes(file_get_contents($arch)));
+        $lol = $this->getImagen();
+        $null = null;
+        $stmt = $this->getDB()->prepare( 
+            "UPDATE propuesta set
+        Nombre=?, Descripcion=?, FechaPublicada=?, Monto=? WHERE id=?"); 
+           
+        $stmt->bind_param("sssi",$nombre,
+            $desc,$fechaPub,$monto);
+        return $stmt->execute();
+   }
+
+
+
+
+
 
 
 }

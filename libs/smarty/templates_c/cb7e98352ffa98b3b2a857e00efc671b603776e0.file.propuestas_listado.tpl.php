@@ -1,22 +1,20 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-10 16:46:40
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-13 23:26:49
          compiled from "vistas\propuestas_listado.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:5400831795cd1edc9991dc1-28867327%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:15034059155cd9e119632f40-78301737%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'cb7e98352ffa98b3b2a857e00efc671b603776e0' => 
     array (
       0 => 'vistas\\propuestas_listado.tpl',
-      1 => 1557499593,
+      1 => 1557781112,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '5400831795cd1edc9991dc1-28867327',
+  'nocache_hash' => '15034059155cd9e119632f40-78301737',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cd1edcadfcb54_70187512',
   'variables' => 
   array (
     'url_base' => 0,
@@ -26,11 +24,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'mensaje' => 0,
     'propuestas' => 0,
     'prop' => 0,
-    'propuesta' => 0,
+    'nueva_colaboracion' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cd9e119be9793_52941648',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cd1edcadfcb54_70187512')) {function content_5cd1edcadfcb54_70187512($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_5cd9e119be9793_52941648')) {function content_5cd9e119be9793_52941648($_smarty_tpl) {?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -79,14 +79,17 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 </div>
           <?php }?>
           <div class="table-responsive">
+
+
+
             <table class="table table-striped">
               <thead>
                 <tr>
                   <th>Nombre</th>
                   <th>Descripcion</th>
                   <th>Monto</th>
-                  <th>Email</th>
                   <th>Fecha agregada</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -95,6 +98,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 foreach ($_from as $_smarty_tpl->tpl_vars['prop']->key => $_smarty_tpl->tpl_vars['prop']->value) {
 $_smarty_tpl->tpl_vars['prop']->_loop = true;
 ?>
+
                   <tr>
                     <td><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['prop']->value->getNombre(), 'UTF-8');?>
 </td>
@@ -102,14 +106,17 @@ $_smarty_tpl->tpl_vars['prop']->_loop = true;
 </td>
                    <td><?php echo $_smarty_tpl->tpl_vars['prop']->value->getMonto();?>
 </td>
-                    <td><?php echo $_smarty_tpl->tpl_vars['prop']->value->getFechaAgregada();?>
+                    <td><?php echo $_smarty_tpl->tpl_vars['prop']->value->getFechaPublicada();?>
 </td>
                     <td>
                       <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-propuesta/listado/borrar/<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getId();?>
+propuesta/borrar/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
 /'"/>
-                     
-                    <!--  <input type="button" value="Favoritos" class="btn btn-submit" onClick="cargarFavoritos();"/>-->
+
+                      <input type="button" value="colaborar" id="colaborar" class="btn btn-success" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['nueva_colaboracion']->value;
+echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
+/'"/>
+                      
                     </td>
                   </tr>
                 <?php } ?>
