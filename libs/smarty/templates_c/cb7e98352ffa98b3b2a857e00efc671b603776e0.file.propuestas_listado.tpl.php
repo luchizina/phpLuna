@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-13 22:33:35
+=======
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-13 22:15:18
+>>>>>>> d8e224327f0bb3a174f9e4e9bb2bf5a25cd6686c
          compiled from "vistas\propuestas_listado.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:5400831795cd1edc9991dc1-28867327%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +11,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cb7e98352ffa98b3b2a857e00efc671b603776e0' => 
     array (
       0 => 'vistas\\propuestas_listado.tpl',
+<<<<<<< HEAD
       1 => 1557779607,
+=======
+      1 => 1557778231,
+>>>>>>> d8e224327f0bb3a174f9e4e9bb2bf5a25cd6686c
       2 => 'file',
     ),
   ),
@@ -110,11 +118,16 @@ $_smarty_tpl->tpl_vars['prop']->_loop = true;
 </td>
                     <td>
                       <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-propuesta/listado/borrar/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
+propuesta/borrar/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
 /'"/>
 
+<<<<<<< HEAD
                       <input type="button" value="colaborar" id="colaborar" class="btn btn-success" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['nueva_colaboracion']->value;
 echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
+=======
+                      <input type="button" value="colaborar" id="colaborar" class="btn btn-success" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/nuevaColaboracion/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
+>>>>>>> d8e224327f0bb3a174f9e4e9bb2bf5a25cd6686c
 /'"/>
                      
                     </td>

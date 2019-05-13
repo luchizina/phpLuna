@@ -133,6 +133,15 @@ class Propuesta extends ClaseBase {
     
     }
 
+ public function borrarProp($nombre){
+
+ $stmt = $this->getDB()->prepare("DELETE FROM propuesta WHERE Nombre=?");
+$stmt->bind_param("s",$nombre);
+    return $stmt->execute();
+    }
+
+
+
 
 public function modificar()
    {
