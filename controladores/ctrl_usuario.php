@@ -230,8 +230,6 @@ function login(){
     $pass=sha1($_POST["password"]);
 
     if($usr->login($email,$pass)){
-$tpl = Template::getInstance();
-  $tpl->asignar('usuLogueado',$_SESSION['usuario_nick']);
       $this->redirect("usuario","listado");
       exit;
     }else{
@@ -254,7 +252,7 @@ $tpl = Template::getInstance();
 function logout(){
   $usr= new Usuario();
   $usr->logout();
-  $this->redirect("usuario","login");
+  $this->redirect("usuario","listado");
 }
 
 

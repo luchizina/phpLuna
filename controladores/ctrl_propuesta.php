@@ -4,6 +4,8 @@ require "clases/propuesta.php";
 //require "clases/estados.php";
 //require "clases/list_estado.php";
 require "clases/recompensa.php";
+require "clases/usuario.php";
+require "clases/colaboracion.php";
 require_once('clases/template.php');
 require_once('clases/Utils.php');
 require_once('clases/session.php');
@@ -60,6 +62,7 @@ class ControladorPropuesta extends ControladorIndex {
    
        $tpl->asignar('registrar_propuesta',$this->getUrl("propuesta","nuevo"));
        $tpl->asignar('propuesta_modificada',$this->getUrl("propuesta","modificar"));
+       $tpl->asignar('nueva_colaboracion',$this->getUrl("propuesta","nuevaColaboracion"));
      //  $tpl->asignar('propuestas',$propuestas);
        $tpl->mostrar('propuestas_listado',$datos);
    
@@ -133,13 +136,6 @@ public function modificar($params = array())
   $tpl->mostrar('modificar_propuesta',$p);
    }
 
-
-
-
-
-
-
-
 public function recompensas($params=array()){
   if(empty($params)){
     $rec = new Recompensa();
@@ -173,10 +169,11 @@ function nuevaColaboracion($params=array()){
   $Usuario = new Usuario();
   $propuesta = new Propuesta();
   $Recompensa = new Recompensa();
-  $rec = $Recompensa->obtenerPorId($_POST['rec']);
-  $usu = $Usuario->obtenerPorId($_SESSION['usuario_id']);
-  $prop=$propuesta->obtenerPorId($params[0]);
+  $recs = $Recompensa->getListado();
+  $usu = $Usuario->obtenerPorNick("lu");
+  $prop=$propuesta->obtenerPorNombreProp($params[0]);
   if(isset($_POST["monto"])){
+    $rec = $Recompensa->obtenerPorId($_POST['rec']);
     $col->setMonto($_POST["monto"]);
     $col->setFecha(date("Y-m-d"));
     $col->setUsuario($usu);
@@ -198,8 +195,12 @@ function nuevaColaboracion($params=array()){
   $tpl->asignar('propuesta',$prop);
   $tpl->asignar('usuario',$usu);
   $tpl->asignar('recompensa',$rec);
+  $tpl->asignar('recompensas',$recs);
   $tpl->mostrar('nueva_colaboracion',array());
+  //$_SESSION['usuario_id'];
+}
 
+function favoritear(){
 }
 
 

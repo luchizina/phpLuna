@@ -1,22 +1,20 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-13 22:15:18
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-13 23:26:49
          compiled from "vistas\propuestas_listado.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:5400831795cd1edc9991dc1-28867327%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:15034059155cd9e119632f40-78301737%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'cb7e98352ffa98b3b2a857e00efc671b603776e0' => 
     array (
       0 => 'vistas\\propuestas_listado.tpl',
-      1 => 1557778231,
+      1 => 1557781112,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '5400831795cd1edc9991dc1-28867327',
+  'nocache_hash' => '15034059155cd9e119632f40-78301737',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cd1edcadfcb54_70187512',
   'variables' => 
   array (
     'url_base' => 0,
@@ -26,10 +24,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'mensaje' => 0,
     'propuestas' => 0,
     'prop' => 0,
+    'nueva_colaboracion' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cd9e119be9793_52941648',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cd1edcadfcb54_70187512')) {function content_5cd1edcadfcb54_70187512($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_5cd9e119be9793_52941648')) {function content_5cd9e119be9793_52941648($_smarty_tpl) {?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -112,10 +113,10 @@ $_smarty_tpl->tpl_vars['prop']->_loop = true;
 propuesta/borrar/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
 /'"/>
 
-                      <input type="button" value="colaborar" id="colaborar" class="btn btn-success" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-propuesta/nuevaColaboracion/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
+                      <input type="button" value="colaborar" id="colaborar" class="btn btn-success" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['nueva_colaboracion']->value;
+echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
 /'"/>
-                     
+                      
                     </td>
                   </tr>
                 <?php } ?>
