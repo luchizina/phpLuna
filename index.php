@@ -4,6 +4,7 @@ require "db/db.php";
 require 'vendor/autoload.php';
 require "controladores/ctrl_index.php";
 require_once('clases/template.php');
+require_once('clases/session.php');
 $controlIndex=new ControladorIndex();
 
 $tpl = Template::getInstance();
@@ -12,8 +13,10 @@ $tpl->asignar('url_logout',$controlIndex->getUrl("usuario","logout"));
 $tpl->asignar('url_login',$controlIndex->getUrl("usuario","login"));
 
 session_start();
-
-
+$nombre = Session::get('usuario_nombre');
+//$ape = Session::get('usuario_apellido');
+//$userLogueado ="¡Hola ".$nombre."!";
+$tpl->asignar('usuLogueado',$nombre);
 $tpl->asignar('proyecto',"Hola");
 
 //Cargamos controladores y acciones

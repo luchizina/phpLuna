@@ -1,33 +1,26 @@
-<<<<<<< HEAD
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-13 20:57:41
-=======
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-13 22:11:35
->>>>>>> d8e224327f0bb3a174f9e4e9bb2bf5a25cd6686c
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-13 23:33:35
          compiled from "vistas\cabezal.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:4226403555cd0bcb390b0b7-60355023%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:3460903965cd9dfa0cadbe1-19867920%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'fb05f10fe29da8a558e3c965866d6cd5dd601380' => 
     array (
       0 => 'vistas\\cabezal.tpl',
-<<<<<<< HEAD
-      1 => 1557773792,
-=======
-      1 => 1557778292,
->>>>>>> d8e224327f0bb3a174f9e4e9bb2bf5a25cd6686c
+      1 => 1557783212,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '4226403555cd0bcb390b0b7-60355023',
+  'nocache_hash' => '3460903965cd9dfa0cadbe1-19867920',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cd0bcb390cee0_10997146',
+  'unifunc' => 'content_5cd9dfa0cbc658_51830300',
   'variables' => 
   array (
     'proyecto' => 0,
+    'usuLogueado' => 0,
     'url_login' => 0,
     'url_logout' => 0,
     'url_base' => 0,
@@ -35,7 +28,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cd0bcb390cee0_10997146')) {function content_5cd0bcb390cee0_10997146($_smarty_tpl) {?><nav class="navbar navbar-inverse navbar-fixed-top">
+<?php if ($_valid && !is_callable('content_5cd9dfa0cbc658_51830300')) {function content_5cd9dfa0cbc658_51830300($_smarty_tpl) {?><nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -49,11 +42,16 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
+            <?php if ($_smarty_tpl->tpl_vars['usuLogueado']->value=='') {?>
             <li><a href="<?php echo $_smarty_tpl->tpl_vars['url_login']->value;?>
 ">Iniciar sesión</a></li>
+            <?php } else { ?>
             <li><a href="<?php echo $_smarty_tpl->tpl_vars['url_logout']->value;?>
-">Cerrar</a></li>
-
+">Cerrar sesión</a></li>
+               <li><a href="<?php echo $_smarty_tpl->tpl_vars['url_logout']->value;?>
+">¡Hola <?php echo $_smarty_tpl->tpl_vars['usuLogueado']->value;?>
+!</a></li>
+               <?php }?>
           </ul>
           <form class="navbar-form navbar-right" method="post" action="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 usuario/buscar/">
