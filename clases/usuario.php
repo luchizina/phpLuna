@@ -188,6 +188,7 @@ public function agregar(){
         return $stmt->execute();
     }
 
+    $response = array();
     public function agregarCel(){ 
         $nombre=$this->getNombre();
         $ape=$this->getApellido();
@@ -204,7 +205,10 @@ public function agregar(){
            VALUES (?,?,?,?,?,?,?,?,?)" );
         $null = NULL;
         $stmt->bind_param("ssssssbsi", $nombre, $ape, $nick, $email, $password, $cel, $null, $ci, $act);
-        return $stmt->execute();
+        $stmt->execute();
+        $response["status"] = 0;
+        $response["message"] = "Usuario creado";
+        echo json_encode($response);
     }
 
      public function getListadoUsus(){
@@ -232,7 +236,7 @@ public function agregar(){
         $stmt->store_result();
         $stmt->fetch();
         //$resultado = $stmt->get_result();
-        $row_cnt = $stmt->num_rows();
+        $row_cnt = $stmt->num_rows;
         if($row_cnt > 0) {
             return true;
         }
