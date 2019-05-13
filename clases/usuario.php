@@ -187,7 +187,7 @@ public function agregar(){
         return $stmt->execute();
     }
 
-    $response = array();
+    private $response = array();
     public function agregarCel(){ 
         $nombre=$this->getNombre();
         $ape=$this->getApellido();
