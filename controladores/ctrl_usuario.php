@@ -89,11 +89,9 @@ function listadoMovil($params=array()){
 
        $arreglo=["status"=>"ok","message"=>$usuarios];
 
-
-       $listaUsers= json_encode($arreglo);
-       //var_dump($listaUsers);
-
-       echo  $listaUsers;
+       $this->consolita($usuarios[1]->getNombre());
+       $listaUsers = json_encode($arreglo);
+       echo $listaUsers;
 
 
 }

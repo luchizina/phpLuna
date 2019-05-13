@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-13 00:42:58
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-13 20:45:31
          compiled from "vistas\propuestas_listado.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:5400831795cd1edc9991dc1-28867327%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cb7e98352ffa98b3b2a857e00efc671b603776e0' => 
     array (
       0 => 'vistas\\propuestas_listado.tpl',
-      1 => 1557700975,
+      1 => 1557773121,
       2 => 'file',
     ),
   ),
@@ -109,11 +109,11 @@ $_smarty_tpl->tpl_vars['prop']->_loop = true;
 </td>
                     <td>
                       <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-propuesta/listado/borrar/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getId();?>
+propuesta/listado/borrar/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
 /'"/>
 
                       <input type="button" value="colaborar" id="colaborar" class="btn btn-success" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-propuesta/listado/colaborar/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getId();?>
+propuesta/listado/colaborar/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
 /'"/>
                      
                     </td>
