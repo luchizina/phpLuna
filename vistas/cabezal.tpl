@@ -13,6 +13,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href="{$url_login}">Iniciar sesión</a></li>
             <li><a href="{$url_logout}">Cerrar</a></li>
+               <li><a href="{$url_logout}">{$usuLogueado}</a></li>
 
           </ul>
           <form class="navbar-form navbar-right" method="post" action="{$url_base}usuario/buscar/">
