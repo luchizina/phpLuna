@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-11 17:32:08
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-13 20:44:27
          compiled from "vistas\usuarios_listado.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:539885575cd0bcb142c081-44622580%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'fc36a80b921661286b287e2df8d64e144a173838' => 
     array (
       0 => 'vistas\\usuarios_listado.tpl',
-      1 => 1557587780,
+      1 => 1557773060,
       2 => 'file',
     ),
   ),
@@ -105,7 +105,7 @@ $_smarty_tpl->tpl_vars['persona']->_loop = true;
 </td>
                     <td>
                       <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-usuario/listado/borrar/<?php echo $_smarty_tpl->tpl_vars['persona']->value->getId();?>
+usuario/listado/borrar/<?php echo $_smarty_tpl->tpl_vars['persona']->value->getNick();?>
 /'"/>
                      
                     <!--  <input type="button" value="Favoritos" class="btn btn-submit" onClick="cargarFavoritos();"/>-->

@@ -8,7 +8,8 @@ require_once('clases/template.php');
 require_once('clases/Utils.php');
 require_once('clases/session.php');
 require_once('clases/auth.php');
-
+ini_set('display_errors', 'On');
+error_reporting(E_ALL);
 class ControladorPropuesta extends ControladorIndex {
 
  function listado($params=array()){
@@ -51,17 +52,33 @@ class ControladorPropuesta extends ControladorIndex {
        'titulo' => $titulo,
        'mensaje' => $mensaje,
        );
+    /*    for( $i=0; $i < count($propuestas); $i++){
+           $this->consolita($propuestas[$i]->getNombre());
+        }
+       */
+      
    
        $tpl->asignar('registrar_propuesta',$this->getUrl("propuesta","nuevo"));
        $tpl->asignar('propuesta_modificada',$this->getUrl("propuesta","modificar"));
+     //  $tpl->asignar('propuestas',$propuestas);
        $tpl->mostrar('propuestas_listado',$datos);
    
    }
 
+
+function consolita( $data ) {
+    $output = $data;
+    if ( is_array( $output ) )
+        $output = implode( ',', $output);
+
+    echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
+}
+
+
    function nuevo(){
 	$mensaje="";
 	if(isset($_POST["nombre"])){
-		$prop= new propuesta();
+		$prop= new Propuesta();
 		$prop->setNombre($_POST["nombre"]);
 		$prop->setDescripcion($_POST["desc"]);
     $fecha =  date("Y-m-d H:i:s");
@@ -85,6 +102,42 @@ class ControladorPropuesta extends ControladorIndex {
 	$tpl->mostrar('registrar_propuesta',array());
 
 }
+
+public function modificar($params = array())
+   {
+    $mensaje = "";
+     $propuesta  = new Propuesta();
+     $p = $propuesta->obtenerPorId($params[0]);
+     if(isset($_POST["nombre"]))
+  { 
+    $p->setNombre($_POST["nombre"]);
+    $p->setDescripcion($_POST["descripcion"]);
+    $p->setMonto($_POST["monto"]);
+    $p->setFechaPublicada($_POST["fechaPub"]);
+    $usr->setTam($_FILES["archivo"]["size"]);
+    if($p->modificar())
+    {
+      $this->redirect("propuesta","listado");
+      exit;
+    }else{
+      $mensaje="Error! No se pudo modificar la propuesta";
+    }
+
+  }
+  $tpl = Template::getInstance();
+  $tpl->asignar('titulo',"Modificar Propuesta");
+  $tpl->asignar('buscar',"");
+  $tpl->asignar('mensaje',$mensaje);
+  $tpl->asignar('propuesta', $u);
+  $tpl->mostrar('modificar_propuesta',$p);
+   }
+
+
+
+
+
+
+
 
 public function recompensas($params=array()){
   if(empty($params)){
@@ -137,5 +190,6 @@ function favoritear(){
 
 }
 
+}
 
 ?>
