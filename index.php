@@ -9,6 +9,11 @@ $controlIndex=new ControladorIndex();
 $tpl = Template::getInstance();
 $tpl->asignar('url_base',"http://localhost/phpLuna/");
 $tpl->asignar('url_logout',$controlIndex->getUrl("usuario","logout"));
+$tpl->asignar('url_login',$controlIndex->getUrl("usuario","login"));
+
+session_start();
+
+
 $tpl->asignar('proyecto',"Hola");
 
 //Cargamos controladores y acciones

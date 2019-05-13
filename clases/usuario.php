@@ -276,10 +276,6 @@ public function modificar()
         return $stmt->execute();
    }
 
-   
-
-
-
 
     public function login($email,$pass){
         $stmt = $this->getDB()->prepare( "SELECT * from  usuario WHERE Correo=? AND Password=?" );
@@ -292,13 +288,13 @@ public function modificar()
         $res=$resultado->fetch_object();
         Session::init();
         Session::set('usuario_logueado', true);
-        Session::set('usuario_id', $res->id);
+        Session::set('usuario_nick', $res->nick);
         Session::set('usuario_nombre', $res->nombre);
         Session::set('usuario_email', $res->email);
-        
+         return true;
 
-        return true;
     }
+
     
    public function logout(){
         Session::init();

@@ -103,6 +103,7 @@ function consolita( $data ) {
 
 }
 
+
 public function modificar($params = array())
    {
     $mensaje = "";
@@ -152,6 +153,20 @@ public function recompensas($params=array()){
        $tpl->mostrar('nueva_colaboracion',$datos);
 }
 
+
+
+public function borrar($params = array()){
+$propuesta = new Propuesta();
+  $this->consolita($params[0]);
+  
+if($propuesta->borrarProp($params[0])){
+  $this->consolita($params[0]);
+   $this->consolita("hola");
+  $this->redirect("propuesta","listado");
+}
+
+}
+
 function nuevaColaboracion($params=array()){
   $mensaje="";
   $col = new Colaboracion();
@@ -185,11 +200,11 @@ function nuevaColaboracion($params=array()){
   $tpl->asignar('recompensa',$rec);
   $tpl->mostrar('nueva_colaboracion',array());
 
-function favoritear(){
 }
+
+
 
 }
 
-}
 
 ?>

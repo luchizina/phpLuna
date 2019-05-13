@@ -72,7 +72,7 @@ function listadoMovil($params=array()){
                     $this->redirect("usuario","listado");
                 }else{
                     //Mostrar error
-                    $usr=$usuario->obtenerPorId($idABorrar);
+                 //   $usr=$usuario->obtenerPorId($idABorrar);
                     //$mensaje="Error!! No se pudo borrar el usuario  <b>".$usr->getNombre()." ".$usr->getApellido()."</b>";
                     $mensaje="ERROR. No existe el usuario";
                     $usuarios=$usuario->getListado(); 
@@ -137,6 +137,10 @@ function nuevo(){
   $tpl->asignar('mensaje',$mensaje);
   $tpl->mostrar('usuarios_nuevo',array());
 }
+
+
+
+
 
 public function modificar($params = array())
    {
@@ -212,6 +216,9 @@ function consolita( $data ) {
     echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
 }
 
+
+
+
 function login(){
 
   $mensaje="";
@@ -222,10 +229,9 @@ function login(){
     $email=$_POST["email"];
     $pass=sha1($_POST["password"]);
 
-    $this->consolita($email);
-    $this->consolita($pass);
-
     if($usr->login($email,$pass)){
+$tpl = Template::getInstance();
+  $tpl->asignar('usuLogueado',$_SESSION['usuario_nick']);
       $this->redirect("usuario","listado");
       exit;
     }else{
@@ -242,9 +248,6 @@ function login(){
   $tpl->mostrar('usuarios_login',array());
 
 }
-
-
-
 
 
 
