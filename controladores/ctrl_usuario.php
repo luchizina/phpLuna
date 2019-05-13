@@ -176,38 +176,33 @@ public function modificar($params = array())
    }
 
 public function existeCi(){
-  $eCi = "";
   if(isset($_POST['ci'])){
   $usuario  = new Usuario();
   if($usuario->ci($_POST['ci'])){
-    $eCi="Cedula en uso";
+    echo "Cedula en uso";   
   }
 }
-  $tpl = Template::getInstance();
-  $tpl->asignar('eCi',$eCi);
 }
 
 public function existeCorreo(){
-  $co = $_POST['email'];
+  if(isset($_POST['correo'])){
   $usuario  = new Usuario();
-  $usuarios = $usuario->getListadoUsus();
-  foreach ($usuarios as $us => $usu) {
-    if($usu->Correo()==$co){
-      echo 'Correo en uso';
-    }
+  if($usuario->correo($_POST['correo'])){
+    echo "Correo en uso";   
   }
+}
 }
 
+
 public function existeNick(){
-  $nick = $_POST['nick'];
+  if(isset($_POST['nick'])){
   $usuario  = new Usuario();
-  $usuarios = $usuario->getListadoUsus();
-  foreach ($usuarios as $us => $usu) {
-    if($usu->getNick()==$nick){
-      echo 'Nick en uso';
-    }
+  if($usuario->nick($_POST['nick'])){
+    echo "Nick en uso";   
   }
 }
+}
+
 function consolita( $data ) {
     $output = $data;
     if ( is_array( $output ) )
@@ -260,8 +255,8 @@ function logout(){
 
 
 
-private $inputJSON = file_get_contents('php://input');
-private $input = json_decode($inputJSON, TRUE); //convertir JSON en array
+/*$inputJSON = file_get_contents('php://input');
+$input = json_decode($inputJSON, TRUE); //convertir JSON en array
 
 public function nuevoUsuCel(){
 	$inputJSON = file_get_contents('php://input');
@@ -279,6 +274,6 @@ public function nuevoUsuCel(){
     $u->agregarCel();
 }
 
-}
+}*/
 }
 ?>

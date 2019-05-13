@@ -155,7 +155,7 @@ function nuevaColaboracion($params=array()){
   $propuesta = new Propuesta();
   $Recompensa = new Recompensa();
   $recs = $Recompensa->traerRecompensas($params[0]);
-  $usu = $Usuario->obtenerPorNick("lu");
+  $usu = $Usuario->obtenerPorNick(Session::get('usuario_nick'));
   $prop=$propuesta->obtenerPorNombreProp($params[0]);
   //$rec = $Recompensa->obtenerPorId($_POST['rec']);
   if(isset($_POST["monto"])){
@@ -189,6 +189,6 @@ function favoritear(){
 }
 
 
-
+}
 
 ?>

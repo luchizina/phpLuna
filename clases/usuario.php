@@ -232,8 +232,38 @@ public function agregar(){
     public function ci($ci){
         $stmt = $this->getDB()->prepare( 
             "SELECT ci FROM usuario 
-            WHERE ci =" );
+            WHERE ci =?" );
         $stmt->bind_param("s",$ci);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->fetch();
+        //$resultado = $stmt->get_result();
+        $row_cnt = $stmt->num_rows;
+        if($row_cnt > 0) {
+            return true;
+        }
+    }
+
+    public function nick($nick){
+        $stmt = $this->getDB()->prepare( 
+            "SELECT Nick FROM usuario 
+            WHERE Nick =?" );
+        $stmt->bind_param("s",$nick);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->fetch();
+        //$resultado = $stmt->get_result();
+        $row_cnt = $stmt->num_rows;
+        if($row_cnt > 0) {
+            return true;
+        }
+    }
+
+    public function correo($correo){
+        $stmt = $this->getDB()->prepare( 
+            "SELECT Correo FROM usuario 
+            WHERE Correo =?" );
+        $stmt->bind_param("s",$correo);
         $stmt->execute();
         $stmt->store_result();
         $stmt->fetch();
