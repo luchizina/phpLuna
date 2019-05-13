@@ -60,6 +60,7 @@ class ControladorUsuario extends ControladorIndex {
 function listadoMovil($params=array()){
 
    $buscar="";
+
        $titulo="Listado";
        $mensaje="";
        if(!empty($params)){
@@ -88,10 +89,11 @@ function listadoMovil($params=array()){
        
 
        $arreglo=["status"=>"ok","message"=>$usuarios];
-
-       $this->consolita($usuarios[1]->getNombre());
+       //$this->consolita($usuarios[0]->getNombre());
        $listaUsers = json_encode($arreglo);
+        echo json_last_error();
        echo $listaUsers;
+       var_dump($arreglo);
 
 
 }
@@ -261,8 +263,8 @@ function logout(){
 
 
 
-$inputJSON = file_get_contents('php://input');
-$input = json_decode($inputJSON, TRUE); //convertir JSON en array
+/*$inputJSON = file_get_contents('php://input');
+$input = json_decode($inputJSON, TRUE); //convertir JSON en array*/
 public function nuevoUsuCel(){
   if(isset($input['nick']) && isset($input['cont']) && isset($input['nombre']) && isset($input['ape']) && isset($input['correo']) && isset($input['cel']) && isset($input['ci'])){
     $u  = new Usuario();
@@ -277,5 +279,6 @@ public function nuevoUsuCel(){
     $u->agregarCel();
 }
 
+}
 }
 ?>
