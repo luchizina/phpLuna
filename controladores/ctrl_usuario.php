@@ -18,12 +18,7 @@ class ControladorUsuario extends ControladorIndex {
        'mensaje' => $mensaje,
        );
           $tpl->mostrar('inicio',$datos);
-
-<<<<<<< HEAD
-  }
-=======
-
->>>>>>> acfb9354e2bf8a0de8724502318a19981b249fdb
+}
     function listado($params=array()){
 
        $buscar="";
@@ -277,12 +272,11 @@ function logout(){
 
 
 
-<<<<<<< HEAD
 /*$inputJSON = file_get_contents('php://input');
 $input = json_decode($inputJSON, TRUE); //convertir JSON en array*/
-=======
 
->>>>>>> 054b36b0ec36b1c8a3eb6cb83e89e73bd9731dc4
+
+
 public function nuevoUsuCel(){
 	$inputJSON = file_get_contents('php://input');
  $input = json_decode($inputJSON, TRUE); 
