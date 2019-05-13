@@ -8,8 +8,16 @@ require_once('clases/auth.php');
 
 
 class ControladorUsuario extends ControladorIndex {
-
-
+  function redirigir(){
+     //Llamar a la vista
+        $tpl = Template::getInstance();
+        $usuarios = "hola";
+        $buscar = "buscar";
+        $datos = array(
+       'mensaje' => $mensaje,
+       );
+          $tpl->mostrar('inicio',$datos);
+}
     function listado($params=array()){
 
        $buscar="";
@@ -57,9 +65,12 @@ class ControladorUsuario extends ControladorIndex {
    }
 
 
+
+
 function listadoMovil($params=array()){
 
    $buscar="";
+
        $titulo="Listado";
        $mensaje="";
        if(!empty($params)){
@@ -88,10 +99,11 @@ function listadoMovil($params=array()){
        
 
        $arreglo=["status"=>"ok","message"=>$usuarios];
-
-       $this->consolita($usuarios[1]->getNombre());
+       //$this->consolita($usuarios[0]->getNombre());
        $listaUsers = json_encode($arreglo);
+        echo json_last_error();
        echo $listaUsers;
+       var_dump($arreglo);
 
 
 }
@@ -252,6 +264,10 @@ function logout(){
 
 
 
+
+
+/*$inputJSON = file_get_contents('php://input');
+$input = json_decode($inputJSON, TRUE); //convertir JSON en array*/
 
 
 
