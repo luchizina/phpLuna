@@ -113,6 +113,8 @@ public function modificar($params = array())
    {
     $mensaje = "";
      $propuesta  = new Propuesta();
+     $u = new Usuario();
+     $usuario = u->obtenerPorNick(Session::get('usuario_nick'));
      $p = $propuesta->obtenerPorId($params[0]);
      if(isset($_POST["nombre"]))
   { 
