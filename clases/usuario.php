@@ -305,16 +305,9 @@ public function modificar()
    {
         $nombre=$this->getNombre();
         $ape=$this->getApellido();
-        $nick=$this->getNick();
-        $ci=$this->getCI();
         $password = sha1($this->getPassword);
         $email=$this->getCorreo();
         $cel = $this->getCelular();
-        $arch = $this->getArchivo();
-        $activo = $this->isActivo();
-        $tama = $this->getTam();
-        $this->setImagen(addslashes(file_get_contents($arch)));
-        $lol = $this->getImagen();
         $null = null;
         $stmt = $this->getDB()->prepare( 
             "UPDATE usuarios set
