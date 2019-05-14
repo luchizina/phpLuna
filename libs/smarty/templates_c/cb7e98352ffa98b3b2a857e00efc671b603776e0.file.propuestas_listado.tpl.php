@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-14 03:09:51
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-14 03:37:05
          compiled from "vistas\propuestas_listado.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:5234278865cda0f9cdc0ac6-57660926%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cb7e98352ffa98b3b2a857e00efc671b603776e0' => 
     array (
       0 => 'vistas\\propuestas_listado.tpl',
-      1 => 1557796163,
+      1 => 1557797806,
       2 => 'file',
     ),
   ),
@@ -26,7 +26,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'mensaje' => 0,
     'propuestas' => 0,
     'prop' => 0,
-    'usuLogueado' => 0,
+    'usuLogNick' => 0,
     'nueva_colaboracion' => 0,
   ),
   'has_nocache_code' => false,
@@ -110,10 +110,13 @@ $_smarty_tpl->tpl_vars['prop']->_loop = true;
                     <td><?php echo $_smarty_tpl->tpl_vars['prop']->value->getFechaPublicada();?>
 </td>
                     <td>
+                    
                       <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 propuesta/borrar/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
 /'"/>
-                      <?php if ($_smarty_tpl->tpl_vars['usuLogueado']->value==$_smarty_tpl->tpl_vars['prop']->value->getUsuario()->getNick()) {?>
+                       
+                      <?php if ($_smarty_tpl->tpl_vars['usuLogNick']->value==$_smarty_tpl->tpl_vars['prop']->value->getUsuario()) {?>
+
                        <input type="button" value="Modificar" id="modificar" class="btn btn-success" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 propuesta/modificar/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
 /'"/>
