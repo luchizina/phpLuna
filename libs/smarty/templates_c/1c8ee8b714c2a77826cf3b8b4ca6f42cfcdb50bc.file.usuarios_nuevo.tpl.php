@@ -1,22 +1,22 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-14 03:26:18
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-14 23:32:08
          compiled from "vistas\usuarios_nuevo.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:16727592995cd9e6aa7605a2-50375301%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2364517695cdb31612eb1e1-94878289%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '1c8ee8b714c2a77826cf3b8b4ca6f42cfcdb50bc' => 
     array (
       0 => 'vistas\\usuarios_nuevo.tpl',
-      1 => 1557794608,
+      1 => 1557869512,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '16727592995cd9e6aa7605a2-50375301',
+  'nocache_hash' => '2364517695cdb31612eb1e1-94878289',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cd9e6ac23bce3_96475135',
+  'unifunc' => 'content_5cdb31614d29e0_79488273',
   'variables' => 
   array (
     'url_base' => 0,
@@ -26,7 +26,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cd9e6ac23bce3_96475135')) {function content_5cd9e6ac23bce3_96475135($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5cdb31614d29e0_79488273')) {function content_5cdb31614d29e0_79488273($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="es">
   <head>
     <base href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
@@ -129,7 +129,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <!-- Button -->
             <div class="form-group">
               <div class="col-md-4">
-                <button id="guardar" name="guardar" class="btn btn-success" onclick="Chequear();">Agregar</button>
+                <button id="guardar" name="guardar" class="btn btn-success">Agregar</button>
               </div>
             </div>
 

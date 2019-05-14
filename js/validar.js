@@ -11,6 +11,7 @@ function validarci(){
 		//dataType:"text",
 		success:function(html){
 			$("#avisaCe").html(html);
+			Chequear();
 		}
 	});
 }

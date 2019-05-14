@@ -7,7 +7,7 @@ require_once('clases/session.php');
 require_once('clases/auth.php');
 
 
-class ControladorUsuario extends ControladorIndex {
+class ControladorUsuario extends ControladorIndex { 
   function redirigir(){
      //Llamar a la vista
         $tpl = Template::getInstance();
@@ -285,6 +285,7 @@ public function nuevoUsuCel(){
     $u->agregarCel();
    // echo json_encode($json_registration);
 
+}
 }
 }
 ?>
