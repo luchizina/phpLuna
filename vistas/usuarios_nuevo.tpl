@@ -79,8 +79,10 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="cel">Celular</label>  
               <div class="col-md-4">
-              <input id="cel" name="cel" type="tel" placeholder="Ej: 099999999" class="form-control input-md" required="">
-                
+
+              <input id="cel" name="cel" type="tel" placeholder="Ej: 099999999" class="form-control input-md" required="" onblur="javascript:validarCel();">
+                <span id="avisaCel"></span>
+
               </div>
             </div>
 
