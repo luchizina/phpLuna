@@ -215,6 +215,21 @@ function desfavoritear($nombre, $nick){
   }
 }
 
+public function comentar($nombre, $nick, $texto){
+  $propuesta = new Propuesta();
+  $prop = $propuesta->obtenerPorNombreProp($nombre);
+  $usuario = new Usuario();
+  $u = $usuario->obtenerPorNick($nick);
+  $c = new Comentario();
+  $c->setUsuario($u);
+  $c->setPropuesta($prop);
+  $c->setTexto($texto);
+  if($c->comentar())
+  {
+    array_push($prop->getComentarios(), $c)
+  }
+}
+
 
 }
 
