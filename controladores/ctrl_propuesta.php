@@ -190,7 +190,29 @@ function nuevaColaboracion($params=array()){
   //$_SESSION['usuario_id'];
 }
 
-function favoritear(){
+function favoritear($nombre, $nick){
+  $propuesta = new Propuesta();
+  $prop = $propuesta->obtenerPorNombreProp($nombre);
+  $usuario = new Usuario();
+  $u = $usuario->obtenerPorNick($nick);
+  if($prop->favoritear($nombre,$nick))
+  {
+    array_push($u->getFavoritos(), $prop);
+    array_push($prop->getFavoritos, $u);
+  }
+
+} 
+
+function desfavoritear($nombre, $nick){
+  $propuesta = new Propuesta();
+  $prop = $propuesta->obtenerPorNombreProp($nombre);
+  $usuario = new Usuario();
+  $u = $usuario->obtenerPorNick($nick);
+  if($prop->desfavoritear($nombre,$nick))
+  {
+    $prop->setFavoritos(array_diff($prop->getFavoritos(), array($u)));
+    $u->setFavoritos(array_diff($u->getFavoritos(), array($prop)));
+  }
 }
 
 
