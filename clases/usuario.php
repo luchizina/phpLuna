@@ -32,6 +32,10 @@ class Usuario extends ClaseBase {
         return $this->Archivo;
     }
 
+    public function getFavoritos(){
+        return $this->favoritos;
+    }
+
     public function setArchivo($Archivo){
         $this->Archivo=$Archivo;
     }
@@ -142,6 +146,10 @@ class Usuario extends ClaseBase {
     public function isActivo()
     {
         return $this->Activo;
+    }
+
+    public function setFavoritos($favoritos){
+        $this->favoritos = $favoritos;
     }
 
     public function getBusqueda($buscar){
@@ -373,7 +381,6 @@ public function modificar()
         Session::init();
         Session::destroy();
    } 
-
 
 
 

@@ -112,6 +112,14 @@ class Propuesta extends ClaseBase {
 		$this->EstadoActual=$EstadoActual;
 	}
 
+	public function getFavoritos(){
+		return $this->favoritos;
+	}
+
+	public function setFavoritos($favoritos){
+		$this->favoritos = $favoritos;
+	}
+
  public function agregar(){
       
         $nombre=$this->getNombre();
@@ -168,6 +176,29 @@ public function modificar()
         $stmt->bind_param("is", $monto, $this->getNombre());
         return $stmt->execute();
    }
+
+   public function favoritear($nombre, $nick)
+   {
+   		$stmt = $this->getDB()->prepare( 
+            "INSERT INTO favorito 
+        (propuesta, usuario) 
+           VALUES (?,?)" );
+        $stmt->bind_param("ss",$nombre,
+            $nick);
+        return $stmt->execute();
+   }
+
+   public function desfavoritear($nombre, $nick)
+   {
+   	$stmt = $this->getDB()->prepare( 
+            "DELETE FROM favorito 
+        WHERE propuesta=? AND usuario=?" );
+        $stmt->bind_param("ss",$nombre,
+            $nick);
+        return $stmt->execute();
+   }
+
+
 
 }
  ?>
