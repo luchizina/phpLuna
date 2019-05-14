@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-14 02:33:06
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-14 02:48:13
          compiled from "vistas\cabezal.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:14397458875cda0b7ea990e7-04825022%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'fb05f10fe29da8a558e3c965866d6cd5dd601380' => 
     array (
       0 => 'vistas\\cabezal.tpl',
-      1 => 1557793981,
+      1 => 1557794890,
       2 => 'file',
     ),
   ),
@@ -56,8 +56,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                <?php } else { ?>
                 <li class="probootstra-cta-button last"><a href="<?php echo $_smarty_tpl->tpl_vars['url_logout']->value;?>
 " class="btn btn-primary">CERRAR SESIÓN</a></li>
-                <li class="probootstra-cta-button last"><a href="<?php echo $_smarty_tpl->tpl_vars['url_logout']->value;?>
-" class="btn btn-primary">¡Hola <?php echo $_smarty_tpl->tpl_vars['usuLogueado']->value;?>
+                <li><a href="about.html">¡Hola <?php echo $_smarty_tpl->tpl_vars['usuLogueado']->value;?>
 !</a></li>
                  <?php }?>
             </ul>

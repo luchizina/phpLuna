@@ -27,7 +27,7 @@
               <li class="probootstra-cta-button last"><a href="{$url_login}" class="btn btn-primary">INICIAR SESIÓN</a></li>
                {else}
                 <li class="probootstra-cta-button last"><a href="{$url_logout}" class="btn btn-primary">CERRAR SESIÓN</a></li>
-                <li class="probootstra-cta-button last"><a href="{$url_logout}" class="btn btn-primary">¡Hola {$usuLogueado}!</a></li>
+                <li><a href="about.html">¡Hola {$usuLogueado}!</a></li>
                  {/if}
             </ul>
           </div>
