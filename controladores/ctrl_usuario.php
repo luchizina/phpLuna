@@ -137,7 +137,7 @@ function nuevo(){
     $usr->setCI($_POST["ci"]);
     $usr->setActivo(1);
     if($usr->agregar()){
-      $this->redirect("usuario","listado");
+      $this->redirect("usuario","login");
       exit;
     }else{
       $mensaje="Error! No se pudo agregar el usuario";
