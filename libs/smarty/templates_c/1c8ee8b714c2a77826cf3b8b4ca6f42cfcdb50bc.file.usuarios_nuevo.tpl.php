@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-13 23:52:03
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-14 03:26:18
          compiled from "vistas\usuarios_nuevo.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:16727592995cd9e6aa7605a2-50375301%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1c8ee8b714c2a77826cf3b8b4ca6f42cfcdb50bc' => 
     array (
       0 => 'vistas\\usuarios_nuevo.tpl',
-      1 => 1557784320,
+      1 => 1557794608,
       2 => 'file',
     ),
   ),
@@ -76,8 +76,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <div class="form-group">
               <label class="col-md-4 control-label" for="ci">Cedula</label>  
               <div class="col-md-4">
-              <input id="ci" name="ci" type="text" placeholder="Ej: 47821920" class="form-control input-md" required="" onblur="validarci(this);">
-              <span id=avisaCe></span>
+              <input id="ci" name="ci" type="text" placeholder="Ej: 47821920" class="form-control input-md" required="" onblur="javascript:validarci();">
+              <span id=avisaCe></span> <br>
+              <span id=avisaFor></span>
               </div>
             </div>
 
@@ -85,7 +86,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <div class="form-group">
               <label class="col-md-4 control-label" for="email">Email</label>  
               <div class="col-md-4">
-              <input id="email" name="email" type="email" placeholder="pepe@gmail.com" class="form-control input-md" required="">  
+              <input id="email" name="email" type="email" placeholder="pepe@gmail.com" class="form-control input-md" required="" onblur="javascript:validarcorreo();">  
               <span id="avisaC"></span>              
               </div>
             </div>
@@ -94,7 +95,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <div class="form-group">
               <label class="col-md-4 control-label" for="nick">Nick</label>  
               <div class="col-md-4">
-              <input id="nick" name="nick" type="text" placeholder="Ej: Pepe" class="form-control input-md">     
+              <input id="nick" name="nick" type="text" placeholder="Ej: Pepe" class="form-control input-md" required="" onblur="javascript:validarnick();">     
               <span id="avisa"></span>            
               </div>
             </div>
@@ -111,8 +112,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <div class="form-group">
               <label class="col-md-4 control-label" for="cel">Celular</label>  
               <div class="col-md-4">
-              <input id="cel" name="cel" type="tel" placeholder="Ej: 099999999" class="form-control input-md" required="">
-                
+
+              <input id="cel" name="cel" type="tel" placeholder="Ej: 099999999" class="form-control input-md" required="" onblur="javascript:validarCel();">
+                <span id="avisaCel"></span>
+
               </div>
             </div>
 
@@ -144,7 +147,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
  src="../../dist/js/bootstrap.min.js"><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
- src="C:/xampp/htdocs/phpLuna/js/validar.js"><?php echo '</script'; ?>
+ src="js/validar.js" type="text/javascript"><?php echo '</script'; ?>
 >
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <?php echo '<script'; ?>

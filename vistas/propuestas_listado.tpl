@@ -55,8 +55,11 @@
                    <td>{$prop->getMonto()}</td>
                     <td>{$prop->getFechaPublicada()}</td>
                     <td>
+                    
                       <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='{$url_base}propuesta/borrar/{$prop->getNombre()}/'"/>
-                      {if $usuLogueado == $prop->getUsuario()->getNick()}
+                       
+                      {if $usuLogNick == $prop->getUsuario()}
+
                        <input type="button" value="Modificar" id="modificar" class="btn btn-success" onClick="window.location='{$url_base}propuesta/modificar/{$prop->getNombre()}/'"/>
                        {/if}
 
