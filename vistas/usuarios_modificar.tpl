@@ -35,7 +35,7 @@
                 <input type="text" class="form-control" value="{$usuario_log->getNombre()}" id="nombre" name="nombre">
               </div>
               <div class="form-group">
-                <label for="Apellido">Nombre</label>
+                <label for="Apellido">Apellido</label>
                 <input type="text" class="form-control" value="{$usuario_log->getApellido()}" id="apellido" name="apellido">
               </div>
               <div class="form-group">

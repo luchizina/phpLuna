@@ -116,6 +116,7 @@ public function modificar($params = array())
      $u = new Usuario();
      $usuario = $u->obtenerPorNick(Session::get('usuario_nick'));
      $p = $propuesta->obtenerPorNombreProp($params[0]);
+
      if(isset($_POST["nombre"]))
   { 
     $p->setNombre($_POST["nombre"]);
@@ -189,6 +190,33 @@ function nuevaColaboracion($params=array()){
   $tpl->mostrar('nueva_colaboracion',array());
   //$_SESSION['usuario_id'];
 }
+
+
+function favoritear($nombre, $nick){
+  $propuesta = new Propuesta();
+  $prop = $propuesta->obtenerPorNombreProp($nombre);
+  $usuario = new Usuario();
+  $u = $usuario->obtenerPorNick($nick);
+  if($prop->favoritear($nombre,$nick))
+  {
+    array_push($u->getFavoritos(), $prop);
+    array_push($prop->getFavoritos, $u);
+  }
+
+} 
+
+function desfavoritear($nombre, $nick){
+  $propuesta = new Propuesta();
+  $prop = $propuesta->obtenerPorNombreProp($nombre);
+  $usuario = new Usuario();
+  $u = $usuario->obtenerPorNick($nick);
+  if($prop->desfavoritear($nombre,$nick))
+  {
+    $prop->setFavoritos(array_diff($prop->getFavoritos(), array($u)));
+    $u->setFavoritos(array_diff($u->getFavoritos(), array($prop)));
+  }
+}
+
 
 
 }

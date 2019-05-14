@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-14 23:21:45
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-15 00:23:47
          compiled from "vistas\usuarios_modificar.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:5158003035cdb316942e537-33021151%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:15585156725cdb3ff3caf332-82413536%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '0b55c0502d49d65e122bfc0ca14f565e52708d1c' => 
     array (
       0 => 'vistas\\usuarios_modificar.tpl',
-      1 => 1557868503,
+      1 => 1557871846,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '5158003035cdb316942e537-33021151',
+  'nocache_hash' => '15585156725cdb3ff3caf332-82413536',
   'function' => 
   array (
   ),
@@ -22,9 +22,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cdb3169595d74_29377206',
+  'unifunc' => 'content_5cdb3ff3d74083_43548061',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cdb3169595d74_29377206')) {function content_5cdb3169595d74_29377206($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5cdb3ff3d74083_43548061')) {function content_5cdb3ff3d74083_43548061($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -60,7 +60,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       <section class="probootstrap-section">
         <div class="container">
           <div class="row">
-          <div class="col-md-5 probootstrap-animate" style="color: white; font-family: Montserrat,Arial,sans-serif >
+          <div class="col-md-5 probootstrap-animate" style="color: white; font-family: Montserrat,Arial,sans-serif" >
             <form method="post" class="probootstrap-form">
               <div class="form-group">
                 <label for="Nombre">Nombre</label>
