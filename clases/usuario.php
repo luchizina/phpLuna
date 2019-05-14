@@ -190,8 +190,6 @@ public function agregar(){
     }
 
 
-    private $response = array();
-
     public function agregarCel(){ 
         
         $nombre=$this->getNombre();
@@ -209,10 +207,14 @@ public function agregar(){
            VALUES (?,?,?,?,?,?,?,?,?)" );
         $null = NULL;
         $stmt->bind_param("ssssssbsi", $nombre, $ape, $nick, $email, $password, $cel, $null, $ci, $act);
-        $stmt->execute();
-        $response["status"] = 0;
-        $response["message"] = "Usuario creado";
-        echo json_encode($response);
+        if($stmt->execute()){
+            $json['success'] = 1;
+            $json['message'] = "Usuario registrado";
+        }else{
+            $json['success'] = 0;
+            $json['message'] = "Error al tratar de registrarse";
+        }
+        echo $json;
     }
 
      public function getListadoUsus(){

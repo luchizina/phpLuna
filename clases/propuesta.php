@@ -1,13 +1,13 @@
 <?php 
 class Propuesta extends ClaseBase {
-
+//estos atributos tienen que tener el mismo nombre que en la bd
 	public $Nombre = '';
 	public $Descripcion = '';
 	public $FechaAgregada = null;
 	public $FechaPublicada = null;
 	public $Monto = 0;
 	public $MontoActual = 0;
-	public $Usuario = null; //objeto usuario
+	public $NickUsuario = null; //objeto usuario
 	public $Categoria = null; //objeto categoria
 	public $Recompensa = array(); //objetoRecompensa
 	public $EstadoActual = null; //objetoEstado
@@ -81,11 +81,11 @@ class Propuesta extends ClaseBase {
 	}
 
 	public function getUsuario(){
-		return $this->Usuario;
+		return $this->NickUsuario;
 	}
 
 	public function setUsuario($Usuario){
-		$this->Usuario=$Usuario;
+		$this->NickUsuario=$Usuario;
 	}
 
 	public function getCategoria(){
@@ -120,15 +120,15 @@ class Propuesta extends ClaseBase {
         $FechaPublicada=$this->getFechaPublicada();
         $Monto = $this->getMonto();
         $MontoActual=0;
-      /*  $Usuario = $this->getUsuario()->getNick();
-        $Categoria = $this->getCategoria()->getNombreP();
+      $Usuario = $this->getUsuario()->getNick();
+       /* $Categoria = $this->getCategoria()->getNombreP();
         $EstadoActual = $this->getEstadoActual()->getNombre();*/
         $stmt = $this->getDB()->prepare( 
             "INSERT INTO propuesta 
-        (Nombre,Descripcion, FechaPublicada,Monto,MontoActual) 
-           VALUES (?,?,?,?,?)" );
-        $stmt->bind_param("sssii",$nombre,
-            $Descripcion,$FechaPublicada,$Monto,$MontoActual);
+        (Nombre,Descripcion, FechaPublicada,Monto,MontoActual,NickUsuario) 
+           VALUES (?,?,?,?,?,?)" );
+        $stmt->bind_param("sssiis",$nombre,
+            $Descripcion,$FechaPublicada,$Monto,$MontoActual,$Usuario);
         return $stmt->execute();
     }
 

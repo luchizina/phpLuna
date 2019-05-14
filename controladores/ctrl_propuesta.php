@@ -81,12 +81,14 @@ function consolita( $data ) {
    function nuevo(){
 	$mensaje="";
 	if(isset($_POST["nombre"])){
+    $usr = new Usuario();
 		$prop= new Propuesta();
 		$prop->setNombre($_POST["nombre"]);
 		$prop->setDescripcion($_POST["desc"]);
     $fecha =  date("Y-m-d H:i:s");
 		$prop->setFechaPublicada('12/12/2019');
 		$prop->setMonto($_POST["monto"]);
+    $prop->setUsuario($usr->obtenerPorNick(Session::get('usuario_nick')));
 		$prop->setMontoActual(0);
 
 		if($prop->agregar()){
