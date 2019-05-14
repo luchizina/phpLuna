@@ -131,8 +131,9 @@ function nuevo(){
     $usr->setCorreo($_POST["email"]);
     $usr->setPassword($_POST["pass"]);
     //var_dump($_FILES);exit();
-    $usr->setArchivo($_FILES["archivo"]["tmp_name"]);
-    $usr->setTam($_FILES["archivo"]["size"]);
+    $usr->setArchivo($_FILES['archivo']['tmp_name']);
+    $usr->setImagen($_FILES['archivo']['name']);
+    $usr->setTipo($_FILES['archivo']['type']);
     $usr->setCI($_POST["ci"]);
     $usr->setActivo(1);
     if($usr->agregar()){
