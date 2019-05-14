@@ -1,25 +1,58 @@
-<!DOCTYPE html>
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-13 23:52:03
+         compiled from "vistas\usuarios_nuevo.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:16727592995cd9e6aa7605a2-50375301%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '1c8ee8b714c2a77826cf3b8b4ca6f42cfcdb50bc' => 
+    array (
+      0 => 'vistas\\usuarios_nuevo.tpl',
+      1 => 1557784320,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '16727592995cd9e6aa7605a2-50375301',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cd9e6ac23bce3_96475135',
+  'variables' => 
+  array (
+    'url_base' => 0,
+    'proyecto' => 0,
+    'titulo' => 0,
+    'mensaje' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5cd9e6ac23bce3_96475135')) {function content_5cd9e6ac23bce3_96475135($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="es">
   <head>
-    <base href="{$url_base}">
+    <base href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+">
     <meta charset="utf-8">    
-    <title>{$proyecto}</title>
+    <title><?php echo $_smarty_tpl->tpl_vars['proyecto']->value;?>
+</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
   </head>
   <body>
-    {include file="cabezal.tpl"}
+    <?php echo $_smarty_tpl->getSubTemplate ("cabezal.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
     <div class="container-fluid">
       <div class="row">
        
         <div class="col-sm-12  col-md-12  main">
           <h1 class="page-header">Usuarios</h1>
-          <h2 class="sub-header">{$titulo}</h2>
-          {if $mensaje!=""}
-            <div class="alert alert-danger" role="alert">{$mensaje}</div>
-          {/if}
+          <h2 class="sub-header"><?php echo $_smarty_tpl->tpl_vars['titulo']->value;?>
+</h2>
+          <?php if ($_smarty_tpl->tpl_vars['mensaje']->value!='') {?>
+            <div class="alert alert-danger" role="alert"><?php echo $_smarty_tpl->tpl_vars['mensaje']->value;?>
+</div>
+          <?php }?>
           <form class="form-horizontal" method="post" enctype="multipart/form-data" id="registr">
             <fieldset>
             <!-- Text input-->
@@ -104,13 +137,24 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <script src="C:/xampp/htdocs/phpLuna/js/validar.js"></script>
+    <?php echo '<script'; ?>
+ src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="../../dist/js/bootstrap.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="C:/xampp/htdocs/phpLuna/js/validar.js"><?php echo '</script'; ?>
+>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-    <script src="../../assets/js/vendor/holder.js"></script>
+    <?php echo '<script'; ?>
+ src="../../assets/js/vendor/holder.js"><?php echo '</script'; ?>
+>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <?php echo '<script'; ?>
+ src="../../assets/js/ie10-viewport-bug-workaround.js"><?php echo '</script'; ?>
+>
   </body>
 </html>
 
+<?php }} ?>

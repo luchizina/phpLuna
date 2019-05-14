@@ -118,6 +118,7 @@ function nuevo(){
     $usr->setCelular($_POST["cel"]);
     $usr->setCorreo($_POST["email"]);
     $usr->setPassword($_POST["pass"]);
+    //var_dump($_FILES);exit();
     $usr->setArchivo($_FILES["archivo"]["tmp_name"]);
     $usr->setTam($_FILES["archivo"]["size"]);
     $usr->setCI($_POST["ci"]);
@@ -255,6 +256,15 @@ function logout(){
   $this->redirect("usuario","listado");
 }
 
+public function traerImagen($params = array()){
+
+$usr = new Usuario();
+$img=$usr->traerImagen($params[0]);
+//ob_start();
+header("Content-type: jpg");
+print base64_decode($img);
+//ob_clean();
+}
 
 
 
