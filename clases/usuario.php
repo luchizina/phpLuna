@@ -208,13 +208,18 @@ public function agregar(){
         $null = NULL;
         $stmt->bind_param("ssssssbsi", $nombre, $ape, $nick, $email, $password, $cel, $null, $ci, $act);
         if($stmt->execute()){
-            $json['success'] = 1;
-            $json['message'] = "Usuario registrado";
+            $arreglo=["status"=>"ok","message"=>"Usuario registrado"];
+            echo json_encode($arreglo);
+            //echo json_encode(array("response"=>"success"));
+           // $json['success'] = 1;
+           // $json['message'] = "Usuario registrado";
         }else{
-            $json['success'] = 0;
-            $json['message'] = "Error al tratar de registrarse";
+            //echo json_encode(array("response"=>"failed"));
+            $arreglo=["status"=>"error","message"=>"Error al tratar de registrarse"];
+            echo json_encode($arreglo);
+           // $json['success'] = 0;
+           // $json['message'] = "Error al tratar de registrarse";
         }
-        echo $json;
     }
 
      public function getListadoUsus(){
