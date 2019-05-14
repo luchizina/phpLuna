@@ -56,8 +56,11 @@
                     <td>{$prop->getFechaPublicada()}</td>
                     <td>
                       <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='{$url_base}propuesta/borrar/{$prop->getNombre()}/'"/>
+                      {if $usuLogueado == $prop->getUsuario()->getNick()}
+                       <input type="button" value="Modificar" id="modificar" class="btn btn-success" onClick="window.location='{$url_base}propuesta/modificar/{$prop->getNombre()}/'"/>
+                       {/if}
 
-                      <input type="button" value="colaborar" id="colaborar" class="btn btn-success" onClick="window.location='{$nueva_colaboracion}{$prop->getNombre()}/'"/>
+                      <input type="button" value="Colaborar" id="colaborar" class="btn btn-success" onClick="window.location='{$nueva_colaboracion}{$prop->getNombre()}/'"/>
                       
                     </td>
                   </tr>

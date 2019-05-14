@@ -173,11 +173,12 @@ public function agregar(){
         $ci = $this->getCI();
         $act = $this->isActivo();
         if($arch != ""){
-            $this->setImagen(addslashes(file_get_contents($arch)));
-            $lol = $this->getImagen();
+            $this->setImagen($this->getDB()->real_escape_string((file_get_contents($arch))));
+            $lol = ((file_get_contents($arch)));
         } else {
             $lol = null;
         }
+        //var_dump($lol);exit;
         $stmt = $this->getDB()->prepare( 
             "INSERT INTO usuario (Nombre, Apellido,Nick, Correo, Password,Celular, Imagen, ci, activo)
            VALUES (?,?,?,?,?,?,?,?,?)" );
@@ -185,6 +186,7 @@ public function agregar(){
         $stmt->bind_param("ssssssbsi", $nombre, $ape, $nick, $email, $password, $cel, $null, $ci, $act);
         $stmt->send_long_data(6, $lol);
         return $stmt->execute();
+        //exit;
     }
 
 
@@ -237,13 +239,7 @@ public function agregar(){
             WHERE ci =?" );
         $stmt->bind_param("s",$ci);
         $stmt->execute();
-        $stmt->store_result();
-        $stmt->fetch();
-        //$resultado = $stmt->get_result();
-        $row_cnt = $stmt->num_rows;
-        if($row_cnt > 0) {
-            return true;
-        }
+           $resultado = $stmt->get_result();
     }
 
     public function nick($nick){
@@ -275,6 +271,23 @@ public function agregar(){
             return true;
         }
     }
+
+
+public function traerImagen($nick){
+
+     $stmt = $this->getDB()->prepare("SELECT Imagen FROM usuario  WHERE Nick = ?" );
+        $stmt->bind_param("s",$nick);
+        $stmt->execute();
+       $resultado = $stmt->get_result();
+       $fila=$resultado->fetch_object();
+        //header("Content-type: image/jpg");
+       return ($fila->Imagen);
+        //exit;
+       /*$linea = '<img src="data:image/jpeg;base64,'.base64_encode( $fila->Imagen ).'"/>';
+      return $linea;*/
+      }
+
+
 
 
    /* public function insertarFav($idLog,$idFav){
