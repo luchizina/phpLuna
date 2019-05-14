@@ -63,7 +63,6 @@ class Colaboracion extends ClaseBase{
     }
 
     public function agregar(){
-        $nombre=$this->getNombre();
         $Fecha=$this->getFecha();
         $usu=$this->getUsuario()->getNick();
         $prop=$this->getPropuesta()->getNombre();

@@ -43,8 +43,9 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="ci">Cedula</label>  
               <div class="col-md-4">
-              <input id="ci" name="ci" type="text" placeholder="Ej: 47821920" class="form-control input-md" required="" onblur="validarci(this);">
-              <span id=avisaCe></span>
+              <input id="ci" name="ci" type="text" placeholder="Ej: 47821920" class="form-control input-md" required="" onblur="javascript:validarci();">
+              <span id=avisaCe></span> <br>
+              <span id=avisaFor></span>
               </div>
             </div>
 
@@ -52,7 +53,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="email">Email</label>  
               <div class="col-md-4">
-              <input id="email" name="email" type="email" placeholder="pepe@gmail.com" class="form-control input-md" required="">  
+              <input id="email" name="email" type="email" placeholder="pepe@gmail.com" class="form-control input-md" required="" onblur="javascript:validarcorreo();">  
               <span id="avisaC"></span>              
               </div>
             </div>
@@ -61,7 +62,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="nick">Nick</label>  
               <div class="col-md-4">
-              <input id="nick" name="nick" type="text" placeholder="Ej: Pepe" class="form-control input-md">     
+              <input id="nick" name="nick" type="text" placeholder="Ej: Pepe" class="form-control input-md" required="" onblur="javascript:validarnick();">     
               <span id="avisa"></span>            
               </div>
             </div>
@@ -106,7 +107,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="../../dist/js/bootstrap.min.js"></script>
-    <script src="C:/xampp/htdocs/phpLuna/js/validar.js"></script>
+    <script src="js/validar.js" type="text/javascript"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <script src="../../assets/js/vendor/holder.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

@@ -1,18 +1,57 @@
-var x = document.getElementById("registr");
-x.addEventListener("blur", validarcorreo);
-x.addEventListener("blur", validarci);
+//var x = document.getElementById("registr");
+//x.addEventListener("blur", validarcorreo);
+//x.addEventListener("blur", validarci);
 
-function validarci(ci){
-	var ced = ci;
+function validarci(){
+	var ced = $("#ci").val();
 	$.ajax({
 		url:"/phpLuna/usuario/existeCi",
 		method: "POST",
 		data:{ci:ced},
-		dataType:"text",
+		//dataType:"text",
 		success:function(html){
-			$(#avisaCe).html(html);
+			$("#avisaCe").html(html);
 		}
 	});
+}
+
+function validarnick(){
+	var ced = $("#nick").val();
+	$.ajax({
+		url:"/phpLuna/usuario/existeNick",
+		method: "POST",
+		data:{nick:ced},
+		//dataType:"text",
+		success:function(html){
+			$("#avisa").html(html);
+		}
+	});
+}
+
+function validarcorreo(){
+	var ced = $("#email").val();
+	$.ajax({
+		url:"/phpLuna/usuario/existeCorreo",
+		method: "POST",
+		data:{correo:ced},
+		//dataType:"text",
+		success:function(html){
+			$("#avisaC").html(html);
+			Chequear();
+		}
+	});
+}
+
+function validar(){
+	if(avisa.innerHTML === "Nick en uso" || avisaC.innerHTML === "Correo en uso" || avisaCe.innerHTML === "Cedula en uso" || avisaFor==="Numero de cedula incorrecto"){
+		var mensaje = confirm("Tiene datos incorrectos ¿Desea corregirlos?");
+        if (mensaje) {
+            return false;
+        } else {
+            //location.href = "";
+            return false;
+        }
+	}
 }
 
 function Chequear(){
@@ -20,12 +59,11 @@ try
 {
 if(EsCorrecto(ci.value))
 {
-alert('Cédula correcta!');
+$("#avisaFor").html("");
 }
 else
 {
-alert('Cédula incorrecta!');
-ci.focus();
+$("#avisaFor").html("Numero de cedula incorrecto");
 }
 }
 catch(ex)
@@ -86,7 +124,7 @@ return false;
 }
 
 else{
-throw('La Cédula debe tener 7 u 8 caractéres.');
+$("#avisaFor").html("Cedula entre 7 y 8 caracteres");
 }
 }
 catch(ex) {throw(ex)}

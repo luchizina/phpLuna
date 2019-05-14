@@ -1,27 +1,30 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">{$proyecto}</a>
+
+ <head>
+    <link rel="shortcut icon" href="img/moon.png" type="image/png" />
+    <title>LUNA</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Montserrat:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles-merged.css">
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+  </head>
+      <nav class="navbar navbar-default probootstrap-navbar">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+             <img src="img/logo2.png" alt="Smiley face" height="100"> 
+          </div>
+
+          <div id="navbar-collapse" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="index.html">Inicio</a></li>
+              <li><a href="about.html">Propuestas</a></li>
+              <li class="probootstra-cta-button last"><a href="donate.html" class="btn btn-primary">INICIAR SESIÓN</a></li>
+            </ul>
+          </div>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            {if $usuLogueado == ""}
-            <li><a href="{$url_login}">Iniciar sesión</a></li>
-            {else}
-            <li><a href="{$url_logout}">Cerrar sesión</a></li>
-               <li><a href="{$url_logout}">¡Hola {$usuLogueado}!</a></li>
-               {/if}
-          </ul>
-          <form class="navbar-form navbar-right" method="post" action="{$url_base}usuario/buscar/">
-            <input type="text" id="buscar" name="buscar" class="form-control" placeholder="Buscar..." value='{$buscar}'>
-            <input type="submit" value="Buscar" class="form-control btn btn-primary">
-          </form>
-        </div>
-      </div>
-    </nav>
+      </nav>

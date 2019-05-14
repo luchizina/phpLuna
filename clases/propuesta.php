@@ -130,7 +130,6 @@ class Propuesta extends ClaseBase {
         $stmt->bind_param("sssii",$nombre,
             $Descripcion,$FechaPublicada,$Monto,$MontoActual);
         return $stmt->execute();
-    
     }
 
  public function borrarProp($nombre){

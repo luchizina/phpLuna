@@ -25,14 +25,14 @@ if(isset($_GET['url'])){
 	$query = $_GET['url'];
 	$request = explode('/', $query);
 	$controller = (!empty($request[0])) ? $request[0] : 'usuario';
-	$action = (!empty($request[1])) ? $request[1] : 'listado';
+	$action = (!empty($request[1])) ? $request[1] : 'redirigir';
 	$params=array();
 	for ($i=2; $i <count($request) ; $i++) { 
 		$params[]=$request[$i];
 	}
 }else{
 	$controller="usuario";
-	$action="listado";
+	$action="redirigir";
 	$params=array();
 }
 
