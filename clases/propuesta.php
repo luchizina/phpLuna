@@ -120,15 +120,15 @@ class Propuesta extends ClaseBase {
         $FechaPublicada=$this->getFechaPublicada();
         $Monto = $this->getMonto();
         $MontoActual=0;
-      /*  $Usuario = $this->getUsuario()->getNick();
-        $Categoria = $this->getCategoria()->getNombreP();
+      $Usuario = $this->getUsuario()->getNick();
+       /* $Categoria = $this->getCategoria()->getNombreP();
         $EstadoActual = $this->getEstadoActual()->getNombre();*/
         $stmt = $this->getDB()->prepare( 
             "INSERT INTO propuesta 
-        (Nombre,Descripcion, FechaPublicada,Monto,MontoActual) 
-           VALUES (?,?,?,?,?)" );
-        $stmt->bind_param("sssii",$nombre,
-            $Descripcion,$FechaPublicada,$Monto,$MontoActual);
+        (Nombre,Descripcion, FechaPublicada,Monto,MontoActual,NickUsuario) 
+           VALUES (?,?,?,?,?,?)" );
+        $stmt->bind_param("sssiis",$nombre,
+            $Descripcion,$FechaPublicada,$Monto,$MontoActual,$Usuario);
         return $stmt->execute();
     }
 

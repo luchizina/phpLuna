@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-14 02:48:13
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-14 03:08:19
          compiled from "vistas\cabezal.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:14397458875cda0b7ea990e7-04825022%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'fb05f10fe29da8a558e3c965866d6cd5dd601380' => 
     array (
       0 => 'vistas\\cabezal.tpl',
-      1 => 1557794890,
+      1 => 1557796093,
       2 => 'file',
     ),
   ),
@@ -19,9 +19,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'unifunc' => 'content_5cda0b7eafc886_31844308',
   'variables' => 
   array (
-    'usuLogueado' => 0,
+    'usuLogNick' => 0,
     'url_login' => 0,
     'url_logout' => 0,
+    'usuLogueado' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -50,7 +51,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <ul class="nav navbar-nav navbar-right">
               <li class="active"><a href="index.html">Inicio</a></li>
               <li><a href="about.html">Propuestas</a></li>
-               <?php if ($_smarty_tpl->tpl_vars['usuLogueado']->value=='') {?>
+               <?php if ($_smarty_tpl->tpl_vars['usuLogNick']->value=='') {?>
               <li class="probootstra-cta-button last"><a href="<?php echo $_smarty_tpl->tpl_vars['url_login']->value;?>
 " class="btn btn-primary">INICIAR SESIÓN</a></li>
                <?php } else { ?>
