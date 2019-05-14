@@ -264,32 +264,20 @@ function logout(){
 
 
 
-
-
-/*$inputJSON = file_get_contents('php://input');
-$input = json_decode($inputJSON, TRUE); //convertir JSON en array*/
-
-
-
-/*$inputJSON = file_get_contents('php://input');
-$input = json_decode($inputJSON, TRUE); //convertir JSON en array
-
-public function nuevoUsuCel(){
-	$inputJSON = file_get_contents('php://input');
- $input = json_decode($inputJSON, TRUE); 
+public function nuevoUsuCel(){ 
   if(isset($input['nick']) && isset($input['cont']) && isset($input['nombre']) && isset($input['ape']) && isset($input['correo']) && isset($input['cel']) && isset($input['ci'])){
     $u  = new Usuario();
-    $u->setNick($input['nick']);
-    $u->setNombre($input['nombre']);
-    $u->setApellido($input['ape']);
-    $u->setCI($input['ci']);
-    $u->setCelular($input['cel']);
-    $u->setCorreo($input['correo']);
-    $u->setPassword($input['cont']);
+    $u->setNick($_POST['nick']);
+    $u->setNombre($_POST['nombre']);
+    $u->setApellido($_POST['ape']);
+    $u->setCI($_POST['ci']);
+    $u->setCelular($_POST['cel']);
+    $u->setCorreo($_POST['correo']);
+    $u->setPassword($_POST['cont']);
     $u->setActivo(1);
-    $u->agregarCel();
-}
+    $json_registration=$u->agregarCel();
+    echo json_encode($json_registration);
 
-}*/
+}
 }
 ?>
