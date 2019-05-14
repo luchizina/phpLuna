@@ -19,7 +19,7 @@
           <div class="row">
             <div class="col-md-12" >
               <div class="probootstrap-slider-text probootstrap-animate" data-animate-effect="fadeIn">
-                <h1 class="probootstrap-heading probootstrap-animate">Modificar Usuario</h1>
+                <h1 class="probootstrap-heading probootstrap-animate">Modificar Propuesta</h1>
               </div>
             </div>
           </div>
@@ -32,23 +32,20 @@
             <form method="post" class="probootstrap-form">
               <div class="form-group">
                 <label for="Nombre">Nombre</label>
-                <input type="text" class="form-control" value="{$usuario_log->getNombre()}" id="nombre" name="nombre">
+                <input type="text" class="form-control" value="{$propuesta->getNombre()}" id="nombre" name="nombre">
               </div>
               <div class="form-group">
-                <label for="Apellido">Apellido</label>
-                <input type="text" class="form-control" value="{$usuario_log->getApellido()}" id="apellido" name="apellido">
+                <label for="Descripción">Descripción</label>
+                <input type="text" class="form-control" value="{$propuesta->getDescripcion()}" id="descripcion" name="descripcion">
               </div>
+
               <div class="form-group">
-                <label for="correo">Correo</label>
-                <input type="email" class="form-control" value="{$usuario_log->getCorreo()}" id="correo" name="correo">
+                <label for="celular">Monto</label>
+                <input type="text" class="form-control" value="{$propuesta->getMonto()}" id="monto" name="monto">
               </div>
-              <div class="form-group">
-                <label for="password">Contraseña</label>
-                <input type="password" class="form-control" placeholder="xxxxxx" id="password" name="password">
-              </div>
-              <div class="form-group">
-                <label for="celular">Celular</label>
-                <input type="text" class="form-control" value="{$usuario_log->getCelular()}" id="celular" name="celular">
+               <div class="form-group">
+                <label for="fecha_pub">Fecha de publicación</label>
+                <input type="text" class="form-control" value="{$propuesta->getFechaPublicada()}" id="fechaPub" name="fechaPub">
               </div>
               <div class="form-group">
                 <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" value="MODIFICAR">
