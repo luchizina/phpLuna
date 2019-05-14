@@ -23,7 +23,12 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="active"><a href="index.html">Inicio</a></li>
               <li><a href="about.html">Propuestas</a></li>
-              <li class="probootstra-cta-button last"><a href="donate.html" class="btn btn-primary">INICIAR SESIÓN</a></li>
+               {if $usuLogueado == ""}
+              <li class="probootstra-cta-button last"><a href="{$url_login}" class="btn btn-primary">INICIAR SESIÓN</a></li>
+               {else}
+                <li class="probootstra-cta-button last"><a href="{$url_logout}" class="btn btn-primary">CERRAR SESIÓN</a></li>
+                <li><a href="about.html">¡Hola {$usuLogueado}!</a></li>
+                 {/if}
             </ul>
           </div>
         </div>

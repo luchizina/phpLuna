@@ -11,10 +11,11 @@ class ControladorUsuario extends ControladorIndex {
   function redirigir(){
      //Llamar a la vista
         $tpl = Template::getInstance();
-        $mensaje = "hola";
-        $datos = array(
-       'mensaje' => $mensaje,);
-          $tpl->mostrar('inicio',$datos);
+        $usuarios = "hola";
+        $buscar = "buscar";
+        $mensaje = "mensaje";
+        $datos = array('mensaje' => $mensaje);
+        $tpl->mostrar('inicio',$datos);
 }
     function listado($params=array()){
 
@@ -129,6 +130,7 @@ function nuevo(){
     $usr->setCelular($_POST["cel"]);
     $usr->setCorreo($_POST["email"]);
     $usr->setPassword($_POST["pass"]);
+    //var_dump($_FILES);exit();
     $usr->setArchivo($_FILES["archivo"]["tmp_name"]);
     $usr->setTam($_FILES["archivo"]["size"]);
     $usr->setCI($_POST["ci"]);
@@ -161,11 +163,10 @@ public function modificar($params = array())
      if(isset($_POST["nombre"]))
   { 
     $u->setNombre($_POST["nombre"]);
-    $u->setNick($_POST["nick"]);
     $u->setApellido($_POST["apellido"]);
     $u->setCelular($_POST["celular"]);
-    $u->setCorreo($_POST["email"]);
-    $u->setPassword($_POST["pass"]);
+    $u->setCorreo($_POST["correo"]);
+    $u->setPassword($_POST["password"]);
     if($u->modificar())
     {
       $this->redirect("usuario","redirigir");
@@ -178,8 +179,8 @@ public function modificar($params = array())
   $tpl = Template::getInstance();
   $tpl->asignar('titulo',"Modificar Usuario");
   $tpl->asignar('buscar',"");
-  $tpl->asignar('usuario_log', $u);
-  $tpl->mostrar('usuarios_modificar', $u);
+  $tpl->asignar('usuario_log', $usuario);
+  $tpl->mostrar('usuarios_modificar', $usuario);
    }
 
 public function existeCi(){
@@ -232,7 +233,8 @@ function login(){
     $pass=sha1($_POST["password"]);
 
     if($usr->login($email,$pass)){
-      $this->redirect("usuario","listado");
+
+      $this->redirect("usuario","redirigir");
       exit;
     }else{
       $mensaje="Error! No se pudo agregar el usuario";
@@ -254,9 +256,18 @@ function login(){
 function logout(){
   $usr= new Usuario();
   $usr->logout();
-  $this->redirect("usuario","listado");
+  $this->redirect("usuario","redirigir");
 }
 
+public function traerImagen($params = array()){
+
+$usr = new Usuario();
+$img=$usr->traerImagen($params[0]);
+//ob_start();
+header("Content-type: jpg");
+print base64_decode($img);
+//ob_clean();
+}
 
 
 
