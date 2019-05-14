@@ -28,7 +28,7 @@
       <section class="probootstrap-section">
         <div class="container">
           <div class="row">
-          <div class="col-md-5 probootstrap-animate" style="color: white; font-family: Montserrat,Arial,sans-serif >
+          <div class="col-md-5 probootstrap-animate" style="color: white; font-family: Montserrat,Arial,sans-serif" >
             <form method="post" class="probootstrap-form">
               <div class="form-group">
                 <label for="Nombre">Nombre</label>
