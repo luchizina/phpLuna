@@ -2,6 +2,7 @@
 	define("DB_HOST", "localhost");
 	define("DB_USR", "root");
 	define("DB_PASS", "1234");
+	define("DB_PASS", "hola");
 	define("DB_DB", "crowdfunding");
 	//define(DB_TYPE, "mysql");
 
