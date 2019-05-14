@@ -13,9 +13,8 @@ class ControladorUsuario extends ControladorIndex {
         $tpl = Template::getInstance();
         $usuarios = "hola";
         $buscar = "buscar";
-        $datos = array(
-       'mensaje' => $mensaje,
-       );
+        $mensaje = "mensaje";
+        $datos = array('mensaje' => $mensaje);
           $tpl->mostrar('inicio',$datos);
 }
     function listado($params=array()){
@@ -238,7 +237,8 @@ function login(){
     $pass=sha1($_POST["password"]);
 
     if($usr->login($email,$pass)){
-      $this->redirect("usuario","listado");
+
+      $this->redirect("usuario","redirigir");
       exit;
     }else{
       $mensaje="Error! No se pudo agregar el usuario";
@@ -260,7 +260,7 @@ function login(){
 function logout(){
   $usr= new Usuario();
   $usr->logout();
-  $this->redirect("usuario","listado");
+  $this->redirect("usuario","redirigir");
 }
 
 public function traerImagen($params = array()){
