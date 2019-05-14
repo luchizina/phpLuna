@@ -156,15 +156,9 @@ public function modificar()
         $desc=$this->getDescripcion();
         $monto=$this->getMonto();
         $fechaPub=$this->getFechaPublicada();
-        $this->setImagen(addslashes(file_get_contents($arch)));
-        $lol = $this->getImagen();
-        $null = null;
-        $stmt = $this->getDB()->prepare( 
-            "UPDATE propuesta set
-        Nombre=?, Descripcion=?, FechaPublicada=?, Monto=? WHERE id=?"); 
+        $stmt = $this->getDB()->prepare("UPDATE propuesta set Nombre=?, Descripcion=?, FechaPublicada=?, Monto=? WHERE Nombre=?"); 
            
-        $stmt->bind_param("sssi",$nombre,
-            $desc,$fechaPub,$monto);
+        $stmt->bind_param("sssss",$nombre,$desc,$fechaPub,$monto,$nombre);
         return $stmt->execute();
    }
 
