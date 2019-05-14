@@ -160,11 +160,14 @@ public function modificar()
         return $stmt->execute();
    }
 
-
-
-
-
-
+   public function actualizaMonto(){
+   	$monto = $this->getMontoActual();
+   	$stmt = $this->getDB()->prepare( 
+            "UPDATE propuesta set MontoActual=? WHERE Nombre=?"); 
+           
+        $stmt->bind_param("is", $monto, $this->getNombre());
+        return $stmt->execute();
+   }
 
 }
  ?>

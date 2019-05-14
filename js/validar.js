@@ -42,6 +42,13 @@ function validarcorreo(){
 	});
 }
 
+function validarCel(){
+	var c = $("#cel").val();
+	if(c.length !== 9 || c.substring(0,0) !== 0){
+		$("#avisaCel").html("El formato es incorrecto");
+	}
+}
+
 function validar(){
 	if(avisa.innerHTML === "Nick en uso" || avisaC.innerHTML === "Correo en uso" || avisaCe.innerHTML === "Cedula en uso" || avisaFor==="Numero de cedula incorrecto"){
 		var mensaje = confirm("Tiene datos incorrectos ¿Desea corregirlos?");
