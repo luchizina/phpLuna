@@ -96,7 +96,7 @@
             <!-- Button -->
             <div class="form-group">
               <div class="col-md-4">
-                <button id="guardar" name="guardar" class="btn btn-success" onclick="Chequear();">Agregar</button>
+                <button id="guardar" name="guardar" class="btn btn-success">Agregar</button>
               </div>
             </div>
 

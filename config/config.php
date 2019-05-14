@@ -1,7 +1,7 @@
 <?php
 	define("DB_HOST", "localhost");
 	define("DB_USR", "root");
-	define("DB_PASS", "1234");
+	define("DB_PASS", "hola");
 	define("DB_DB", "crowdfunding");
 	//define(DB_TYPE, "mysql");
 
@@ -14,5 +14,5 @@
         );
     define ("URL_BASE","/phpLuna/");
     ini_set("display_errors", 1);
-    error_reporting(E_ERROR);
+    error_reporting(E_ALL);
 ?>

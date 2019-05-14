@@ -1,29 +1,35 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-14 02:27:42
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-14 23:21:19
          compiled from "vistas\inicio.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:14410030105cda0b7e6c8415-70440504%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:7214408445cdb314fe15455-89255559%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'c9a1123df06652abffdc7699f4d4134cd2f4681f' => 
     array (
       0 => 'vistas\\inicio.tpl',
-      1 => 1557793618,
+      1 => 1557853382,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '14410030105cda0b7e6c8415-70440504',
+  'nocache_hash' => '7214408445cdb314fe15455-89255559',
   'function' => 
   array (
   ),
+  'variables' => 
+  array (
+    'url_base' => 0,
+  ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cda0b7e7d1c87_28845846',
+  'unifunc' => 'content_5cdb314fecc156_95514648',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cda0b7e7d1c87_28845846')) {function content_5cda0b7e7d1c87_28845846($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5cdb314fecc156_95514648')) {function content_5cdb314fecc156_95514648($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <base href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="img/moon.png" type="image/png" />
     <title>LUNA</title>

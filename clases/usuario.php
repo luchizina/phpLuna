@@ -181,16 +181,17 @@ public function agregar(){
         $act = $this->isActivo();
         $img = $this->getImagen();
         $tip = $this->getTipo();
-        $permitidos = array("image/jpg", "image/jpeg", "image/png", "");
+        $permitidos = array("image/jpg", "image/jpeg", "image/png");
         $target='';
         if(in_array($tip, $permitidos)){
             //$target = "imgUsus/".basename($img);
-            $extension=end(explode("/", $tip));
+            $extension=end(explode(".", $img));
             //rename($target, $nick.".".$extension);
             $target = "imgUsus/".$nick.".".$extension;
         } else {
             echo "El tipo de imagen es incorrecto";
         }
+        $this->setImagen($target);
         /*if($arch != ""){
             $this->setImagen($this->getDB()->real_escape_string((file_get_contents($arch))));
             $lol = ((file_get_contents($arch)));
@@ -266,8 +267,15 @@ public function agregar(){
             WHERE ci =?" );
         $stmt->bind_param("s",$ci);
         $stmt->execute();
-           $resultado = $stmt->get_result();
+        $stmt->store_result();
+        $stmt->fetch();
+        //$resultado = $stmt->get_result();
+        $row_cnt = $stmt->num_rows;
+        if($row_cnt > 0) {
+            return true;
+        }
     }
+    
 
     public function nick($nick){
         $stmt = $this->getDB()->prepare( 
