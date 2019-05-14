@@ -131,8 +131,9 @@ function nuevo(){
     $usr->setCorreo($_POST["email"]);
     $usr->setPassword($_POST["pass"]);
     //var_dump($_FILES);exit();
-    $usr->setArchivo($_FILES["archivo"]["tmp_name"]);
-    $usr->setTam($_FILES["archivo"]["size"]);
+    $usr->setArchivo($_FILES['archivo']['tmp_name']);
+    $usr->setImagen($_FILES['archivo']['name']);
+    $usr->setTipo($_FILES['archivo']['type']);
     $usr->setCI($_POST["ci"]);
     $usr->setActivo(1);
     if($usr->agregar()){
@@ -271,7 +272,7 @@ print base64_decode($img);
 
 
 public function nuevoUsuCel(){ 
-  if(isset($input['nick']) && isset($input['cont']) && isset($input['nombre']) && isset($input['ape']) && isset($input['correo']) && isset($input['cel']) && isset($input['ci'])){
+  if(isset($_POST['nick']) && isset($_POST['cont']) && isset($_POST['nombre']) && isset($_POST['ape']) && isset($_POST['correo']) && isset($_POST['cel']) && isset($_POST['ci'])){
     $u  = new Usuario();
     $u->setNick($_POST['nick']);
     $u->setNombre($_POST['nombre']);
@@ -281,8 +282,8 @@ public function nuevoUsuCel(){
     $u->setCorreo($_POST['correo']);
     $u->setPassword($_POST['cont']);
     $u->setActivo(1);
-    $json_registration=$u->agregarCel();
-    echo json_encode($json_registration);
+    $u->agregarCel();
+   // echo json_encode($json_registration);
 
 }
 }

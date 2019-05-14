@@ -7,9 +7,9 @@ class Usuario extends ClaseBase {
 	public $Password = '';
 	public $Correo = '';
 	public $Celular = '';
-	public $Imagen = null;
+	public $Imagen;
     public $Archivo;
-    public $Tam;
+    public $tipo;
 	public $Comentarios = array();
 	public $PropuestasPropone = array();
 	public $PropuestasColabora = array();
@@ -36,12 +36,12 @@ class Usuario extends ClaseBase {
         $this->Archivo=$Archivo;
     }
 
-    public function getTam(){
-        return $this->Tam;
+    public function getTipo(){
+        return $this->tipo;
     }
 
-    public function setTam($Tam){
-        $this->Tam=$Tam;
+    public function setTipo($tipo){
+        $this->tipo=$tipo;
     }
 
     public function getPropuestasColabora(){
@@ -169,22 +169,36 @@ public function agregar(){
         $password = sha1($this->getPassword());
         $email=$this->getCorreo();
         $arch = $this->getArchivo();
-        $tama = $this->getTam();
         $ci = $this->getCI();
         $act = $this->isActivo();
-        if($arch != ""){
+        $img = $this->getImagen();
+        $tip = $this->getTipo();
+        $permitidos = array("image/jpg", "image/jpeg", "image/png", "");
+        $target='';
+        if(in_array($tip, $permitidos)){
+            //$target = "imgUsus/".basename($img);
+            $extension=end(explode("/", $tip));
+            //rename($target, $nick.".".$extension);
+            $target = "imgUsus/".$nick.".".$extension;
+        } else {
+            echo "El tipo de imagen es incorrecto";
+        }
+        /*if($arch != ""){
             $this->setImagen($this->getDB()->real_escape_string((file_get_contents($arch))));
             $lol = ((file_get_contents($arch)));
         } else {
             $lol = null;
-        }
+        }*/
         //var_dump($lol);exit;
         $stmt = $this->getDB()->prepare( 
             "INSERT INTO usuario (Nombre, Apellido,Nick, Correo, Password,Celular, Imagen, ci, activo)
            VALUES (?,?,?,?,?,?,?,?,?)" );
-        $null = NULL;
-        $stmt->bind_param("ssssssbsi", $nombre, $ape, $nick, $email, $password, $cel, $null, $ci, $act);
-        $stmt->send_long_data(6, $lol);
+        //$null = NULL;
+        $stmt->bind_param("ssssssssi", $nombre, $ape, $nick, $email, $password, $cel, $target, $ci, $act);
+        if($target != ''){
+        move_uploaded_file($arch, $target);
+    }
+        //$stmt->send_long_data(6, $lol);
         return $stmt->execute();
         //exit;
     }
@@ -208,13 +222,18 @@ public function agregar(){
         $null = NULL;
         $stmt->bind_param("ssssssbsi", $nombre, $ape, $nick, $email, $password, $cel, $null, $ci, $act);
         if($stmt->execute()){
-            $json['success'] = 1;
-            $json['message'] = "Usuario registrado";
+            $arreglo=["status"=>"ok","message"=>"Usuario registrado"];
+            echo json_encode($arreglo);
+            //echo json_encode(array("response"=>"success"));
+           // $json['success'] = 1;
+           // $json['message'] = "Usuario registrado";
         }else{
-            $json['success'] = 0;
-            $json['message'] = "Error al tratar de registrarse";
+            //echo json_encode(array("response"=>"failed"));
+            $arreglo=["status"=>"error","message"=>"Error al tratar de registrarse"];
+            echo json_encode($arreglo);
+           // $json['success'] = 0;
+           // $json['message'] = "Error al tratar de registrarse";
         }
-        echo $json;
     }
 
      public function getListadoUsus(){
