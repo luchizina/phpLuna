@@ -1,25 +1,25 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-14 00:13:21
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-14 03:28:30
          compiled from "vistas\cabezal.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:312495cd9eb61c89b36-97330013%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:74695cda19be20b179-21276094%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'fb05f10fe29da8a558e3c965866d6cd5dd601380' => 
     array (
       0 => 'vistas\\cabezal.tpl',
-      1 => 1557785552,
+      1 => 1557789435,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '312495cd9eb61c89b36-97330013',
+  'nocache_hash' => '74695cda19be20b179-21276094',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cd9eb61c94057_85958148',
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cda19be214da7_53420621',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cd9eb61c94057_85958148')) {function content_5cd9eb61c94057_85958148($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_5cda19be214da7_53420621')) {function content_5cda19be214da7_53420621($_smarty_tpl) {?>
  <head>
     <link rel="shortcut icon" href="img/moon.png" type="image/png" />
     <title>LUNA</title>
@@ -28,7 +28,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <link rel="stylesheet" href="css/style.min.css">
     <link rel="stylesheet" href="css/custom.css">
   </head>
-      <nav class="navbar navbar-default probootstrap-navbar">
+      <nav class="navbar navbar-default probootstrap-navbar" style="display: block;">
         <div class="container">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" aria-controls="navbar">

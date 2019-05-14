@@ -29,13 +29,11 @@
         <div class="col-sm-12  col-md-12  main">
           <h1 class="page-header">Propuestas</h1>
           <h2 class="sub-header">{$titulo} <button id="agregar" name="agregar" class="btn btn-success pull-right" onClick="window.location='{$registrar_propuesta}'">Agregar</button></h2>
+
           {if $mensaje!=""}
             <div class="alert alert-danger" role="alert">{$mensaje}</div>
           {/if}
           <div class="table-responsive">
-
-
-
             <table class="table table-striped">
               <thead>
                 <tr>

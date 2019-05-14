@@ -11,10 +11,9 @@ class ControladorUsuario extends ControladorIndex {
   function redirigir(){
      //Llamar a la vista
         $tpl = Template::getInstance();
-        $usuarios = "hola";
-        $buscar = "buscar";
+        $mensaje = "hola";  
         $datos = array(
-       'mensaje' => $mensaje,
+       'mensaje' => $mensaje
        );
           $tpl->mostrar('inicio',$datos);
 }
