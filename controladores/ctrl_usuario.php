@@ -11,11 +11,9 @@ class ControladorUsuario extends ControladorIndex {
   function redirigir(){
      //Llamar a la vista
         $tpl = Template::getInstance();
-        $usuarios = "hola";
-        $buscar = "buscar";
+        $mensaje = "hola";
         $datos = array(
-       'mensaje' => $mensaje,
-       );
+       'mensaje' => $mensaje,);
           $tpl->mostrar('inicio',$datos);
 }
     function listado($params=array()){
@@ -63,6 +61,7 @@ class ControladorUsuario extends ControladorIndex {
        $tpl->mostrar('usuarios_listado',$datos);
    
    }
+
 
 
 
@@ -156,23 +155,20 @@ function nuevo(){
 
 public function modificar($params = array())
    {
-    $mensaje = "";
-     $usuario  = new Usuario();
-     $u = $usuario->obtenerPorId($params[0]);
+     $mensaje = "";
+     $u = new Usuario();
+     $usuario = $u->obtenerPorNick(Session::get('usuario_nick'));
      if(isset($_POST["nombre"]))
   { 
     $u->setNombre($_POST["nombre"]);
     $u->setNick($_POST["nick"]);
     $u->setApellido($_POST["apellido"]);
-    $u->setCI($_POST["ci"]);
     $u->setCelular($_POST["celular"]);
     $u->setCorreo($_POST["email"]);
-    $u->setArchivo($_FILES["archivo"]["tmp_name"]);
     $u->setPassword($_POST["pass"]);
-    $usr->setTam($_FILES["archivo"]["size"]);
     if($u->modificar())
     {
-      $this->redirect("usuario","listado");
+      $this->redirect("usuario","redirigir");
       exit;
     }else{
       $mensaje="Error! No se pudo modificar el usuario";
@@ -182,9 +178,8 @@ public function modificar($params = array())
   $tpl = Template::getInstance();
   $tpl->asignar('titulo',"Modificar Usuario");
   $tpl->asignar('buscar',"");
-  $tpl->asignar('mensaje',$mensaje);
-  $tpl->asignar('usuario', $u);
-  $tpl->mostrar('modificar_usuario',$u);
+  $tpl->asignar('usuario_log', $u);
+  $tpl->mostrar('usuarios_modificar', $u);
    }
 
 public function existeCi(){
