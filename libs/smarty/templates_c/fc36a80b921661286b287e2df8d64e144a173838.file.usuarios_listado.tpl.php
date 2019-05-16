@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-14 23:35:37
-         compiled from "vistas\propuestas_listado.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:162345cdb34a940b8a4-79759951%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-15 00:09:37
+         compiled from "vistas\usuarios_listado.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:82025cdb3ca1c2eb82-34044773%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    'cb7e98352ffa98b3b2a857e00efc671b603776e0' => 
+    'fc36a80b921661286b287e2df8d64e144a173838' => 
     array (
-      0 => 'vistas\\propuestas_listado.tpl',
-      1 => 1557869520,
+      0 => 'vistas\\usuarios_listado.tpl',
+      1 => 1557795259,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '162345cdb34a940b8a4-79759951',
+  'nocache_hash' => '82025cdb3ca1c2eb82-34044773',
   'function' => 
   array (
   ),
@@ -20,18 +20,16 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'url_base' => 0,
     'proyecto' => 0,
     'titulo' => 0,
-    'registrar_propuesta' => 0,
+    'usuario_nuevo' => 0,
     'mensaje' => 0,
-    'propuestas' => 0,
-    'prop' => 0,
-    'usuLogNick' => 0,
-    'nueva_colaboracion' => 0,
+    'usuarios' => 0,
+    'persona' => 0,
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cdb34a95eeae7_25845372',
+  'unifunc' => 'content_5cdb3ca1e88b91_09615851',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cdb34a95eeae7_25845372')) {function content_5cdb34a95eeae7_25845372($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_5cdb3ca1e88b91_09615851')) {function content_5cdb3ca1e88b91_09615851($_smarty_tpl) {?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -71,11 +69,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       <div class="row">
        
         <div class="col-sm-12  col-md-12  main">
-          <h1 class="page-header">Propuestas</h1>
+          <h1 class="page-header">Usuarios</h1>
           <h2 class="sub-header"><?php echo $_smarty_tpl->tpl_vars['titulo']->value;?>
- <button id="agregar" name="agregar" class="btn btn-success pull-right" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['registrar_propuesta']->value;?>
+ <button id="agregar" name="agregar" class="btn btn-success pull-right" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['usuario_nuevo']->value;?>
 '">Agregar</button></h2>
-
           <?php if ($_smarty_tpl->tpl_vars['mensaje']->value!='') {?>
             <div class="alert alert-danger" role="alert"><?php echo $_smarty_tpl->tpl_vars['mensaje']->value;?>
 </div>
@@ -85,45 +82,33 @@ $_valid = $_smarty_tpl->decodeProperties(array (
               <thead>
                 <tr>
                   <th>Nombre</th>
-                  <th>Descripcion</th>
-                  <th>Monto</th>
-                  <th>Fecha agregada</th>
+                  <th>Apellido</th>
+                  <th>Nick</th>
+                  <th>Email</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <?php  $_smarty_tpl->tpl_vars['prop'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['prop']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['propuestas']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['prop']->key => $_smarty_tpl->tpl_vars['prop']->value) {
-$_smarty_tpl->tpl_vars['prop']->_loop = true;
+                <?php  $_smarty_tpl->tpl_vars['persona'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['persona']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['usuarios']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['persona']->key => $_smarty_tpl->tpl_vars['persona']->value) {
+$_smarty_tpl->tpl_vars['persona']->_loop = true;
 ?>
-
                   <tr>
-                    <td><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['prop']->value->getNombre(), 'UTF-8');?>
+                    <td><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['persona']->value->getNombre(), 'UTF-8');?>
 </td>
-                    <td><?php echo $_smarty_tpl->tpl_vars['prop']->value->getDescripcion();?>
+                    <td><?php echo $_smarty_tpl->tpl_vars['persona']->value->getApellido();?>
 </td>
-                   <td><?php echo $_smarty_tpl->tpl_vars['prop']->value->getMonto();?>
+                   <td><?php echo $_smarty_tpl->tpl_vars['persona']->value->getNick();?>
 </td>
-                    <td><?php echo $_smarty_tpl->tpl_vars['prop']->value->getFechaPublicada();?>
+                    <td><?php echo $_smarty_tpl->tpl_vars['persona']->value->getCorreo();?>
 </td>
                     <td>
-                    
                       <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-propuesta/borrar/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
+usuario/listado/borrar/<?php echo $_smarty_tpl->tpl_vars['persona']->value->getId();?>
 /'"/>
-                       
-                      <?php if ($_smarty_tpl->tpl_vars['usuLogNick']->value==$_smarty_tpl->tpl_vars['prop']->value->getUsuario()) {?>
-
-                       <input type="button" value="Modificar" id="modificar" class="btn btn-success" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-propuesta/modificar/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
-/'"/>
-                       <?php }?>
-
-                      <input type="button" value="Colaborar" id="colaborar" class="btn btn-success" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['nueva_colaboracion']->value;
-echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
-/'"/>
-                      
+                     
+                    <!--  <input type="button" value="Favoritos" class="btn btn-submit" onClick="cargarFavoritos();"/>-->
                     </td>
                   </tr>
                 <?php } ?>

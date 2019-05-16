@@ -15,17 +15,14 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <!--<script type="text/javascript" src="js/funciones.js"></script>-->
-    
-    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>  
   </head>
-
   <body>
     {include file="cabezal.tpl"}
+     <section class="probootstrap-hero" style="background-image: url(img/img_sq_3.jpg); height:100%"  data-stellar-background-ratio="0.1">
     <div class="container-fluid" > 
                
-      <div class="row" style="max-width: 700px; margin: 0 auto;">  
+      <div class="row" style="max-width: 700px; margin: 0 auto">  
       <div> 
            <form class="form-horizontal" method="post" style=" padding-top: 50px">
             <fieldset>
@@ -38,10 +35,10 @@
             </fieldset>
           </form>  
           </div>   
-        <div class="col-sm-12  col-md-12  main">
+        <div class="col-sm-12  col-md-12  main" >
           <div class="table-responsive">
 
-            <table class="table table-striped">
+            <table class="table table-striped tabla" style=" background-color: #ecececb3">
               <thead>
                 <tr>
                   <th>Nombre</th>
@@ -53,7 +50,7 @@
                     <td>{$persona->getNombreP()|upper}</td>
                   
                     <td>
-                      <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='{$borrar_catego}{$persona->getNombreP()}/'"/>
+                      <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='{$url_base}propuesta/borrarCa/{$persona->getNombreP()}/'"/>
                      
                     <!--  <input type="button" value="Favoritos" class="btn btn-submit" onClick="cargarFavoritos();"/>-->
                     </td>
@@ -65,14 +62,8 @@
         </div>
 
       </div>
-   
     </div>
-    
-    <!--{include file="favoritos.tpl"}-->
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+     </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
   </body>

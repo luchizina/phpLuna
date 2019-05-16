@@ -82,12 +82,14 @@ function consolita( $data ) {
    function nuevo(){
 	$mensaje="";
 	if(isset($_POST["nombre"])){
+    $usr = new Usuario();
 		$prop= new Propuesta();
 		$prop->setNombre($_POST["nombre"]);
 		$prop->setDescripcion($_POST["desc"]);
     $fecha =  date("Y-m-d H:i:s");
 		$prop->setFechaPublicada('12/12/2019');
 		$prop->setMonto($_POST["monto"]);
+    $prop->setUsuario($usr->obtenerPorNick(Session::get('usuario_nick')));
 		$prop->setMontoActual(0);
 
 		if($prop->agregar()){
@@ -112,6 +114,8 @@ public function modificar($params = array())
    {
     $mensaje = "";
      $propuesta  = new Propuesta();
+     $u = new Usuario();
+     $usuario = $u->obtenerPorNick(Session::get('usuario_nick'));
      $p = $propuesta->obtenerPorId($params[0]);
      if(isset($_POST["nombre"]))
   { 
@@ -137,21 +141,6 @@ public function modificar($params = array())
   $tpl->mostrar('modificar_propuesta',$p);
    }
 
-public function recompensas($params=array()){
-  if(empty($params)){
-    $rec = new Recompensa();
-    $recs = $rec->getListado();
-  }
-  $tpl = Template::getInstance();
-        $datos = array(
-       'recompensas' => $recs,
-       );
-   
-       $tpl->mostrar('nueva_colaboracion',$datos);
-}
-
-
-
 public function borrar($params = array()){
 $propuesta = new Propuesta();
   $this->consolita($params[0]);
@@ -170,19 +159,20 @@ function nuevaColaboracion($params=array()){
   $Usuario = new Usuario();
   $propuesta = new Propuesta();
   $Recompensa = new Recompensa();
-  $recs = $Recompensa->getListado();
-  $usu = $Usuario->obtenerPorNick("lu");
+  $recs = $Recompensa->traerRecompensas($params[0]);
+  $usu = $Usuario->obtenerPorNick(Session::get('usuario_nick'));
   $prop=$propuesta->obtenerPorNombreProp($params[0]);
+  //$rec = $Recompensa->obtenerPorId($_POST['rec']);
   if(isset($_POST["monto"])){
-    $rec = $Recompensa->obtenerPorId($_POST['rec']);
     $col->setMonto($_POST["monto"]);
     $col->setFecha(date("Y-m-d"));
     $col->setUsuario($usu);
     $col->setTituloPropuesta($prop);
-    $col->setRecompensa($rec);
-    if($usr->agregar()){
-      array_push($usu->getPropuestasColabora(), $col);
+    $col->setRecompensa($Recompensa->obtenerPorId($_POST['rec']));
+    if($col->agregar()){
+      array_push($usu->getPropuestasColabora(), $prop);
       $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
+      $prop->actualizaMonto();
       $this->redirect("propuesta","listado");
       exit;
     }else{
@@ -195,37 +185,23 @@ function nuevaColaboracion($params=array()){
   $tpl->asignar('mensaje',$mensaje);
   $tpl->asignar('propuesta',$prop);
   $tpl->asignar('usuario',$usu);
-  $tpl->asignar('recompensa',$rec);
+  //$tpl->asignar('recompensa',$rec);
   $tpl->asignar('recompensas',$recs);
   $tpl->mostrar('nueva_colaboracion',array());
   //$_SESSION['usuario_id'];
 }
 
-function borrarCo($params=array()){
-  if(!empty($params)){
-           if($params[0]=="borrar"){
+function borrarCa($params=array()){
                $categoria=new categoria();
-               $stringABorrar=$params[1];
-                if($categoria->borrarC($stringABorrar)){
-                    //Redirigir al listado
-                    //header('Location: index.php');exit;
-                    $this->redirect("propuesta","listado");
+               $stringABorrar=$params[0];
+               echo $stringABorrar;
+                if($categoria->borrar($stringABorrar)){
+                    echo $stringABorrar;
+                    $this->redirect("propuesta","listadoCat");
                     exit;
                 }
-              }
-              }
-               $categoria=new categoria();
-           $categorias=$categoria->getListado();         
-       //Llamar a la vista
-        $tpl = Template::getInstance();
-        $datos = array(
-       'categorias' => $categorias
-      
-       );
-        
-       
-   
-} 
+
+}         
   function listadoCat($params=array()){
 
      $buscar="";
@@ -261,7 +237,6 @@ function borrarCo($params=array()){
 
 function favoritear(){
 }
-
 
 
 }

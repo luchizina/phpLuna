@@ -63,7 +63,7 @@ class Colaboracion extends ClaseBase{
     }
 
     public function agregar(){
-        $nombre=$this->getNombre();
+        $monto = $this->getMonto();
         $Fecha=$this->getFecha();
         $usu=$this->getUsuario()->getNick();
         $prop=$this->getPropuesta()->getNombre();
@@ -72,8 +72,7 @@ class Colaboracion extends ClaseBase{
             "INSERT INTO colaboracion 
         (Fecha, Monto,NickUsuario, TituloPropuesta, Recompensa) 
            VALUES (?,?,?,?,?)" );
-        $stmt->bind_param("sissi",$nombre,
-            $Fecha,$usu,$prop,$rec);
+        $stmt->bind_param("sissi", $Fecha,$monto,$usu,$prop,$rec);
         return $stmt->execute();
     
     }

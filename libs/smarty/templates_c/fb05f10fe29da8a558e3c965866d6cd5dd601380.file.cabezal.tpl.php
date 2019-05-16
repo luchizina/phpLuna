@@ -1,25 +1,32 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-14 03:28:30
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-14 23:35:37
          compiled from "vistas\cabezal.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:74695cda19be20b179-21276094%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:318355cdb34a9a91725-72021606%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'fb05f10fe29da8a558e3c965866d6cd5dd601380' => 
     array (
       0 => 'vistas\\cabezal.tpl',
-      1 => 1557789435,
+      1 => 1557869520,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '74695cda19be20b179-21276094',
+  'nocache_hash' => '318355cdb34a9a91725-72021606',
   'function' => 
   array (
   ),
+  'variables' => 
+  array (
+    'usuLogNick' => 0,
+    'url_login' => 0,
+    'url_logout' => 0,
+    'usuLogueado' => 0,
+  ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cda19be214da7_53420621',
+  'unifunc' => 'content_5cdb34a9ac1727_55638157',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cda19be214da7_53420621')) {function content_5cda19be214da7_53420621($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_5cdb34a9ac1727_55638157')) {function content_5cdb34a9ac1727_55638157($_smarty_tpl) {?>
  <head>
     <link rel="shortcut icon" href="img/moon.png" type="image/png" />
     <title>LUNA</title>
@@ -44,7 +51,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <ul class="nav navbar-nav navbar-right">
               <li class="active"><a href="index.html">Inicio</a></li>
               <li><a href="about.html">Propuestas</a></li>
-              <li class="probootstra-cta-button last"><a href="donate.html" class="btn btn-primary">INICIAR SESIÓN</a></li>
+               <?php if ($_smarty_tpl->tpl_vars['usuLogNick']->value=='') {?>
+              <li class="probootstra-cta-button last"><a href="<?php echo $_smarty_tpl->tpl_vars['url_login']->value;?>
+" class="btn btn-primary">INICIAR SESIÓN</a></li>
+               <?php } else { ?>
+                <li class="probootstra-cta-button last"><a href="<?php echo $_smarty_tpl->tpl_vars['url_logout']->value;?>
+" class="btn btn-primary">CERRAR SESIÓN</a></li>
+                <li><a href="about.html">¡Hola <?php echo $_smarty_tpl->tpl_vars['usuLogueado']->value;?>
+!</a></li>
+                 <?php }?>
             </ul>
           </div>
         </div>

@@ -46,10 +46,10 @@ class ClaseBase{
     }
 
     public function obtenerPorNick($nick){
-        $sql="select * from $this->tabla where Nick=$nick ";
+        $sql="select * from $this->tabla where Nick='$nick' ";
         $res=NULL;
         $resultado =$this->db->query($sql)   
-            or die ("Fallo en la consulta");
+            or die ("Fallo en la consulta usuario");
          if($fila = $resultado->fetch_object()) {
            $res= new $this->modelo($fila);
         }
@@ -57,10 +57,10 @@ class ClaseBase{
     }
 
     public function obtenerPorNombreProp($nombre){
-        $sql="select * from $this->tabla where Nombre=$nombre ";
+        $sql="select * from $this->tabla where Nombre='$nombre' ";
         $res=NULL;
         $resultado =$this->db->query($sql)   
-            or die ("Fallo en la consulta");
+            or die ("Fallo en la consulta propuesta");
          if($fila = $resultado->fetch_object()) {
            $res= new $this->modelo($fila);
         }
@@ -84,6 +84,22 @@ class ClaseBase{
             $res=true;
         }
         return $res;
+    }
+
+    public function traerRecompensas($propuesta){
+        $sql="select * from recompensa where TituloPropuesta = '$propuesta'";
+        $resultados=array();
+
+        $resultado =$this->db->query($sql)   
+            or die ("Fallo en la consulta recompensas");
+
+        while ( $fila = $resultado->fetch_object() )
+        {
+            
+            $objeto= new $this->modelo($fila);
+            $resultados[]=$objeto;
+        } 
+     return $resultados;  
     }
 
     //Borrar por ID, etc

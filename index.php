@@ -14,9 +14,11 @@ $tpl->asignar('url_login',$controlIndex->getUrl("usuario","login"));
 
 session_start();
 $nombre = Session::get('usuario_nombre');
+$nick = Session::get('usuario_nick');
 //$ape = Session::get('usuario_apellido');
 //$userLogueado ="¡Hola ".$nombre."!";
 $tpl->asignar('usuLogueado',$nombre);
+$tpl->asignar('usuLogNick',$nick);
 $tpl->asignar('proyecto',"Hola");
 
 //Cargamos controladores y acciones

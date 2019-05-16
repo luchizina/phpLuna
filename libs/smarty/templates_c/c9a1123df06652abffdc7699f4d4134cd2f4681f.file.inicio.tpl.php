@@ -1,9 +1,35 @@
-<!DOCTYPE html>
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-16 21:20:43
+         compiled from "vistas\inicio.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:219355cddb80b722574-56510393%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'c9a1123df06652abffdc7699f4d4134cd2f4681f' => 
+    array (
+      0 => 'vistas\\inicio.tpl',
+      1 => 1557869520,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '219355cddb80b722574-56510393',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'url_base' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cddb80c6c8843_23426600',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5cddb80c6c8843_23426600')) {function content_5cddb80c6c8843_23426600($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <base href="{$url_base}">
+    <base href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="img/moon.png" type="image/png" />
     <title>LUNA</title>
@@ -13,12 +39,17 @@
     <link rel="stylesheet" href="css/custom.css">
 
     <!--[if lt IE 9]>
-      <script src="js/vendor/html5shiv.min.js"></script>
-      <script src="js/vendor/respond.min.js"></script>
+      <?php echo '<script'; ?>
+ src="js/vendor/html5shiv.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="js/vendor/respond.min.js"><?php echo '</script'; ?>
+>
     <![endif]-->
   </head>
   <body>
-    {include file="cabezal.tpl"}          
+    <?php echo $_smarty_tpl->getSubTemplate ("cabezal.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+          
       <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg)"  data-stellar-background-ratio="0.5">
         <div class="container">
 
@@ -396,9 +427,16 @@
 
       </footer>
 
-    <script src="js/scripts.min.js"></script>
-    <script src="js/main.min.js"></script>
-    <script src="js/custom.js"></script>
+    <?php echo '<script'; ?>
+ src="js/scripts.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/main.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/custom.js"><?php echo '</script'; ?>
+>
     
   </body>
 </html>
+<?php }} ?>

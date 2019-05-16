@@ -7,9 +7,9 @@ class Usuario extends ClaseBase {
 	public $Password = '';
 	public $Correo = '';
 	public $Celular = '';
-	public $Imagen = null;
+	public $Imagen;
     public $Archivo;
-    public $Tam;
+    public $tipo;
 	public $Comentarios = array();
 	public $PropuestasPropone = array();
 	public $PropuestasColabora = array();
@@ -36,12 +36,12 @@ class Usuario extends ClaseBase {
         $this->Archivo=$Archivo;
     }
 
-    public function getTam(){
-        return $this->Tam;
+    public function getTipo(){
+        return $this->tipo;
     }
 
-    public function setTam($Tam){
-        $this->Tam=$Tam;
+    public function setTipo($tipo){
+        $this->tipo=$tipo;
     }
 
     public function getPropuestasColabora(){
@@ -169,26 +169,40 @@ public function agregar(){
         $password = sha1($this->getPassword());
         $email=$this->getCorreo();
         $arch = $this->getArchivo();
-        $tama = $this->getTam();
         $ci = $this->getCI();
         $act = $this->isActivo();
-        if($arch != ""){
-            $this->setImagen(addslashes(file_get_contents($arch)));
-            $lol = $this->getImagen();
+        $img = $this->getImagen();
+        $tip = $this->getTipo();
+        $permitidos = array("image/jpg", "image/jpeg", "image/png", "");
+        $target='';
+        if(in_array($tip, $permitidos)){
+            //$target = "imgUsus/".basename($img);
+            $extension=end(explode("/", $tip));
+            //rename($target, $nick.".".$extension);
+            $target = "imgUsus/".$nick.".".$extension;
+        } else {
+            echo "El tipo de imagen es incorrecto";
+        }
+        /*if($arch != ""){
+            $this->setImagen($this->getDB()->real_escape_string((file_get_contents($arch))));
+            $lol = ((file_get_contents($arch)));
         } else {
             $lol = null;
-        }
+        }*/
+        //var_dump($lol);exit;
         $stmt = $this->getDB()->prepare( 
             "INSERT INTO usuario (Nombre, Apellido,Nick, Correo, Password,Celular, Imagen, ci, activo)
            VALUES (?,?,?,?,?,?,?,?,?)" );
-        $null = NULL;
-        $stmt->bind_param("ssssssbsi", $nombre, $ape, $nick, $email, $password, $cel, $null, $ci, $act);
-        $stmt->send_long_data(6, $lol);
+        //$null = NULL;
+        $stmt->bind_param("ssssssssi", $nombre, $ape, $nick, $email, $password, $cel, $target, $ci, $act);
+        if($target != ''){
+        move_uploaded_file($arch, $target);
+    }
+        //$stmt->send_long_data(6, $lol);
         return $stmt->execute();
+        //exit;
     }
 
-
-    private $response = array();
 
     public function agregarCel(){ 
         
@@ -198,19 +212,23 @@ public function agregar(){
         $nick=$this->getNick();
         $password = sha1($this->getPassword());
         $email=$this->getCorreo();
-        $arch = $this->getArchivo();
-        $tama = $this->getTam();
         $ci = $this->getCI();
         $act = $this->isActivo();
         $stmt = $this->getDB()->prepare( 
             "INSERT INTO usuario (Nombre, Apellido,Nick, Correo, Password,Celular, Imagen, ci, activo)
            VALUES (?,?,?,?,?,?,?,?,?)" );
-        $null = NULL;
-        $stmt->bind_param("ssssssbsi", $nombre, $ape, $nick, $email, $password, $cel, $null, $ci, $act);
-        $stmt->execute();
-        $response["status"] = 0;
-        $response["message"] = "Usuario creado";
-        echo json_encode($response);
+        $null = "xD";
+        $stmt->bind_param("ssssssssi", $nombre, $ape, $nick, $email, $password, $cel, $null, $ci, $act);
+        return $stmt->execute();
+            
+            //echo json_encode(array("response"=>"success"));
+           // $json['success'] = 1;
+           // $json['message'] = "Usuario registrado";
+            //echo json_encode(array("response"=>"failed"));
+            
+           // $json['success'] = 0;
+           // $json['message'] = "Error al tratar de registrarse";
+        
     }
 
      public function getListadoUsus(){
@@ -232,8 +250,17 @@ public function agregar(){
     public function ci($ci){
         $stmt = $this->getDB()->prepare( 
             "SELECT ci FROM usuario 
-            WHERE ci =" );
+            WHERE ci =?" );
         $stmt->bind_param("s",$ci);
+        $stmt->execute();
+           $resultado = $stmt->get_result();
+    }
+
+    public function nick($nick){
+        $stmt = $this->getDB()->prepare( 
+            "SELECT Nick FROM usuario 
+            WHERE Nick =?" );
+        $stmt->bind_param("s",$nick);
         $stmt->execute();
         $stmt->store_result();
         $stmt->fetch();
@@ -243,6 +270,38 @@ public function agregar(){
             return true;
         }
     }
+
+    public function correo($correo){
+        $stmt = $this->getDB()->prepare( 
+            "SELECT Correo FROM usuario 
+            WHERE Correo =?" );
+        $stmt->bind_param("s",$correo);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->fetch();
+        //$resultado = $stmt->get_result();
+        $row_cnt = $stmt->num_rows;
+        if($row_cnt > 0) {
+            return true;
+        }
+    }
+
+
+public function traerImagen($nick){
+
+     $stmt = $this->getDB()->prepare("SELECT Imagen FROM usuario  WHERE Nick = ?" );
+        $stmt->bind_param("s",$nick);
+        $stmt->execute();
+       $resultado = $stmt->get_result();
+       $fila=$resultado->fetch_object();
+        //header("Content-type: image/jpg");
+       return ($fila->Imagen);
+        //exit;
+       /*$linea = '<img src="data:image/jpeg;base64,'.base64_encode( $fila->Imagen ).'"/>';
+      return $linea;*/
+      }
+
+
 
 
    /* public function insertarFav($idLog,$idFav){
@@ -262,16 +321,9 @@ public function modificar()
    {
         $nombre=$this->getNombre();
         $ape=$this->getApellido();
-        $nick=$this->getNick();
-        $ci=$this->getCI();
         $password = sha1($this->getPassword);
         $email=$this->getCorreo();
         $cel = $this->getCelular();
-        $arch = $this->getArchivo();
-        $activo = $this->isActivo();
-        $tama = $this->getTam();
-        $this->setImagen(addslashes(file_get_contents($arch)));
-        $lol = $this->getImagen();
         $null = null;
         $stmt = $this->getDB()->prepare( 
             "UPDATE usuarios set

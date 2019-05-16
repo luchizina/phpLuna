@@ -16,6 +16,7 @@ class ControladorUsuario extends ControladorIndex {
        'mensaje' => $mensaje
        );
           $tpl->mostrar('inicio',$datos);
+
 }
     function listado($params=array()){
 
@@ -62,6 +63,7 @@ class ControladorUsuario extends ControladorIndex {
        $tpl->mostrar('usuarios_listado',$datos);
    
    }
+
 
 
 
@@ -129,8 +131,10 @@ function nuevo(){
     $usr->setCelular($_POST["cel"]);
     $usr->setCorreo($_POST["email"]);
     $usr->setPassword($_POST["pass"]);
-    $usr->setArchivo($_FILES["archivo"]["tmp_name"]);
-    $usr->setTam($_FILES["archivo"]["size"]);
+    //var_dump($_FILES);exit();
+    $usr->setArchivo($_FILES['archivo']['tmp_name']);
+    $usr->setImagen($_FILES['archivo']['name']);
+    $usr->setTipo($_FILES['archivo']['type']);
     $usr->setCI($_POST["ci"]);
     $usr->setActivo(1);
     if($usr->agregar()){
@@ -155,23 +159,19 @@ function nuevo(){
 
 public function modificar($params = array())
    {
-    $mensaje = "";
-     $usuario  = new Usuario();
-     $u = $usuario->obtenerPorId($params[0]);
+     $mensaje = "";
+     $u = new Usuario();
+     $usuario = $u->obtenerPorNick(Session::get('usuario_nick'));
      if(isset($_POST["nombre"]))
   { 
     $u->setNombre($_POST["nombre"]);
-    $u->setNick($_POST["nick"]);
     $u->setApellido($_POST["apellido"]);
-    $u->setCI($_POST["ci"]);
     $u->setCelular($_POST["celular"]);
-    $u->setCorreo($_POST["email"]);
-    $u->setArchivo($_FILES["archivo"]["tmp_name"]);
-    $u->setPassword($_POST["pass"]);
-    $usr->setTam($_FILES["archivo"]["size"]);
+    $u->setCorreo($_POST["correo"]);
+    $u->setPassword($_POST["password"]);
     if($u->modificar())
     {
-      $this->redirect("usuario","listado");
+      $this->redirect("usuario","redirigir");
       exit;
     }else{
       $mensaje="Error! No se pudo modificar el usuario";
@@ -181,44 +181,38 @@ public function modificar($params = array())
   $tpl = Template::getInstance();
   $tpl->asignar('titulo',"Modificar Usuario");
   $tpl->asignar('buscar',"");
-  $tpl->asignar('mensaje',$mensaje);
-  $tpl->asignar('usuario', $u);
-  $tpl->mostrar('modificar_usuario',$u);
+  $tpl->asignar('usuario_log', $usuario);
+  $tpl->mostrar('usuarios_modificar', $usuario);
    }
 
 public function existeCi(){
-  $eCi = "";
   if(isset($_POST['ci'])){
   $usuario  = new Usuario();
   if($usuario->ci($_POST['ci'])){
-    $eCi="Cedula en uso";
+    echo "Cedula en uso";   
   }
 }
-  $tpl = Template::getInstance();
-  $tpl->asignar('eCi',$eCi);
 }
 
 public function existeCorreo(){
-  $co = $_POST['email'];
+  if(isset($_POST['correo'])){
   $usuario  = new Usuario();
-  $usuarios = $usuario->getListadoUsus();
-  foreach ($usuarios as $us => $usu) {
-    if($usu->Correo()==$co){
-      echo 'Correo en uso';
-    }
+  if($usuario->correo($_POST['correo'])){
+    echo "Correo en uso";   
   }
+}
 }
 
+
 public function existeNick(){
-  $nick = $_POST['nick'];
+  if(isset($_POST['nick'])){
   $usuario  = new Usuario();
-  $usuarios = $usuario->getListadoUsus();
-  foreach ($usuarios as $us => $usu) {
-    if($usu->getNick()==$nick){
-      echo 'Nick en uso';
-    }
+  if($usuario->nick($_POST['nick'])){
+    echo "Nick en uso";   
   }
 }
+}
+
 function consolita( $data ) {
     $output = $data;
     if ( is_array( $output ) )
@@ -241,7 +235,8 @@ function login(){
     $pass=sha1($_POST["password"]);
 
     if($usr->login($email,$pass)){
-      $this->redirect("usuario","listado");
+
+      $this->redirect("usuario","redirigir");
       exit;
     }else{
       $mensaje="Error! No se pudo agregar el usuario";
@@ -263,34 +258,42 @@ function login(){
 function logout(){
   $usr= new Usuario();
   $usr->logout();
-  $this->redirect("usuario","listado");
+  $this->redirect("usuario","redirigir");
+}
+
+public function traerImagen($params = array()){
+
+$usr = new Usuario();
+$img=$usr->traerImagen($params[0]);
+//ob_start();
+header("Content-type: jpg");
+print base64_decode($img);
+//ob_clean();
 }
 
 
-
-
-
-/*$inputJSON = file_get_contents('php://input');
-$input = json_decode($inputJSON, TRUE); //convertir JSON en array*/
-
-
-
-public function nuevoUsuCel(){
-	$inputJSON = file_get_contents('php://input');
- $input = json_decode($inputJSON, TRUE); 
-  if(isset($input['nick']) && isset($input['cont']) && isset($input['nombre']) && isset($input['ape']) && isset($input['correo']) && isset($input['cel']) && isset($input['ci'])){
+public function nuevoUsuCel(){ 
     $u  = new Usuario();
-    $u->setNick($input['nick']);
-    $u->setNombre($input['nombre']);
-    $u->setApellido($input['ape']);
-    $u->setCI($input['ci']);
-    $u->setCelular($input['cel']);
-    $u->setCorreo($input['correo']);
-    $u->setPassword($input['cont']);
+    $u->setNick($_POST['nick']);
+    $u->setNombre($_POST['nombre']);
+    $u->setApellido($_POST['ape']);
+    $u->setCI($_POST['ci']);
+    $u->setCelular($_POST['cel']);
+    $u->setCorreo($_POST['correo']);
+    $u->setPassword($_POST['cont']);
     $u->setActivo(1);
-    $u->agregarCel();
-}
-
+    if($u->agregarCel()){
+      $msg = "Usuario registrado";
+      $array = ["mensajito"=>$msg];
+      $arreglo=["status"=>"ok","message"=>[$array]];
+            echo json_encode($arreglo);
+    } else {
+      $msg = "Error al tratar de registrarse";
+      $array = ["mensajito"=>$msg];
+      $arreglo=["status"=>"error","message"=>[$array]];
+            echo json_encode($arreglo);
+    }
+   // echo json_encode($json_registration);
 }
 }
 ?>

@@ -1,33 +1,32 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-14 03:35:07
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-15 00:35:24
          compiled from "vistas\registrar_categoria.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:307885cda19bde5d392-99717159%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:219695cdb34ea582111-21873181%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '74e3499dd2d9cd038d4ce1da225b24bb7bc611f3' => 
     array (
       0 => 'vistas\\registrar_categoria.tpl',
-      1 => 1557797551,
+      1 => 1557873296,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '307885cda19bde5d392-99717159',
+  'nocache_hash' => '219695cdb34ea582111-21873181',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cda19be0236d1_66115183',
+  'unifunc' => 'content_5cdb34ea69d2e2_98273090',
   'variables' => 
   array (
     'url_base' => 0,
     'proyecto' => 0,
     'categorias' => 0,
     'persona' => 0,
-    'borrar_catego' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cda19be0236d1_66115183')) {function content_5cda19be0236d1_66115183($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_5cdb34ea69d2e2_98273090')) {function content_5cdb34ea69d2e2_98273090($_smarty_tpl) {?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -52,20 +51,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 >
     <?php echo '<script'; ?>
  src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"><?php echo '</script'; ?>
->
-    <!--<?php echo '<script'; ?>
- type="text/javascript" src="js/funciones.js"><?php echo '</script'; ?>
->-->
-    
-    
+>  
   </head>
-
   <body>
     <?php echo $_smarty_tpl->getSubTemplate ("cabezal.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
+     <section class="probootstrap-hero" style="background-image: url(img/img_sq_3.jpg); height:100%"  data-stellar-background-ratio="0.1">
     <div class="container-fluid" > 
                
-      <div class="row" style="max-width: 700px; margin: 0 auto;">  
+      <div class="row" style="max-width: 700px; margin: 0 auto">  
       <div> 
            <form class="form-horizontal" method="post" style=" padding-top: 50px">
             <fieldset>
@@ -78,10 +72,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             </fieldset>
           </form>  
           </div>   
-        <div class="col-sm-12  col-md-12  main">
+        <div class="col-sm-12  col-md-12  main" >
           <div class="table-responsive">
 
-            <table class="table table-striped">
+            <table class="table table-striped tabla" style=" background-color: #ecececb3">
               <thead>
                 <tr>
                   <th>Nombre</th>
@@ -98,8 +92,8 @@ $_smarty_tpl->tpl_vars['persona']->_loop = true;
 </td>
                   
                     <td>
-                      <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['borrar_catego']->value;
-echo $_smarty_tpl->tpl_vars['persona']->value->getNombreP();?>
+                      <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/borrarCa/<?php echo $_smarty_tpl->tpl_vars['persona']->value->getNombreP();?>
 /'"/>
                      
                     <!--  <input type="button" value="Favoritos" class="btn btn-submit" onClick="cargarFavoritos();"/>-->
@@ -112,15 +106,8 @@ echo $_smarty_tpl->tpl_vars['persona']->value->getNombreP();?>
         </div>
 
       </div>
-   
     </div>
-    
-    <!--<?php echo $_smarty_tpl->getSubTemplate ("favoritos.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
--->
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+     </section>
     <?php echo '<script'; ?>
  src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"><?php echo '</script'; ?>
 >

@@ -49,5 +49,12 @@ class Categoria extends ClaseBase {
         return $stmt->execute();
     }
 
+     public function borrar($nombre){
+ $stmt = $this->getDB()->prepare("DELETE FROM categoria WHERE NombreP=?");
+$stmt->bind_param("s",$nombre);
+    return $stmt->execute();
+    }
+
+
 }
 ?>

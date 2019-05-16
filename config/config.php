@@ -13,4 +13,6 @@
         'config_dir' => 'libs/smarty/configs/',
         );
     define ("URL_BASE","/phpLuna/");
+    ini_set("display_errors", 1);
+    error_reporting(E_ERROR);
 ?>
