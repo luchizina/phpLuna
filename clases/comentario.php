@@ -42,5 +42,15 @@ class Comentario extends ClaseBase {
     public function setPropuesta(){
     	$this->Propuesta=$Propuesta;
     }
+
+    public function comentar(){
+        $stmt = $this->getDB()->prepare( 
+            "INSERT INTO comentario 
+        (Texto, NickUsuario, TituloPropuesta) 
+           VALUES (?,?,?)" );
+        $stmt->bind_param("sss",$this->getTexto(),$this->getPropuesta()->getNombre(),
+            $this->getUsuario()->getNick());
+        return $stmt->execute();
+    }
 }
 ?>

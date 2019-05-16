@@ -11,6 +11,7 @@ $tpl = Template::getInstance();
 $tpl->asignar('url_base',"http://localhost/phpLuna/");
 $tpl->asignar('url_logout',$controlIndex->getUrl("usuario","logout"));
 $tpl->asignar('url_login',$controlIndex->getUrl("usuario","login"));
+$tpl->asignar('url_regis',$controlIndex->getUrl("usuario","nuevo"));
 
 session_start();
 $nombre = Session::get('usuario_nombre');

@@ -116,14 +116,16 @@ public function modificar($params = array())
      $propuesta  = new Propuesta();
      $u = new Usuario();
      $usuario = $u->obtenerPorNick(Session::get('usuario_nick'));
-     $p = $propuesta->obtenerPorId($params[0]);
+
+   
+     $p = $propuesta->obtenerPorNombreProp($params[0]);
+
      if(isset($_POST["nombre"]))
   { 
     $p->setNombre($_POST["nombre"]);
     $p->setDescripcion($_POST["descripcion"]);
     $p->setMonto($_POST["monto"]);
     $p->setFechaPublicada($_POST["fechaPub"]);
-    $usr->setTam($_FILES["archivo"]["size"]);
     if($p->modificar())
     {
       $this->redirect("propuesta","listado");
@@ -137,21 +139,23 @@ public function modificar($params = array())
   $tpl->asignar('titulo',"Modificar Propuesta");
   $tpl->asignar('buscar',"");
   $tpl->asignar('mensaje',$mensaje);
-  $tpl->asignar('propuesta', $u);
-  $tpl->mostrar('modificar_propuesta',$p);
+  $tpl->asignar('propuesta', $p);
+  $tpl->mostrar('propuestas_modificar',$p);
    }
+
+
+
+
 
 public function borrar($params = array()){
 $propuesta = new Propuesta();
-  $this->consolita($params[0]);
-  
 if($propuesta->borrarProp($params[0])){
-  $this->consolita($params[0]);
-   $this->consolita("hola");
   $this->redirect("propuesta","listado");
 }
 
 }
+
+
 
 function nuevaColaboracion($params=array()){
   $mensaje="";
@@ -175,9 +179,8 @@ function nuevaColaboracion($params=array()){
       $prop->actualizaMonto();
       $this->redirect("propuesta","listado");
       exit;
-    }else{
-      $mensaje="Error! No se pudo agregar la colaboracion";
-    } 
+    }else $mensaje="Error! No se pudo agregar la colaboracion";
+  
   }
   $tpl = Template::getInstance();
   $tpl->asignar('titulo',"Nueva colaboracion");
@@ -190,6 +193,7 @@ function nuevaColaboracion($params=array()){
   $tpl->mostrar('nueva_colaboracion',array());
   //$_SESSION['usuario_id'];
 }
+
 
 function borrarCa($params=array()){
                $categoria=new categoria();
@@ -236,7 +240,49 @@ function borrarCa($params=array()){
    }
 
 function favoritear(){
+
+
+function favoritear($nombre, $nick){
+  $propuesta = new Propuesta();
+  $prop = $propuesta->obtenerPorNombreProp($nombre);
+  $usuario = new Usuario();
+  $u = $usuario->obtenerPorNick($nick);
+  if($prop->favoritear($nombre,$nick))
+  {
+    array_push($u->getFavoritos(), $prop);
+    array_push($prop->getFavoritos, $u);
+  }
+
+} 
+
+function desfavoritear($nombre, $nick){
+  $propuesta = new Propuesta();
+  $prop = $propuesta->obtenerPorNombreProp($nombre);
+  $usuario = new Usuario();
+  $u = $usuario->obtenerPorNick($nick);
+  if($prop->desfavoritear($nombre,$nick))
+  {
+    $prop->setFavoritos(array_diff($prop->getFavoritos(), array($u)));
+    $u->setFavoritos(array_diff($u->getFavoritos(), array($prop)));
+  }
 }
+
+public function comentar($nombre, $nick, $texto){
+  $propuesta = new Propuesta();
+  $prop = $propuesta->obtenerPorNombreProp($nombre);
+  $usuario = new Usuario();
+  $u = $usuario->obtenerPorNick($nick);
+  $c = new Comentario();
+  $c->setUsuario($u);
+  $c->setPropuesta($prop);
+  $c->setTexto($texto);
+  if($c->comentar())
+  {
+    array_push($prop->getComentarios(), $c)
+  }
+
+}
+
 
 
 }

@@ -25,6 +25,7 @@
               <li><a href="about.html">Propuestas</a></li>
                {if $usuLogNick == ""}
               <li class="probootstra-cta-button last"><a href="{$url_login}" class="btn btn-primary">INICIAR SESIÓN</a></li>
+              <li class="probootstra-cta-button last"><a href="{$url_regis}" class="btn btn-primary">REGISTRARSE</a></li>
                {else}
                 <li class="probootstra-cta-button last"><a href="{$url_logout}" class="btn btn-primary">CERRAR SESIÓN</a></li>
                 <li><a href="about.html">¡Hola {$usuLogueado}!</a></li>

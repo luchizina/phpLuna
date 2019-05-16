@@ -7,7 +7,7 @@ require_once('clases/session.php');
 require_once('clases/auth.php');
 
 
-class ControladorUsuario extends ControladorIndex {
+class ControladorUsuario extends ControladorIndex { 
   function redirigir(){
      //Llamar a la vista
         $tpl = Template::getInstance();
@@ -138,7 +138,7 @@ function nuevo(){
     $usr->setCI($_POST["ci"]);
     $usr->setActivo(1);
     if($usr->agregar()){
-      $this->redirect("usuario","listado");
+      $this->redirect("usuario","login");
       exit;
     }else{
       $mensaje="Error! No se pudo agregar el usuario";
@@ -294,6 +294,7 @@ public function nuevoUsuCel(){
             echo json_encode($arreglo);
     }
    // echo json_encode($json_registration);
+}
 }
 }
 ?>

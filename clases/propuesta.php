@@ -112,6 +112,14 @@ class Propuesta extends ClaseBase {
 		$this->EstadoActual=$EstadoActual;
 	}
 
+	public function getFavoritos(){
+		return $this->favoritos;
+	}
+
+	public function setFavoritos($favoritos){
+		$this->favoritos = $favoritos;
+	}
+
  public function agregar(){
       
         $nombre=$this->getNombre();
@@ -148,15 +156,9 @@ public function modificar()
         $desc=$this->getDescripcion();
         $monto=$this->getMonto();
         $fechaPub=$this->getFechaPublicada();
-        $this->setImagen(addslashes(file_get_contents($arch)));
-        $lol = $this->getImagen();
-        $null = null;
-        $stmt = $this->getDB()->prepare( 
-            "UPDATE propuesta set
-        Nombre=?, Descripcion=?, FechaPublicada=?, Monto=? WHERE id=?"); 
+        $stmt = $this->getDB()->prepare("UPDATE propuesta set Nombre=?, Descripcion=?, FechaPublicada=?, Monto=? WHERE Nombre=?"); 
            
-        $stmt->bind_param("sssi",$nombre,
-            $desc,$fechaPub,$monto);
+        $stmt->bind_param("sssss",$nombre,$desc,$fechaPub,$monto,$nombre);
         return $stmt->execute();
    }
 
@@ -168,6 +170,29 @@ public function modificar()
         $stmt->bind_param("is", $monto, $this->getNombre());
         return $stmt->execute();
    }
+
+   public function favoritear($nombre, $nick)
+   {
+   		$stmt = $this->getDB()->prepare( 
+            "INSERT INTO favorito 
+        (propuesta, usuario) 
+           VALUES (?,?)" );
+        $stmt->bind_param("ss",$nombre,
+            $nick);
+        return $stmt->execute();
+   }
+
+   public function desfavoritear($nombre, $nick)
+   {
+   	$stmt = $this->getDB()->prepare( 
+            "DELETE FROM favorito 
+        WHERE propuesta=? AND usuario=?" );
+        $stmt->bind_param("ss",$nombre,
+            $nick);
+        return $stmt->execute();
+   }
+
+
 
 }
  ?>
