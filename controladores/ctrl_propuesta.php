@@ -194,6 +194,9 @@ function nuevaColaboracion($params=array()){
   //$_SESSION['usuario_id'];
 }
 
+function nuevaColaboracionCel($params=array()){
+  
+}
 
 function borrarCa($params=array()){
                $categoria=new categoria();
@@ -254,8 +257,11 @@ function traerPropuesta($params=array()){
    
    }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> a29cda55f1f8b09278891fb322e52a78007bf63a
 
 function favoritear($nombre, $nick){
   $propuesta = new Propuesta();
@@ -298,5 +304,12 @@ function comentar($nombre, $nick, $texto){
 
 }
 
+<<<<<<< HEAD
 }
+=======
+
+
+
+
+>>>>>>> a29cda55f1f8b09278891fb322e52a78007bf63a
 ?>
