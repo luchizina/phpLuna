@@ -96,7 +96,7 @@ function consolita( $data ) {
 			$this->redirect("propuesta","listado");
 			exit;
 		}else{
-			$mensaje="Error! No se pudo agregar el usuario";
+			$mensaje="Error! No se pudo agregar la propuesta";
 		}
 
 		
