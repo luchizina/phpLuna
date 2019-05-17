@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-14 23:35:37
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-17 01:41:51
          compiled from "vistas\cabezal.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:318355cdb34a9a91725-72021606%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'fb05f10fe29da8a558e3c965866d6cd5dd601380' => 
     array (
       0 => 'vistas\\cabezal.tpl',
-      1 => 1557869520,
+      1 => 1558049999,
       2 => 'file',
     ),
   ),
@@ -15,16 +15,17 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cdb34a9ac1727_55638157',
   'variables' => 
   array (
     'usuLogNick' => 0,
     'url_login' => 0,
+    'url_regis' => 0,
     'url_logout' => 0,
     'usuLogueado' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cdb34a9ac1727_55638157',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5cdb34a9ac1727_55638157')) {function content_5cdb34a9ac1727_55638157($_smarty_tpl) {?>
  <head>
@@ -54,6 +55,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                <?php if ($_smarty_tpl->tpl_vars['usuLogNick']->value=='') {?>
               <li class="probootstra-cta-button last"><a href="<?php echo $_smarty_tpl->tpl_vars['url_login']->value;?>
 " class="btn btn-primary">INICIAR SESIÓN</a></li>
+              <li class="probootstra-cta-button last"><a href="<?php echo $_smarty_tpl->tpl_vars['url_regis']->value;?>
+" class="btn btn-primary">REGISTRARSE</a></li>
                <?php } else { ?>
                 <li class="probootstra-cta-button last"><a href="<?php echo $_smarty_tpl->tpl_vars['url_logout']->value;?>
 " class="btn btn-primary">CERRAR SESIÓN</a></li>
