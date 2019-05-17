@@ -37,5 +37,24 @@ class Categoria extends ClaseBase {
     public function setProfundidad($Profundidad){
     	$this->Profundidad=$Profundidad;
     }
+
+
+    public function agregarCatego(){ 
+        $nombre=$this->getNombreP();
+        $stmt = $this->getDB()->prepare( 
+            "INSERT INTO categoria (NombreP)
+           VALUES (?)" );
+        $null = NULL;
+        $stmt->bind_param("s", $nombre);
+        return $stmt->execute();
+    }
+
+     public function borrar($nombre){
+ $stmt = $this->getDB()->prepare("DELETE FROM categoria WHERE NombreP=?");
+$stmt->bind_param("s",$nombre);
+    return $stmt->execute();
+    }
+
+
 }
 ?>

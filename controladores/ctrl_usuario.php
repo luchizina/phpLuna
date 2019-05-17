@@ -11,11 +11,12 @@ class ControladorUsuario extends ControladorIndex {
   function redirigir(){
      //Llamar a la vista
         $tpl = Template::getInstance();
-        $usuarios = "hola";
-        $buscar = "buscar";
-        $mensaje = "mensaje";
-        $datos = array('mensaje' => $mensaje);
-        $tpl->mostrar('inicio',$datos);
+        $mensaje = "hola";  
+        $datos = array(
+       'mensaje' => $mensaje
+       );
+          $tpl->mostrar('inicio',$datos);
+
 }
     function listado($params=array()){
 
@@ -272,7 +273,6 @@ print base64_decode($img);
 
 
 public function nuevoUsuCel(){ 
-  if(isset($_POST['nick']) && isset($_POST['cont']) && isset($_POST['nombre']) && isset($_POST['ape']) && isset($_POST['correo']) && isset($_POST['cel']) && isset($_POST['ci'])){
     $u  = new Usuario();
     $u->setNick($_POST['nick']);
     $u->setNombre($_POST['nombre']);
@@ -282,10 +282,19 @@ public function nuevoUsuCel(){
     $u->setCorreo($_POST['correo']);
     $u->setPassword($_POST['cont']);
     $u->setActivo(1);
-    $u->agregarCel();
+    if($u->agregarCel()){
+      $msg = "Usuario registrado";
+      $array = ["mensajito"=>$msg];
+      $arreglo=["status"=>"ok","message"=>[$array]];
+            echo json_encode($arreglo);
+    } else {
+      $msg = "Error al tratar de registrarse";
+      $array = ["mensajito"=>$msg];
+      $arreglo=["status"=>"error","message"=>[$array]];
+            echo json_encode($arreglo);
+    }
    // echo json_encode($json_registration);
+}
 
-}
-}
 }
 ?>

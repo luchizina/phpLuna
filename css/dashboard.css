@@ -103,3 +103,7 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+.tabla{
+box-shadow: 15px 5px 10px #000;
+}

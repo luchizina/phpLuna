@@ -221,28 +221,23 @@ public function agregar(){
         $nick=$this->getNick();
         $password = sha1($this->getPassword());
         $email=$this->getCorreo();
-        $arch = $this->getArchivo();
-        $tama = $this->getTam();
         $ci = $this->getCI();
         $act = $this->isActivo();
         $stmt = $this->getDB()->prepare( 
             "INSERT INTO usuario (Nombre, Apellido,Nick, Correo, Password,Celular, Imagen, ci, activo)
            VALUES (?,?,?,?,?,?,?,?,?)" );
-        $null = NULL;
-        $stmt->bind_param("ssssssbsi", $nombre, $ape, $nick, $email, $password, $cel, $null, $ci, $act);
-        if($stmt->execute()){
-            $arreglo=["status"=>"ok","message"=>"Usuario registrado"];
-            echo json_encode($arreglo);
+        $null = "xD";
+        $stmt->bind_param("ssssssssi", $nombre, $ape, $nick, $email, $password, $cel, $null, $ci, $act);
+        return $stmt->execute();
+            
             //echo json_encode(array("response"=>"success"));
            // $json['success'] = 1;
            // $json['message'] = "Usuario registrado";
-        }else{
             //echo json_encode(array("response"=>"failed"));
-            $arreglo=["status"=>"error","message"=>"Error al tratar de registrarse"];
-            echo json_encode($arreglo);
+            
            // $json['success'] = 0;
            // $json['message'] = "Error al tratar de registrarse";
-        }
+        
     }
 
      public function getListadoUsus(){

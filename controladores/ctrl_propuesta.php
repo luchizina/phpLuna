@@ -5,6 +5,7 @@ require "clases/propuesta.php";
 //require "clases/list_estado.php";
 require "clases/recompensa.php";
 require "clases/usuario.php";
+require "clases/categoria.php";
 require "clases/colaboracion.php";
 require_once('clases/template.php');
 require_once('clases/Utils.php');
@@ -115,6 +116,8 @@ public function modificar($params = array())
      $propuesta  = new Propuesta();
      $u = new Usuario();
      $usuario = $u->obtenerPorNick(Session::get('usuario_nick'));
+
+   
      $p = $propuesta->obtenerPorNombreProp($params[0]);
 
      if(isset($_POST["nombre"]))
@@ -192,6 +195,68 @@ function nuevaColaboracion($params=array()){
 }
 
 
+function borrarCa($params=array()){
+               $categoria=new categoria();
+               $stringABorrar=$params[0];
+               echo $stringABorrar;
+                if($categoria->borrar($stringABorrar)){
+                    echo $stringABorrar;
+                    $this->redirect("propuesta","listadoCat");
+                    exit;
+                }
+
+}       
+
+
+
+function traerPropuesta($params=array()){
+
+  $prop = new Propuesta();
+  $propuesta = $prop->obtenerPorNombreProp($params[0]);
+   $p=["propuesta"=>$propuesta];
+    $arreglo=["status"=>"ok","message"=>[$propuesta]];
+      $nuevo = json_encode($arreglo);
+      echo $nuevo;
+}
+
+
+
+  function listadoCat($params=array()){
+
+     $buscar="";
+     $titulo="Listado";
+     $mensaje="";
+     
+    if(isset($_POST["nombreP"])){
+        $categoria2= new categoria();
+        $categoria2->setNombreP($_POST["nombreP"]);
+        if($categoria2->agregarCatego()){
+          $mensaje="Bein!";
+        }else{
+          $mensaje="Error! No se pudo agregar la categoria";
+        }
+    }
+            $categoria=new categoria();
+           $categorias=$categoria->getListado();         
+       //Llamar a la vista
+        $tpl = Template::getInstance();
+        $datos = array(
+       'categorias' => $categorias,
+       'buscar' => $buscar,
+       'titulo' => $titulo,
+       'mensaje' => $mensaje,
+       );
+
+    $tpl->asignar('borrar_catego',$this->getUrl("propuesta","borrarCo"));
+       $tpl->asignar('usuario_nuevo',$this->getUrl("usuario","nuevo"));
+       $tpl->asignar('usuario_modificado',$this->getUrl("usuario","modificar"));
+       $tpl->mostrar('registrar_categoria',$datos);
+   
+   }
+
+
+
+
 function favoritear($nombre, $nick){
   $propuesta = new Propuesta();
   $prop = $propuesta->obtenerPorNombreProp($nombre);
@@ -217,7 +282,7 @@ function desfavoritear($nombre, $nick){
   }
 }
 
-public function comentar($nombre, $nick, $texto){
+function comentar($nombre, $nick, $texto){
   $propuesta = new Propuesta();
   $prop = $propuesta->obtenerPorNombreProp($nombre);
   $usuario = new Usuario();
@@ -228,12 +293,10 @@ public function comentar($nombre, $nick, $texto){
   $c->setTexto($texto);
   if($c->comentar())
   {
-    array_push($prop->getComentarios(), $c)
+    array_push($prop->getComentarios(), $c);
   }
-}
-
-
 
 }
 
+}
 ?>

@@ -76,6 +76,15 @@ class ClaseBase{
         }
         return $res;
     }
+    public function borrarC($id){
+        $sql="DELETE FROM $this->tabla WHERE NombreP=$id ";
+        $resultado =$this->db->query($sql);
+        $res=false;
+        if($this->db->affected_rows>0){
+            $res=true;
+        }
+        return $res;
+    }
 
     public function traerRecompensas($propuesta){
         $sql="select * from recompensa where TituloPropuesta = '$propuesta'";

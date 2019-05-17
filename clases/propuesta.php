@@ -150,6 +150,12 @@ $stmt->bind_param("s",$nombre);
 
 
 
+
+    
+
+
+
+
 public function modificar()
    {
         $nombre=$this->getNombre();
