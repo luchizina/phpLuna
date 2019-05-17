@@ -189,7 +189,8 @@ public function existeCi(){
   if(isset($_POST['ci'])){
   $usuario  = new Usuario();
   if($usuario->ci($_POST['ci'])){
-    echo "Cedula en uso";   
+    echo "Cedula en uso";  
+    return true; 
   }
 }
 }
@@ -198,7 +199,8 @@ public function existeCorreo(){
   if(isset($_POST['correo'])){
   $usuario  = new Usuario();
   if($usuario->correo($_POST['correo'])){
-    echo "Correo en uso";   
+    echo "Correo en uso";  
+    return true; 
   }
 }
 }
@@ -208,7 +210,8 @@ public function existeNick(){
   if(isset($_POST['nick'])){
   $usuario  = new Usuario();
   if($usuario->nick($_POST['nick'])){
-    echo "Nick en uso";   
+    echo "Nick en uso"; 
+    return true;  
   }
 }
 }
@@ -274,6 +277,24 @@ print base64_decode($img);
 
 public function nuevoUsuCel(){ 
     $u  = new Usuario();
+    if($this->existeCi($_POST['ci'])){
+      $msg = "La cedula se encuentra en uso";
+      $array = ["mensajito"=>$msg];
+      $arreglo=["status"=>"error","message"=>[$array]];
+            echo json_encode($arreglo);
+    } else {
+      if($this->existeNick($_POST['nick'])){
+        $msg = "El nick se encuentra en uso";
+      $array = ["mensajito"=>$msg];
+      $arreglo=["status"=>"error","message"=>[$array]];
+            echo json_encode($arreglo);
+      } else {
+        if($this->existeCorreo($_POST['correo'])){
+          $msg = "El correo se encuentra en uso";
+      $array = ["mensajito"=>$msg];
+      $arreglo=["status"=>"error","message"=>[$array]];
+            echo json_encode($arreglo);
+        } else {
     $u->setNick($_POST['nick']);
     $u->setNombre($_POST['nombre']);
     $u->setApellido($_POST['ape']);
@@ -293,8 +314,11 @@ public function nuevoUsuCel(){
       $arreglo=["status"=>"error","message"=>[$array]];
             echo json_encode($arreglo);
     }
+    }
+    }
+    }
    // echo json_encode($json_registration);
 }
-}
+
 }
 ?>

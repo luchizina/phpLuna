@@ -194,6 +194,9 @@ function nuevaColaboracion($params=array()){
   //$_SESSION['usuario_id'];
 }
 
+function nuevaColaboracionCel($params=array()){
+  
+}
 
 function borrarCa($params=array()){
                $categoria=new categoria();
@@ -205,7 +208,22 @@ function borrarCa($params=array()){
                     exit;
                 }
 
-}         
+}       
+
+
+
+function traerPropuesta($params=array()){
+
+  $prop = new Propuesta();
+  $propuesta = $prop->obtenerPorNombreProp($params[0]);
+   $p=["propuesta"=>$propuesta];
+    $arreglo=["status"=>"ok","message"=>[$propuesta]];
+      $nuevo = json_encode($arreglo);
+      echo $nuevo;
+}
+
+
+
   function listadoCat($params=array()){
 
      $buscar="";
@@ -239,8 +257,11 @@ function borrarCa($params=array()){
    
    }
 
-function favoritear(){
+<<<<<<< HEAD
 
+
+=======
+>>>>>>> a29cda55f1f8b09278891fb322e52a78007bf63a
 
 function favoritear($nombre, $nick){
   $propuesta = new Propuesta();
@@ -267,7 +288,7 @@ function desfavoritear($nombre, $nick){
   }
 }
 
-public function comentar($nombre, $nick, $texto){
+function comentar($nombre, $nick, $texto){
   $propuesta = new Propuesta();
   $prop = $propuesta->obtenerPorNombreProp($nombre);
   $usuario = new Usuario();
@@ -278,13 +299,17 @@ public function comentar($nombre, $nick, $texto){
   $c->setTexto($texto);
   if($c->comentar())
   {
-    array_push($prop->getComentarios(), $c)
+    array_push($prop->getComentarios(), $c);
   }
 
 }
 
-
-
+<<<<<<< HEAD
 }
+=======
 
+
+
+
+>>>>>>> a29cda55f1f8b09278891fb322e52a78007bf63a
 ?>
