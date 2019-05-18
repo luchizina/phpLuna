@@ -47,7 +47,7 @@
               <tbody>
                 {foreach from=$categorias item=persona}
                   <tr>
-                    <td>{$persona->getNombreP()|upper}</td>
+                    <td>{$persona->getNombreH()|upper}</td>
                   
                     <td>
                       <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='{$url_base}propuesta/borrarCa/{$persona->getNombreP()}/'"/>

@@ -3,6 +3,8 @@ require "clases/clase_base.php";
 require "clases/propuesta.php";
 //require "clases/estados.php";
 //require "clases/list_estado.php";
+
+require "clases/listaestados.php";
 require "clases/recompensa.php";
 require "clases/usuario.php";
 require "clases/categoria.php";
@@ -12,6 +14,8 @@ require_once('clases/Utils.php');
 require_once('clases/session.php');
 require_once('clases/auth.php');
 ini_set('display_errors', 'On');
+date_default_timezone_set('UTC');
+date_default_timezone_set("America/Montevideo");
 error_reporting(E_ALL);
 class ControladorPropuesta extends ControladorIndex {
 
@@ -70,6 +74,20 @@ class ControladorPropuesta extends ControladorIndex {
    }
 
 
+
+function listadoCel(){
+
+
+  $prop = new Propuesta();
+  $propuestas=$prop->getListado();
+   $arreglo=["status"=>"ok","message"=>$propuestas];
+       //$this->consolita($usuarios[0]->getNombre());
+       $listaProps = json_encode($arreglo);
+       echo $listaProps;
+}
+
+
+
 function consolita( $data ) {
     $output = $data;
     if ( is_array( $output ) )
@@ -81,29 +99,51 @@ function consolita( $data ) {
 
    function nuevo(){
 	$mensaje="";
+
 	if(isset($_POST["nombre"])){
+    $p = new Propuesta();
+  //  if($p->obtenerPorNombreProp($_POST["nombre"])==null){
     $usr = new Usuario();
 		$prop= new Propuesta();
+    $categ = new categoria();
 		$prop->setNombre($_POST["nombre"]);
 		$prop->setDescripcion($_POST["desc"]);
-    $fecha =  date("Y-m-d H:i:s");
-		$prop->setFechaPublicada('12/12/2019');
+    $fecha =  date("Y-m-d");
+		$prop->setFechaPublicada($fecha);
 		$prop->setMonto($_POST["monto"]);
+    $prop->setCategoria($categ->obtenerPorNombreCat($_POST["catego"]));
     $prop->setUsuario($usr->obtenerPorNick(Session::get('usuario_nick')));
 		$prop->setMontoActual(0);
-
-		if($prop->agregar()){
+    $prop->setEstadoActual(1);
+    $EstadoActual = 1;
+      
+		if($prop->agregarP()){
+        $listEstado = new listaestados();
+        $listEstado->setEstado(1);
+        $listEstado->setPropuesta($prop->getNombre());
+        $listEstado->setFecha($fecha);
+         $hora = date('H:i:s');
+        $listEstado->setHora($hora);
+        $listEstado->agregarE(); 
+        $jaja = $listEstado->getEstado().$listEstado->getPropuesta().$listEstado->getFecha().$listEstado->getHora();
 			$this->redirect("propuesta","listado");
 			exit;
 		}else{
-			$mensaje="Error! No se pudo agregar el usuario";
+			$mensaje="Error! No se pudo agregar la propuesta ".$jaja;
 		}
+ /* }
+  else{
+    $mensaje = "Ya existe propuesta con este nombre ¿Qué tal si pruebas con otro nombre? ".$jaja;
+  }*/
 
 		
 	}
+  $categ = new categoria();
+  $categorias = $categ->getListado();
 	$tpl = Template::getInstance();
 	$tpl->asignar('titulo',"Nueva propuesta");
 	$tpl->asignar('buscar',"");
+  $tpl->asignar('categorias',$categorias);
 	$tpl->asignar('mensaje',$mensaje);
 	$tpl->mostrar('registrar_propuesta',array());
 
@@ -188,10 +228,8 @@ function nuevaColaboracion($params=array()){
   $tpl->asignar('mensaje',$mensaje);
   $tpl->asignar('propuesta',$prop);
   $tpl->asignar('usuario',$usu);
-  //$tpl->asignar('recompensa',$rec);
   $tpl->asignar('recompensas',$recs);
   $tpl->mostrar('nueva_colaboracion',array());
-  //$_SESSION['usuario_id'];
 }
 
 function nuevaColaboracionCel(){
@@ -281,29 +319,57 @@ function traerPropuesta($params=array()){
    
    }
 
-function favoritear($nombre, $nick){
-  $propuesta = new Propuesta();
-  $prop = $propuesta->obtenerPorNombreProp($nombre);
-  $usuario = new Usuario();
-  $u = $usuario->obtenerPorNick($nick);
-  if($prop->favoritear($nombre,$nick))
-  {
-    array_push($u->getFavoritos(), $prop);
-    array_push($prop->getFavoritos, $u);
-  }
+function consolita2( $data ) {
+    $output = $data;
+    if ( is_array( $output ) )
+        $output = implode( ',', $output);
+    echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
+}
 
+function favoritear($params=array()){
+  $propuesta = new Propuesta();
+  $prop = $propuesta->obtenerPorNombreProp($params[0]);
+  $usuario = new Usuario();
+  $u = $usuario->obtenerPorNick(Session::get('usuario_nick'));
+  if($prop->favoritear($params[0],Session::get('usuario_nick')))
+  {
+    $array = $u->getFavoritos();
+    $array2 = $prop->getFavoritos();
+    array_push($array, $prop);
+    array_push($array2, $u);
+    $u->setFavoritos($array);
+    $prop->setFavoritos($array2);
+  }
+  $this->redirect("propuesta","listado");
 } 
 
-function desfavoritear($nombre, $nick){
+function desfavoritear($params=array()){
   $propuesta = new Propuesta();
-  $prop = $propuesta->obtenerPorNombreProp($nombre);
+  $prop = $propuesta->obtenerPorNombreProp($params[0]);
   $usuario = new Usuario();
-  $u = $usuario->obtenerPorNick($nick);
-  if($prop->desfavoritear($nombre,$nick))
+  $u = $usuario->obtenerPorNick(Session::get('usuario_nick'));
+  
+  if($prop->desfavoritear($params[0],Session::get('usuario_nick')))
   {
-    $prop->setFavoritos(array_diff($prop->getFavoritos(), array($u)));
-    $u->setFavoritos(array_diff($u->getFavoritos(), array($prop)));
+    
+    $key = array_search($u, $prop->getFavoritos());
+    print($key);
+    if($key !== false)
+    {
+      print($key);
+       consolita2($key); 
+      unset($prop->getFavoritos()[$key]);
+    }
+    $key2 = array_search($prop, $u->getFavoritos());
+    if($key2 !== false)
+    {
+      print($key2);
+      consolita2($key2); 
+      unset($u->getFavoritos[$key2]);
+    }
+    print("xD");
   }
+  //$this->redirect("propuesta","listado");
 }
 
 function comentar($nombre, $nick, $texto){
@@ -332,8 +398,6 @@ function comentar($nombre, $nick, $texto){
   }
 
 }
-
-
 }
 
 ?>

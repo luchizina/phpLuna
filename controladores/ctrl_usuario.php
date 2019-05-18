@@ -5,8 +5,6 @@ require_once('clases/template.php');
 require_once('clases/Utils.php');
 require_once('clases/session.php');
 require_once('clases/auth.php');
-
-
 class ControladorUsuario extends ControladorIndex { 
   function redirigir(){
      //Llamar a la vista
@@ -16,10 +14,8 @@ class ControladorUsuario extends ControladorIndex {
        'mensaje' => $mensaje
        );
           $tpl->mostrar('inicio',$datos);
-
 }
     function listado($params=array()){
-
        $buscar="";
        $titulo="Listado";
        $mensaje="";
@@ -55,7 +51,6 @@ class ControladorUsuario extends ControladorIndex {
        'titulo' => $titulo,
        'mensaje' => $mensaje,
        );
-
     
    
        $tpl->asignar('usuario_nuevo',$this->getUrl("usuario","nuevo"));
@@ -63,15 +58,8 @@ class ControladorUsuario extends ControladorIndex {
        $tpl->mostrar('usuarios_listado',$datos);
    
    }
-
-
-
-
-
 function listadoMovil($params=array()){
-
    $buscar="";
-
        $titulo="Listado";
        $mensaje="";
        if(!empty($params)){
@@ -98,19 +86,13 @@ function listadoMovil($params=array()){
            $usuarios=$usuario->getListado();  
         }
        
-
        $arreglo=["status"=>"ok","message"=>$usuarios];
        //$this->consolita($usuarios[0]->getNombre());
        $listaUsers = json_encode($arreglo);
         echo json_last_error();
        echo $listaUsers;
        var_dump($arreglo);
-
-
 }
-
-
-
 function multiplicidad($a = array())
 {
   $f = $a[0]*100;
@@ -119,8 +101,6 @@ $b=["status"=>"ok","message"=>[$c]];
 $hola= json_encode($b);
 echo $hola;
 }
-
-
 function nuevo(){
   $mensaje="";
   if(isset($_POST["nick"])){
@@ -143,7 +123,6 @@ function nuevo(){
     }else{
       $mensaje="Error! No se pudo agregar el usuario";
     }
-
     
   }
   $tpl = Template::getInstance();
@@ -152,11 +131,6 @@ function nuevo(){
   $tpl->asignar('mensaje',$mensaje);
   $tpl->mostrar('usuarios_nuevo',array());
 }
-
-
-
-
-
 public function modificar($params = array())
    {
      $mensaje = "";
@@ -176,7 +150,6 @@ public function modificar($params = array())
     }else{
       $mensaje="Error! No se pudo modificar el usuario";
     }
-
   }
   $tpl = Template::getInstance();
   $tpl->asignar('titulo',"Modificar Usuario");
@@ -184,7 +157,6 @@ public function modificar($params = array())
   $tpl->asignar('usuario_log', $usuario);
   $tpl->mostrar('usuarios_modificar', $usuario);
    }
-
 public function existeCi(){
   if(isset($_POST['ci'])){
   $usuario  = new Usuario();
@@ -194,7 +166,6 @@ public function existeCi(){
   }
 }
 }
-
 public function existeCorreo(){
   if(isset($_POST['correo'])){
   $usuario  = new Usuario();
@@ -204,8 +175,6 @@ public function existeCorreo(){
   }
 }
 }
-
-
 public function existeNick(){
   if(isset($_POST['nick'])){
   $usuario  = new Usuario();
@@ -215,20 +184,29 @@ public function existeNick(){
   }
 }
 }
-
 function consolita( $data ) {
     $output = $data;
     if ( is_array( $output ) )
         $output = implode( ',', $output);
-
     echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
 }
-
-
-
-
+function loginCel(){
+$usr = new Usuario();
+$email = $_POST['email'];
+$pass = sha1($_POST['pass']);
+	if($usr->login($email,$pass)){
+		    $msg = "logueado con éxito";
+      $array = ["mens"=>$msg];
+      $arreglo=["status"=>"ok","message"=>[$array]];
+            echo json_encode($arreglo);
+	}else{
+		 $msg = "no existe usuario";
+      $array = ["mens"=>$msg];
+      $arreglo=["status"=>"error","message"=>[$array]];
+            echo json_encode($arreglo);
+	}
+}
 function login(){
-
   $mensaje="";
   
   if(isset($_POST["email"])){
@@ -236,15 +214,12 @@ function login(){
     
     $email=$_POST["email"];
     $pass=sha1($_POST["password"]);
-
     if($usr->login($email,$pass)){
-
       $this->redirect("usuario","redirigir");
       exit;
     }else{
-      $mensaje="Error! No se pudo agregar el usuario";
+      $mensaje="Error! Este usuario no está registrado en el sistema";
     }
-
     
   }
   $tpl = Template::getInstance();
@@ -253,19 +228,13 @@ function login(){
   $tpl->asignar('buscar',"");
   $tpl->asignar('mensaje',$mensaje);
   $tpl->mostrar('usuarios_login',array());
-
 }
-
-
-
 function logout(){
   $usr= new Usuario();
   $usr->logout();
   $this->redirect("usuario","redirigir");
 }
-
 public function traerImagen($params = array()){
-
 $usr = new Usuario();
 $img=$usr->traerImagen($params[0]);
 //ob_start();
@@ -273,8 +242,6 @@ header("Content-type: jpg");
 print base64_decode($img);
 //ob_clean();
 }
-
-
 public function nuevoUsuCel(){ 
     $u  = new Usuario();
     if($this->existeCi($_POST['ci'])){
@@ -319,6 +286,5 @@ public function nuevoUsuCel(){
     }
    // echo json_encode($json_registration);
 }
-
 }
 ?>

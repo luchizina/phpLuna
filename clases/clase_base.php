@@ -56,6 +56,17 @@ class ClaseBase{
         return $res;
     }
 
+    public function obtenerPorNombreCat($nombre){
+        $sql="select * from categoria where NombreH='$nombre' ";
+        $res=NULL;
+        $resultado =$this->db->query($sql)   
+            or die ("Fallo en la consulta categoria");
+         if($fila = $resultado->fetch_object()) {
+           $res= new $this->modelo($fila);
+        }
+        return $res;
+    }
+
     public function obtenerPorNombreProp($nombre){
         $sql="select * from $this->tabla where Nombre='$nombre' ";
         $res=NULL;

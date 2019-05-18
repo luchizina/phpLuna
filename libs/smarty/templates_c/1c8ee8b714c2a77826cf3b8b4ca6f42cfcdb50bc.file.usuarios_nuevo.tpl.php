@@ -1,19 +1,50 @@
-<!DOCTYPE html>
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-18 04:20:03
+         compiled from "vistas\usuarios_nuevo.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:51015cdf229d5eb389-53866930%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '1c8ee8b714c2a77826cf3b8b4ca6f42cfcdb50bc' => 
+    array (
+      0 => 'vistas\\usuarios_nuevo.tpl',
+      1 => 1558145995,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '51015cdf229d5eb389-53866930',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cdf229d77e591_37606689',
+  'variables' => 
+  array (
+    'url_base' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5cdf229d77e591_37606689')) {function content_5cdf229d77e591_37606689($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
-    <base href="{$url_base}">
+    <base href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+">
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
     <!--[if lt IE 9]>
-      <script src="js/vendor/html5shiv.min.js"></script>
-      <script src="js/vendor/respond.min.js"></script>
+      <?php echo '<script'; ?>
+ src="js/vendor/html5shiv.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="js/vendor/respond.min.js"><?php echo '</script'; ?>
+>
     <![endif]-->
   </head>
   <body >
 
-    {include file="cabezal.tpl"}
+    <?php echo $_smarty_tpl->getSubTemplate ("cabezal.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
     <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg); height:100%"  data-stellar-background-ratio="0.1">
         <div class="container">
           <div class="row">
@@ -66,7 +97,7 @@
                 <label for="archivo">Seleccionar imagen de perfil
 
                 <input  id="archivo" name="archivo" type="file" class="form-control" accept="image/*"> 
-               
+                <img src="/img/logo.png">
                 </label>
               </div>
               <div class="form-group">
@@ -77,11 +108,20 @@
         </div>
         </div>
 
-    <script src="js/scripts.min.js"></script>
-    <script src="js/main.min.js"></script>
-    <script src="js/custom.js"></script>
-    <script src="js/validar.js" type="text/javascript"></script>
+    <?php echo '<script'; ?>
+ src="js/scripts.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/main.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/custom.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/validar.js" type="text/javascript"><?php echo '</script'; ?>
+>
     </section>          
   </section>
       </body></html>
 
+<?php }} ?>
