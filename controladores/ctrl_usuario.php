@@ -226,6 +226,30 @@ function consolita( $data ) {
 
 
 
+function loginCel(){
+
+
+$usr = new Usuario();
+$email = $_POST['email'];
+$pass = sha1($_POST['pass']);
+
+	if($usr->login($email,$pass)){
+
+		    $msg = "logueado con éxito";
+      $array = ["mens"=>$msg];
+      $arreglo=["status"=>"ok","message"=>[$array]];
+            echo json_encode($arreglo);
+
+	}else{
+		 $msg = "no existe usuario";
+      $array = ["mens"=>$msg];
+      $arreglo=["status"=>"error","message"=>[$array]];
+            echo json_encode($arreglo);
+	}
+
+}
+
+
 
 function login(){
 
@@ -242,7 +266,7 @@ function login(){
       $this->redirect("usuario","redirigir");
       exit;
     }else{
-      $mensaje="Error! No se pudo agregar el usuario";
+      $mensaje="Error! Este usuario no está registrado en el sistema";
     }
 
     
