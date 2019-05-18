@@ -74,6 +74,20 @@ class ControladorPropuesta extends ControladorIndex {
    }
 
 
+
+function listadoCel(){
+
+
+  $prop = new Propuesta();
+  $propuestas=$prop->getListado();
+   $arreglo=["status"=>"ok","message"=>$propuestas];
+       //$this->consolita($usuarios[0]->getNombre());
+       $listaProps = json_encode($arreglo);
+       echo $listaProps;
+}
+
+
+
 function consolita( $data ) {
     $output = $data;
     if ( is_array( $output ) )
