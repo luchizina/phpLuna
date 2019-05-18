@@ -1,4 +1,6 @@
 <?php 
+date_default_timezone_set('UTC');
+date_default_timezone_set("America/Montevideo");
 class Propuesta extends ClaseBase {
 //estos atributos tienen que tener el mismo nombre que en la bd
 	public $Nombre = '';
@@ -127,14 +129,14 @@ class Propuesta extends ClaseBase {
         $Monto = $this->getMonto();
         $MontoActual=0;
         $Usuario = $this->getUsuario()->getNick();
-       // $Categ = $this->getCategoria()->getNombreP();
-        //$EstadoActual = 0;//$this->getEstadoActual()->getNombre();
+        $Categ = $this->getCategoria()->getNombreH();
+        
         $stmt = $this->getDB()->prepare( 
             "INSERT INTO propuesta 
-        (Nombre,Descripcion, FechaPublicada,Monto,MontoActual,NickUsuario/*,Categoria,EstadoActual*/) 
-           VALUES (?,?,?,?,?,?/*,?,?*/)" );
-        $stmt->bind_param("sssiiss",$nombre,
-            $Descripcion,$FechaPublicada,$Monto,$MontoActual,$Usuario,$Categ/*,$EstadoActual*/);
+        (Nombre,Descripcion, FechaPublicada,Monto,MontoActual,NickUsuario,Categoria,EstadoActual) 
+           VALUES (?,?,?,?,?,?,?,?)" );
+        $stmt->bind_param("sssiissi",$nombre,
+            $Descripcion,$FechaPublicada,$Monto,$MontoActual,$Usuario,$Categ,$EstadoActual);
         return $stmt->execute();
     }
 

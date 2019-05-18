@@ -42,15 +42,15 @@ class Categoria extends ClaseBase {
     public function agregarCatego(){ 
         $nombre=$this->getNombreP();
         $stmt = $this->getDB()->prepare( 
-            "INSERT INTO categoria (NombreP)
-           VALUES (?)" );
+            "INSERT INTO categoria (NombreP,NombreH)
+           VALUES (?,?)" );
         $null = NULL;
-        $stmt->bind_param("s", $nombre);
+        $stmt->bind_param("ss", $nombre,$nombre);
         return $stmt->execute();
     }
 
      public function borrar($nombre){
- $stmt = $this->getDB()->prepare("DELETE FROM categoria WHERE NombreP=?");
+ $stmt = $this->getDB()->prepare("DELETE FROM categoria WHERE NombreH=?");
 $stmt->bind_param("s",$nombre);
     return $stmt->execute();
     }

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-17 23:15:57
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-17 22:41:53
          compiled from "vistas\registrar_categoria.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:251225cdf248d8d4543-05319240%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '74e3499dd2d9cd038d4ce1da225b24bb7bc611f3' => 
     array (
       0 => 'vistas\\registrar_categoria.tpl',
-      1 => 1557873296,
+      1 => 1558143699,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cdf248da60e45_22908849',
   'variables' => 
   array (
     'url_base' => 0,
@@ -23,8 +25,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'persona' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cdf248da60e45_22908849',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5cdf248da60e45_22908849')) {function content_5cdf248da60e45_22908849($_smarty_tpl) {?>
 <!DOCTYPE html>
@@ -88,7 +88,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['persona']->key => $_smarty_tpl->tpl_v
 $_smarty_tpl->tpl_vars['persona']->_loop = true;
 ?>
                   <tr>
-                    <td><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['persona']->value->getNombreP(), 'UTF-8');?>
+                    <td><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['persona']->value->getNombreH(), 'UTF-8');?>
 </td>
                   
                     <td>

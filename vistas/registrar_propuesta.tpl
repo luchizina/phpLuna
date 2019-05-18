@@ -74,11 +74,11 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
               </style>
          <div class="form-group">
-              <label class="col-md-4 control-label" for="monto">Monto</label>  
+              <label class="col-md-4 control-label" for="monto">Categoria</label>  
               <div class="col-md-4">
            <select name="catego" class="dis">
               {foreach from=$categorias item=persona}
-            <option value="{$persona->getNombreP()}">{$persona->getNombreP()|upper}</option>
+            <option value="{$persona->getNombreH()}">{$persona->getNombreH()|upper}</option>
             {/foreach}
           </select>
            </div>

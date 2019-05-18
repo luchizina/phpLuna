@@ -63,8 +63,11 @@
                 <input id="cel" name="cel" type="tel" placeholder="Ej: 099999999" class="form-control" required="">
               </div>
               <div class="form-group">
-                <label for="archivo">Seleccionar imagen de perfil</label>
-                <input id="archivo" name="archivo" type="file" class="form-control" accept="image/*"> 
+                <label for="archivo">Seleccionar imagen de perfil
+
+                <input  id="archivo" name="archivo" type="file" class="form-control" accept="image/*"> 
+                <img src="../img/logo.png">
+                </label>
               </div>
               <div class="form-group">
                 <input type="submit" class="btn btn-primary btn-lg" id="guardar" name="guardar" value="Registrarse">

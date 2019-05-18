@@ -3,6 +3,8 @@ require "clases/clase_base.php";
 require "clases/propuesta.php";
 //require "clases/estados.php";
 //require "clases/list_estado.php";
+
+require "clases/listaestados.php";
 require "clases/recompensa.php";
 require "clases/usuario.php";
 require "clases/categoria.php";
@@ -12,6 +14,8 @@ require_once('clases/Utils.php');
 require_once('clases/session.php');
 require_once('clases/auth.php');
 ini_set('display_errors', 'On');
+date_default_timezone_set('UTC');
+date_default_timezone_set("America/Montevideo");
 error_reporting(E_ALL);
 class ControladorPropuesta extends ControladorIndex {
 
@@ -84,7 +88,7 @@ function consolita( $data ) {
 
 	if(isset($_POST["nombre"])){
     $p = new Propuesta();
-    if($p->obtenerPorNombreProp($_POST["nombre"])==null){
+  //  if($p->obtenerPorNombreProp($_POST["nombre"])==null){
     $usr = new Usuario();
 		$prop= new Propuesta();
     $categ = new categoria();
@@ -96,16 +100,27 @@ function consolita( $data ) {
     $prop->setCategoria($categ->obtenerPorNombreCat($_POST["catego"]));
     $prop->setUsuario($usr->obtenerPorNick(Session::get('usuario_nick')));
 		$prop->setMontoActual(0);
+    $prop->setEstadoActual(1);
+    $EstadoActual = 1;
+      
 		if($prop->agregarP()){
+        $listEstado = new listaestados();
+        $listEstado->setEstado(1);
+        $listEstado->setPropuesta($prop->getNombre());
+        $listEstado->setFecha($fecha);
+         $hora = date('H:i:s');
+        $listEstado->setHora($hora);
+        $listEstado->agregarE(); 
+        $jaja = $listEstado->getEstado().$listEstado->getPropuesta().$listEstado->getFecha().$listEstado->getHora();
 			$this->redirect("propuesta","listado");
 			exit;
 		}else{
-			$mensaje="Error! No se pudo agregar la propuesta";
+			$mensaje="Error! No se pudo agregar la propuesta ".$jaja;
 		}
-  }
+ /* }
   else{
-    $mensaje = "Ya existe propuesta con este nombre ¿Qué tal si pruebas con otro nombre?";
-  }
+    $mensaje = "Ya existe propuesta con este nombre ¿Qué tal si pruebas con otro nombre? ".$jaja;
+  }*/
 
 		
 	}

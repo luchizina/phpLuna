@@ -4,8 +4,8 @@ class Listaestados extends ClaseBase {
 	public $id=0;
 	public $Estado = null; //objeto estado
 	public $Propuesta = null; //objeto propuesta
-	public $Fecha = date("Y-m-d");
-	public $Hora = date("H:i:s");
+	public $Fecha;
+	public $Hora;
 
 	public function __construct($obj=NULL) {
         if(isset($obj)){
@@ -53,5 +53,17 @@ class Listaestados extends ClaseBase {
     	$this->Hora=$Hora;
     }
 
+ public function agregarE(){
+        $IDEstado = $this->getEstado();
+        $Propuesta = $this->getPropuesta();
+        $fecha = $this->getFecha();
+        $hora = $this->getHora();
+        $stmt = $this->getDB()->prepare( 
+            "INSERT INTO listaestados 
+        (IDEstado,TituloPropuesta,Fecha,Hora) 
+           VALUES (?,?,?,?)" );
+        $stmt->bind_param("isss",$IDEstado,$Propuesta,$fecha,$hora);
+        return $stmt->execute();
+    }
 }
 ?>

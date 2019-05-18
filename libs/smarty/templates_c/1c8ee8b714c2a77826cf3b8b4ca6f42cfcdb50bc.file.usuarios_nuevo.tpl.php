@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-17 23:07:41
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-18 03:54:10
          compiled from "vistas\usuarios_nuevo.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:51015cdf229d5eb389-53866930%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1c8ee8b714c2a77826cf3b8b4ca6f42cfcdb50bc' => 
     array (
       0 => 'vistas\\usuarios_nuevo.tpl',
-      1 => 1558040242,
+      1 => 1558144443,
       2 => 'file',
     ),
   ),
@@ -15,13 +15,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cdf229d77e591_37606689',
   'variables' => 
   array (
     'url_base' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cdf229d77e591_37606689',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5cdf229d77e591_37606689')) {function content_5cdf229d77e591_37606689($_smarty_tpl) {?><!DOCTYPE html>
 
@@ -94,8 +94,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 <input id="cel" name="cel" type="tel" placeholder="Ej: 099999999" class="form-control" required="">
               </div>
               <div class="form-group">
-                <label for="archivo">Seleccionar imagen de perfil</label>
-                <input id="archivo" name="archivo" type="file" class="form-control" accept="image/*"> 
+                <label for="archivo">Seleccionar imagen de perfil
+
+                <input style="visibility: hidden;" id="archivo" name="archivo" type="file" class="form-control" accept="image/*"> 
+                <img src="../img/logo.png">
+                </label>
               </div>
               <div class="form-group">
                 <input type="submit" class="btn btn-primary btn-lg" id="guardar" name="guardar" value="Registrarse">

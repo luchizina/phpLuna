@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-18 00:22:48
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-18 01:36:31
          compiled from "vistas\registrar_propuesta.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:12225cdf1f1bdaf7c5-41888752%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '01c181d3b7bf18d145777ee84d60c3f99164a3c8' => 
     array (
       0 => 'vistas\\registrar_propuesta.tpl',
-      1 => 1558131761,
+      1 => 1558136175,
       2 => 'file',
     ),
   ),
@@ -109,7 +109,7 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
               </style>
          <div class="form-group">
-              <label class="col-md-4 control-label" for="monto">Monto</label>  
+              <label class="col-md-4 control-label" for="monto">Categoria</label>  
               <div class="col-md-4">
            <select name="catego" class="dis">
               <?php  $_smarty_tpl->tpl_vars['persona'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['persona']->_loop = false;
@@ -117,8 +117,8 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 foreach ($_from as $_smarty_tpl->tpl_vars['persona']->key => $_smarty_tpl->tpl_vars['persona']->value) {
 $_smarty_tpl->tpl_vars['persona']->_loop = true;
 ?>
-            <option value="<?php echo $_smarty_tpl->tpl_vars['persona']->value->getNombreP();?>
-"><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['persona']->value->getNombreP(), 'UTF-8');?>
+            <option value="<?php echo $_smarty_tpl->tpl_vars['persona']->value->getNombreH();?>
+"><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['persona']->value->getNombreH(), 'UTF-8');?>
 </option>
             <?php } ?>
           </select>

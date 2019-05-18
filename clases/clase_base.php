@@ -57,7 +57,7 @@ class ClaseBase{
     }
 
     public function obtenerPorNombreCat($nombre){
-        $sql="select * from categoria where NombreP='$nombre' ";
+        $sql="select * from categoria where NombreH='$nombre' ";
         $res=NULL;
         $resultado =$this->db->query($sql)   
             or die ("Fallo en la consulta categoria");
@@ -66,6 +66,7 @@ class ClaseBase{
         }
         return $res;
     }
+
     public function obtenerPorNombreProp($nombre){
         $sql="select * from $this->tabla where Nombre='$nombre' ";
         $res=NULL;
