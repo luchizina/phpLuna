@@ -194,8 +194,32 @@ function nuevaColaboracion($params=array()){
   //$_SESSION['usuario_id'];
 }
 
-function nuevaColaboracionCel($params=array()){
-  
+function nuevaColaboracionCel(){
+  $col = new Colaboracion();
+  $Usuario = new Usuario();
+  $propuesta = new Propuesta();
+  $Recompensa = new Recompensa();
+  $usu = $Usuario->obtenerPorNick(Session::get('usuario_nick'));
+  $prop=$propuesta->obtenerPorNombreProp($_POST["nombreP"]);
+  $col->setMonto($_POST["monto"]);
+  $col->setFecha(date("Y-m-d"));
+  $col->setUsuario($usu);
+  $col->setTituloPropuesta($prop);
+    if($col->agregar()){
+      array_push($usu->getPropuestasColabora(), $prop);
+      $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
+      $prop->actualizaMonto();
+      $msg = "que rica ñery te la jugaste";
+      $array = ["mensajito"=>$msg];
+      $arreglo=["status"=>"ok","message"=>[$array]];
+            echo json_encode($arreglo);
+    }else 
+    {
+      $msg = "mal ahí ñery";
+          $array = ["mensajito"=>$msg];
+          $arreglo=["status"=>"error","message"=>[$array]];
+          echo json_encode($arreglo);
+    }
 }
 
 function borrarCa($params=array()){
@@ -257,12 +281,6 @@ function traerPropuesta($params=array()){
    
    }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> a29cda55f1f8b09278891fb322e52a78007bf63a
-
 function favoritear($nombre, $nick){
   $propuesta = new Propuesta();
   $prop = $propuesta->obtenerPorNombreProp($nombre);
@@ -300,16 +318,22 @@ function comentar($nombre, $nick, $texto){
   if($c->comentar())
   {
     array_push($prop->getComentarios(), $c);
+      $msg = "Comentado compa";
+      $array = ["mensajito"=>$msg];
+      $arreglo=["status"=>"ok","message"=>[$array]];
+      echo json_encode($arreglo);
+  }
+  else
+  {
+    $msg = "No comentado compa";
+    $array = ["mensajito"=>$msg];
+    $arreglo=["status"=>"ok","message"=>[$array]];
+    echo json_encode($arreglo);
   }
 
 }
 
-<<<<<<< HEAD
+
 }
-=======
 
-
-
-
->>>>>>> a29cda55f1f8b09278891fb322e52a78007bf63a
 ?>
