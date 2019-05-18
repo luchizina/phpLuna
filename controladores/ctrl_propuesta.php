@@ -272,8 +272,6 @@ function borrarCa($params=array()){
 
 }       
 
-
-
 function traerPropuesta($params=array()){
 
   $prop = new Propuesta();
@@ -283,8 +281,6 @@ function traerPropuesta($params=array()){
       $nuevo = json_encode($arreglo);
       echo $nuevo;
 }
-
-
 
   function listadoCat($params=array()){
 
@@ -369,7 +365,7 @@ function desfavoritear($params=array()){
     }
     print("xD");
   }
-  //$this->redirect("propuesta","listado");
+  $this->redirect("propuesta","listado");
 }
 
 function comentar($nombre, $nick, $texto){
