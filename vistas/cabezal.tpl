@@ -16,13 +16,24 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-             <img src="img/logo2.png" alt="Smiley face" height="100"> 
+             <img src="img/logo2.png" alt="Luna" height="100"> 
           </div>
 
           <div id="navbar-collapse" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
               <li class="active"><a href="index.html">Inicio</a></li>
-              <li><a href="about.html">Propuestas</a></li>
+              <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Usuarios</a>
+                <ul class="dropdown-menu">
+                  <li><a href="/phpLuna/usuario/listado/">Listado</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Propuestas</a>
+                <ul class="dropdown-menu">
+                  <li><a href="/phpLuna/propuesta/listado/">Listado</a></li>
+                </ul>
+              </li>
                {if $usuLogNick == ""}
               <li class="probootstra-cta-button last"><a href="{$url_login}" class="btn btn-primary">INICIAR SESIÓN</a></li>
               <li class="probootstra-cta-button last"><a href="{$url_regis}" class="btn btn-primary">REGISTRARSE</a></li>
