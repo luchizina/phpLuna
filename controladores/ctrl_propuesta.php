@@ -81,29 +81,40 @@ function consolita( $data ) {
 
    function nuevo(){
 	$mensaje="";
+
 	if(isset($_POST["nombre"])){
+    $p = new Propuesta();
+    if($p->obtenerPorNombreProp($_POST["nombre"])==null){
     $usr = new Usuario();
 		$prop= new Propuesta();
+    $categ = new categoria();
 		$prop->setNombre($_POST["nombre"]);
 		$prop->setDescripcion($_POST["desc"]);
-    $fecha =  date("Y-m-d H:i:s");
-		$prop->setFechaPublicada('12/12/2019');
+    $fecha =  date("Y-m-d");
+		$prop->setFechaPublicada($fecha);
 		$prop->setMonto($_POST["monto"]);
+    $prop->setCategoria($categ->obtenerPorNombreCat($_POST["catego"]));
     $prop->setUsuario($usr->obtenerPorNick(Session::get('usuario_nick')));
 		$prop->setMontoActual(0);
-
-		if($prop->agregar()){
+		if($prop->agregarP()){
 			$this->redirect("propuesta","listado");
 			exit;
 		}else{
-			$mensaje="Error! No se pudo agregar el usuario";
+			$mensaje="Error! No se pudo agregar la propuesta";
 		}
+  }
+  else{
+    $mensaje = "Ya existe propuesta con este nombre ¿Qué tal si pruebas con otro nombre?";
+  }
 
 		
 	}
+  $categ = new categoria();
+  $categorias = $categ->getListado();
 	$tpl = Template::getInstance();
 	$tpl->asignar('titulo',"Nueva propuesta");
 	$tpl->asignar('buscar',"");
+  $tpl->asignar('categorias',$categorias);
 	$tpl->asignar('mensaje',$mensaje);
 	$tpl->mostrar('registrar_propuesta',array());
 
@@ -257,11 +268,6 @@ function traerPropuesta($params=array()){
    
    }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> a29cda55f1f8b09278891fb322e52a78007bf63a
 
 function favoritear($nombre, $nick){
   $propuesta = new Propuesta();
@@ -304,12 +310,6 @@ function comentar($nombre, $nick, $texto){
 
 }
 
-<<<<<<< HEAD
 }
-=======
 
-
-
-
->>>>>>> a29cda55f1f8b09278891fb322e52a78007bf63a
 ?>

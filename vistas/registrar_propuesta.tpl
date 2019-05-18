@@ -8,15 +8,14 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
+     {include file="cabezal.tpl"}
   </head>
   <body>
-    {include file="cabezal.tpl"}
+   <section class="probootstrap-hero" style="background-image: url(img/img_sq_3.jpg); height:100%"  data-stellar-background-ratio="0.1">
     <div class="container-fluid">
       <div class="row">
-     
-
         <div class="col-sm-12  col-md-12  main">
-          <h1 class="page-header">Propuesta</h1>
+        <br>
           <h2 class="sub-header">{$titulo}</h2>
           {if $mensaje!=""}
             <div class="alert alert-danger" role="alert">{$mensaje}</div>
@@ -55,14 +54,35 @@
               <input id="monto" name="monto" type="number" class="form-control input-md" required="">
               </div>
             </div>
-
-            <!-- Text input-->
-           <select name="catego" id="categoria">
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
-          </select> 
+              <style>
+.dis{  display: block;
+width: 100%;
+height: 34px;
+padding: 6px 12px;
+font-size: 14px;
+line-height: 1.42857143;
+color: #555;
+background-color: #fff;
+background-image: none;
+border: 1px solid #ccc;
+border-radius: 4px;
+-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; 
+}
+              </style>
+         <div class="form-group">
+              <label class="col-md-4 control-label" for="monto">Monto</label>  
+              <div class="col-md-4">
+           <select name="catego" class="dis">
+              {foreach from=$categorias item=persona}
+            <option value="{$persona->getNombreP()}">{$persona->getNombreP()|upper}</option>
+            {/foreach}
+          </select>
+           </div>
+            </div> 
            <!-- Text input-->
             <div class="form-group">
               <label class="col-md-4 control-label" for="ci">Recompensa</label>  
@@ -84,7 +104,7 @@
           </form>
       </div>
     </div>
-
+ </section>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

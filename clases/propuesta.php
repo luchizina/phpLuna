@@ -120,23 +120,21 @@ class Propuesta extends ClaseBase {
 		$this->favoritos = $favoritos;
 	}
 
- public function agregar(){
-      
+ public function agregarP(){
         $nombre=$this->getNombre();
         $Descripcion=$this->getDescripcion();
-     //   $FechaAgregada=$this->getFechaAgregada();
-        $FechaPublicada=$this->getFechaPublicada();
+       	$FechaPublicada=$this->getFechaPublicada();
         $Monto = $this->getMonto();
         $MontoActual=0;
-      $Usuario = $this->getUsuario()->getNick();
-       /* $Categoria = $this->getCategoria()->getNombreP();
-        $EstadoActual = $this->getEstadoActual()->getNombre();*/
+        $Usuario = $this->getUsuario()->getNick();
+       // $Categ = $this->getCategoria()->getNombreP();
+        //$EstadoActual = 0;//$this->getEstadoActual()->getNombre();
         $stmt = $this->getDB()->prepare( 
             "INSERT INTO propuesta 
-        (Nombre,Descripcion, FechaPublicada,Monto,MontoActual,NickUsuario) 
-           VALUES (?,?,?,?,?,?)" );
-        $stmt->bind_param("sssiis",$nombre,
-            $Descripcion,$FechaPublicada,$Monto,$MontoActual,$Usuario);
+        (Nombre,Descripcion, FechaPublicada,Monto,MontoActual,NickUsuario/*,Categoria,EstadoActual*/) 
+           VALUES (?,?,?,?,?,?/*,?,?*/)" );
+        $stmt->bind_param("sssiiss",$nombre,
+            $Descripcion,$FechaPublicada,$Monto,$MontoActual,$Usuario,$Categ/*,$EstadoActual*/);
         return $stmt->execute();
     }
 
@@ -146,15 +144,6 @@ class Propuesta extends ClaseBase {
 $stmt->bind_param("s",$nombre);
     return $stmt->execute();
     }
-
-
-
-
-
-    
-
-
-
 
 public function modificar()
    {
