@@ -66,7 +66,7 @@
                 <label for="archivo">Seleccionar imagen de perfil
 
                 <input  id="archivo" name="archivo" type="file" class="form-control" accept="image/*"> 
-                <img src="../img/logo.png">
+               
                 </label>
               </div>
               <div class="form-group">
