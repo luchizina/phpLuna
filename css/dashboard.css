@@ -6,7 +6,11 @@
 body {
   padding-top: 50px;
 }
-
+ h1{
+  color: #fff;
+text-transform: full-width;
+text-decoration: none;
+ }
 
 /*
  * Global add-ons
@@ -106,4 +110,10 @@ body {
 
 .tabla{
 box-shadow: 15px 5px 10px #000;
+}
+
+.scr{
+    overflow:scroll;
+     height:250px;
+     max-width:800px;
 }
