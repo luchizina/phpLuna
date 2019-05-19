@@ -267,7 +267,7 @@ public function agregar(){
         //$resultado = $stmt->get_result();
         $row_cnt = $stmt->num_rows;
         if($row_cnt > 0) {
-            return true;
+            return true; 
         }
     }
     

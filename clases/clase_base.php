@@ -79,6 +79,19 @@ class ClaseBase{
         return $res;
     }
 
+    public function com($prop){
+        $sql="select * from $this->tabla where TituloPropuesta = '$prop'";
+        $resultados=array();
+        $resultado =$this->db->query($sql)   
+            or die ("Fallo en la consulta");
+        while ( $fila = $resultado->fetch_object() )
+        {   
+            $objeto= new $this->modelo($fila);
+            $resultados[]=$objeto;
+        } 
+     return $resultados; 
+    }
+
     public function obtenerPorNombreProp($nombre){
         $sql="select * from $this->tabla where Nombre='$nombre' ";
         $res=NULL;

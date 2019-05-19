@@ -87,6 +87,15 @@ function listadoCel(){
        echo $listaProps;
 }
 
+function listComent($a = array()){
+  //$prop = $_GET['prop'];
+  $prop = $a[0];
+  $com = new Comentario();
+  $coms=$com->com($prop);
+  $arreglo=["status"=>"ok","message"=>$coms];
+  $listComs = json_encode($arreglo);
+  echo $listComs;
+}
 
 
 function consolita( $data ) {
