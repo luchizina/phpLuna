@@ -12,7 +12,7 @@ class Comentario extends ClaseBase {
             }    
         }
         $tabla="comentario";
-        parent::__construct($tabla);
+        parent::__construct($tabla); 
     }
 
     public function getId(){

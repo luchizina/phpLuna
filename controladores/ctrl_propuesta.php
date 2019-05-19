@@ -8,6 +8,7 @@ require "clases/listaestados.php";
 require "clases/recompensa.php";
 require "clases/usuario.php";
 require "clases/categoria.php";
+require "clases/comentario.php";
 require "clases/colaboracion.php";
 require_once('clases/template.php');
 require_once('clases/Utils.php');
@@ -86,6 +87,15 @@ function listadoCel(){
        echo $listaProps;
 }
 
+function listComent($a = array()){
+  //$prop = $_GET['prop'];
+  $prop = $a[0];
+  $com = new Comentario();
+  $coms=$com->com($prop);
+  $arreglo=["status"=>"ok","message"=>$coms];
+  $listComs = json_encode($arreglo);
+  echo $listComs;
+}
 
 
 function consolita( $data ) {

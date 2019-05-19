@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-18 04:20:03
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-19 15:58:14
          compiled from "vistas\usuarios_nuevo.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:51015cdf229d5eb389-53866930%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1c8ee8b714c2a77826cf3b8b4ca6f42cfcdb50bc' => 
     array (
       0 => 'vistas\\usuarios_nuevo.tpl',
-      1 => 1558145995,
+      1 => 1558230213,
       2 => 'file',
     ),
   ),
@@ -97,7 +97,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 <label for="archivo">Seleccionar imagen de perfil
 
                 <input  id="archivo" name="archivo" type="file" class="form-control" accept="image/*"> 
-                <img src="/img/logo.png">
+               
                 </label>
               </div>
               <div class="form-group">
