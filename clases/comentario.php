@@ -12,7 +12,7 @@ class Comentario extends ClaseBase {
             }    
         }
         $tabla="comentario";
-        parent::__construct($tabla);
+        parent::__construct($tabla); 
     }
 
     public function getId(){
@@ -39,17 +39,19 @@ class Comentario extends ClaseBase {
     	return $this->Propuesta;
     }
 
-    public function setPropuesta(){
+    public function setPropuesta($Propuesta){
     	$this->Propuesta=$Propuesta;
     }
 
     public function comentar(){
+        $texto = $this->getTexto();
+        $nomProp = $this->getPropuesta()->getNombre();
+        $nick = $this->getUsuario()->getNick();
         $stmt = $this->getDB()->prepare( 
             "INSERT INTO comentario 
         (Texto, NickUsuario, TituloPropuesta) 
            VALUES (?,?,?)" );
-        $stmt->bind_param("sss",$this->getTexto(),$this->getPropuesta()->getNombre(),
-            $this->getUsuario()->getNick());
+        $stmt->bind_param("sss",$texto,$nick,$nomProp);
         return $stmt->execute();
     }
 }

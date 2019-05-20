@@ -101,6 +101,14 @@ $b=["status"=>"ok","message"=>[$c]];
 $hola= json_encode($b);
 echo $hola;
 }
+
+function devuelveUsu($a = array()){
+  $usu = new Usuario();
+  $u = ["nick" => $usu->obtenerPorMail($a[0])->getNick()];
+  $b=["status"=>"ok","message"=>[$u]];
+  echo json_encode($b);
+}
+
 function nuevo(){
   $mensaje="";
   if(isset($_POST["nick"])){
