@@ -99,11 +99,11 @@ function listComent($a = array()){
 
 function borrComent($a = array()){
   $com = new Comentario();
-  $num = (int) $a[0];
-  if($com->borrar($num){
+  $num = (int)$a[0];
+  if($com->borrar($num)){
     $msg = "Comentario borrado";
     $array = ["mensajito"=>$msg];
-    $arreglo=["status"=>"error","message"=>[$array]];
+    $arreglo=["status"=>"ok","message"=>[$array]];
     echo json_encode($arreglo);
   } else {
     $msg = "No se ha podido borrar el comentario";
