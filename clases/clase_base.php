@@ -45,6 +45,17 @@ class ClaseBase{
         return $res;
     }
 
+    public function obtenerPorCorreo($correo){
+        $sql="select * from $this->tabla where id='$correo' ";
+        $res=NULL;
+        $resultado =$this->db->query($sql)   
+            or die ("Fallo en la consulta");
+         if($fila = $resultado->fetch_object()) {
+           $res= new $this->modelo($fila);
+        }
+        return $res;
+    }
+
     public function obtenerPorNick($nick){
         $sql="select * from $this->tabla where Nick='$nick' ";
         $res=NULL;
