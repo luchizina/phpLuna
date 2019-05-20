@@ -7,7 +7,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <link href="css/dashboard.css" rel="stylesheet">
-
+ <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -16,16 +16,16 @@
     
   </head>
 
-  <body style="background-image: url(img/img_sm_1.jpg)">
+  <body class="bg">
     {include file="cabezal.tpl"}
     <br>
     <br>
     <section class="probootstrap-hero"  data-stellar-background-ratio="0.1">
     <div class="container-fluid">
-      <div class="row " style="max-width: 800px; margin: 0 auto">
+      <div class="row " style="max-width: 1000px; margin: 0 auto">
        
-        <div class="col-sm-12  col-md-12  main">
-          <h1 class="page-header" >Propuestas</h1>
+        <div class="col-sm-12  col-md-12  main" >
+          <h1 class="page-header" style="color: #fff ; text-align: center;">Propuestas</h1>
           <br>
           <h2 class="sub-header" style="color: #fff">{$titulo} <button id="agregar" name="agregar" class="btn btn-success pull-right" onClick="window.location='{$registrar_propuesta}'">Agregar</button></h2>
 
@@ -33,7 +33,7 @@
             <div class="alert alert-danger" role="alert">{$mensaje}</div>
           {/if}
           <div class="table-responsive tabla scr">
-            <table class="table table-striped  " style=" background-color: #ecececb3">
+            <table class="table table-striped  " style=" background-color: #ececec;">
               <thead>
                 <tr>
                   <th>Nombre</th>
@@ -52,24 +52,31 @@
                    <td>{$prop->getMonto()}</td>
                     <td>{$prop->getFechaPublicada()}</td>
                     <td>
+                <a class="btn" href="{$url_base}propuesta/detalleProp/{$prop->getNombre()}/">
+                  <i class="icon-eye"></i></a>
                     
-                      <input type="button" value="Ver detalle" class="btn btn-success" onClick="window.location='{$url_base}propuesta/detalleProp/{$prop->getNombre()}/'"/>
-                       
                       {if $usuLogNick == $prop->getUsuario()}
 
-                        <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='{$url_base}propuesta/borrar/{$prop->getNombre()}/'"/>
-
-                       <input type="button" value="Modificar" id="modificar" class="btn btn-success" onClick="window.location='{$url_base}propuesta/modificar/{$prop->getNombre()}/'"/>
+                         <a class="btn" href="{$url_base}propuesta/borrar/{$prop->getNombre()}/">
+                         <i class="icon-trash"></i></a>
+                          <a class="btn" href="{$url_base}propuesta/modificar/{$prop->getNombre()}/">
+                         <i class="icon-edit"></i></a>
                        {/if}
 
                        {if $prop->isFavoriteada($usuLogNick)}
-                       <input type="button" value="Desfavoritear" id="desfavoritear" class="btn btn-danger" onClick="window.location='{$url_base}propuesta/desfavoritear/{$prop->getNombre()}/'"/>
-                       {/if}
-                       {if !$prop->isFavoriteada($usuLogNick)}
-                       <input type="button" value="Favoritear" id="Favoritear" class="btn btn-success" onClick="window.location='{$url_base}propuesta/favoritear/{$prop->getNombre()}/'"/>
-                       {/if}
-                      <input type="button" value="Colaborar" id="colaborar" class="btn btn-success" onClick="window.location='{$nueva_colaboracion}{$prop->getNombre()}/'"/>
+                        <a class="btn" href="{$url_base}propuesta/desfavoritear/{$prop->getNombre()}/">
+                         <i class="fa fa-star"></i></a>
                       
+                       {/if}
+
+                       {if !$prop->isFavoriteada($usuLogNick)}
+                        <a class="btn" href="{$url_base}propuesta/favoritear/{$prop->getNombre()}/">
+                         <i class="fa fa-star-o"></i></a>
+                       
+                       {/if}
+                        <a class="btn" href="{$nueva_colaboracion}{$prop->getNombre()}/">
+                         <i class="fa fa-dollar"></i></a>
+                     
                     </td>
                   </tr>
                 {/foreach}
