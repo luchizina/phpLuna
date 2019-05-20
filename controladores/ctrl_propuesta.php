@@ -141,6 +141,13 @@ function consolita( $data ) {
     $prop->setUsuario($usr->obtenerPorNick(Session::get('usuario_nick')));
 		$prop->setMontoActual(0);
     $prop->setEstadoActual(1);
+    $prop->setArchivo($_FILES['archivo']['tmp_name']);
+    $prop->setImagen($_FILES['archivo']['name']);
+    $prop->setTipo($_FILES['archivo']['type']);
+    $this->consolita($prop->getArchivo());
+    $this->consolita($prop->getImagen());
+    $this->consolita($prop->getTipo());
+
     $EstadoActual = 1;
       
 		if($prop->agregarP()){
@@ -364,6 +371,19 @@ function favoritear($params=array()){
   }
   $this->redirect("propuesta","listado");
 } 
+
+function detalleProp($params=array()){
+$propuesta = new Propuesta();
+$prop = $propuesta->obtenerPorNombreProp($params[0]);
+$imagen = $propuesta->traerImagen($prop->getNombre());
+    $tpl = Template::getInstance();
+    $prop->setImagen($imagen);
+   $tpl->asignar('propuesta', $prop);
+  $tpl->mostrar('propuestas_detalle',$prop);
+
+}
+
+
 
 function desfavoritear($params=array()){
   $propuesta = new Propuesta();

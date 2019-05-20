@@ -1,14 +1,47 @@
-<!DOCTYPE html>
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-20 09:48:55
+         compiled from "vistas\registrar_propuesta.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:15229421105ce21670b07ed2-45841880%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '01c181d3b7bf18d145777ee84d60c3f99164a3c8' => 
+    array (
+      0 => 'vistas\\registrar_propuesta.tpl',
+      1 => 1558356494,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '15229421105ce21670b07ed2-45841880',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5ce21670e9bd34_70450243',
+  'variables' => 
+  array (
+    'url_base' => 0,
+    'proyecto' => 0,
+    'titulo' => 0,
+    'mensaje' => 0,
+    'categorias' => 0,
+    'persona' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5ce21670e9bd34_70450243')) {function content_5ce21670e9bd34_70450243($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en">
   <head>
-    <base href="{$url_base}">
+    <base href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+">
     <meta charset="utf-8">    
-    <title>{$proyecto}</title>
+    <title><?php echo $_smarty_tpl->tpl_vars['proyecto']->value;?>
+</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
-     {include file="cabezal.tpl"}
+     <?php echo $_smarty_tpl->getSubTemplate ("cabezal.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
   </head>
   <body>
    <section class="probootstrap-hero" style="background-image: url(img/img_sq_3.jpg); height:100%"  data-stellar-background-ratio="0.1">
@@ -16,10 +49,12 @@
       <div class="row">
         <div class="col-sm-12  col-md-12  main">
         <br>
-          <h2 class="sub-header">{$titulo}</h2>
-          {if $mensaje!=""}
-            <div class="alert alert-danger" role="alert">{$mensaje}</div>
-          {/if}
+          <h2 class="sub-header"><?php echo $_smarty_tpl->tpl_vars['titulo']->value;?>
+</h2>
+          <?php if ($_smarty_tpl->tpl_vars['mensaje']->value!='') {?>
+            <div class="alert alert-danger" role="alert"><?php echo $_smarty_tpl->tpl_vars['mensaje']->value;?>
+</div>
+          <?php }?>
           <form class="form-horizontal" enctype="multipart/form-data" method="post">
             <fieldset>
             <!-- Text input-->
@@ -87,9 +122,15 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
               <label class="col-md-4 control-label" for="monto">Categoria</label>  
               <div class="col-md-4">
            <select name="catego" class="dis">
-              {foreach from=$categorias item=persona}
-            <option value="{$persona->getNombreH()}">{$persona->getNombreH()|upper}</option>
-            {/foreach}
+              <?php  $_smarty_tpl->tpl_vars['persona'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['persona']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['categorias']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['persona']->key => $_smarty_tpl->tpl_vars['persona']->value) {
+$_smarty_tpl->tpl_vars['persona']->_loop = true;
+?>
+            <option value="<?php echo $_smarty_tpl->tpl_vars['persona']->value->getNombreH();?>
+"><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['persona']->value->getNombreH(), 'UTF-8');?>
+</option>
+            <?php } ?>
           </select>
            </div>
             </div> 
@@ -118,12 +159,21 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
+    <?php echo '<script'; ?>
+ src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="../../dist/js/bootstrap.min.js"><?php echo '</script'; ?>
+>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-    <script src="../../assets/js/vendor/holder.js"></script>
+    <?php echo '<script'; ?>
+ src="../../assets/js/vendor/holder.js"><?php echo '</script'; ?>
+>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <?php echo '<script'; ?>
+ src="../../assets/js/ie10-viewport-bug-workaround.js"><?php echo '</script'; ?>
+>
   </body>
 </html>
 
+<?php }} ?>
