@@ -287,14 +287,13 @@ function nuevaColaboracionCel(){
   $Usuario = new Usuario();
   $propuesta = new Propuesta();
   $Recompensa = new Recompensa();
-  $usu = $Usuario->obtenerPorNick(Session::get('usuario_nick'));
-  $prop=$propuesta->obtenerPorNombreProp($_POST["nombreP"]);
+  $usu = $Usuario->obtenerPorMail($_POST['mail']);
+  $prop=$propuesta->obtenerPorNombreProp($_POST["nombre"]);
   $col->setMonto($_POST["monto"]);
   $col->setFecha(date("Y-m-d"));
   $col->setUsuario($usu);
   $col->setTituloPropuesta($prop);
     if($col->agregar()){
-      array_push($usu->getPropuestasColabora(), $prop);
       $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
       $prop->actualizaMonto();
       $msg = "que rica ñery te la jugaste";
