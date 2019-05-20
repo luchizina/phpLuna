@@ -20,7 +20,7 @@
           {if $mensaje!=""}
             <div class="alert alert-danger" role="alert">{$mensaje}</div>
           {/if}
-          <form class="form-horizontal" method="post">
+          <form class="form-horizontal" enctype="multipart/form-data" method="post">
             <fieldset>
             <!-- Text input-->
             <div class="form-group">
@@ -47,6 +47,16 @@
               </div>
             </div>
 
+              <div class="form-group">
+                 <div class="col-md-4">
+                <label for="archivo">Seleccionar imagen para propuesta
+
+                <input  id="archivo" name="archivo" type="file" class="form-control input-md" accept="image/*"> 
+
+               
+                </label>
+              </div>
+              </div>
              <!-- Text input-->
             <div class="form-group">
               <label class="col-md-4 control-label" for="monto">Monto</label>  

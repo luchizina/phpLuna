@@ -15,6 +15,9 @@ class Propuesta extends ClaseBase {
 	public $EstadoActual = null; //objetoEstado
 	public $Comentarios = array();
 	public $favoritos = array();
+	public $Imagen;
+    public $Archivo;
+    public $tipo;
 
 	public function __construct($obj=NULL) {
         if(isset($obj)){
@@ -25,6 +28,35 @@ class Propuesta extends ClaseBase {
         $tabla="propuesta";
         parent::__construct($tabla);
     }
+
+
+
+
+    public function getArchivo(){
+        return $this->Archivo;
+    }
+
+    public function setArchivo($Archivo){
+        $this->Archivo=$Archivo;
+    }
+
+    public function getTipo(){
+        return $this->tipo;
+    }
+
+    public function setTipo($tipo){
+        $this->tipo=$tipo;
+    }
+
+
+    public function getImagen(){
+    	return $this->Imagen;
+    }
+
+    public function setImagen($Imagen){
+    	$this->Imagen=$Imagen;
+    }
+
 
     public function getComentario(){
     	return $this->Comentarios;
@@ -149,15 +181,48 @@ class Propuesta extends ClaseBase {
         $MontoActual=0;
         $Usuario = $this->getUsuario()->getNick();
         $Categ = $this->getCategoria()->getNombreH();
+
+        $arch = $this->getArchivo();
+        $img = $this->getImagen();
+        $tip = $this->getTipo();
+        $permitidos = array("image/jpg", "image/jpeg", "image/png");
+        $target='';
+        if(in_array($tip, $permitidos)){
+            //$target = "imgUsus/".basename($img);
+            $extension=end(explode(".", $img));
+            //rename($target, $nick.".".$extension);
+            $target = "imgProps/".$nombre.".".$extension;
+        } else {
+            echo "El tipo de imagen es incorrecto";
+        }
+        $this->setImagen($target);
         
         $stmt = $this->getDB()->prepare( 
             "INSERT INTO propuesta 
-        (Nombre,Descripcion, FechaPublicada,Monto,MontoActual,NickUsuario,Categoria,EstadoActual) 
-           VALUES (?,?,?,?,?,?,?,?)" );
-        $stmt->bind_param("sssiissi",$nombre,
-            $Descripcion,$FechaPublicada,$Monto,$MontoActual,$Usuario,$Categ,$EstadoActual);
+        (Nombre,Descripcion, FechaPublicada,Monto,MontoActual,NickUsuario,Categoria,EstadoActual,Imagen) 
+           VALUES (?,?,?,?,?,?,?,?,?)" );
+        $stmt->bind_param("sssiissis",$nombre,
+            $Descripcion,$FechaPublicada,$Monto,$MontoActual,$Usuario,$Categ,$EstadoActual,$target);
+           if($target != ''){
+        move_uploaded_file($arch, $target);
+    }
         return $stmt->execute();
     }
+
+
+
+public function traerImagen($nombre){
+ $stmt = $this->getDB()->prepare("SELECT Imagen FROM propuesta WHERE Nombre=?");
+$stmt->bind_param("s",$nombre);
+     $stmt->execute();
+       $resultado = $stmt->get_result();
+       $fila=$resultado->fetch_object();
+        //header("Content-type: image/jpg");
+       return ($fila->Imagen);
+}
+
+
+
 
  public function borrarProp($nombre){
 
