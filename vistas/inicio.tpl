@@ -18,14 +18,16 @@
     <![endif]-->
   </head>
   <body>
-    {include file="cabezal.tpl"}          
+    {include file="cabezal.tpl"}  
+    <br>
+    <br>
+    <br>        
       <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg)"  data-stellar-background-ratio="0.5">
         <div class="container">
-
           <div class="row">
             <div class="col-md-12">
               <div class="probootstrap-slider-text probootstrap-animate" data-animate-effect="fadeIn">
-                <h1 class="probootstrap-heading probootstrap-animate">un pequeño cambio en tu bolsillo<span>un gran sueño hecho realidad</span></h1>
+                <h1 class="probootstrap-heading probootstrap-animate">Pequeña ayuda<span>GRAN CAUSA...</span></h1>
                 <p class="probootstrap-animate"><a href="#" class="btn btn-primary btn-lg">Saber más</a></p>
               </div>
             </div>
@@ -69,7 +71,7 @@
         </div>
       </section>
 
-      <section class="probootstrap-section">
+    <!--  <section class="probootstrap-section">
         <div class="container">
           <div class="row">
             <div class="col-md-12 text-center section-heading probootstrap-animate" data-animate-effect="fadeIn">
@@ -390,11 +392,12 @@
             </div>
            
           </div>
-          <!-- END row -->
+        
           
         </div>
 
       </footer>
+       -->
 
     <script src="js/scripts.min.js"></script>
     <script src="js/main.min.js"></script>

@@ -402,6 +402,7 @@ $imagen = $propuesta->traerImagen($prop->getNombre());
 
 
 
+
 function desfavoritear($params=array()){
   $propuesta = new Propuesta();
   $prop = $propuesta->obtenerPorNombreProp($params[0]);
@@ -431,6 +432,7 @@ function desfavoritear($params=array()){
   $this->redirect("propuesta","listado");
 }
 
+
 function comentar(){
   $propuesta = new Propuesta();
   $prop = $propuesta->obtenerPorNombreProp($_POST['nombre']); 
@@ -455,6 +457,8 @@ function comentar(){
     echo json_encode($arreglo);
   }
 }
+
+
 }
 
 ?>
