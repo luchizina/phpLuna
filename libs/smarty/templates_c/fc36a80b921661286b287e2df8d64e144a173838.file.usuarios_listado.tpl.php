@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-18 04:33:41
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-20 00:39:32
          compiled from "vistas\usuarios_listado.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:62855cdf6f0555ffe9-33966691%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:61905ce1db24482a42-49205864%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'fc36a80b921661286b287e2df8d64e144a173838' => 
     array (
       0 => 'vistas\\usuarios_listado.tpl',
-      1 => 1557795259,
+      1 => 1558286144,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '62855cdf6f0555ffe9-33966691',
+  'nocache_hash' => '61905ce1db24482a42-49205864',
   'function' => 
   array (
   ),
@@ -27,9 +27,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cdf6f058439b0_29554710',
+  'unifunc' => 'content_5ce1db24b5dce3_89551321',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cdf6f058439b0_29554710')) {function content_5cdf6f058439b0_29554710($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_5ce1db24b5dce3_89551321')) {function content_5ce1db24b5dce3_89551321($_smarty_tpl) {?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -105,9 +105,11 @@ $_smarty_tpl->tpl_vars['persona']->_loop = true;
 </td>
                     <td>
                       <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-usuario/listado/borrar/<?php echo $_smarty_tpl->tpl_vars['persona']->value->getId();?>
+usuario/listado/borrar/<?php echo $_smarty_tpl->tpl_vars['persona']->value->getNick();?>
 /'"/>
-                     
+                      <input type="button" value="Modificar" class="btn btn-success" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+usuario/modificar/<?php echo $_smarty_tpl->tpl_vars['persona']->value->getNick();?>
+/'"/>
                     <!--  <input type="button" value="Favoritos" class="btn btn-submit" onClick="cargarFavoritos();"/>-->
                     </td>
                   </tr>

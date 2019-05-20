@@ -1,22 +1,20 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-17 23:48:47
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-19 19:36:52
          compiled from "vistas\propuestas_listado.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:104225cdf6c8750c623-68670488%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:241125ce1da8486e788-42183103%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'cb7e98352ffa98b3b2a857e00efc671b603776e0' => 
     array (
       0 => 'vistas\\propuestas_listado.tpl',
-      1 => 1558147517,
+      1 => 1558286144,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '104225cdf6c8750c623-68670488',
+  'nocache_hash' => '241125ce1da8486e788-42183103',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cdf6c87a70ad9_44522526',
   'variables' => 
   array (
     'url_base' => 0,
@@ -29,8 +27,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'nueva_colaboracion' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5ce1da86e138e7_29892051',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cdf6c87a70ad9_44522526')) {function content_5cdf6c87a70ad9_44522526($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_5ce1da86e138e7_29892051')) {function content_5ce1da86e138e7_29892051($_smarty_tpl) {?>
 <!DOCTYPE html>
 <html lang="es" >
   <head>
@@ -65,7 +65,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       <div class="row " style="max-width: 800px; margin: 0 auto">
        
         <div class="col-sm-12  col-md-12  main">
-          <h1 class="page-header" style="color: #fff margin-left: 30%;">Propuestas</h1>
+          <h1 class="page-header" >Propuestas</h1>
           <br>
           <h2 class="sub-header" style="color: #fff"><?php echo $_smarty_tpl->tpl_vars['titulo']->value;?>
  <button id="agregar" name="agregar" class="btn btn-success pull-right" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['registrar_propuesta']->value;?>
@@ -115,6 +115,16 @@ propuesta/modificar/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre(
 /'"/>
                        <?php }?>
 
+                       <?php if ($_smarty_tpl->tpl_vars['prop']->value->isFavoriteada($_smarty_tpl->tpl_vars['usuLogNick']->value)) {?>
+                       <input type="button" value="Desfavoritear" id="desfavoritear" class="btn btn-danger" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/desfavoritear/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
+/'"/>
+                       <?php }?>
+                       <?php if (!$_smarty_tpl->tpl_vars['prop']->value->isFavoriteada($_smarty_tpl->tpl_vars['usuLogNick']->value)) {?>
+                       <input type="button" value="Favoritear" id="Favoritear" class="btn btn-success" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/favoritear/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
+/'"/>
+                       <?php }?>
                       <input type="button" value="Colaborar" id="colaborar" class="btn btn-success" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['nueva_colaboracion']->value;
 echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
 /'"/>

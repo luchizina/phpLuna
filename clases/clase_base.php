@@ -48,11 +48,19 @@ class ClaseBase{
     public function obtenerPorNick($nick){
         $sql="select * from $this->tabla where Nick='$nick' ";
         $res=NULL;
-        $resultado =$this->db->query($sql)   
-            or die ("Fallo en la consulta usuario");
+        $resultado =$this->db->query($sql)
+        or die ("Fallo en la consulta usuario");
+     /*   $sql2="select * from propuesta where Nombre = (SELECT propuesta from favorito where usuario ='$nick')";
+        $resultado2 = $this->db->query($sql2)
+$resultados = array();
+        while($fila2 = $resultado2->fetch_object())
+        {
+            $objeto = new propuesta();
+            $resultados[]=$objeto;
+        } */
          if($fila = $resultado->fetch_object()) {
            $res= new $this->modelo($fila);
-        }
+            }
         return $res;
     }
 

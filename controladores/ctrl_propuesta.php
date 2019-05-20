@@ -74,6 +74,20 @@ class ControladorPropuesta extends ControladorIndex {
    }
 
 
+
+function listadoCel(){
+
+
+  $prop = new Propuesta();
+  $propuestas=$prop->getListado();
+   $arreglo=["status"=>"ok","message"=>$propuestas];
+       //$this->consolita($usuarios[0]->getNombre());
+       $listaProps = json_encode($arreglo);
+       echo $listaProps;
+}
+
+
+
 function consolita( $data ) {
     $output = $data;
     if ( is_array( $output ) )
@@ -214,14 +228,36 @@ function nuevaColaboracion($params=array()){
   $tpl->asignar('mensaje',$mensaje);
   $tpl->asignar('propuesta',$prop);
   $tpl->asignar('usuario',$usu);
-  //$tpl->asignar('recompensa',$rec);
   $tpl->asignar('recompensas',$recs);
   $tpl->mostrar('nueva_colaboracion',array());
-  //$_SESSION['usuario_id'];
 }
 
-function nuevaColaboracionCel($params=array()){
-  
+function nuevaColaboracionCel(){
+  $col = new Colaboracion();
+  $Usuario = new Usuario();
+  $propuesta = new Propuesta();
+  $Recompensa = new Recompensa();
+  $usu = $Usuario->obtenerPorNick(Session::get('usuario_nick'));
+  $prop=$propuesta->obtenerPorNombreProp($_POST["nombreP"]);
+  $col->setMonto($_POST["monto"]);
+  $col->setFecha(date("Y-m-d"));
+  $col->setUsuario($usu);
+  $col->setTituloPropuesta($prop);
+    if($col->agregar()){
+      array_push($usu->getPropuestasColabora(), $prop);
+      $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
+      $prop->actualizaMonto();
+      $msg = "que rica ñery te la jugaste";
+      $array = ["mensajito"=>$msg];
+      $arreglo=["status"=>"ok","message"=>[$array]];
+            echo json_encode($arreglo);
+    }else 
+    {
+      $msg = "mal ahí ñery";
+          $array = ["mensajito"=>$msg];
+          $arreglo=["status"=>"error","message"=>[$array]];
+          echo json_encode($arreglo);
+    }
 }
 
 function borrarCa($params=array()){
@@ -236,8 +272,6 @@ function borrarCa($params=array()){
 
 }       
 
-
-
 function traerPropuesta($params=array()){
 
   $prop = new Propuesta();
@@ -247,8 +281,6 @@ function traerPropuesta($params=array()){
       $nuevo = json_encode($arreglo);
       echo $nuevo;
 }
-
-
 
   function listadoCat($params=array()){
 
@@ -283,30 +315,57 @@ function traerPropuesta($params=array()){
    
    }
 
+function consolita2( $data ) {
+    $output = $data;
+    if ( is_array( $output ) )
+        $output = implode( ',', $output);
+    echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
+}
 
-function favoritear($nombre, $nick){
+function favoritear($params=array()){
   $propuesta = new Propuesta();
-  $prop = $propuesta->obtenerPorNombreProp($nombre);
+  $prop = $propuesta->obtenerPorNombreProp($params[0]);
   $usuario = new Usuario();
-  $u = $usuario->obtenerPorNick($nick);
-  if($prop->favoritear($nombre,$nick))
+  $u = $usuario->obtenerPorNick(Session::get('usuario_nick'));
+  if($prop->favoritear($params[0],Session::get('usuario_nick')))
   {
-    array_push($u->getFavoritos(), $prop);
-    array_push($prop->getFavoritos, $u);
+    $array = $u->getFavoritos();
+    $array2 = $prop->getFavoritos();
+    array_push($array, $prop);
+    array_push($array2, $u);
+    $u->setFavoritos($array);
+    $prop->setFavoritos($array2);
   }
-
+  $this->redirect("propuesta","listado");
 } 
 
-function desfavoritear($nombre, $nick){
+function desfavoritear($params=array()){
   $propuesta = new Propuesta();
-  $prop = $propuesta->obtenerPorNombreProp($nombre);
+  $prop = $propuesta->obtenerPorNombreProp($params[0]);
   $usuario = new Usuario();
-  $u = $usuario->obtenerPorNick($nick);
-  if($prop->desfavoritear($nombre,$nick))
+  $u = $usuario->obtenerPorNick(Session::get('usuario_nick'));
+  
+  if($prop->desfavoritear($params[0],Session::get('usuario_nick')))
   {
-    $prop->setFavoritos(array_diff($prop->getFavoritos(), array($u)));
-    $u->setFavoritos(array_diff($u->getFavoritos(), array($prop)));
+    
+    $key = array_search($u, $prop->getFavoritos());
+    print($key);
+    if($key !== false)
+    {
+      print($key);
+       consolita2($key); 
+      unset($prop->getFavoritos()[$key]);
+    }
+    $key2 = array_search($prop, $u->getFavoritos());
+    if($key2 !== false)
+    {
+      print($key2);
+      consolita2($key2); 
+      unset($u->getFavoritos[$key2]);
+    }
+    print("xD");
   }
+  $this->redirect("propuesta","listado");
 }
 
 function comentar($nombre, $nick, $texto){
@@ -321,10 +380,20 @@ function comentar($nombre, $nick, $texto){
   if($c->comentar())
   {
     array_push($prop->getComentarios(), $c);
+      $msg = "Comentado compa";
+      $array = ["mensajito"=>$msg];
+      $arreglo=["status"=>"ok","message"=>[$array]];
+      echo json_encode($arreglo);
+  }
+  else
+  {
+    $msg = "No comentado compa";
+    $array = ["mensajito"=>$msg];
+    $arreglo=["status"=>"ok","message"=>[$array]];
+    echo json_encode($arreglo);
   }
 
 }
-
 }
 
 ?>

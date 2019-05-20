@@ -60,6 +60,12 @@
                        <input type="button" value="Modificar" id="modificar" class="btn btn-success" onClick="window.location='{$url_base}propuesta/modificar/{$prop->getNombre()}/'"/>
                        {/if}
 
+                       {if $prop->isFavoriteada($usuLogNick)}
+                       <input type="button" value="Desfavoritear" id="desfavoritear" class="btn btn-danger" onClick="window.location='{$url_base}propuesta/desfavoritear/{$prop->getNombre()}/'"/>
+                       {/if}
+                       {if !$prop->isFavoriteada($usuLogNick)}
+                       <input type="button" value="Favoritear" id="Favoritear" class="btn btn-success" onClick="window.location='{$url_base}propuesta/favoritear/{$prop->getNombre()}/'"/>
+                       {/if}
                       <input type="button" value="Colaborar" id="colaborar" class="btn btn-success" onClick="window.location='{$nueva_colaboracion}{$prop->getNombre()}/'"/>
                       
                     </td>

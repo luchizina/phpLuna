@@ -122,6 +122,25 @@ class Propuesta extends ClaseBase {
 		$this->favoritos = $favoritos;
 	}
 
+	public function isFavoriteada($nick){
+        $stmt = $this->getDB()->prepare( 
+            "SELECT * FROM favorito
+            WHERE propuesta =? AND usuario =? " );
+        $nombre = $this->getNombre();
+        $stmt->bind_param("ss", $nombre, $nick);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->fetch();
+        $resultadito = $stmt->num_rows;
+        if($resultadito != 0)
+		{
+			return true;
+        }
+        else
+        {
+        	return false;
+        }
+	}
  public function agregarP(){
         $nombre=$this->getNombre();
         $Descripcion=$this->getDescripcion();
