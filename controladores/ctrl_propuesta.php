@@ -103,7 +103,7 @@ function borrComent($a = array()){
   if($com->borrar($num)){
     $msg = "Comentario borrado";
     $array = ["mensajito"=>$msg];
-    $arreglo=["status"=>"error","message"=>[$array]];
+    $arreglo=["status"=>"ok","message"=>[$array]];
     echo json_encode($arreglo);
   } else {
     $msg = "No se ha podido borrar el comentario";
