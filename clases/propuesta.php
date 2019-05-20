@@ -182,37 +182,21 @@ class Propuesta extends ClaseBase {
         $Usuario = $this->getUsuario()->getNick();
         $Categ = $this->getCategoria()->getNombreH();
 
-        $arch = $this->getArchivo();
-        $img = $this->getImagen();
-        $tip = $this->getTipo();
-        $permitidos = array("image/jpg", "image/jpeg", "image/png");
-        $target='';
-        if(in_array($tip, $permitidos)){
-            //$target = "imgUsus/".basename($img);
-            $extension=end(explode(".", $img));
-            //rename($target, $nick.".".$extension);
-            $target = "imgProps/".$nombre.".".$extension;
-        } else {
-            echo "El tipo de imagen es incorrecto";
-        }
-        $this->setImagen($target);
         
         $stmt = $this->getDB()->prepare( 
             "INSERT INTO propuesta 
-        (Nombre,Descripcion, FechaPublicada,Monto,MontoActual,NickUsuario,Categoria,EstadoActual,Imagen) 
-           VALUES (?,?,?,?,?,?,?,?,?)" );
-        $stmt->bind_param("sssiissis",$nombre,
-            $Descripcion,$FechaPublicada,$Monto,$MontoActual,$Usuario,$Categ,$EstadoActual,$target);
-           if($target != ''){
-        move_uploaded_file($arch, $target);
-    }
+        (Nombre,Descripcion, FechaPublicada,Monto,MontoActual,NickUsuario,Categoria,EstadoActual) 
+           VALUES (?,?,?,?,?,?,?,?)" );
+        $stmt->bind_param("sssiissi",$nombre,
+            $Descripcion,$FechaPublicada,$Monto,$MontoActual,$Usuario,$Categ,$EstadoActual);
+
         return $stmt->execute();
     }
 
 
 
 public function traerImagen($nombre){
- $stmt = $this->getDB()->prepare("SELECT Imagen FROM propuesta WHERE Nombre=?");
+ $stmt = $this->getDB()->prepare("SELECT Imagen FROM imagen WHERE TituloPropuesta=?");
 $stmt->bind_param("s",$nombre);
      $stmt->execute();
        $resultado = $stmt->get_result();
@@ -222,7 +206,13 @@ $stmt->bind_param("s",$nombre);
 }
 
 
-
+public function insertarImagen($nombre,$path){
+ $stmt = $this->getDB()->prepare("INSERT INTO imagen (Imagen,TituloPropuesta) VALUES (?,?)" );
+ echo $path;
+ echo $nombre;
+      $stmt->bind_param("ss",$path,$nombre);
+        return $stmt->execute();
+}
 
  public function borrarProp($nombre){
 
@@ -230,6 +220,8 @@ $stmt->bind_param("s",$nombre);
 $stmt->bind_param("s",$nombre);
     return $stmt->execute();
     }
+
+
 
 public function modificar()
    {

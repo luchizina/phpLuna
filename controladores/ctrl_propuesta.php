@@ -141,16 +141,33 @@ function consolita( $data ) {
     $prop->setUsuario($usr->obtenerPorNick(Session::get('usuario_nick')));
 		$prop->setMontoActual(0);
     $prop->setEstadoActual(1);
-    $prop->setArchivo($_FILES['archivo']['tmp_name']);
-    $prop->setImagen($_FILES['archivo']['name']);
-    $prop->setTipo($_FILES['archivo']['type']);
-    $this->consolita($prop->getArchivo());
-    $this->consolita($prop->getImagen());
-    $this->consolita($prop->getTipo());
+
+    $arch =($_FILES['archivo']['tmp_name']);
+    $img =($_FILES['archivo']['name']);
+    $tipo = ($_FILES['archivo']['type']);
+
+     $permitidos = array("image/jpg", "image/jpeg", "image/png");
+        $target='';
+        if(in_array($tipo, $permitidos)){
+            //$target = "imgUsus/".basename($img);
+            $extension=end(explode(".", $img));
+            //rename($target, $nick.".".$extension);
+            $target = "imgProps/".$prop->getNombre().".".$extension;
+        } else {
+            echo "El tipo de imagen es incorrecto";
+        }
+            if($target != ''){
+            
+     
+        move_uploaded_file($arch, $target);
+    }
+        $prop->setImagen($target);
+
 
     $EstadoActual = 1;
       
 		if($prop->agregarP()){
+         $prop->insertarImagen($prop->getNombre(),$target);
         $listEstado = new listaestados();
         $listEstado->setEstado(1);
         $listEstado->setPropuesta($prop->getNombre());
