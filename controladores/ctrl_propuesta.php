@@ -394,31 +394,29 @@ function desfavoritear($params=array()){
   $this->redirect("propuesta","listado");
 }
 
-function comentar($nombre, $nick, $texto){
+function comentar(){
   $propuesta = new Propuesta();
-  $prop = $propuesta->obtenerPorNombreProp($nombre);
+  $prop = $propuesta->obtenerPorNombreProp($_POST['nombre']); 
   $usuario = new Usuario();
-  $u = $usuario->obtenerPorNick($nick);
+  $u = $usuario->obtenerPorMail($_POST['mail']);
   $c = new Comentario();
   $c->setUsuario($u);
   $c->setPropuesta($prop);
-  $c->setTexto($texto);
+  $c->setTexto($_POST['texto']);
   if($c->comentar())
   {
-    array_push($prop->getComentarios(), $c);
-      $msg = "Comentado compa";
-      $array = ["mensajito"=>$msg];
+      $msg = "Bien";
+      $array = ["mens"=>$msg];
       $arreglo=["status"=>"ok","message"=>[$array]];
       echo json_encode($arreglo);
   }
   else
   {
-    $msg = "No comentado compa";
-    $array = ["mensajito"=>$msg];
-    $arreglo=["status"=>"ok","message"=>[$array]];
+    $msg = "mal";
+      $array = ["mens"=>$msg];
+      $arreglo=["status"=>"error","message"=>[$array]];
     echo json_encode($arreglo);
   }
-
 }
 }
 

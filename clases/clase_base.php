@@ -45,14 +45,16 @@ class ClaseBase{
         return $res;
     }
 
-    public function obtenerPorCorreo($correo){
-        $sql="select * from $this->tabla where id='$correo' ";
+
+    public function obtenerPorMail($mail)
+    {
+        $sql="select * from $this->tabla where Correo='$mail' ";
         $res=NULL;
-        $resultado =$this->db->query($sql)   
-            or die ("Fallo en la consulta");
-         if($fila = $resultado->fetch_object()) {
+        $resultado =$this->db->query($sql)
+        or die ("Fallo en la consulta usuario");
+        if($fila = $resultado->fetch_object()) {
            $res= new $this->modelo($fila);
-        }
+            }
         return $res;
     }
 
@@ -61,14 +63,6 @@ class ClaseBase{
         $res=NULL;
         $resultado =$this->db->query($sql)
         or die ("Fallo en la consulta usuario");
-     /*   $sql2="select * from propuesta where Nombre = (SELECT propuesta from favorito where usuario ='$nick')";
-        $resultado2 = $this->db->query($sql2)
-$resultados = array();
-        while($fila2 = $resultado2->fetch_object())
-        {
-            $objeto = new propuesta();
-            $resultados[]=$objeto;
-        } */
          if($fila = $resultado->fetch_object()) {
            $res= new $this->modelo($fila);
             }
