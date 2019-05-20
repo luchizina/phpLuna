@@ -2,7 +2,7 @@
 class Imagen extends ClaseBase {
 	public $id=0;
 	public $Imagen=null;
-	public $Propuesta = null; //Objeto propuesta
+	public $TituloPropuesta = null; //Objeto propuesta
 
 	public function __construct($obj=NULL) {
         if(isset($obj)){
@@ -26,12 +26,12 @@ class Imagen extends ClaseBase {
     	$this->Imagen=$Imagen;
     }
 
-    public function getPropuesta(){
-    	return $this->Propuesta;
+    public function getTituloPropuesta(){
+    	return $this->TituloPropuesta;
     }
 
-    public function setPropuesta($Propuesta){
-    	$this->Propuesta=$Propuesta;
+    public function setTituloPropuesta($Propuesta){
+    	$this->TituloPropuesta=$Propuesta;
     }
 }
  ?>
