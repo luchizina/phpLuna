@@ -45,6 +45,7 @@ class ClaseBase{
         return $res;
     }
 
+
     public function obtenerPorMail($mail)
     {
         $sql="select * from $this->tabla where Correo='$mail' ";
