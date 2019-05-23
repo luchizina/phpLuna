@@ -287,14 +287,13 @@ function nuevaColaboracionCel(){
   $Usuario = new Usuario();
   $propuesta = new Propuesta();
   $Recompensa = new Recompensa();
-  $usu = $Usuario->obtenerPorNick(Session::get('usuario_nick'));
-  $prop=$propuesta->obtenerPorNombreProp($_POST["nombreP"]);
+  $usu = $Usuario->obtenerPorMail($_POST['mail']);
+  $prop=$propuesta->obtenerPorNombreProp($_POST["nombre"]);
   $col->setMonto($_POST["monto"]);
   $col->setFecha(date("Y-m-d"));
   $col->setUsuario($usu);
   $col->setTituloPropuesta($prop);
     if($col->agregar()){
-      array_push($usu->getPropuestasColabora(), $prop);
       $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
       $prop->actualizaMonto();
       $msg = "que rica ñery te la jugaste";
@@ -402,6 +401,7 @@ $imagen = $propuesta->traerImagen($prop->getNombre());
 
 
 
+
 function desfavoritear($params=array()){
   $propuesta = new Propuesta();
   $prop = $propuesta->obtenerPorNombreProp($params[0]);
@@ -431,6 +431,7 @@ function desfavoritear($params=array()){
   $this->redirect("propuesta","listado");
 }
 
+
 function comentar(){
   $propuesta = new Propuesta();
   $prop = $propuesta->obtenerPorNombreProp($_POST['nombre']); 
@@ -455,6 +456,8 @@ function comentar(){
     echo json_encode($arreglo);
   }
 }
+
+
 }
 
 ?>

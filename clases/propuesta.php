@@ -193,7 +193,12 @@ class Propuesta extends ClaseBase {
         return $stmt->execute();
     }
 
-
+public function calc(){
+  $moT = $this->getMonto();
+  $moA = $this->getMontoActual();
+  $toT= ($moT * $moA)/100;
+   return ($toT);
+}
 
 public function traerImagen($nombre){
  $stmt = $this->getDB()->prepare("SELECT Imagen FROM imagen WHERE TituloPropuesta=?");

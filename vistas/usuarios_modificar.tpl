@@ -14,10 +14,11 @@
   <body >
 
     {include file="cabezal.tpl"}
+    
     <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg); height:100%"  data-stellar-background-ratio="0.1">
         <div class="container">
           <div class="row">
-            <div class="col-md-12" >
+            <div class="col-sm-12  col-md-12  main">
               <div class="probootstrap-slider-text probootstrap-animate" data-animate-effect="fadeIn">
                 <h1 class="probootstrap-heading probootstrap-animate">Modificar Usuario</h1>
               </div>
@@ -25,10 +26,11 @@
           </div>
         </div>
 
-      <section class="probootstrap-section">
-        <div class="container">
-          <div class="row">
-          <div class="col-md-5 probootstrap-animate" style="color: white; font-family: Montserrat,Arial,sans-serif" >
+      <section class="probootstrap-section" >
+        <div class="container" >
+          <div class="row" style="margin: 0 auto">
+
+          <div class="col-md-5 probootstrap-animate mx-auto" style="margin: auto 0; color: white; font-family: Montserrat,Arial,sans-serif "  >
             <form method="post" class="probootstrap-form">
               <div class="form-group">
                 <label for="Nombre">Nombre</label>
