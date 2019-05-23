@@ -19,7 +19,7 @@
           <div class="row">
             <div class="col-md-12" >
               <div class="probootstrap-slider-text probootstrap-animate" data-animate-effect="fadeIn">
-                <h1 class="probootstrap-heading probootstrap-animate">Ver Propuesta</h1>
+                <h1 class="probootstrap-heading probootstrap-animate">¡Hola {$usuario->getNombre()}! Este es tu perfil.</h1>
               </div>
             </div>
           </div>
@@ -31,29 +31,29 @@
           <div class="col-md-5 probootstrap-animate" style="color: white; font-family: Montserrat,Arial,sans-serif" >
             <form method="post" class="probootstrap-form">
               <div class="form-group">
-                <label for="Nombre">{$propuesta->getNombre()}</label>
+                <label for="Nombre">{$usuario->getNombre()}</label>
                
               </div>
               <div class="form-group">
-                <label for="Descripción">{$propuesta->getDescripcion()}</label>
+                <label for="Descripción">{$usuario->getApellido()}</label>
               
               </div>
 
               <div class="form-group">
-                <label for="celular">{$propuesta->getMonto()}</label>
+                <label for="celular">{$usuario->getNick()}</label>
                
               </div>
                <div class="form-group">
-                <label for="fecha_pub">{$propuesta->getFechaPublicada()}</label>
+                <label for="fecha_pub">{$usuario->getCorreo()}</label>
                 
               </div>
                 <div class="form-group">
-                <img src="./{$propuesta->getImagen()}" />
+                <img src="./{$usuario->getImagen()}" />
                 
               </div>
 
               <div class="form-group">
-                <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" value="MODIFICAR">
+              
               </div>
             </form>
           </div>

@@ -294,5 +294,23 @@ public function nuevoUsuCel(){
     }
    // echo json_encode($json_registration);
 }
+
+
+function verPerfil($params=array()){
+$usuario = new Usuario();
+$usu = $usuario->obtenerPorNick($params[0]);
+$imagen = $usuario->traerImagen($usu->getNick());
+    $tpl = Template::getInstance();
+    $usu->setImagen($imagen);
+   $tpl->asignar('usuario', $usu);
+  $tpl->mostrar('usuario_perfil',$usu);
+
+}
+
+
+
+
+
+
 }
 ?>
