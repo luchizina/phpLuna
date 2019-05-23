@@ -1,30 +1,32 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-20 11:11:09
-         compiled from "vistas\propuestas_modificar.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:298445ce2b57d12ee14-19848391%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-20 11:50:22
+         compiled from "vistas\nueva_colaboracion.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:16631203925ce2beae357b98-44970336%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '47c26a9960d7deb1884814d3bbd5b5a1610d84aa' => 
+    'bd8d4aeb4edb11e2b85b54ed7f61b912892d7854' => 
     array (
-      0 => 'vistas\\propuestas_modificar.tpl',
-      1 => 1558040242,
+      0 => 'vistas\\nueva_colaboracion.tpl',
+      1 => 1557872876,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '298445ce2b57d12ee14-19848391',
+  'nocache_hash' => '16631203925ce2beae357b98-44970336',
   'function' => 
   array (
   ),
   'variables' => 
   array (
     'url_base' => 0,
-    'propuesta' => 0,
+    'recompensas' => 0,
+    'rec' => 0,
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5ce2b57d2b5446_46460371',
+  'unifunc' => 'content_5ce2beae4e9c87_90793087',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5ce2b57d2b5446_46460371')) {function content_5ce2b57d2b5446_46460371($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5ce2beae4e9c87_90793087')) {function content_5ce2beae4e9c87_90793087($_smarty_tpl) {?>
+<!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -51,7 +53,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
           <div class="row">
             <div class="col-md-12" >
               <div class="probootstrap-slider-text probootstrap-animate" data-animate-effect="fadeIn">
-                <h1 class="probootstrap-heading probootstrap-animate">Modificar Propuesta</h1>
+                <h1 class="probootstrap-heading probootstrap-animate">Agregar Colaboracion</h1>
               </div>
             </div>
           </div>
@@ -63,28 +65,25 @@ $_valid = $_smarty_tpl->decodeProperties(array (
           <div class="col-md-5 probootstrap-animate" style="color: white; font-family: Montserrat,Arial,sans-serif" >
             <form method="post" class="probootstrap-form">
               <div class="form-group">
-                <label for="Nombre">Nombre</label>
-                <input type="text" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
-" id="nombre" name="nombre">
+                <label for="monto">Monto</label>
+                <input id="monto" name="monto" type="number" placeholder="Ej: 500" class="form-control" required="">
               </div>
+              <label for="rec">Recompensa</label>
+              <select name="rec">
               <div class="form-group">
-                <label for="Descripción">Descripción</label>
-                <input type="text" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getDescripcion();?>
-" id="descripcion" name="descripcion">
+                <?php  $_smarty_tpl->tpl_vars['rec'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['rec']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['recompensas']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['rec']->key => $_smarty_tpl->tpl_vars['rec']->value) {
+$_smarty_tpl->tpl_vars['rec']->_loop = true;
+?>
+              <option value="<?php echo $_smarty_tpl->tpl_vars['rec']->value->getId();?>
+"><?php echo $_smarty_tpl->tpl_vars['rec']->value->getNombre();?>
+</option>
+                <?php } ?>
               </div>
-
+            </select>
               <div class="form-group">
-                <label for="celular">Monto</label>
-                <input type="text" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getMonto();?>
-" id="monto" name="monto">
-              </div>
-               <div class="form-group">
-                <label for="fecha_pub">Fecha de publicación</label>
-                <input type="text" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getFechaPublicada();?>
-" id="fechaPub" name="fechaPub">
-              </div>
-              <div class="form-group">
-                <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" value="MODIFICAR">
+                <input type="submit" class="btn btn-primary btn-lg" id="guardar" name="guardar" value="Colaborar">
               </div>
             </form>
           </div>
@@ -102,4 +101,5 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 >
     </section>          
   </section>
-      </body></html><?php }} ?>
+      </body></html>
+<?php }} ?>
