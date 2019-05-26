@@ -233,6 +233,20 @@ $stmt->bind_param("s",$nombre);
 }
 
 
+public function actualizarEstadoProp(){
+
+    $estado = $this->getEstadoActual();
+    $stmt = $this->getDB()->prepare( 
+            "UPDATE propuesta set EstadoActual=? WHERE Nombre=?"); 
+           
+        $stmt->bind_param("is", $estado, $this->getNombre());
+        return $stmt->execute();
+   
+
+}
+
+
+
 public function insertarImagen($nombre,$path){
  $stmt = $this->getDB()->prepare("INSERT INTO imagen (Imagen,TituloPropuesta) VALUES (?,?)" );
  echo $path;

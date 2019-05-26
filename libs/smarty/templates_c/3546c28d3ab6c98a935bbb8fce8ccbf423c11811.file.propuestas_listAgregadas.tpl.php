@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-26 11:21:49
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-26 17:36:39
          compiled from "vistas\propuestas_listAgregadas.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:14477477365ceaa0b8586577-75211528%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '3546c28d3ab6c98a935bbb8fce8ccbf423c11811' => 
     array (
       0 => 'vistas\\propuestas_listAgregadas.tpl',
-      1 => 1558880502,
+      1 => 1558902993,
       2 => 'file',
     ),
   ),
@@ -98,9 +98,16 @@ $_smarty_tpl->tpl_vars['prop']->_loop = true;
 propuesta/detalleProp/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
 /">
                   <i class="icon-eye"></i></a>
-                    
-                
-                     
+                  <?php if ($_smarty_tpl->tpl_vars['prop']->value->getEstadoActual()==1) {?>
+                    <a class="btn" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/publicarPropuesta/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
+/">
+                  <i class="fa fa-check"></i></a>
+                  <a class="btn" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/cancelarPropuesta/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
+/">
+                  <i class="fa fa-times"></i></a>  
+                <?php }?>
                     </td>
                   </tr>
                 <?php } ?>

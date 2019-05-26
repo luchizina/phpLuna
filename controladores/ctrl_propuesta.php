@@ -80,11 +80,33 @@ function listadoPropsAgregadas($params=array()){
 
   $prop = new Propuesta();
   $propsAgre = $prop->getListadoAgregadas($params[0]);
+  #$propsNue = $prop->getListado();
    $tpl = Template::getInstance();
         $datos = array(
        'propsAgre' => $propsAgre
        );
+
+
    $tpl->mostrar('propuestas_listAgregadas',$datos);
+
+}
+
+
+function publicarPropuesta($params=array()){
+$prop = new Propuesta();
+$propuesta = $prop->obtenerPorNombreProp($params[0]);
+$propuesta->setEstadoActual(3);
+$propuesta->actualizarEstadoProp();
+$this->redirect("propuesta","listado");
+
+}
+
+function cancelarPropuesta($params=array()){
+$prop = new Propuesta();
+$propuesta = $prop->obtenerPorNombreProp($params[0]);
+$propuesta->setEstadoActual(2);
+$propuesta->actualizarEstadoProp();
+$this->redirect("propuesta","listado");
 
 }
 

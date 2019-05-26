@@ -51,9 +51,12 @@
                     <td>
                 <a class="btn" href="{$url_base}propuesta/detalleProp/{$prop->getNombre()}/">
                   <i class="icon-eye"></i></a>
-                    
-                
-                     
+                  {if $prop->getEstadoActual() == 1}
+                    <a class="btn" href="{$url_base}propuesta/publicarPropuesta/{$prop->getNombre()}/">
+                  <i class="fa fa-check"></i></a>
+                  <a class="btn" href="{$url_base}propuesta/cancelarPropuesta/{$prop->getNombre()}/">
+                  <i class="fa fa-times"></i></a>  
+                {/if}
                     </td>
                   </tr>
                 {/foreach}
