@@ -16,10 +16,12 @@ $tpl->asignar('url_regis',$controlIndex->getUrl("usuario","nuevo"));
 session_start();
 $nombre = Session::get('usuario_nombre');
 $nick = Session::get('usuario_nick');
+$tipaso = Session::get('usuario_tipo');
 //$ape = Session::get('usuario_apellido');
 //$userLogueado ="¡Hola ".$nombre."!";
 $tpl->asignar('usuLogueado',$nombre);
 $tpl->asignar('usuLogNick',$nick);
+$tpl->asignar('usuLogTipo',$tipaso);
 $tpl->asignar('proyecto',"Hola");
 
 //Cargamos controladores y acciones

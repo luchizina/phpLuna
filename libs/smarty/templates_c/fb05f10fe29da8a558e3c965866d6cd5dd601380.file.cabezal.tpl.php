@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-23 23:20:27
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-26 16:20:34
          compiled from "vistas\cabezal.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:9669151855ce709f4d8de05-79231675%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'fb05f10fe29da8a558e3c965866d6cd5dd601380' => 
     array (
       0 => 'vistas\\cabezal.tpl',
-      1 => 1558646421,
+      1 => 1558880414,
       2 => 'file',
     ),
   ),
@@ -20,6 +20,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'variables' => 
   array (
     'usuLogNick' => 0,
+    'usuLogTipo' => 0,
     'url_login' => 0,
     'url_regis' => 0,
     'usuLogueado' => 0,
@@ -61,6 +62,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Propuestas</a>
                 <ul class="dropdown-menu">
                   <li><a href="/phpLuna/propuesta/listado/">Listado</a></li>
+                  <?php if ($_smarty_tpl->tpl_vars['usuLogNick']->value!=''&&$_smarty_tpl->tpl_vars['usuLogTipo']->value==0) {?>
+                  <li><a href="/phpLuna/propuesta/listadoPropsAgregadas/1">Aceptar/rechazar propuestas</a></li>
+                   <?php }?>
                 </ul>
               </li>
                <?php if ($_smarty_tpl->tpl_vars['usuLogNick']->value=='') {?>
@@ -69,7 +73,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
               <li class="probootstra-cta-button last"><a href="<?php echo $_smarty_tpl->tpl_vars['url_regis']->value;?>
 " class="btn btn-primary">REGISTRARSE</a></li>
                <?php } else { ?>
-                <li><a href="/phpLuna/usuario/verPerfil/<?php echo $_smarty_tpl->tpl_vars['usuLogueado']->value;?>
+                <li><a href="/phpLuna/usuario/verPerfil/<?php echo $_smarty_tpl->tpl_vars['usuLogNick']->value;?>
 ">¡Hola <?php echo $_smarty_tpl->tpl_vars['usuLogueado']->value;?>
 !</a></li>
                 <li class="probootstra-cta-button last"><a href="<?php echo $_smarty_tpl->tpl_vars['url_logout']->value;?>

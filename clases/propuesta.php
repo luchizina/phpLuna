@@ -173,6 +173,28 @@ class Propuesta extends ClaseBase {
         	return false;
         }
 	}
+
+
+
+ public function getListadoAgregadas($id){
+     $propuestas=array();
+        $stmt = $this->getDB()->prepare( 
+            "SELECT * FROM propuesta 
+            WHERE EstadoActual = ? " );
+     
+        $stmt->bind_param( "i",$id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        while ($fila=$resultado->fetch_object()) {
+            $prop= new Propuesta($fila);
+                $propuestas[]=$prop;
+        }
+        return $propuestas;
+
+ } 
+
+
+
  public function agregarP(){
         $nombre=$this->getNombre();
         $Descripcion=$this->getDescripcion();
@@ -181,7 +203,7 @@ class Propuesta extends ClaseBase {
         $MontoActual=0;
         $Usuario = $this->getUsuario()->getNick();
         $Categ = $this->getCategoria()->getNombreH();
-
+        $EstadoActual = $this->getEstadoActual();
         
         $stmt = $this->getDB()->prepare( 
             "INSERT INTO propuesta 

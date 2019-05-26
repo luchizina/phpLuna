@@ -76,6 +76,19 @@ class ControladorPropuesta extends ControladorIndex {
 
 
 
+function listadoPropsAgregadas($params=array()){
+
+  $prop = new Propuesta();
+  $propsAgre = $prop->getListadoAgregadas($params[0]);
+   $tpl = Template::getInstance();
+        $datos = array(
+       'propsAgre' => $propsAgre
+       );
+   $tpl->mostrar('propuestas_listAgregadas',$datos);
+
+}
+
+
 function listadoCel(){
 
 

@@ -122,7 +122,8 @@ function nuevo(){
     //var_dump($_FILES);exit();
     $usr->setArchivo($_FILES['archivo']['tmp_name']);
     $usr->setImagen($_FILES['archivo']['name']);
-    $usr->setTipo($_FILES['archivo']['type']);
+    $usr->setTipoImg($_FILES['archivo']['type']);
+     $usr->setTipo(1);
     $usr->setCI($_POST["ci"]);
     $usr->setActivo(1);
     if($usr->agregar()){

@@ -32,13 +32,16 @@
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Propuestas</a>
                 <ul class="dropdown-menu">
                   <li><a href="/phpLuna/propuesta/listado/">Listado</a></li>
+                  {if $usuLogNick != "" and $usuLogTipo == 0}
+                  <li><a href="/phpLuna/propuesta/listadoPropsAgregadas/1">Aceptar/rechazar propuestas</a></li>
+                   {/if}
                 </ul>
               </li>
                {if $usuLogNick == ""}
               <li class="probootstra-cta-button last"><a href="{$url_login}" class="btn btn-primary">INICIAR SESIÓN</a></li>
               <li class="probootstra-cta-button last"><a href="{$url_regis}" class="btn btn-primary">REGISTRARSE</a></li>
                {else}
-                <li><a href="/phpLuna/usuario/verPerfil/{$usuLogueado}">¡Hola {$usuLogueado}!</a></li>
+                <li><a href="/phpLuna/usuario/verPerfil/{$usuLogNick}">¡Hola {$usuLogueado}!</a></li>
                 <li class="probootstra-cta-button last"><a href="{$url_logout}" class="btn btn-primary">CERRAR SESIÓN</a></li>
                
                  {/if}
