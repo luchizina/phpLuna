@@ -493,6 +493,21 @@ function comentar(){
 }
 
 
+
+function comentarEnPagina($params=array()){
+  $propuesta = new Propuesta();
+  $prop = $propuesta->obtenerPorNombreProp($params[0]);
+  $usuario = new Usuario();
+  $u = $usuario->obtenerPorNick(Session::get('usuario_nick'));
+  $c = new Comentario();
+  $c->setUsuario($u);
+  $c->setPropuesta($prop);
+  $c->setTexto($_POST['textoCom']);
+  $c->comentar();
+
+
+}
+
 }
 
 ?>
