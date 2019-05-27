@@ -1,19 +1,52 @@
-<!DOCTYPE html>
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-27 20:40:13
+         compiled from "vistas\registrar_recomp.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:82095cec51b8a7edf2-90442383%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '871ac5eaba5bac2584c1bbbd51b51116bce58f11' => 
+    array (
+      0 => 'vistas\\registrar_recomp.tpl',
+      1 => 1559000411,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '82095cec51b8a7edf2-90442383',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cec51b8b89917_15265372',
+  'variables' => 
+  array (
+    'url_base' => 0,
+    'reco' => 0,
+    'recompensa' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5cec51b8b89917_15265372')) {function content_5cec51b8b89917_15265372($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
-    <base href="{$url_base}">
+    <base href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+">
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
     <!--[if lt IE 9]>
-      <script src="js/vendor/html5shiv.min.js"></script>
-      <script src="js/vendor/respond.min.js"></script>
+      <?php echo '<script'; ?>
+ src="js/vendor/html5shiv.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="js/vendor/respond.min.js"><?php echo '</script'; ?>
+>
     <![endif]-->
   </head>
   <body >
 
-    {include file="cabezal.tpl"}
+    <?php echo $_smarty_tpl->getSubTemplate ("cabezal.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
     <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg); height:100%"  data-stellar-background-ratio="0.1">
         <div class="container">
           <div class="row">
@@ -52,14 +85,16 @@
               </div>
               
               <div class="form-group">
-                <input type="submit" value="Guardar y agregar otra" class="btn btn-primary" onClick="window.location='{$url_base}propuesta/registrarRecom/2'"/>
-                  <input type="submit" value="Guardar y finalizar" class="btn btn-success" onClick="window.location='{$url_base}propuesta/registrarRecom/1'"/>
+                <input type="submit" value="Guardar y agregar otra" class="btn btn-primary" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/registrarRecom/2'"/>
+                  <input type="submit" value="Guardar y finalizar" class="btn btn-success" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/registrarRecom/1'"/>
               </div>
                
             </form>
           </div>
          <div class="col-md-6 col-md-push-1 probootstrap-animate">            
-            <h2 style="color:#fff">Recompensas ya ingresadas</h2>
+            <h2 style="color:#fff">Recompensas registradas</h2>
             <div class="row">
             <div class="col-sm-12  col-md-12  main">
             <div class="table-responsive scrip">
@@ -71,11 +106,16 @@
               </thead>
               <tbody>
 
-                {foreach from=$reco item=recompensa}
+                <?php  $_smarty_tpl->tpl_vars['recompensa'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['recompensa']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['reco']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['recompensa']->key => $_smarty_tpl->tpl_vars['recompensa']->value) {
+$_smarty_tpl->tpl_vars['recompensa']->_loop = true;
+?>
                   <tr>
-                    <td>{$recompensa->getNombre()|upper}</td>
+                    <td><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['recompensa']->value->getNombre(), 'UTF-8');?>
+</td>
                   </tr>
-                {/foreach}
+                <?php } ?>
                
               </tbody>
             </table>
@@ -87,11 +127,20 @@
         </div>
 
 
-    <script src="js/scripts.min.js"></script>
-    <script src="js/main.min.js"></script>
-    <script src="js/custom.js"></script>
-    <script src="js/validar.js" type="text/javascript"></script>
+    <?php echo '<script'; ?>
+ src="js/scripts.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/main.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/custom.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/validar.js" type="text/javascript"><?php echo '</script'; ?>
+>
     </section>          
   </section>
       </body></html>
 
+<?php }} ?>

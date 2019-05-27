@@ -32,12 +32,11 @@
         </div>
 
       <section class="probootstrap-section" >
-        <div class="container >
+        <div class="container" >
           <div class="row" style="margin: 0 auto">
 
           <div class="col-md-5 probootstrap-animate mx-auto" style="margin: auto 0; color: white; font-family: Montserrat,Arial,sans-serif "  >
-        
- <form class="form-signin" method="POST" >
+        <form class="form-signin" method="POST" >
         {if $mensaje!=""}
             <div class="alert alert-danger" role="alert">{$mensaje}</div>
           {/if}
@@ -46,9 +45,8 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required="">
         
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
-        
-      </form>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button> 
+        </form>
           </div>
           <div class="col-md-6 col-md-push-1 probootstrap-animate">            
             <h2 style="color:#fff">¿Qué puedes encontrar en LUNA?</h2>
@@ -59,6 +57,7 @@
             </ul>
 
           </div>
+        </div>
         </div>
         
 

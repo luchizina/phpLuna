@@ -56,10 +56,38 @@ class Recompensa extends ClaseBase {
         return $this->TituloPropuesta->getNombre();
     }
 
-     public function setDescripcion($PropuNueva){
-       $this->TituloPropuesta = $propuNueva
-   
-        $this->Descripcion=$Descripcion;
+     public function setTituloPropuesta($propuNueva){
+       $this->TituloPropuesta = $propuNueva;
     }
+
+    public function agregar(){
+        $nombre=$this->getNombre();
+        $Descripcion=$this->getDescripcion();
+        $limiteUsu=$this->getLimiteUsuarios();
+        $monto = $this->getMontoaSuperar();
+        $titulo = $this->getTituloPropuesta();
+        $stmt = $this->getDB()->prepare( 
+            "INSERT INTO recompensa
+        (Nombre,Descripcion, MontoaSuperar,limiteUsuarios,TituloPropuesta) 
+           VALUES (?,?,?,?,?)" );
+        $stmt->bind_param("ssiis",$nombre,$Descripcion,$limiteUsu,$monto,$titulo);
+        return $stmt->execute();
+    }
+
+
+    public function getListadoR($no){
+         $recompensas=array();
+        $stmt = $this->getDB()->prepare( "SELECT * FROM recompensa WHERE TituloPropuesta =?" );
+        $stmt->bind_param( "s",$no);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        while ($fila=$resultado->fetch_object()) {
+            $recomp= new recompensa($fila);
+                $recompensas[]=$recomp;
+        }
+        
+        return $recompensas;
+ } 
+
 }
 ?>

@@ -76,6 +76,41 @@ class ControladorPropuesta extends ControladorIndex {
 
 
 
+function listadoPropsAgregadas($params=array()){
+
+  $prop = new Propuesta();
+  $propsAgre = $prop->getListadoAgregadas($params[0]);
+  #$propsNue = $prop->getListado();
+   $tpl = Template::getInstance();
+        $datos = array(
+       'propsAgre' => $propsAgre
+       );
+
+
+   $tpl->mostrar('propuestas_listAgregadas',$datos);
+
+}
+
+
+function publicarPropuesta($params=array()){
+$prop = new Propuesta();
+$propuesta = $prop->obtenerPorNombreProp($params[0]);
+$propuesta->setEstadoActual(3);
+$propuesta->actualizarEstadoProp();
+$this->redirect("propuesta","listado");
+
+}
+
+function cancelarPropuesta($params=array()){
+$prop = new Propuesta();
+$propuesta = $prop->obtenerPorNombreProp($params[0]);
+$propuesta->setEstadoActual(2);
+$propuesta->actualizarEstadoProp();
+$this->redirect("propuesta","listado");
+
+}
+
+
 function listadoCel(){
 
 
@@ -239,9 +274,12 @@ public function modificar($params = array())
 
 public function borrar($params = array()){
 $propuesta = new Propuesta();
-if($propuesta->borrarProp($params[0])){
-  $this->redirect("propuesta","listado");
-}
+
+$prop = $propuesta->obtenerPorNombreProp($params[0]);
+$prop->setEstadoActual(2);
+$prop->actualizarEstadoProp();
+$this->redirect("propuesta","listado");
+
 
 }
 
@@ -457,32 +495,50 @@ function comentar(){
   }
 }
 
-function registrarRecom()
+function registrarRecom($params = array())
 {
  $mensaje="";
   $propuesta = new Propuesta();
-  $prop=$propuesta->obtenerPorNombreProp($_POST["propu"]);
-  if(isset($_POST["TituPropu"])){
-    $col->setNombre($_POST["nombre"]);
-    $col->setUsuario($usu);
-    $col->setTituloPropuesta($prop);
-    $col->setRecompensa($Recompensa->obtenerPorId($_POST['rec']));
-    if($col->agregar()){
-      array_push($usu->getPropuestasColabora(), $prop);
-      $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
-      $prop->actualizaMonto();
+  $prop=$propuesta->obtenerPorNombreProp("hola");
+  if(isset($_POST["nombre"])){
+    $recom = new recompensa();
+    $recom->setNombre($_POST["nombre"]);
+    $recom->setMontoaSuperar($_POST["monto"]);
+    $recom->setLimiteUsuarios($_POST["limite"]);
+    $recom->setDescripcion($_POST["desc"]);
+    $recom->setTituloPropuesta($prop);
+    if($recom->agregar()){
+      if($params[0] ==1){
       $this->redirect("propuesta","listado");
+      }
+      if($params[0] ==2){
+      $this->redirect("propuesta","registrar_recomp");
+      }
+
       exit;
     }else $mensaje="Error! No se pudo agregar la colaboracion";
-  
   }
+  $rec = new recompensa();
+  $reco = $rec->getListadoR("hola");
   $tpl = Template::getInstance();
-  $tpl->asignar('usuario',$usu);
-  $tpl->asignar('recompensas',$recs);
-  $tpl->mostrar('nueva_colaboracion',array());
 
+  $tpl->asignar('reco', $reco);
+  $tpl->mostrar('registrar_recomp',array());
 }
 
+function comentarEnPagina($params=array()){
+  $propuesta = new Propuesta();
+  $prop = $propuesta->obtenerPorNombreProp($params[0]);
+  $usuario = new Usuario();
+  $u = $usuario->obtenerPorNick(Session::get('usuario_nick'));
+  $c = new Comentario();
+  $c->setUsuario($u);
+  $c->setPropuesta($prop);
+  $c->setTexto($_POST['textoCom']);
+  $c->comentar();
+
+
+}
 
 }
 

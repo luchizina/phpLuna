@@ -10,6 +10,7 @@ class Usuario extends ClaseBase {
 	public $Imagen;
     public $Archivo;
     public $tipo;
+    public $tipoImg;
 	public $Comentarios = array();
 	public $PropuestasPropone = array();
 	public $PropuestasColabora = array();
@@ -46,6 +47,14 @@ class Usuario extends ClaseBase {
 
     public function setTipo($tipo){
         $this->tipo=$tipo;
+    }
+
+    public function getTipoImg(){
+        return $this->tipoImg;
+    }
+
+    public function setTipoImg($tipoImg){
+        $this->tipoImg=$tipoImg;
     }
 
     public function getPropuestasColabora(){
@@ -181,9 +190,10 @@ public function agregar(){
         $act = $this->isActivo();
         $img = $this->getImagen();
         $tip = $this->getTipo();
+        $tipoImg = $this->getTipoImg();
         $permitidos = array("image/jpg", "image/jpeg", "image/png");
         $target='';
-        if(in_array($tip, $permitidos)){
+        if(in_array($tipoImg, $permitidos)){
             //$target = "imgUsus/".basename($img);
             $extension=end(explode(".", $img));
             //rename($target, $nick.".".$extension);
@@ -200,10 +210,10 @@ public function agregar(){
         }*/
         //var_dump($lol);exit;
         $stmt = $this->getDB()->prepare( 
-            "INSERT INTO usuario (Nombre, Apellido,Nick, Correo, Password,Celular, Imagen, ci, activo)
-           VALUES (?,?,?,?,?,?,?,?,?)" );
+            "INSERT INTO usuario (Nombre, Apellido,Nick, Correo, Password,Celular, Imagen, ci, activo, tipo)
+           VALUES (?,?,?,?,?,?,?,?,?,?)" );
         //$null = NULL;
-        $stmt->bind_param("ssssssssi", $nombre, $ape, $nick, $email, $password, $cel, $target, $ci, $act);
+        $stmt->bind_param("ssssssssii", $nombre, $ape, $nick, $email, $password, $cel, $target, $ci, $act,$tip);
         if($target != ''){
         move_uploaded_file($arch, $target);
     }
@@ -366,6 +376,7 @@ public function modificar()
         Session::set('usuario_nick', $res->Nick);
         Session::set('usuario_nombre', $res->Nombre);
         Session::set('usuario_email', $res->Correo);
+        Session::set('usuario_tipo', $res->tipo);
 
          return true;
 

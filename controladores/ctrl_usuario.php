@@ -122,7 +122,8 @@ function nuevo(){
     //var_dump($_FILES);exit();
     $usr->setArchivo($_FILES['archivo']['tmp_name']);
     $usr->setImagen($_FILES['archivo']['name']);
-    $usr->setTipo($_FILES['archivo']['type']);
+    $usr->setTipoImg($_FILES['archivo']['type']);
+     $usr->setTipo(1);
     $usr->setCI($_POST["ci"]);
     $usr->setActivo(1);
     if($usr->agregar()){
@@ -294,5 +295,23 @@ public function nuevoUsuCel(){
     }
    // echo json_encode($json_registration);
 }
+
+
+function verPerfil($params=array()){
+$usuario = new Usuario();
+$usu = $usuario->obtenerPorNick($params[0]);
+$imagen = $usuario->traerImagen($usu->getNick());
+    $tpl = Template::getInstance();
+    $usu->setImagen($imagen);
+   $tpl->asignar('usuario', $usu);
+  $tpl->mostrar('usuario_perfil',$usu);
+
+}
+
+
+
+
+
+
 }
 ?>
