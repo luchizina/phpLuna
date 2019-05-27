@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-20 15:42:34
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-23 23:00:35
          compiled from "vistas\inicio.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:219535ce2aeca473412-99260727%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:5167914275ce709f3cc8ac4-58207417%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'c9a1123df06652abffdc7699f4d4134cd2f4681f' => 
     array (
       0 => 'vistas\\inicio.tpl',
-      1 => 1557869520,
+      1 => 1558645113,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '219535ce2aeca473412-99260727',
+  'nocache_hash' => '5167914275ce709f3cc8ac4-58207417',
   'function' => 
   array (
   ),
@@ -21,9 +21,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5ce2aecb3df8b2_92247363',
+  'unifunc' => 'content_5ce709f4a798c7_72529239',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5ce2aecb3df8b2_92247363')) {function content_5ce2aecb3df8b2_92247363($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5ce709f4a798c7_72529239')) {function content_5ce709f4a798c7_72529239($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -49,14 +49,16 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   </head>
   <body>
     <?php echo $_smarty_tpl->getSubTemplate ("cabezal.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
-          
+  
+    <br>
+    <br>
+    <br>        
       <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg)"  data-stellar-background-ratio="0.5">
         <div class="container">
-
           <div class="row">
             <div class="col-md-12">
               <div class="probootstrap-slider-text probootstrap-animate" data-animate-effect="fadeIn">
-                <h1 class="probootstrap-heading probootstrap-animate">un pequeño cambio en tu bolsillo<span>un gran sueño hecho realidad</span></h1>
+                <h1 class="probootstrap-heading probootstrap-animate">Pequeña ayuda<span>GRAN CAUSA...</span></h1>
                 <p class="probootstrap-animate"><a href="#" class="btn btn-primary btn-lg">Saber más</a></p>
               </div>
             </div>
@@ -100,7 +102,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         </div>
       </section>
 
-      <section class="probootstrap-section">
+    <!--  <section class="probootstrap-section">
         <div class="container">
           <div class="row">
             <div class="col-md-12 text-center section-heading probootstrap-animate" data-animate-effect="fadeIn">
@@ -421,11 +423,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             </div>
            
           </div>
-          <!-- END row -->
+        
           
         </div>
 
       </footer>
+       -->
 
     <?php echo '<script'; ?>
  src="js/scripts.min.js"><?php echo '</script'; ?>

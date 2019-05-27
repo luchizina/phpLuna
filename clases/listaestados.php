@@ -2,8 +2,8 @@
 class Listaestados extends ClaseBase {
 
 	public $id=0;
-	public $Estado = null; //objeto estado
-	public $Propuesta = null; //objeto propuesta
+	public $IDEstado = null; //objeto estado
+	public $TituloPropuesta = null; //objeto propuesta
 	public $Fecha;
 	public $Hora;
 
@@ -22,19 +22,19 @@ class Listaestados extends ClaseBase {
     }
 
     public function getEstado(){
-    	return $this->Estado;
+    	return $this->IDEstado;
     }
 
     public function setEstado($Estado){
-    	$this->Estado=$Estado;
+    	$this->IDEstado=$Estado;
     }
 
     public function getPropuesta(){
-    	return $this->Propuesta;
+    	return $this->TituloPropuesta;
     }
 
     public function setPropuesta($Propuesta){
-    	$this->Propuesta=$Propuesta;
+    	$this->TituloPropuesta=$Propuesta;
     }
 
     public function getFecha(){

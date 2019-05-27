@@ -76,6 +76,41 @@ class ControladorPropuesta extends ControladorIndex {
 
 
 
+function listadoPropsAgregadas($params=array()){
+
+  $prop = new Propuesta();
+  $propsAgre = $prop->getListadoAgregadas($params[0]);
+  #$propsNue = $prop->getListado();
+   $tpl = Template::getInstance();
+        $datos = array(
+       'propsAgre' => $propsAgre
+       );
+
+
+   $tpl->mostrar('propuestas_listAgregadas',$datos);
+
+}
+
+
+function publicarPropuesta($params=array()){
+$prop = new Propuesta();
+$propuesta = $prop->obtenerPorNombreProp($params[0]);
+$propuesta->setEstadoActual(3);
+$propuesta->actualizarEstadoProp();
+$this->redirect("propuesta","listado");
+
+}
+
+function cancelarPropuesta($params=array()){
+$prop = new Propuesta();
+$propuesta = $prop->obtenerPorNombreProp($params[0]);
+$propuesta->setEstadoActual(2);
+$propuesta->actualizarEstadoProp();
+$this->redirect("propuesta","listado");
+
+}
+
+
 function listadoCel(){
 
 
@@ -239,9 +274,12 @@ public function modificar($params = array())
 
 public function borrar($params = array()){
 $propuesta = new Propuesta();
-if($propuesta->borrarProp($params[0])){
-  $this->redirect("propuesta","listado");
-}
+
+$prop = $propuesta->obtenerPorNombreProp($params[0]);
+$prop->setEstadoActual(2);
+$prop->actualizarEstadoProp();
+$this->redirect("propuesta","listado");
+
 
 }
 
@@ -401,6 +439,7 @@ $imagen = $propuesta->traerImagen($prop->getNombre());
 
 
 
+
 function desfavoritear($params=array()){
   $propuesta = new Propuesta();
   $prop = $propuesta->obtenerPorNombreProp($params[0]);
@@ -430,6 +469,7 @@ function desfavoritear($params=array()){
   $this->redirect("propuesta","listado");
 }
 
+
 function comentar(){
   $propuesta = new Propuesta();
   $prop = $propuesta->obtenerPorNombreProp($_POST['nombre']); 
@@ -454,6 +494,63 @@ function comentar(){
     echo json_encode($arreglo);
   }
 }
+
+function comentarEnPagina($params=array()){
+  $propuesta = new Propuesta();
+  $prop = $propuesta->obtenerPorNombreProp($params[0]);
+  $usuario = new Usuario();
+  $u = $usuario->obtenerPorNick(Session::get('usuario_nick'));
+  $c = new Comentario();
+  $c->setUsuario($u);
+  $c->setPropuesta($prop);
+  $c->setTexto($_POST['textoCom']);
+  $c->comentar();
+}
+
+function likeCometario(){
+  $num =(int)$_POST['idCom'];
+  $usuario = new Usuario();
+  $u = $usuario->$obtenerPorMail($_POST['mail']);
+  $comentario = new Comentario();
+  $c = $comentario->obtenerPorId();
+  if($c->likeCom($u->getNick(), $c->getId($num))){
+    //$array = $c->getLikes();
+    //array_push($array, $u);
+    //$c->setFavoritos($array);
+    $msg = "Bien";
+    $array = ["mens"=>$msg];
+    $arreglo=["status"=>"ok","message"=>[$array]];
+    echo json_encode($arreglo);
+  } else {
+    $msg = "Mal";
+    $array = ["mens"=>$msg];
+    $arreglo=["status"=>"ok","message"=>[$array]];
+    echo json_encode($arreglo);
+  }
+}
+
+function dislikeCometario(){
+  $num =(int)$_POST['idCom'];
+  $usuario = new Usuario();
+  $u = $usuario->$obtenerPorMail($_POST['mail']);
+  $comentario = new Comentario();
+  $c = $comentario->obtenerPorId();
+  if($c->dislikeCom($u->getNick(), $c->getId($num))){
+    //$array = $c->getLikes();
+    //array_push($array, $u);
+    //$c->setFavoritos($array);
+    $msg = "Bien";
+    $array = ["mens"=>$msg];
+    $arreglo=["status"=>"ok","message"=>[$array]];
+    echo json_encode($arreglo);
+  } else {
+    $msg = "Mal";
+    $array = ["mens"=>$msg];
+    $arreglo=["status"=>"ok","message"=>[$array]];
+    echo json_encode($arreglo);
+  }
+}
+
 }
 
 ?>

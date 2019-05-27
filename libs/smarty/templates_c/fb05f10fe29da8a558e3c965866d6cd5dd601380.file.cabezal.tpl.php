@@ -1,25 +1,34 @@
+<<<<<<< HEAD
 <?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-20 20:30:55
+=======
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-26 16:20:34
+>>>>>>> e6bf66fd39445788b83c4caf3b08d561a2f8c402
          compiled from "vistas\cabezal.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:57515ce2ab21efa846-74113031%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:9669151855ce709f4d8de05-79231675%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'fb05f10fe29da8a558e3c965866d6cd5dd601380' => 
     array (
       0 => 'vistas\\cabezal.tpl',
+<<<<<<< HEAD
       1 => 1558376376,
+=======
+      1 => 1558880414,
+>>>>>>> e6bf66fd39445788b83c4caf3b08d561a2f8c402
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '57515ce2ab21efa846-74113031',
+  'nocache_hash' => '9669151855ce709f4d8de05-79231675',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5ce2ab220808d6_16673649',
+  'unifunc' => 'content_5ce709f50b66c1_32248688',
   'variables' => 
   array (
     'usuLogNick' => 0,
+    'usuLogTipo' => 0,
     'url_login' => 0,
     'url_regis' => 0,
     'usuLogueado' => 0,
@@ -27,7 +36,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5ce2ab220808d6_16673649')) {function content_5ce2ab220808d6_16673649($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_5ce709f50b66c1_32248688')) {function content_5ce709f50b66c1_32248688($_smarty_tpl) {?>
  <head>
     <link rel="shortcut icon" href="img/moon.png" type="image/png" />
     <title>LUNA</title>
@@ -61,6 +70,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Propuestas</a>
                 <ul class="dropdown-menu">
                   <li><a href="/phpLuna/propuesta/listado/">Listado</a></li>
+                  <?php if ($_smarty_tpl->tpl_vars['usuLogNick']->value!=''&&$_smarty_tpl->tpl_vars['usuLogTipo']->value==0) {?>
+                  <li><a href="/phpLuna/propuesta/listadoPropsAgregadas/1">Aceptar/rechazar propuestas</a></li>
+                   <?php }?>
                 </ul>
               </li>
                <?php if ($_smarty_tpl->tpl_vars['usuLogNick']->value=='') {?>
@@ -69,7 +81,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
               <li class="probootstra-cta-button last"><a href="<?php echo $_smarty_tpl->tpl_vars['url_regis']->value;?>
 " class="btn btn-primary">REGISTRARSE</a></li>
                <?php } else { ?>
-                <li><a href="about.html">¡Hola <?php echo $_smarty_tpl->tpl_vars['usuLogueado']->value;?>
+                <li><a href="/phpLuna/usuario/verPerfil/<?php echo $_smarty_tpl->tpl_vars['usuLogNick']->value;?>
+">¡Hola <?php echo $_smarty_tpl->tpl_vars['usuLogueado']->value;?>
 !</a></li>
                 <li class="probootstra-cta-button last"><a href="<?php echo $_smarty_tpl->tpl_vars['url_logout']->value;?>
 " class="btn btn-primary">CERRAR SESIÓN</a></li>
