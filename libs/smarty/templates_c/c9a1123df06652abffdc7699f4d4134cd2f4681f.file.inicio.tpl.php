@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-20 23:09:59
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-20 23:24:12
          compiled from "vistas\inicio.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:219535ce2aeca473412-99260727%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c9a1123df06652abffdc7699f4d4134cd2f4681f' => 
     array (
       0 => 'vistas\\inicio.tpl',
-      1 => 1558386592,
+      1 => 1558386644,
       2 => 'file',
     ),
   ),
@@ -55,7 +55,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <br>        
       <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg)"  data-stellar-background-ratio="0.5">
         <div class="container">
-
           <div class="row">
             <div class="col-md-12">
               <div class="probootstrap-slider-text probootstrap-animate" data-animate-effect="fadeIn">

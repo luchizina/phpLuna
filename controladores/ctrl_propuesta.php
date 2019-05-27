@@ -457,6 +457,32 @@ function comentar(){
   }
 }
 
+function registrarRecom()
+{
+ $mensaje="";
+  $propuesta = new Propuesta();
+  $prop=$propuesta->obtenerPorNombreProp($_POST["propu"]);
+  if(isset($_POST["TituPropu"])){
+    $col->setNombre($_POST["nombre"]);
+    $col->setUsuario($usu);
+    $col->setTituloPropuesta($prop);
+    $col->setRecompensa($Recompensa->obtenerPorId($_POST['rec']));
+    if($col->agregar()){
+      array_push($usu->getPropuestasColabora(), $prop);
+      $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
+      $prop->actualizaMonto();
+      $this->redirect("propuesta","listado");
+      exit;
+    }else $mensaje="Error! No se pudo agregar la colaboracion";
+  
+  }
+  $tpl = Template::getInstance();
+  $tpl->asignar('usuario',$usu);
+  $tpl->asignar('recompensas',$recs);
+  $tpl->mostrar('nueva_colaboracion',array());
+
+}
+
 
 }
 

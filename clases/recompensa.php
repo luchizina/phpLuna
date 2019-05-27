@@ -6,7 +6,7 @@ class Recompensa extends ClaseBase {
 	public $Descripcion ='';
 	public $MontoaSuperar=0;
 	public $limiteUsuarios=0;
-
+    public $TituloPropuesta= '';
 	public function __construct($obj=NULL) {
         if(isset($obj)){
             foreach ($obj as $key => $value) {
@@ -52,6 +52,14 @@ class Recompensa extends ClaseBase {
      public function setLimiteUsuarios($limiteUsuarios){
     	$this->limiteUsuarios=$limiteUsuarios;
     }
+      public function getTituloPropuesta(){
+        return $this->TituloPropuesta->getNombre();
+    }
 
+     public function setDescripcion($PropuNueva){
+       $this->TituloPropuesta = $propuNueva
+   
+        $this->Descripcion=$Descripcion;
+    }
 }
 ?>

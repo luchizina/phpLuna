@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-20 20:45:15
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-21 00:18:17
          compiled from "vistas\usuarios_modificar.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:179205ce2ee940db325-03162607%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0b55c0502d49d65e122bfc0ca14f565e52708d1c' => 
     array (
       0 => 'vistas\\usuarios_modificar.tpl',
-      1 => 1558377909,
+      1 => 1558382198,
       2 => 'file',
     ),
   ),
@@ -46,7 +46,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
     <?php echo $_smarty_tpl->getSubTemplate ("cabezal.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
-    <div style="margin: 0 auto">
+    
     <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg); height:100%"  data-stellar-background-ratio="0.1">
         <div class="container">
           <div class="row">
@@ -59,7 +59,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         </div>
 
       <section class="probootstrap-section" >
-        <div class="container >
+        <div class="container" >
           <div class="row" style="margin: 0 auto">
 
           <div class="col-md-5 probootstrap-animate mx-auto" style="margin: auto 0; color: white; font-family: Montserrat,Arial,sans-serif "  >
@@ -107,5 +107,4 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 >
     </section>          
   </section>
-    </div>
       </body></html><?php }} ?>

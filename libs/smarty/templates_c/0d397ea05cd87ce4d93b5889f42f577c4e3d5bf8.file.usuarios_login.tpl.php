@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-20 21:55:27
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-20 23:53:00
          compiled from "vistas\usuarios_login.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:178805ce2b057287e80-43743975%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0d397ea05cd87ce4d93b5889f42f577c4e3d5bf8' => 
     array (
       0 => 'vistas\\usuarios_login.tpl',
-      1 => 1558382121,
+      1 => 1558389168,
       2 => 'file',
     ),
   ),
@@ -91,7 +91,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <ul style="color:#fff" class="probootstrap-contact-info">
               <li><i class="icon-edit"></i> <span>Proponer ideas</span></li>
               <li><i class="fa fa-dollar"></i><span>Colaborar a hacer realidad sueños</span></li>
-              <li><i class="fa fa-sign"></i><span>¿Aún no tienes cuenta? ¿Qué esperas? <a href="<?php echo $_smarty_tpl->tpl_vars['url_regis']->value;?>
+              <li><i class="fa fa-sign-in"></i><span>¿Aún no tienes cuenta? ¿Qué esperas? <a href="<?php echo $_smarty_tpl->tpl_vars['url_regis']->value;?>
 ">Haz click aquí</a></span></li>
             </ul>
 

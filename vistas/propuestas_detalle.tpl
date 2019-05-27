@@ -14,7 +14,7 @@
   <body >
 
     {include file="cabezal.tpl"}
-    <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg); height:100%"  data-stellar-background-ratio="0.1">
+    <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg); height:100%"  data-stellar-background-ratio="0.01">
         <div class="container">
           <div class="row">
             <div class="col-md-12" >
@@ -37,7 +37,7 @@
               
               <div class="form-group">
                 <label for="monto">Monto:</label>
-                 <p name="monto">{$propuesta->getMonto()}</p> 
+                 <p name="monto">${$propuesta->getMonto()}</p> 
               </div>
 
 
@@ -66,7 +66,7 @@
                  <p name="Desc">{$propuesta->getDescripcion()}</p> 
               </div>
                 <div class="form-group">
-                    <label for="na">Progreso actual</label>
+                    <label for="na">Progreso actual: ${$propuesta->getMontoActual()}</label>
                <div class="progress" style="max-width: 400px">
                     <div class="progress-bar progress-bar-s2" data-percent="{$propuesta->calc()}"></div>
                   </div>

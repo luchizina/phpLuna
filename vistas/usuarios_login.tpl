@@ -55,7 +55,7 @@
             <ul style="color:#fff" class="probootstrap-contact-info">
               <li><i class="icon-edit"></i> <span>Proponer ideas</span></li>
               <li><i class="fa fa-dollar"></i><span>Colaborar a hacer realidad sueños</span></li>
-              <li><i class="fa fa-sign"></i><span>¿Aún no tienes cuenta? ¿Qué esperas? <a href="{$url_regis}">Haz click aquí</a></span></li>
+              <li><i class="fa fa-sign-in"></i><span>¿Aún no tienes cuenta? ¿Qué esperas? <a href="{$url_regis}">Haz click aquí</a></span></li>
             </ul>
 
           </div>

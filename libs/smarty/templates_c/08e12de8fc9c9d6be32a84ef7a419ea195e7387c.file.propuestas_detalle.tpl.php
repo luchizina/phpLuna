@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-20 18:02:45
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-20 19:19:30
          compiled from "vistas\propuestas_detalle.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:319315ce2aec8dffc66-63408971%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '08e12de8fc9c9d6be32a84ef7a419ea195e7387c' => 
     array (
       0 => 'vistas\\propuestas_detalle.tpl',
-      1 => 1558386158,
+      1 => 1558390763,
       2 => 'file',
     ),
   ),
@@ -46,7 +46,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
     <?php echo $_smarty_tpl->getSubTemplate ("cabezal.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
-    <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg); height:100%"  data-stellar-background-ratio="0.1">
+    <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg); height:100%"  data-stellar-background-ratio="0.01">
         <div class="container">
           <div class="row">
             <div class="col-md-12" >
@@ -70,7 +70,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
               
               <div class="form-group">
                 <label for="monto">Monto:</label>
-                 <p name="monto"><?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getMonto();?>
+                 <p name="monto">$<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getMonto();?>
 </p> 
               </div>
 
@@ -105,7 +105,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 </p> 
               </div>
                 <div class="form-group">
-                    <label for="na">Progreso actual</label>
+                    <label for="na">Progreso actual: $<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getMontoActual();?>
+</label>
                <div class="progress" style="max-width: 400px">
                     <div class="progress-bar progress-bar-s2" data-percent="<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->calc();?>
 "></div>
