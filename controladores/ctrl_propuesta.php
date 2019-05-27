@@ -211,7 +211,7 @@ function consolita( $data ) {
         $listEstado->setHora($hora);
         $listEstado->agregarE(); 
         $jaja = $listEstado->getEstado().$listEstado->getPropuesta().$listEstado->getFecha().$listEstado->getHora();
-			$this->redirect("propuesta","listado");
+      $this->redirect("propuesta","registrarRecom");
 			exit;
 		}else{
 			$mensaje="Error! No se pudo agregar la propuesta ".$jaja;
@@ -500,7 +500,7 @@ function registrarRecom($params = array())
  $mensaje="";
   $propuesta = new Propuesta();
   $prop=$propuesta->obtenerPorNombreProp("hola");
-  if(isset($_POST["nombre"])){
+  if(isset($_POST["nombreR"])){
     $recom = new recompensa();
     $recom->setNombre($_POST["nombre"]);
     $recom->setMontoaSuperar($_POST["monto"]);
@@ -508,13 +508,12 @@ function registrarRecom($params = array())
     $recom->setDescripcion($_POST["desc"]);
     $recom->setTituloPropuesta($prop);
     if($recom->agregar()){
-      if($params[0] ==1){
+      if($params[0] == "fin"){
       $this->redirect("propuesta","listado");
       }
-      if($params[0] ==2){
-      $this->redirect("propuesta","registrar_recomp");
+      if($params[0] == "registrar_nueva_reco"){
+      $this->redirect("propuesta","registrarRecom");
       }
-
       exit;
     }else $mensaje="Error! No se pudo agregar la colaboracion";
   }

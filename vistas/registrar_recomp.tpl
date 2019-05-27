@@ -32,8 +32,8 @@
           <div class="col-md-5 probootstrap-animate" style="color: white; font-family: Montserrat,Arial,sans-serif" >
             <form method="post" class="probootstrap-form" enctype="multipart/form-data" id="registr">
               <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input id="nombre" name="nombre" type="text" placeholder="Juan" class="form-control" required="">
+                <label for="nombreR">Nombre</label>
+                <input id="nombreR" name="nombreR" type="text" placeholder="Juan" class="form-control" required="">
               </div>
                <div class="form-group">
                <label for="desc">Descripción:</label>  
@@ -52,8 +52,8 @@
               </div>
               
               <div class="form-group">
-                <input type="submit" value="Guardar y agregar otra" class="btn btn-primary" onClick="window.location='{$url_base}propuesta/registrarRecom/2'"/>
-                  <input type="submit" value="Guardar y finalizar" class="btn btn-success" onClick="window.location='{$url_base}propuesta/registrarRecom/1'"/>
+                <input type="submit" value="Guardar y agregar otra" class="btn btn-primary" onClick="window.location='{$url_base}propuesta/registrarRecom/registrar_nueva_reco'"/>
+                  <input type="submit" value="Guardar y finalizar" class="btn btn-success" onClick="window.location='{$url_base}propuesta/registrarRecom/fin'"/>
               </div>
                
             </form>
