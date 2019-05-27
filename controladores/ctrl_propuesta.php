@@ -274,9 +274,12 @@ public function modificar($params = array())
 
 public function borrar($params = array()){
 $propuesta = new Propuesta();
-if($propuesta->borrarProp($params[0])){
-  $this->redirect("propuesta","listado");
-}
+
+$prop = $propuesta->obtenerPorNombreProp($params[0]);
+$prop->setEstadoActual(2);
+$prop->actualizarEstadoProp();
+$this->redirect("propuesta","listado");
+
 
 }
 
