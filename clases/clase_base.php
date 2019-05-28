@@ -33,7 +33,7 @@ class ClaseBase{
         } 
      return $resultados;   
     }
-
+     
     public function obtenerPorId($id){
         $sql="select * from $this->tabla where id=$id ";
         $res=NULL;
@@ -44,6 +44,7 @@ class ClaseBase{
         }
         return $res;
     }
+
 
 
     public function obtenerPorMail($mail)

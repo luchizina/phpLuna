@@ -1,22 +1,20 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-27 22:29:18
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-27 22:48:35
          compiled from "vistas\propuestas_detalle.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:13138585835cec852dbfef72-43270041%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:16463338915cec9373d54066-20230924%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '08e12de8fc9c9d6be32a84ef7a419ea195e7387c' => 
     array (
       0 => 'vistas\\propuestas_detalle.tpl',
-      1 => 1559006955,
+      1 => 1559007917,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '13138585835cec852dbfef72-43270041',
+  'nocache_hash' => '16463338915cec9373d54066-20230924',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cec852dcf2b75_60140363',
   'variables' => 
   array (
     'url_base' => 0,
@@ -25,8 +23,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'com' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cec9373ec1a63_22613999',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cec852dcf2b75_60140363')) {function content_5cec852dcf2b75_60140363($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5cec9373ec1a63_22613999')) {function content_5cec9373ec1a63_22613999($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -50,7 +50,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
     <?php echo $_smarty_tpl->getSubTemplate ("cabezal.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
-    <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg); height:100%"  data-stellar-background-ratio="0.1">
+    <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg); height:100%"  data-stellar-background-ratio="0.01">
         <div class="container">
           <div class="row">
             <div class="col-md-12" >
@@ -74,7 +74,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
               
               <div class="form-group">
                 <label for="monto">Monto:</label>
-                 <p name="monto"><?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getMonto();?>
+                 <p name="monto">$<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getMonto();?>
 </p> 
               </div>
 
@@ -109,7 +109,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 </p> 
               </div>
                 <div class="form-group">
-                    <label for="na">Progreso actual</label>
+                    <label for="na">Progreso actual: $<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getMontoActual();?>
+</label>
                <div class="progress" style="max-width: 400px">
                     <div class="progress-bar progress-bar-s2" data-percent="<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->calc();?>
 "></div>

@@ -32,12 +32,11 @@
         </div>
 
       <section class="probootstrap-section" >
-        <div class="container >
+        <div class="container" >
           <div class="row" style="margin: 0 auto">
 
           <div class="col-md-5 probootstrap-animate mx-auto" style="margin: auto 0; color: white; font-family: Montserrat,Arial,sans-serif "  >
-        
- <form class="form-signin" method="POST" >
+        <form class="form-signin" method="POST" >
         {if $mensaje!=""}
             <div class="alert alert-danger" role="alert">{$mensaje}</div>
           {/if}
@@ -46,19 +45,19 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required="">
         
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
-        
-      </form>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button> 
+        </form>
           </div>
           <div class="col-md-6 col-md-push-1 probootstrap-animate">            
             <h2 style="color:#fff">¿Qué puedes encontrar en LUNA?</h2>
             <ul style="color:#fff" class="probootstrap-contact-info">
               <li><i class="icon-edit"></i> <span>Proponer ideas</span></li>
               <li><i class="fa fa-dollar"></i><span>Colaborar a hacer realidad sueños</span></li>
-              <li><i class="fa fa-sign"></i><span>¿Aún no tienes cuenta? ¿Qué esperas? <a href="{$url_regis}">Haz click aquí</a></span></li>
+              <li><i class="fa fa-sign-in"></i><span>¿Aún no tienes cuenta? ¿Qué esperas? <a href="{$url_regis}">Haz click aquí</a></span></li>
             </ul>
 
           </div>
+        </div>
         </div>
         
 
