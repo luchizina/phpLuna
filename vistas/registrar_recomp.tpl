@@ -26,7 +26,7 @@
         </div>
 
       <section class="probootstrap-section">
-        <input id="propu" name="propu" type="hidden" value="hola" class="form-control">
+        <input id="tituloPropuesta" name="tituloPropuesta" type="hidden" value={$tituloPropuesta}  class="form-control">
         <div class="container">
           <div class="row">
           <div class="col-md-5 probootstrap-animate" style="color: white; font-family: Montserrat,Arial,sans-serif" >

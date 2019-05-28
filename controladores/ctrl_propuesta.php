@@ -202,7 +202,7 @@ function consolita( $data ) {
     $EstadoActual = 1;
       
 		if($prop->agregarP()){
-         $prop->insertarImagen($prop->getNombre(),$target);
+        $prop->insertarImagen($prop->getNombre(),$target);
         $listEstado = new listaestados();
         $listEstado->setEstado(1);
         $listEstado->setPropuesta($prop->getNombre());
@@ -211,16 +211,13 @@ function consolita( $data ) {
         $listEstado->setHora($hora);
         $listEstado->agregarE(); 
         $jaja = $listEstado->getEstado().$listEstado->getPropuesta().$listEstado->getFecha().$listEstado->getHora();
-      $this->redirect("propuesta","registrarRecom");
+        $tpl2 = Template::getInstance();
+          $tpl2->asignar('tituloPropuesta',$prop->getNombre());
+         $tpl2->mostrar('registrar_recomp',array());
 			exit;
 		}else{
-			$mensaje="Error! No se pudo agregar la propuesta ".$jaja;
+			$mensaje="Error! No se pudo agregar la propuesta ";
 		}
- /* }
-  else{
-    $mensaje = "Ya existe propuesta con este nombre ¿Qué tal si pruebas con otro nombre? ".$jaja;
-  }*/
-
 		
 	}
   $categ = new categoria();
@@ -499,7 +496,7 @@ function registrarRecom($params = array())
 {
  $mensaje="";
   $propuesta = new Propuesta();
-  $prop=$propuesta->obtenerPorNombreProp("hola");
+  $prop=$propuesta->obtenerPorNombreProp($_POST["tituloPropuesta"]);
   if(isset($_POST["nombreR"])){
     $recom = new recompensa();
     $recom->setNombre($_POST["nombre"]);
@@ -510,17 +507,15 @@ function registrarRecom($params = array())
     if($recom->agregar()){
       if($params[0] == "fin"){
       $this->redirect("propuesta","listado");
+       exit;
       }
-      if($params[0] == "registrar_nueva_reco"){
-      $this->redirect("propuesta","registrarRecom");
-      }
-      exit;
+     
     }else $mensaje="Error! No se pudo agregar la colaboracion";
   }
   $rec = new recompensa();
-  $reco = $rec->getListadoR("hola");
+  $reco = $rec->getListadoR($_POST["tituloPropuesta"]);
   $tpl = Template::getInstance();
-
+  $tpl->asignar('tituloPropuesta', $_POST["tituloPropuesta"]);
   $tpl->asignar('reco', $reco);
   $tpl->mostrar('registrar_recomp',array());
 }
