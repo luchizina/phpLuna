@@ -290,7 +290,14 @@ function nuevaColaboracion($params=array()){
     $col->setFecha(date("Y-m-d"));
     $col->setUsuario($usu);
     $col->setTituloPropuesta($prop);
-    $col->setRecompensa($Recompensa->obtenerPorId($_POST['rec']));
+    //$col->setRecompensa($Recompensa->obtenerPorId($_POST['rec']));
+    foreach ($recs as $r) {
+      if ($col->getMonto() >= $r->getMontoaSuperar()){
+        if($r->getLimiteUsuarios() <= $r->getCantActual()){
+          $r->setCantActual($r->getCantActual() + 1);
+        }
+      }
+    }
     if($col->agregar()){
       array_push($usu->getPropuestasColabora(), $prop);
       $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
