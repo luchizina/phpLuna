@@ -29,6 +29,9 @@
         <div class="container">
           <div class="row">
           <div class="col-md-5 probootstrap-animate" style="color: white; font-family: Montserrat,Arial,sans-serif" >
+            <div id="message1" class="alert alert-error" style="display:none">  
+              <p><strong>Ha ocurrido un error!</strong></p>
+            </div>
             <form method="post" class="probootstrap-form" enctype="multipart/form-data" id="registr">
               <div class="form-group">
                 <label for="nombre">Nombre</label>

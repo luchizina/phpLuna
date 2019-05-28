@@ -4,6 +4,7 @@ class Comentario extends ClaseBase {
 	public $Texto = '';
 	public $Usuario = null; //objeto Usuario
 	public $Propuesta = null; //objeto Propuesta
+    public $likes = null; //array de likes
 
 	public function __construct($obj=NULL) {
         if(isset($obj)){
@@ -13,6 +14,14 @@ class Comentario extends ClaseBase {
         }
         $tabla="comentario";
         parent::__construct($tabla); 
+    }
+
+    public function getLikes(){
+        return $this->likes;
+    }
+
+    public function setLike($like){
+        $this->likes = $like;
     }
 
     public function getId(){
@@ -53,6 +62,38 @@ class Comentario extends ClaseBase {
            VALUES (?,?,?)" );
         $stmt->bind_param("sss",$texto,$nick,$nomProp);
         return $stmt->execute();
+    }
+
+    public function likeCom($nick, $idCom){
+        $stmt = $this->getDB()->prepare( 
+            "INSERT INTO likeComentario 
+        (Usuario, Comentario) 
+           VALUES (?,?)" );
+        $stmt->bind_param("si",$nick,
+            $idCom);
+        return $stmt->execute();
+    }
+
+    public function dislikeCom($nick, $idCom){
+        $stmt = $this->getDB()->prepare( 
+            "DELETE FROM likeComentario 
+        WHERE Usuario=? AND Comentario=?");
+        $stmt->bind_param("si",$nick,
+            $idCom);
+        return $stmt->execute();
+    }
+
+    public function traeUsuarios($prop){
+        $sql="select usuario.* from comentario, usuario where usuario.nick=comentario.NickUsuario and comentario.TituloPropuesta = '$prop'";
+        $resultados=array();
+        $resultado =$this->db->query($sql)   
+            or die ("Fallo en la consulta");
+        while ( $fila = $resultado->fetch_assoc() )
+        {   
+            $objeto= new $this->modelo($fila);
+            $resultados[]=$objeto;
+        } 
+     return $resultados; 
     }
 }
 ?>

@@ -12,6 +12,9 @@ function validarci(){
 		success:function(html){
 			$("#avisaCe").html(html);
 			Chequear();
+		},
+		error:function(){
+			document.getElementById("message1").style.display = "block";
 		}
 	});
 }
@@ -25,6 +28,9 @@ function validarnick(){
 		//dataType:"text",
 		success:function(html){
 			$("#avisa").html(html);
+		},
+		error:function(){
+			document.getElementById("message1").style.display = "block";
 		}
 	});
 }
@@ -39,6 +45,9 @@ function validarcorreo(){
 		success:function(html){
 			$("#avisaC").html(html);
 			Chequear();
+		},
+		error:function(){
+			document.getElementById("message1").style.display = "block";
 		}
 	});
 }

@@ -1,0 +1,82 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,100,300&subset=latin,cyrillic);
+body {
+  margin-top: 40px;
+  background-color: #d6d6d6;
+}
+
+/* ----- Section Coments ----- */
+.section-comments {
+  margin: 0 auto;
+  width: 600px;
+  height: auto;
+  background-color: white;
+  padding: 30px;
+  font-family: 'Roboto', sans-refi;
+}
+
+/* ----- Coments ----- */
+.comments__title {
+  margin-bottom: 40px;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* ----- Comment ----- */
+.list-comment__comment {
+  width: 100%;
+  margin-bottom: 50px;
+}
+.list-comment__comment::after, .list-comment__comment::before {
+  display: table;
+  content: "";
+}
+.list-comment__comment::after {
+  clear: both;
+}
+
+.comment__avatar {
+  width: 15%;
+  height: 100%;
+  float: left;
+  clear: both;
+}
+
+.avatar__border {
+  width: 50px;
+  height: 50px;
+  border-radius: 35px;
+  overflow: hidden;
+}
+
+.avatar__author {
+  width: 50px;
+}
+
+/* ----- Comment text ----- */
+.comment__comment-text {
+  width: 75%;
+  display: block;
+  float: right;
+}
+
+.comment-text__name-author {
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.name-author__data-post {
+  font-weight: 400;
+  font-size: 10pt;
+  color: gray;
+}
+.name-author__data-post::before {
+  content: " · ";
+  font-weight: 900;
+}
+
+.comment-text__content {
+  font-size: 11pt;
+  line-height: 18pt;
+}

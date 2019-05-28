@@ -417,17 +417,27 @@ function favoritear($params=array()){
 } 
 
 function detalleProp($params=array()){
+
+
 $propuesta = new Propuesta();
+$com = new Comentario();
+$coms = $com->com($params[0]);
+$u = new Usuario();
+foreach ($coms as $c) {
+  $usu = $u->obtenerPorNick($c->NickUsuario);
+  $c->setUsuario($usu);
+}
+
+
 $prop = $propuesta->obtenerPorNombreProp($params[0]);
 $imagen = $propuesta->traerImagen($prop->getNombre());
     $tpl = Template::getInstance();
     $prop->setImagen($imagen);
-   $tpl->asignar('propuesta', $prop);
+  $tpl->asignar('propuesta', $prop);
+  $tpl->asignar('comentarios', $coms);
   $tpl->mostrar('propuestas_detalle',$prop);
 
 }
-
-
 
 
 function desfavoritear($params=array()){
@@ -485,6 +495,7 @@ function comentar(){
   }
 }
 
+
 function registrarRecom($params = array())
 {
  $mensaje="";
@@ -520,18 +531,78 @@ function registrarRecom($params = array())
 }
 
 
-function comentarEnPagina($params=array()){
+function comentarEnPagina(){
   $propuesta = new Propuesta();
-  $prop = $propuesta->obtenerPorNombreProp($params[0]);
+ $this->consolita($_POST['textoComentario']);
+  if(isset($_POST["nomPropCom"])){
+
+  $prop = $propuesta->obtenerPorNombreProp($_POST['nomPropCom']);
   $usuario = new Usuario();
   $u = $usuario->obtenerPorNick(Session::get('usuario_nick'));
   $c = new Comentario();
   $c->setUsuario($u);
   $c->setPropuesta($prop);
-  $c->setTexto($_POST['textoCom']);
+  $c->setTexto($_POST['textoComentario']);
   $c->comentar();
+  $algo = array();
+  $algo[] =$prop->getNombre();
+   $this->redirect("propuesta","detalleProp",$algo);
+     }
 
+}
 
+function borrarComEnPagina($params=array()){
+  $comentario = new Comentario();
+   $num = (int)$params[1];
+   $algo = array();
+  $algo[] =$params[0];
+  if($comentario->borrar($num)){
+     $this->redirect("propuesta","detalleProp",$algo);
+  }
+}
+
+function likeCometario(){
+  $num =(int)$_POST['idCom'];
+  $usuario = new Usuario();
+  $u = $usuario->$obtenerPorMail($_POST['mail']);
+  $comentario = new Comentario();
+  $c = $comentario->obtenerPorId();
+  if($c->likeCom($u->getNick(), $c->getId($num))){
+    //$array = $c->getLikes();
+    //array_push($array, $u);
+    //$c->setFavoritos($array);
+    $msg = "Bien";
+    $array = ["mens"=>$msg];
+    $arreglo=["status"=>"ok","message"=>[$array]];
+    echo json_encode($arreglo);
+  } else {
+    $msg = "Mal";
+    $array = ["mens"=>$msg];
+    $arreglo=["status"=>"ok","message"=>[$array]];
+    echo json_encode($arreglo);
+  }
+}
+
+function dislikeCometario(){
+  $num =(int)$_POST['idCom'];
+  $usuario = new Usuario();
+  $u = $usuario->$obtenerPorMail($_POST['mail']);
+  $comentario = new Comentario();
+  $c = $comentario->obtenerPorId();
+  if($c->dislikeCom($u->getNick(), $c->getId($num))){
+    //$array = $c->getLikes();
+    //array_push($array, $u);
+    //$c->setFavoritos($array);
+    $msg = "Bien";
+    $array = ["mens"=>$msg];
+    $arreglo=["status"=>"ok","message"=>[$array]];
+    echo json_encode($arreglo);
+  } else {
+    $msg = "Mal";
+    $array = ["mens"=>$msg];
+    $arreglo=["status"=>"ok","message"=>[$array]];
+    echo json_encode($arreglo);
+  }
 }
 
 }
