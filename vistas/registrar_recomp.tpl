@@ -21,6 +21,9 @@
               <div class="probootstrap-slider-text probootstrap-animate" data-animate-effect="fadeIn">
                 <h1 class="probootstrap-heading probootstrap-animate">Registrar Recompensa</h1>
               </div>
+               {if $mensaje!=""}
+                  <div class="alert alert-danger" role="alert">{$mensaje}</div>
+               {/if}
             </div>
           </div>
         </div>
@@ -52,8 +55,9 @@
               </div>
               
               <div class="form-group">
-                <input type="submit" value="Guardar y agregar otra" class="btn btn-primary" onClick="window.location='{$url_base}propuesta/registrarRecom/registrar_nueva_reco'"/>
-                  <input type="submit" value="Guardar y finalizar" class="btn btn-success" onClick="window.location='{$url_base}propuesta/registrarRecom/fin'"/>
+                
+                <input type="submit" name="jaja" value="Guardar y agregar otra" class="btn btn-primary" onClick="window.location='{$url_base}propuesta/registrarRecom/{$tituloPropuesta}'"/>
+                  <input type="submit" name="que" value="Guardar y finalizar" class="btn btn-primary" onClick="window.location='{$url_base}propuesta/registrarRecomF/{$tituloPropuesta}'"/>
               </div>
                
             </form>
@@ -70,13 +74,18 @@
                 </tr>
               </thead>
               <tbody>
-
+                 {if $reco != null }                 
                 {foreach from=$reco item=recompensa}
                   <tr>
                     <td>{$recompensa->getNombre()|upper}</td>
                   </tr>
                 {/foreach}
-               
+               {/if} 
+               {if  $reco == null}                 
+                  <tr>
+                    <td>Aún no tienes recompensas</td>
+                  </tr>
+               {/if} 
               </tbody>
             </table>
           </div>
