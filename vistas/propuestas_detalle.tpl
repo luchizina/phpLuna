@@ -81,7 +81,7 @@
     <ul class="comments__list-comment">
       {foreach from=$comentarios item=com}
       <li class="list-comment__comment">
-        {if {$com->getUsuario()->getImagen()} != null}
+        {if $com->getUsuario()->getImagen() != null}
         <div class="comment__avatar">
           <div class="avatar__border"><img class="avatar__author" src="./{$com->getUsuario()->getImagen()}" alt=""/></div>
         </div>
@@ -89,6 +89,10 @@
         <div class="comment__comment-text">
          <h5 class="comment-text__name-author">{$com->getUsuario()->getNick()}</h5>
           <p class="comment-text__content">{$com->getTexto()}</p>
+          {if $com->getUsuario()->getNick() == $usuLogNick}
+           <a class="btn" href="{$url_base}propuesta/borrarComEnPagina/{$propuesta->getNombre()}/{$com->getId()}">
+                         <i class="icon-trash"></i></a>
+         {/if}
         </div>
       </li>
       {/foreach}

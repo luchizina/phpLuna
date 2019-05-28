@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-28 09:49:13
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-28 11:08:48
          compiled from "vistas\propuestas_detalle.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:16463338915cec9373d54066-20230924%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '08e12de8fc9c9d6be32a84ef7a419ea195e7387c' => 
     array (
       0 => 'vistas\\propuestas_detalle.tpl',
-      1 => 1559047750,
+      1 => 1559052475,
       2 => 'file',
     ),
   ),
@@ -23,6 +23,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'propuesta' => 0,
     'comentarios' => 0,
     'com' => 0,
+    'usuLogNick' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -128,8 +129,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['com']->key => $_smarty_tpl->tpl_vars[
 $_smarty_tpl->tpl_vars['com']->_loop = true;
 ?>
       <li class="list-comment__comment">
-        <?php ob_start();?><?php echo $_smarty_tpl->tpl_vars['com']->value->getUsuario()->getImagen();?>
-<?php $_tmp3=ob_get_clean();?><?php if ($_tmp3!=null) {?>
+        <?php if ($_smarty_tpl->tpl_vars['com']->value->getUsuario()->getImagen()!=null) {?>
         <div class="comment__avatar">
           <div class="avatar__border"><img class="avatar__author" src="./<?php echo $_smarty_tpl->tpl_vars['com']->value->getUsuario()->getImagen();?>
 " alt=""/></div>
@@ -140,6 +140,13 @@ $_smarty_tpl->tpl_vars['com']->_loop = true;
 </h5>
           <p class="comment-text__content"><?php echo $_smarty_tpl->tpl_vars['com']->value->getTexto();?>
 </p>
+          <?php if ($_smarty_tpl->tpl_vars['com']->value->getUsuario()->getNick()==$_smarty_tpl->tpl_vars['usuLogNick']->value) {?>
+           <a class="btn" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/borrarComEnPagina/<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
+/<?php echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
+">
+                         <i class="icon-trash"></i></a>
+         <?php }?>
         </div>
       </li>
       <?php } ?>

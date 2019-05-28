@@ -551,6 +551,16 @@ function comentarEnPagina(){
 
 }
 
+function borrarComEnPagina($params=array()){
+  $comentario = new Comentario();
+   $num = (int)$params[1];
+   $algo = array();
+  $algo[] =$params[0];
+  if($comentario->borrar($num)){
+     $this->redirect("propuesta","detalleProp",$algo);
+  }
+}
+
 function likeCometario(){
   $num =(int)$_POST['idCom'];
   $usuario = new Usuario();
