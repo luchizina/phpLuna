@@ -424,6 +424,8 @@ function favoritear($params=array()){
 } 
 
 function detalleProp($params=array()){
+
+
 $propuesta = new Propuesta();
 $com = new Comentario();
 $coms = $com->com($params[0]);
@@ -432,6 +434,8 @@ foreach ($coms as $c) {
   $usu = $u->obtenerPorNick($c->NickUsuario);
   $c->setUsuario($usu);
 }
+
+
 $prop = $propuesta->obtenerPorNombreProp($params[0]);
 $imagen = $propuesta->traerImagen($prop->getNombre());
     $tpl = Template::getInstance();
@@ -527,16 +531,24 @@ function registrarRecom($params = array())
   $tpl->mostrar('registrar_recomp',array());
 }
 
-function comentarEnPagina($params=array()){
+function comentarEnPagina(){
   $propuesta = new Propuesta();
-  $prop = $propuesta->obtenerPorNombreProp($params[0]);
+ $this->consolita($_POST['textoComentario']);
+  if(isset($_POST["nomPropCom"])){
+
+  $prop = $propuesta->obtenerPorNombreProp($_POST['nomPropCom']);
   $usuario = new Usuario();
   $u = $usuario->obtenerPorNick(Session::get('usuario_nick'));
   $c = new Comentario();
   $c->setUsuario($u);
   $c->setPropuesta($prop);
-  $c->setTexto($_POST['textoCom']);
+  $c->setTexto($_POST['textoComentario']);
   $c->comentar();
+  $algo = array();
+  $algo[] =$prop->getNombre();
+   $this->redirect("propuesta","detalleProp",$algo);
+     }
+
 }
 
 function likeCometario(){

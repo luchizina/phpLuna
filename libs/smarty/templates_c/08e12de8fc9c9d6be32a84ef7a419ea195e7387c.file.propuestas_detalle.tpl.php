@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-27 22:48:35
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-28 09:49:13
          compiled from "vistas\propuestas_detalle.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:16463338915cec9373d54066-20230924%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '08e12de8fc9c9d6be32a84ef7a419ea195e7387c' => 
     array (
       0 => 'vistas\\propuestas_detalle.tpl',
-      1 => 1559007917,
+      1 => 1559047750,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cec9373ec1a63_22613999',
   'variables' => 
   array (
     'url_base' => 0,
@@ -23,8 +25,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'com' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cec9373ec1a63_22613999',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5cec9373ec1a63_22613999')) {function content_5cec9373ec1a63_22613999($_smarty_tpl) {?><!DOCTYPE html>
 
@@ -65,7 +65,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <div class="container">
           <div class="row">
           <div class="col-md-5 probootstrap-animate" style="color: white; font-family: Montserrat,Arial,sans-serif" >
-            <form method="post" class="probootstrap-form">
+           
               <div class="form-group">
                 <label for="Nombre">Nombre:</label>
                  <p name="Nombre"><?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
@@ -85,10 +85,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 </p>                 
               </div>
              
-              <div class="form-group">
-                <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" value="MODIFICAR">
-              </div>
-            </form>
+           
+        
           </div>
            <div class="col-md-6 col-md-push-1 probootstrap-animate"  style="color: white;">            
              <div class="form-group" style="max-width: 300px;max-height: 300px">
@@ -145,14 +143,19 @@ $_smarty_tpl->tpl_vars['com']->_loop = true;
         </div>
       </li>
       <?php } ?>
+      <form method="post" action="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/comentarEnPagina" class="probootstrap-form">
       <li>
-        <textarea rows="5" cols="57" name="coment"></textarea>
+        <textarea rows="5" cols="57" name="textoComentario" id="textoComentario"></textarea>
       </li>
       <li>
-        <div class="form-group">
+        <div class="form-group" >
+          <input type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
+" name="nomPropCom" id="nomPropCom">
             <input type="submit" class="btn btn-primary btn-lg" id="com" name="com" value="COMENTAR">
           </div>
       </li>
+    </form>
     </ul>
   </div>
 </div>

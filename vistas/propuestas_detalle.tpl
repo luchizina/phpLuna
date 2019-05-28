@@ -31,7 +31,7 @@
         <div class="container">
           <div class="row">
           <div class="col-md-5 probootstrap-animate" style="color: white; font-family: Montserrat,Arial,sans-serif" >
-            <form method="post" class="probootstrap-form">
+           
               <div class="form-group">
                 <label for="Nombre">Nombre:</label>
                  <p name="Nombre">{$propuesta->getNombre()}</p> 
@@ -48,10 +48,8 @@
                  <p name="fecha">{$propuesta->getFechaPublicada()}</p>                 
               </div>
              
-              <div class="form-group">
-                <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" value="MODIFICAR">
-              </div>
-            </form>
+           
+        
           </div>
            <div class="col-md-6 col-md-push-1 probootstrap-animate"  style="color: white;">            
              <div class="form-group" style="max-width: 300px;max-height: 300px">
@@ -94,14 +92,17 @@
         </div>
       </li>
       {/foreach}
+      <form method="post" action="{$url_base}propuesta/comentarEnPagina" class="probootstrap-form">
       <li>
-        <textarea rows="5" cols="57" name="coment"></textarea>
+        <textarea rows="5" cols="57" name="textoComentario" id="textoComentario"></textarea>
       </li>
       <li>
-        <div class="form-group">
+        <div class="form-group" >
+          <input type="hidden" value="{$propuesta->getNombre()}" name="nomPropCom" id="nomPropCom">
             <input type="submit" class="btn btn-primary btn-lg" id="com" name="com" value="COMENTAR">
           </div>
       </li>
+    </form>
     </ul>
   </div>
 </div>
