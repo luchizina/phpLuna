@@ -1,30 +1,32 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-23 18:01:01
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-27 22:29:18
          compiled from "vistas\propuestas_detalle.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:8264295125ce70a0d318f31-71561845%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:13138585835cec852dbfef72-43270041%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '08e12de8fc9c9d6be32a84ef7a419ea195e7387c' => 
     array (
       0 => 'vistas\\propuestas_detalle.tpl',
-      1 => 1558645113,
+      1 => 1559006955,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '8264295125ce70a0d318f31-71561845',
+  'nocache_hash' => '13138585835cec852dbfef72-43270041',
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cec852dcf2b75_60140363',
   'variables' => 
   array (
     'url_base' => 0,
     'propuesta' => 0,
+    'comentarios' => 0,
+    'com' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5ce70a0d439768_28578114',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5ce70a0d439768_28578114')) {function content_5ce70a0d439768_28578114($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5cec852dcf2b75_60140363')) {function content_5cec852dcf2b75_60140363($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -33,6 +35,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="css/style_com.css">
     <!--[if lt IE 9]>
       <?php echo '<script'; ?>
  src="js/vendor/html5shiv.min.js"><?php echo '</script'; ?>
@@ -115,6 +119,43 @@ $_valid = $_smarty_tpl->decodeProperties(array (
           </div>
         </div>
         </div>
+        <div class="section-comments">
+  <div class="section-comments__comments">
+    <h6 class="comments__title">Comentarios</h6>
+    <ul class="comments__list-comment">
+      <?php  $_smarty_tpl->tpl_vars['com'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['com']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['comentarios']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['com']->key => $_smarty_tpl->tpl_vars['com']->value) {
+$_smarty_tpl->tpl_vars['com']->_loop = true;
+?>
+      <li class="list-comment__comment">
+        <?php ob_start();?><?php echo $_smarty_tpl->tpl_vars['com']->value->getUsuario()->getImagen();?>
+<?php $_tmp3=ob_get_clean();?><?php if ($_tmp3!=null) {?>
+        <div class="comment__avatar">
+          <div class="avatar__border"><img class="avatar__author" src="./<?php echo $_smarty_tpl->tpl_vars['com']->value->getUsuario()->getImagen();?>
+" alt=""/></div>
+        </div>
+        <?php }?>
+        <div class="comment__comment-text">
+         <h5 class="comment-text__name-author"><?php echo $_smarty_tpl->tpl_vars['com']->value->getUsuario()->getNick();?>
+</h5>
+          <p class="comment-text__content"><?php echo $_smarty_tpl->tpl_vars['com']->value->getTexto();?>
+</p>
+        </div>
+      </li>
+      <?php } ?>
+      <li>
+        <textarea rows="5" cols="57" name="coment"></textarea>
+      </li>
+      <li>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary btn-lg" id="com" name="com" value="COMENTAR">
+          </div>
+      </li>
+    </ul>
+  </div>
+</div>
+  
 
     <?php echo '<script'; ?>
  src="js/scripts.min.js"><?php echo '</script'; ?>

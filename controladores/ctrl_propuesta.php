@@ -428,16 +428,22 @@ function favoritear($params=array()){
 
 function detalleProp($params=array()){
 $propuesta = new Propuesta();
+$com = new Comentario();
+$coms = $com->com($params[0]);
+$u = new Usuario();
+foreach ($coms as $c) {
+  $usu = $u->obtenerPorNick($c->NickUsuario);
+  $c->setUsuario($usu);
+}
 $prop = $propuesta->obtenerPorNombreProp($params[0]);
 $imagen = $propuesta->traerImagen($prop->getNombre());
     $tpl = Template::getInstance();
     $prop->setImagen($imagen);
-   $tpl->asignar('propuesta', $prop);
+  $tpl->asignar('propuesta', $prop);
+  $tpl->asignar('comentarios', $coms);
   $tpl->mostrar('propuestas_detalle',$prop);
 
 }
-
-
 
 
 function desfavoritear($params=array()){

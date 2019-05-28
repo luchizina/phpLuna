@@ -82,5 +82,18 @@ class Comentario extends ClaseBase {
             $idCom);
         return $stmt->execute();
     }
+
+    public function traeUsuarios($prop){
+        $sql="select usuario.* from comentario, usuario where usuario.nick=comentario.NickUsuario and comentario.TituloPropuesta = '$prop'";
+        $resultados=array();
+        $resultado =$this->db->query($sql)   
+            or die ("Fallo en la consulta");
+        while ( $fila = $resultado->fetch_assoc() )
+        {   
+            $objeto= new $this->modelo($fila);
+            $resultados[]=$objeto;
+        } 
+     return $resultados; 
+    }
 }
 ?>

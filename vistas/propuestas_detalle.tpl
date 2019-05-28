@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="css/style_com.css">
     <!--[if lt IE 9]>
       <script src="js/vendor/html5shiv.min.js"></script>
       <script src="js/vendor/respond.min.js"></script>
@@ -75,6 +77,35 @@
           </div>
         </div>
         </div>
+        <div class="section-comments">
+  <div class="section-comments__comments">
+    <h6 class="comments__title">Comentarios</h6>
+    <ul class="comments__list-comment">
+      {foreach from=$comentarios item=com}
+      <li class="list-comment__comment">
+        {if {$com->getUsuario()->getImagen()} != null}
+        <div class="comment__avatar">
+          <div class="avatar__border"><img class="avatar__author" src="./{$com->getUsuario()->getImagen()}" alt=""/></div>
+        </div>
+        {/if}
+        <div class="comment__comment-text">
+         <h5 class="comment-text__name-author">{$com->getUsuario()->getNick()}</h5>
+          <p class="comment-text__content">{$com->getTexto()}</p>
+        </div>
+      </li>
+      {/foreach}
+      <li>
+        <textarea rows="5" cols="57" name="coment"></textarea>
+      </li>
+      <li>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary btn-lg" id="com" name="com" value="COMENTAR">
+          </div>
+      </li>
+    </ul>
+  </div>
+</div>
+  
 
     <script src="js/scripts.min.js"></script>
     <script src="js/main.min.js"></script>

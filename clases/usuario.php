@@ -191,13 +191,17 @@ public function agregar(){
         $img = $this->getImagen();
         $tip = $this->getTipo();
         $tipoImg = $this->getTipoImg();
-        $permitidos = array("image/jpg", "image/jpeg", "image/png");
+        $permitidos = array("image/jpg", "image/jpeg", "image/png", "");
         $target='';
         if(in_array($tipoImg, $permitidos)){
             //$target = "imgUsus/".basename($img);
-            $extension=end(explode(".", $img));
+            if($tipoImg != ""){
+                $extension=end(explode(".", $img));
             //rename($target, $nick.".".$extension);
-            $target = "imgUsus/".$nick.".".$extension;
+                $target = "imgUsus/".$nick.".".$extension;
+            } else {
+                $target = "";
+            }
         } else {
             echo "El tipo de imagen es incorrecto";
         }

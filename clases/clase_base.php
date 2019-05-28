@@ -89,6 +89,7 @@ class ClaseBase{
         {   
             $objeto= new $this->modelo($fila);
             $resultados[]=$objeto;
+            //$objeto->setUsuario($this->obtenerPorNick($objeto->NickUsuario));
         } 
      return $resultados; 
     }
