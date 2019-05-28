@@ -125,9 +125,16 @@ function nuevo(){
     $usr->setTipoImg($_FILES['archivo']['type']);
      $usr->setTipo(1);
     $usr->setCI($_POST["ci"]);
-    $usr->setActivo(1);
+    $usr->setActivo(0);
+    $token = md5(uniqid(mt_rand(), false));
+    $usr->setToken($token);
     if($usr->agregar()){
-      $this->redirect("usuario","login");
+      $nombreC = $usr->getNombre()." ".$usr->getApellido();
+      $url="http://localhost/phpLuna/usuario/activarU/".$token;
+      $body = "Para activar su cuenta debe entrar al siguiente enlace: ".$url;
+      $bodyhtml = "Para activar su cuenta haga click aqui <a href='$url'>Activar cuenta</a>";
+      Utils::enviarEmail($usr->getCorreo(),$nombreC, $body, $bodyhtml);
+      $this->redirect("usuario","aviso");
       exit;
     }else{
       $mensaje="Error! No se pudo agregar el usuario";
@@ -140,6 +147,22 @@ function nuevo(){
   $tpl->asignar('mensaje',$mensaje);
   $tpl->mostrar('usuarios_nuevo',array());
 }
+
+public function aviso(){
+  $tpl = Template::getInstance();
+  $tpl->mostrar('aviso', array());
+}
+
+public function activarU($a = array()){
+  $token = $a[0];
+  $u = new Usuario();
+  if($u->activarUsuario($token)){
+    $this->redirect("usuario","login");
+  } else {
+    echo "Error en tratar de activar el usuario";
+  }
+}
+
 public function modificar($params = array())
    {
      $mensaje = "";
@@ -227,7 +250,7 @@ function login(){
       $this->redirect("usuario","redirigir");
       exit;
     }else{
-      $mensaje="Error! Este usuario no está registrado en el sistema";
+      $mensaje="Error! Este usuario no está registrado en el sistema o su cuenta aun no esta activa";
     }
     
   }
