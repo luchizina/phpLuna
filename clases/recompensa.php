@@ -6,6 +6,7 @@ class Recompensa extends ClaseBase {
 	public $Descripcion ='';
 	public $MontoaSuperar=0;
 	public $limiteUsuarios=0;
+    public $cantActual=0;
     public $TituloPropuesta= '';
 	public function __construct($obj=NULL) {
         if(isset($obj)){
@@ -19,6 +20,14 @@ class Recompensa extends ClaseBase {
 
     public function getId(){
     	return $this->id;
+    }
+
+    public function getCantActual(){
+        return $this->cantActual;
+    }
+
+    public function setCantActual($cant){
+        $this->cantActual=$cant;
     }
 
     public function getNombre(){
