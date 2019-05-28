@@ -165,23 +165,22 @@ function consolita( $data ) {
     $p = new Propuesta();
   //  if($p->obtenerPorNombreProp($_POST["nombre"])==null){
     $usr = new Usuario();
-		$prop= new Propuesta();
+	$prop= new Propuesta();
     $categ = new categoria();
-		$prop->setNombre($_POST["nombre"]);
-		$prop->setDescripcion($_POST["desc"]);
+	$prop->setNombre($_POST["nombre"]);
+	$prop->setDescripcion($_POST["desc"]);
     $fecha =  date("Y-m-d");
-		$prop->setFechaPublicada($fecha);
-		$prop->setMonto($_POST["monto"]);
+	$prop->setFechaPublicada($fecha);
+	$prop->setMonto($_POST["monto"]);
     $prop->setCategoria($categ->obtenerPorNombreCat($_POST["catego"]));
     $prop->setUsuario($usr->obtenerPorNick(Session::get('usuario_nick')));
-		$prop->setMontoActual(0);
+	$prop->setMontoActual(0);
     $prop->setEstadoActual(1);
 
     $arch =($_FILES['archivo']['tmp_name']);
     $img =($_FILES['archivo']['name']);
     $tipo = ($_FILES['archivo']['type']);
-
-     $permitidos = array("image/jpg", "image/jpeg", "image/png");
+    $permitidos = array("image/jpg", "image/jpeg", "image/png");
         $target='';
         if(in_array($tipo, $permitidos)){
             //$target = "imgUsus/".basename($img);
@@ -192,43 +191,37 @@ function consolita( $data ) {
             echo "El tipo de imagen es incorrecto";
         }
             if($target != ''){
-            
-     
-        move_uploaded_file($arch, $target);
-    }
-        $prop->setImagen($target);
-
-
+            move_uploaded_file($arch, $target);
+    		}
+    $prop->setImagen($target);
     $EstadoActual = 1;
-      
 		if($prop->agregarP()){
         $prop->insertarImagen($prop->getNombre(),$target);
         $listEstado = new listaestados();
         $listEstado->setEstado(1);
         $listEstado->setPropuesta($prop->getNombre());
         $listEstado->setFecha($fecha);
-         $hora = date('H:i:s');
+        $hora = date('H:i:s');
         $listEstado->setHora($hora);
         $listEstado->agregarE(); 
-        $jaja = $listEstado->getEstado().$listEstado->getPropuesta().$listEstado->getFecha().$listEstado->getHora();
-        $tpl2 = Template::getInstance();
-          $tpl2->asignar('tituloPropuesta',$prop->getNombre());
-         $tpl2->mostrar('registrar_recomp',array());
-			exit;
+        $rec = new recompensa();
+        $reco = $rec->getListadoR($prop->getNombre());
+        $dato =$prop->getNombre();	
+        $this->redirect("propuesta","registrarRecom/$dato");
 		}else{
 			$mensaje="Error! No se pudo agregar la propuesta ";
 		}
 		
-	}
-  $categ = new categoria();
-  $categorias = $categ->getListado();
+	}else{
+	$categ = new categoria();
+	$categorias = $categ->getListado();
 	$tpl = Template::getInstance();
 	$tpl->asignar('titulo',"Nueva propuesta");
 	$tpl->asignar('buscar',"");
-  $tpl->asignar('categorias',$categorias);
+    $tpl->asignar('categorias',$categorias);
 	$tpl->asignar('mensaje',$mensaje);
 	$tpl->mostrar('registrar_propuesta',array());
-
+    }
 }
 
 
@@ -515,29 +508,36 @@ function registrarRecom($params = array())
 {
  $mensaje="";
   $propuesta = new Propuesta();
-  $prop=$propuesta->obtenerPorNombreProp($_POST["tituloPropuesta"]);
+  $prop=$propuesta->obtenerPorNombreProp($params[0]);
   if(isset($_POST["nombreR"])){
     $recom = new recompensa();
-    $recom->setNombre($_POST["nombre"]);
+    $recom->setNombre($_POST["nombreR"]);
     $recom->setMontoaSuperar($_POST["monto"]);
     $recom->setLimiteUsuarios($_POST["limite"]);
     $recom->setDescripcion($_POST["desc"]);
     $recom->setTituloPropuesta($prop);
     if($recom->agregar()){
-      if($params[0] == "fin"){
+      if(isset($_POST["Guardar y finalizar"])){
       $this->redirect("propuesta","listado");
        exit;
       }
+      else{
+         $this->redirect("propuesta","registrarRecom/$params[0]");
+         exit;
+      	   }
      
     }else $mensaje="Error! No se pudo agregar la colaboracion";
+  }else{
+	  $rec = new recompensa();
+	  $reco = $rec->getListadoR($params[0]);
+	  $tpl = Template::getInstance();
+	  $tpl->asignar('reco', $reco);
+	  $tpl->asignar('mensaje', $mensaje);
+	  $tpl->asignar('tituloPropuesta', $params[0]);
+	  $tpl->mostrar('registrar_recomp',array());
   }
-  $rec = new recompensa();
-  $reco = $rec->getListadoR($_POST["tituloPropuesta"]);
-  $tpl = Template::getInstance();
-  $tpl->asignar('tituloPropuesta', $_POST["tituloPropuesta"]);
-  $tpl->asignar('reco', $reco);
-  $tpl->mostrar('registrar_recomp',array());
 }
+
 
 function comentarEnPagina(){
   $propuesta = new Propuesta();

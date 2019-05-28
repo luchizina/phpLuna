@@ -17,6 +17,7 @@ class Usuario extends ClaseBase {
     private $Cedula = '';
     private $Activo = 0;
     private $favoritos = array();
+    private $token='';
 
 	public function __construct($obj=NULL) {
         if(isset($obj)){
@@ -27,6 +28,14 @@ class Usuario extends ClaseBase {
         $tabla="usuario";
         parent::__construct($tabla);
 
+    }
+
+    public function getToken(){
+        return $this->token;
+    }
+
+    public function setToken($token){
+        $this->token=$token;
     }
 
     public function getArchivo(){
@@ -187,6 +196,7 @@ public function agregar(){
         $email=$this->getCorreo();
         $arch = $this->getArchivo();
         $ci = $this->getCI();
+        $tokencito = $this->getToken();
         $act = $this->isActivo();
         $img = $this->getImagen();
         $tip = $this->getTipo();
@@ -214,10 +224,10 @@ public function agregar(){
         }*/
         //var_dump($lol);exit;
         $stmt = $this->getDB()->prepare( 
-            "INSERT INTO usuario (Nombre, Apellido,Nick, Correo, Password,Celular, Imagen, ci, activo, tipo)
-           VALUES (?,?,?,?,?,?,?,?,?,?)" );
+            "INSERT INTO usuario (Nombre, Apellido,Nick, Correo, Password,Celular, Imagen, ci, activo, tipo, token)
+           VALUES (?,?,?,?,?,?,?,?,?,?,?)" );
         //$null = NULL;
-        $stmt->bind_param("ssssssssii", $nombre, $ape, $nick, $email, $password, $cel, $target, $ci, $act,$tip);
+        $stmt->bind_param("ssssssssiis", $nombre, $ape, $nick, $email, $password, $cel, $target, $ci, $act,$tip, $tokencito);
         if($target != ''){
         move_uploaded_file($arch, $target);
     }
@@ -367,7 +377,7 @@ public function modificar()
 
 
     public function login($email,$pass){
-        $stmt = $this->getDB()->prepare( "SELECT * from  usuario WHERE Correo=? AND Password=?" );
+        $stmt = $this->getDB()->prepare( "SELECT * from  usuario WHERE Correo=? AND Password=? AND activo=1" );
         $stmt->bind_param("ss",$email,$pass);
         $stmt->execute();
         $resultado = $stmt->get_result();
@@ -391,6 +401,14 @@ public function modificar()
         Session::init();
         Session::destroy();
    } 
+
+   public function activarUsuario($token){
+    $estado = 1;
+    $stmt = $this->getDB()->prepare( 
+        "UPDATE usuario set activo=? WHERE token=?");     
+        $stmt->bind_param("is", $estado, $token);
+        return $stmt->execute();
+   }
 
 
 
