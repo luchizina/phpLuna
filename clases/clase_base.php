@@ -70,6 +70,8 @@ class ClaseBase{
         return $res;
     }
 
+
+
     public function obtenerPorNombreCat($nombre){
         $sql="select * from categoria where NombreH='$nombre' ";
         $res=NULL;

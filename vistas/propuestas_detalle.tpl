@@ -7,7 +7,10 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style_com.css">
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
     <!--[if lt IE 9]>
       <script src="js/vendor/html5shiv.min.js"></script>
       <script src="js/vendor/respond.min.js"></script>
@@ -93,6 +96,9 @@
            <a class="btn" href="{$url_base}propuesta/borrarComEnPagina/{$propuesta->getNombre()}/{$com->getId()}">
                          <i class="icon-trash"></i></a>
          {/if}
+         <a class="btn" onclick="javascript:likeComentario('{$usuLogNick}',{$com->getId()});">
+                         <i class="fa fa-thumbs-up"></i> <span id="{$usuLogNick}{$com->getId()}">{$com->getLikes()}</span></a>
+                         
         </div>
       </li>
       {/foreach}
@@ -115,6 +121,7 @@
     <script src="js/scripts.min.js"></script>
     <script src="js/main.min.js"></script>
     <script src="js/custom.js"></script>
+     <script src="js/validar.js" type="text/javascript"></script>
     </section>          
   </section>
       </body></html>

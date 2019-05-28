@@ -429,15 +429,23 @@ function detalleProp($params=array()){
 $propuesta = new Propuesta();
 $com = new Comentario();
 $coms = $com->com($params[0]);
+foreach ($coms as $comentario) {
+    
+}
+
 $u = new Usuario();
 foreach ($coms as $c) {
   $usu = $u->obtenerPorNick($c->NickUsuario);
   $c->setUsuario($usu);
+
+  $valor = $c->traerLikesComentario($c->getId());  
+  $c->setLike($valor["cant"]);
 }
 
 
 $prop = $propuesta->obtenerPorNombreProp($params[0]);
 $imagen = $propuesta->traerImagen($prop->getNombre());
+
     $tpl = Template::getInstance();
     $prop->setImagen($imagen);
   $tpl->asignar('propuesta', $prop);
@@ -559,6 +567,26 @@ function borrarComEnPagina($params=array()){
   if($comentario->borrar($num)){
      $this->redirect("propuesta","detalleProp",$algo);
   }
+}
+
+
+function likeComentPagina(){
+  //var_dump($_POST);
+  $num =(int)$_POST['idCom'];
+  $usuario = $_POST['nickUsu'];
+  $coment = new Comentario();
+  $com = $coment->obtenerPorId($num);
+  $res=$coment->likeCom($usuario, $num);
+  if($res){
+    $valor = $com->traerLikesComentario($num);
+   
+   echo $valor["cant"];  
+  }else {
+    $com->dislikeCom($usuario,$num);
+    $valor = $com->traerLikesComentario($num);
+    echo $valor["cant"];
+  }
+  
 }
 
 function likeCometario(){

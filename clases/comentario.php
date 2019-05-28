@@ -71,8 +71,11 @@ class Comentario extends ClaseBase {
            VALUES (?,?)" );
         $stmt->bind_param("si",$nick,
             $idCom);
-        return $stmt->execute();
+        $res=$stmt->execute();
+        //if(!$res) echo $stmt->error;
+        return $res;
     }
+
 
     public function dislikeCom($nick, $idCom){
         $stmt = $this->getDB()->prepare( 
@@ -81,6 +84,18 @@ class Comentario extends ClaseBase {
         $stmt->bind_param("si",$nick,
             $idCom);
         return $stmt->execute();
+    }
+
+
+    public function traerLikesComentario($idCom){
+        $sql="select count(*) as cant from likecomentario where Comentario ='$idCom'";
+        $resultados=array();
+        $resultado =$this->getDB()->query($sql)   
+            or die ("Fallo en la consulta");
+            $fila = $resultado->fetch_assoc();
+            $this->setLike($fila["cant"]);
+         return $fila; 
+
     }
 
     public function traeUsuarios($prop){

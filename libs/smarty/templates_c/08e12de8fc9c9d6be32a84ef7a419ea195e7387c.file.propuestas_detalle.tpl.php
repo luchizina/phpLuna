@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-28 11:08:48
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-28 19:45:40
          compiled from "vistas\propuestas_detalle.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:16463338915cec9373d54066-20230924%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '08e12de8fc9c9d6be32a84ef7a419ea195e7387c' => 
     array (
       0 => 'vistas\\propuestas_detalle.tpl',
-      1 => 1559052475,
+      1 => 1559083537,
       2 => 'file',
     ),
   ),
@@ -37,7 +37,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style_com.css">
+     <?php echo '<script'; ?>
+ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"><?php echo '</script'; ?>
+>
+
     <!--[if lt IE 9]>
       <?php echo '<script'; ?>
  src="js/vendor/html5shiv.min.js"><?php echo '</script'; ?>
@@ -147,6 +152,14 @@ propuesta/borrarComEnPagina/<?php echo $_smarty_tpl->tpl_vars['propuesta']->valu
 ">
                          <i class="icon-trash"></i></a>
          <?php }?>
+         <a class="btn" onclick="javascript:likeComentario('<?php echo $_smarty_tpl->tpl_vars['usuLogNick']->value;?>
+',<?php echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
+);">
+                         <i class="fa fa-thumbs-up"></i> <span id="<?php echo $_smarty_tpl->tpl_vars['usuLogNick']->value;
+echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
+"><?php echo $_smarty_tpl->tpl_vars['com']->value->getLikes();?>
+</span></a>
+                         
         </div>
       </li>
       <?php } ?>
@@ -176,6 +189,9 @@ propuesta/comentarEnPagina" class="probootstrap-form">
 >
     <?php echo '<script'; ?>
  src="js/custom.js"><?php echo '</script'; ?>
+>
+     <?php echo '<script'; ?>
+ src="js/validar.js" type="text/javascript"><?php echo '</script'; ?>
 >
     </section>          
   </section>
