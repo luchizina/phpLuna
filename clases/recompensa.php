@@ -98,5 +98,13 @@ class Recompensa extends ClaseBase {
         return $recompensas;
  } 
 
+ public function actualizaCant(){
+    $id = $this->getId();
+    $stmt = $this->getDB()->prepare( 
+    "UPDATE recompensa set cantActual=? WHERE id=?"); 
+    $stmt->bind_param("ii", $this->getCantActual(), $id);
+    return $stmt->execute();
+   }
+
 }
 ?>

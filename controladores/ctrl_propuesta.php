@@ -290,13 +290,14 @@ function nuevaColaboracion($params=array()){
     $col->setUsuario($usu);
     $col->setTituloPropuesta($prop);
     //$col->setRecompensa($Recompensa->obtenerPorId($_POST['rec']));
-    foreach ($recs as $r) {
-      if ($col->getMonto() >= $r->getMontoaSuperar()){
-        if($r->getLimiteUsuarios() <= $r->getCantActual()){
-          $r->setCantActual($r->getCantActual() + 1);
-        }
+    foreach ($recs as $clave=>$r) {
+      if($col->getMonto() >= $r->getMontoaSuperar()){
+        $pos = $clave;
       }
     }
+
+    $this->recursiva($recs, $col, $pos, $prop);
+
     if($col->agregar()){
       array_push($usu->getPropuestasColabora(), $prop);
       $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
@@ -315,6 +316,22 @@ function nuevaColaboracion($params=array()){
   $tpl->asignar('recompensas',$recs);
   $tpl->mostrar('nueva_colaboracion',array());
 }
+
+public function recursiva($recs, $col, $pos, $prop){
+  $r = $recs[$pos];
+  $r->setTituloPropuesta($prop);
+      if($r->getLimiteUsuarios() > $r->getCantActual()){
+        $r->setCantActual($r->getCantActual() + 1);
+        $col->setRecompensa($r);
+        $r->actualizaCant();
+        } else {
+          if($pos != 0){
+          $pos = $pos - 1;
+          $this->recursiva($recs, $col, $pos, $prop);
+        }
+      }
+  }
+
 
 function nuevaColaboracionCel(){
   $col = new Colaboracion();
