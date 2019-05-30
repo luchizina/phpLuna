@@ -22,14 +22,15 @@ class ControladorUsuario extends ControladorIndex {
        if(!empty($params)){
            if($params[0]=="borrar"){
                $usuario=new Usuario();
-               $idABorrar=$params[1];
-                if($usuario->borrar($idABorrar)){
+               $nickABorrar=$params[1];
+                if($usuario->borrar($nickABorrar)){
+                  $usuario->logout();
                     //Redirigir al listado
                     //header('Location: index.php');exit;
                     $this->redirect("usuario","listado");
                 }else{
                     //Mostrar error
-                    $usr=$usuario->obtenerPorId($idABorrar);
+                    $usr=$usuario->obtenerPorNick($nickABorrar);
                     //$mensaje="Error!! No se pudo borrar el usuario  <b>".$usr->getNombre()." ".$usr->getApellido()."</b>";
                     $mensaje="ERROR. No existe el usuario";
                     $usuarios=$usuario->getListado();	
@@ -65,8 +66,8 @@ function listadoMovil($params=array()){
        if(!empty($params)){
            if($params[0]=="borrar"){
                $usuario=new Usuario();
-               $idABorrar=$params[1];
-                if($usuario->borrar($idABorrar)){
+               $nickABorrar=$params[1];
+                if($usuario->borrar($NickABorrar)){
                     //Redirigir al listado
                     //header('Location: index.php');exit;
                     $this->redirect("usuario","listado");

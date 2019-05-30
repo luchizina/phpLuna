@@ -170,6 +170,14 @@ class Usuario extends ClaseBase {
         $this->favoritos = $favoritos;
     }
 
+    public function borrar($nick)
+    {
+        $activo = 0;
+            $stmt = $this->getDB()->prepare("UPDATE usuario set activo=? WHERE nick=?"); 
+        $stmt->bind_param("is",$activo, $nick);
+        return $stmt->execute();
+    }
+
     public function getBusqueda($buscar){
         $usuarios=array();
         $stmt = $this->getDB()->prepare( 

@@ -43,8 +43,13 @@ class ControladorPropuesta extends ControladorIndex {
                 if($params[0]=="colaborar"){
                   $this->nuevaColaboracion($params=array());
                 }
-           }else if ($params[0]=="filtrarrr"){
+           }else if ($params[0]=="filtrar"){
                $propuestas=$params[1];	
+            }
+            else{
+              $propuesta=new Propuesta();
+               $propuestas=$propuesta->getListadoProp();
+
             }
        }else{
             $propuesta=new Propuesta();
@@ -636,14 +641,17 @@ function likeCometario(){
 
 function filtrar($params=array())
 {
-    $texto = "a";
+    $texto = $params[0];
     $listaFinal = array();
     $prop = new Propuesta();
     $propuestasCat = $prop->getListadoCat($texto);
     $propuestasDesc = $prop->getListadoDesc($texto);
     $propuestasTit = $prop->getListadoTit($texto);
     $listaFinal = array_unique((array_merge($propuestasCat, $propuestasDesc, $propuestasTit)));
-    var_dump($listaFinal);
+    $array = array();
+    $array[] = "filtrar";
+    $array[] = $listaFinal;
+    $this->listado($array);
 }
 
 function dislikeCometario(){
