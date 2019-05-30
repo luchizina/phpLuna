@@ -545,14 +545,8 @@ function registrarRecom($params = array())
     $recom->setDescripcion($_POST["desc"]);
     $recom->setTituloPropuesta($prop);
     if($recom->agregar()){
-      if(isset($_POST["Guardar y finalizar"])){
-      $this->redirect("propuesta","listado");
-       exit;
-      }
-      else{
          $this->redirect("propuesta","registrarRecom/$params[0]");
          exit;
-      	   }
      
     }else $mensaje="Error! No se pudo agregar la colaboracion";
   }else{
@@ -593,6 +587,7 @@ function borrarComEnPagina($params=array()){
    $algo = array();
   $algo[] =$params[0];
   if($comentario->borrar($num)){
+    $comentario->borrarLikesCom($num);
      $this->redirect("propuesta","detalleProp",$algo);
   }
 }
