@@ -86,6 +86,15 @@ class Comentario extends ClaseBase {
         return $stmt->execute();
     }
 
+    public function borrarLikesCom($idCom){
+        $stmt = $this->getDB()->prepare( 
+            "DELETE FROM likecomentario 
+        WHERE Comentario=?");
+        $stmt->bind_param("i",$idCom);
+        return $stmt->execute();
+    }
+
+
 
     public function traerLikesComentario($idCom){
         $sql="select count(*) as cant from likecomentario where Comentario ='$idCom'";

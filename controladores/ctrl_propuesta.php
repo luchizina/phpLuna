@@ -589,6 +589,7 @@ function borrarComEnPagina($params=array()){
    $algo = array();
   $algo[] =$params[0];
   if($comentario->borrar($num)){
+    $comentario->borrarLikesCom($num);
      $this->redirect("propuesta","detalleProp",$algo);
   }
 }
