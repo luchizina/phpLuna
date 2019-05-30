@@ -290,7 +290,15 @@ function nuevaColaboracion($params=array()){
     $col->setFecha(date("Y-m-d"));
     $col->setUsuario($usu);
     $col->setTituloPropuesta($prop);
-    $col->setRecompensa($Recompensa->obtenerPorId($_POST['rec']));
+    //$col->setRecompensa($Recompensa->obtenerPorId($_POST['rec']));
+    foreach ($recs as $clave=>$r) {
+      if($col->getMonto() >= $r->getMontoaSuperar()){
+        $pos = $clave;
+      }
+    }
+
+    $this->recursiva($recs, $col, $pos, $prop);
+
     if($col->agregar()){
       array_push($usu->getPropuestasColabora(), $prop);
       $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
@@ -309,6 +317,22 @@ function nuevaColaboracion($params=array()){
   $tpl->asignar('recompensas',$recs);
   $tpl->mostrar('nueva_colaboracion',array());
 }
+
+public function recursiva($recs, $col, $pos, $prop){
+  $r = $recs[$pos];
+  $r->setTituloPropuesta($prop);
+      if($r->getLimiteUsuarios() > $r->getCantActual()){
+        $r->setCantActual($r->getCantActual() + 1);
+        $col->setRecompensa($r);
+        $r->actualizaCant();
+        } else {
+          if($pos != 0){
+          $pos = $pos - 1;
+          $this->recursiva($recs, $col, $pos, $prop);
+        }
+      }
+  }
+
 
 function nuevaColaboracionCel(){
   $col = new Colaboracion();
@@ -422,15 +446,23 @@ function detalleProp($params=array()){
 $propuesta = new Propuesta();
 $com = new Comentario();
 $coms = $com->com($params[0]);
+foreach ($coms as $comentario) {
+    
+}
+
 $u = new Usuario();
 foreach ($coms as $c) {
   $usu = $u->obtenerPorNick($c->NickUsuario);
   $c->setUsuario($usu);
+
+  $valor = $c->traerLikesComentario($c->getId());  
+  $c->setLike($valor["cant"]);
 }
 
 
 $prop = $propuesta->obtenerPorNombreProp($params[0]);
 $imagen = $propuesta->traerImagen($prop->getNombre());
+
     $tpl = Template::getInstance();
     $prop->setImagen($imagen);
   $tpl->asignar('propuesta', $prop);
@@ -551,8 +583,29 @@ function borrarComEnPagina($params=array()){
    $algo = array();
   $algo[] =$params[0];
   if($comentario->borrar($num)){
+    $comentario->borrarLikesCom($num);
      $this->redirect("propuesta","detalleProp",$algo);
   }
+}
+
+
+function likeComentPagina(){
+  //var_dump($_POST);
+  $num =(int)$_POST['idCom'];
+  $usuario = $_POST['nickUsu'];
+  $coment = new Comentario();
+  $com = $coment->obtenerPorId($num);
+  $res=$coment->likeCom($usuario, $num);
+  if($res){
+    $valor = $com->traerLikesComentario($num);
+   
+   echo $valor["cant"];  
+  }else {
+    $com->dislikeCom($usuario,$num);
+    $valor = $com->traerLikesComentario($num);
+    echo $valor["cant"];
+  }
+  
 }
 
 function likeCometario(){

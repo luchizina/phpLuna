@@ -70,6 +70,8 @@ class ClaseBase{
         return $res;
     }
 
+
+
     public function obtenerPorNombreCat($nombre){
         $sql="select * from categoria where NombreH='$nombre' ";
         $res=NULL;
@@ -126,7 +128,7 @@ class ClaseBase{
     }
 
     public function traerRecompensas($propuesta){
-        $sql="select * from recompensa where TituloPropuesta = '$propuesta'";
+        $sql="SELECT * FROM recompensa WHERE TituloPropuesta='$propuesta' ORDER BY MontoaSuperar ASC"; 
         $resultados=array();
 
         $resultado =$this->db->query($sql)   
