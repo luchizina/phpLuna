@@ -38,18 +38,17 @@ class ControladorPropuesta extends ControladorIndex {
                     $usr=$propuesta->obtenerPorId($idABorrar);
                     //$mensaje="Error!! No se pudo borrar el usuario  <b>".$usr->getNombre()." ".$usr->getApellido()."</b>";
                     $mensaje="ERROR. No existe la propuesta";
-                    $propuestas=$propuesta->getListado();	
+                    $propuestas=$propuesta->getListadoProp();	
                 }
                 if($params[0]=="colaborar"){
                   $this->nuevaColaboracion($params=array());
                 }
-           }else{
-                $propuesta=new Propuesta();
-               $propuestas=$propuesta->getListado();	
+           }else if ($params[0]=="filtrarrr"){
+               $propuestas=$params[1];	
             }
        }else{
             $propuesta=new Propuesta();
-               $propuestas=$propuesta->getListado();
+               $propuestas=$propuesta->getListadoProp();
         }
        
        //Llamar a la vista
@@ -115,7 +114,7 @@ function listadoCel(){
 
 
   $prop = new Propuesta();
-  $propuestas=$prop->getListado();
+  $propuestas=$prop->getListadoProp();
    $arreglo=["status"=>"ok","message"=>$propuestas];
        //$this->consolita($usuarios[0]->getNombre());
        $listaProps = json_encode($arreglo);
@@ -616,6 +615,18 @@ function likeCometario(){
     $arreglo=["status"=>"ok","message"=>[$array]];
     echo json_encode($arreglo);
   }
+}
+
+function filtrar($params=array())
+{
+    $texto = "a";
+    $listaFinal = array();
+    $prop = new Propuesta();
+    $propuestasCat = $prop->getListadoCat($texto);
+    $propuestasDesc = $prop->getListadoDesc($texto);
+    $propuestasTit = $prop->getListadoTit($texto);
+    $listaFinal = array_unique((array_merge($propuestasCat, $propuestasDesc, $propuestasTit)));
+    var_dump($listaFinal);
 }
 
 function dislikeCometario(){

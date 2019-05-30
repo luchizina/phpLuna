@@ -30,7 +30,9 @@ class Propuesta extends ClaseBase {
     }
 
 
-
+    public function __toString() {
+        return $this->Nombre;
+    }
 
     public function getArchivo(){
         return $this->Archivo;
