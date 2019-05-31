@@ -151,6 +151,9 @@ public function modificar($params = array())
     $u->setCelular($_POST["celular"]);
     $u->setCorreo($_POST["correo"]);
     $u->setPassword($_POST["password"]);
+    $u->setArchivo($_FILES['archivo']['tmp_name']);
+    $u->setImagen($_FILES['archivo']['name']);
+    $u->setTipo($_FILES['archivo']['type']);
     if($u->modificar())
     {
       $this->redirect("usuario","redirigir");

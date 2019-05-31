@@ -53,6 +53,13 @@
                 <input type="text" class="form-control" value="{$usuario_log->getCelular()}" id="celular" name="celular">
               </div>
               <div class="form-group">
+                <label for="archivo">Seleccionar imagen de perfil
+
+                <input  id="archivo" name="archivo" type="file" class="form-control" accept="image/*"> 
+               
+                </label>
+              </div>
+              <div class="form-group">
                 <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" value="MODIFICAR">
               </div>
             </form>

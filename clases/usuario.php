@@ -341,13 +341,27 @@ public function modificar()
         $email=$this->getCorreo();
         $cel = $this->getCelular();
         $null = null;
+        $arch = $this->getArchivo();
+        $img = $this->getImagen();
+        $tip = $this->getTipo();
+        $permitidos = array("image/jpg", "image/jpeg", "image/png");
+        $target='';
+        if(in_array($tip, $permitidos)){
+            $extension=end(explode(".", $img));
+            $target = "imgUsus/".$nick.".".$extension;
+        } else {
+            echo "El tipo de imagen es incorrecto";
+        }
+        $this->setImagen($target);
         $stmt = $this->getDB()->prepare( 
             "UPDATE usuarios set
-        nombre=?, apellido=?,Nick=?, Correo=?, Password=?,Celular=?, Imagen=?, ci=?, activo=? WHERE id=?"); 
+        nombre=?, apellido=?, Correo=?, Password=?,Celular=?, Imagen=? WHERE Nick=?"); 
            
-        $stmt->bind_param("ssssssbsi",$nombre,
-            $ape,$nick,$email,$password,$cel,$null,$ci,$activo);
-        $stmt->send_long_data(7, $lol);
+        $stmt->bind_param("sssssss",$nombre,
+            $ape,$email,$password,$cel,$target);
+        if($target != ''){
+        move_uploaded_file($arch, $target);
+    }
         return $stmt->execute();
    }
 
