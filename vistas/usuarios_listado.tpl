@@ -51,8 +51,11 @@
                    <td>{$persona->getNick()}</td>
                     <td>{$persona->getCorreo()}</td>
                     <td>
+                       {if $usuLogNick == $persona->getNick()}
                       <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='{$url_base}usuario/listado/borrar/{$persona->getNick()}/'"/>
                       <input type="button" value="Modificar" class="btn btn-success" onClick="window.location='{$url_base}usuario/modificar/{$persona->getNick()}/'"/>
+                       {/if}
+                      <input type="button" value="Ver perfil" class="btn btn-success" onClick="window.location='{$url_base}usuario/verPerfil/{$persona->getNick()}/'"/>
                     <!--  <input type="button" value="Favoritos" class="btn btn-submit" onClick="cargarFavoritos();"/>-->
                     </td>
                   </tr>

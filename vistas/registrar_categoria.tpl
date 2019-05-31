@@ -37,7 +37,6 @@
           </div>   
         <div class="col-sm-12  col-md-12  main" >
           <div class="table-responsive">
-
             <table class="table table-striped tabla" style=" background-color: #ecececb3">
               <thead>
                 <tr>

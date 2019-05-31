@@ -12,6 +12,28 @@ function validarci(){
 		success:function(html){
 			$("#avisaCe").html(html);
 			Chequear();
+		},
+		error:function(){
+			document.getElementById("message1").style.display = "block";
+		}
+	});
+}
+
+
+function likeComentario(usuario, idComent){
+
+$.ajax({
+		url:"/phpLuna/propuesta/likeComentPagina",
+		method: "POST",
+		data:{nickUsu:usuario,
+				idCom:idComent},
+		//dataType:"text",
+		success:function(valor){
+			$("#"+usuario+idComent).html(valor);
+			
+		},
+		error:function(){
+			//document.getElementById("message1").style.display = "block";
 		}
 	});
 }
@@ -25,6 +47,9 @@ function validarnick(){
 		//dataType:"text",
 		success:function(html){
 			$("#avisa").html(html);
+		},
+		error:function(){
+			document.getElementById("message1").style.display = "block";
 		}
 	});
 }
@@ -39,6 +64,9 @@ function validarcorreo(){
 		success:function(html){
 			$("#avisaC").html(html);
 			Chequear();
+		},
+		error:function(){
+			document.getElementById("message1").style.display = "block";
 		}
 	});
 }

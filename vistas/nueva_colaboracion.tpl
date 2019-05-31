@@ -35,14 +35,14 @@
                 <label for="monto">Monto</label>
                 <input id="monto" name="monto" type="number" placeholder="Ej: 500" class="form-control" required="">
               </div>
-              <label for="rec">Recompensa</label>
+             <!-- <label for="rec">Recompensa</label>
               <select name="rec">
               <div class="form-group">
                 {foreach from=$recompensas item=rec}
               <option value="{$rec->getId()}">{$rec->getNombre()}</option>
                 {/foreach}
               </div>
-            </select>
+            </select> -->
               <div class="form-group">
                 <input type="submit" class="btn btn-primary btn-lg" id="guardar" name="guardar" value="Colaborar">
               </div>

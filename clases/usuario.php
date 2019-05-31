@@ -10,12 +10,14 @@ class Usuario extends ClaseBase {
 	public $Imagen;
     public $Archivo;
     public $tipo;
+    public $tipoImg;
 	public $Comentarios = array();
 	public $PropuestasPropone = array();
 	public $PropuestasColabora = array();
     private $Cedula = '';
     private $Activo = 0;
     private $favoritos = array();
+    private $token='';
 
 	public function __construct($obj=NULL) {
         if(isset($obj)){
@@ -26,6 +28,14 @@ class Usuario extends ClaseBase {
         $tabla="usuario";
         parent::__construct($tabla);
 
+    }
+
+    public function getToken(){
+        return $this->token;
+    }
+
+    public function setToken($token){
+        $this->token=$token;
     }
 
     public function getArchivo(){
@@ -46,6 +56,14 @@ class Usuario extends ClaseBase {
 
     public function setTipo($tipo){
         $this->tipo=$tipo;
+    }
+
+    public function getTipoImg(){
+        return $this->tipoImg;
+    }
+
+    public function setTipoImg($tipoImg){
+        $this->tipoImg=$tipoImg;
     }
 
     public function getPropuestasColabora(){
@@ -152,6 +170,14 @@ class Usuario extends ClaseBase {
         $this->favoritos = $favoritos;
     }
 
+    public function borrar($nick)
+    {
+        $activo = 0;
+            $stmt = $this->getDB()->prepare("UPDATE usuario set activo=? WHERE nick=?"); 
+        $stmt->bind_param("is",$activo, $nick);
+        return $stmt->execute();
+    }
+
     public function getBusqueda($buscar){
         $usuarios=array();
         $stmt = $this->getDB()->prepare( 
@@ -178,16 +204,22 @@ public function agregar(){
         $email=$this->getCorreo();
         $arch = $this->getArchivo();
         $ci = $this->getCI();
+        $tokencito = $this->getToken();
         $act = $this->isActivo();
         $img = $this->getImagen();
         $tip = $this->getTipo();
-        $permitidos = array("image/jpg", "image/jpeg", "image/png");
+        $tipoImg = $this->getTipoImg();
+        $permitidos = array("image/jpg", "image/jpeg", "image/png", "");
         $target='';
-        if(in_array($tip, $permitidos)){
+        if(in_array($tipoImg, $permitidos)){
             //$target = "imgUsus/".basename($img);
-            $extension=end(explode(".", $img));
+            if($tipoImg != ""){
+                $extension=end(explode(".", $img));
             //rename($target, $nick.".".$extension);
-            $target = "imgUsus/".$nick.".".$extension;
+                $target = "imgUsus/".$nick.".".$extension;
+            } else {
+                $target = "";
+            }
         } else {
             echo "El tipo de imagen es incorrecto";
         }
@@ -200,10 +232,10 @@ public function agregar(){
         }*/
         //var_dump($lol);exit;
         $stmt = $this->getDB()->prepare( 
-            "INSERT INTO usuario (Nombre, Apellido,Nick, Correo, Password,Celular, Imagen, ci, activo)
-           VALUES (?,?,?,?,?,?,?,?,?)" );
+            "INSERT INTO usuario (Nombre, Apellido,Nick, Correo, Password,Celular, Imagen, ci, activo, tipo, token)
+           VALUES (?,?,?,?,?,?,?,?,?,?,?)" );
         //$null = NULL;
-        $stmt->bind_param("ssssssssi", $nombre, $ape, $nick, $email, $password, $cel, $target, $ci, $act);
+        $stmt->bind_param("ssssssssiis", $nombre, $ape, $nick, $email, $password, $cel, $target, $ci, $act,$tip, $tokencito);
         if($target != ''){
         move_uploaded_file($arch, $target);
     }
@@ -367,7 +399,7 @@ public function modificar()
 
 
     public function login($email,$pass){
-        $stmt = $this->getDB()->prepare( "SELECT * from  usuario WHERE Correo=? AND Password=?" );
+        $stmt = $this->getDB()->prepare( "SELECT * from  usuario WHERE Correo=? AND Password=? AND activo=1" );
         $stmt->bind_param("ss",$email,$pass);
         $stmt->execute();
         $resultado = $stmt->get_result();
@@ -380,6 +412,7 @@ public function modificar()
         Session::set('usuario_nick', $res->Nick);
         Session::set('usuario_nombre', $res->Nombre);
         Session::set('usuario_email', $res->Correo);
+        Session::set('usuario_tipo', $res->tipo);
 
          return true;
 
@@ -390,6 +423,14 @@ public function modificar()
         Session::init();
         Session::destroy();
    } 
+
+   public function activarUsuario($token){
+    $estado = 1;
+    $stmt = $this->getDB()->prepare( 
+        "UPDATE usuario set activo=? WHERE token=?");     
+        $stmt->bind_param("is", $estado, $token);
+        return $stmt->execute();
+   }
 
 
 

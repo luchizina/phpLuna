@@ -22,14 +22,15 @@ class ControladorUsuario extends ControladorIndex {
        if(!empty($params)){
            if($params[0]=="borrar"){
                $usuario=new Usuario();
-               $idABorrar=$params[1];
-                if($usuario->borrar($idABorrar)){
+               $nickABorrar=$params[1];
+                if($usuario->borrar($nickABorrar)){
+                  $usuario->logout();
                     //Redirigir al listado
                     //header('Location: index.php');exit;
                     $this->redirect("usuario","listado");
                 }else{
                     //Mostrar error
-                    $usr=$usuario->obtenerPorId($idABorrar);
+                    $usr=$usuario->obtenerPorNick($nickABorrar);
                     //$mensaje="Error!! No se pudo borrar el usuario  <b>".$usr->getNombre()." ".$usr->getApellido()."</b>";
                     $mensaje="ERROR. No existe el usuario";
                     $usuarios=$usuario->getListado();	
@@ -65,8 +66,8 @@ function listadoMovil($params=array()){
        if(!empty($params)){
            if($params[0]=="borrar"){
                $usuario=new Usuario();
-               $idABorrar=$params[1];
-                if($usuario->borrar($idABorrar)){
+               $nickABorrar=$params[1];
+                if($usuario->borrar($NickABorrar)){
                     //Redirigir al listado
                     //header('Location: index.php');exit;
                     $this->redirect("usuario","listado");
@@ -122,11 +123,19 @@ function nuevo(){
     //var_dump($_FILES);exit();
     $usr->setArchivo($_FILES['archivo']['tmp_name']);
     $usr->setImagen($_FILES['archivo']['name']);
-    $usr->setTipo($_FILES['archivo']['type']);
+    $usr->setTipoImg($_FILES['archivo']['type']);
+     $usr->setTipo(1);
     $usr->setCI($_POST["ci"]);
-    $usr->setActivo(1);
+    $usr->setActivo(0);
+    $token = md5(uniqid(mt_rand(), false));
+    $usr->setToken($token);
     if($usr->agregar()){
-      $this->redirect("usuario","login");
+      $nombreC = $usr->getNombre()." ".$usr->getApellido();
+      $url="http://localhost/phpLuna/usuario/activarU/".$token;
+      $body = "Para activar su cuenta debe entrar al siguiente enlace: ".$url;
+      $bodyhtml = "Para activar su cuenta haga click aqui <a href='$url'>Activar cuenta</a>";
+      Utils::enviarEmail($usr->getCorreo(),$nombreC, $body, $bodyhtml);
+      $this->redirect("usuario","aviso");
       exit;
     }else{
       $mensaje="Error! No se pudo agregar el usuario";
@@ -139,6 +148,22 @@ function nuevo(){
   $tpl->asignar('mensaje',$mensaje);
   $tpl->mostrar('usuarios_nuevo',array());
 }
+
+public function aviso(){
+  $tpl = Template::getInstance();
+  $tpl->mostrar('aviso', array());
+}
+
+public function activarU($a = array()){
+  $token = $a[0];
+  $u = new Usuario();
+  if($u->activarUsuario($token)){
+    $this->redirect("usuario","login");
+  } else {
+    echo "Error en tratar de activar el usuario";
+  }
+}
+
 public function modificar($params = array())
    {
      $mensaje = "";
@@ -229,7 +254,7 @@ function login(){
       $this->redirect("usuario","redirigir");
       exit;
     }else{
-      $mensaje="Error! Este usuario no está registrado en el sistema";
+      $mensaje="Error! Este usuario no está registrado en el sistema o su cuenta aun no esta activa";
     }
     
   }
@@ -297,5 +322,23 @@ public function nuevoUsuCel(){
     }
    // echo json_encode($json_registration);
 }
+
+
+function verPerfil($params=array()){
+$usuario = new Usuario();
+$usu = $usuario->obtenerPorNick($params[0]);
+$imagen = $usuario->traerImagen($usu->getNick());
+    $tpl = Template::getInstance();
+    $usu->setImagen($imagen);
+   $tpl->asignar('usuario', $usu);
+  $tpl->mostrar('usuario_perfil',$usu);
+
+}
+
+
+
+
+
+
 }
 ?>

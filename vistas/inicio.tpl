@@ -52,7 +52,7 @@
                 </div>
                 <div class="text">
                   <h2>Conviértete en voluntario...</h2>
-                  <p>Apoyando estarás siendo parte de nuestra comunidad que deseaoms tener aquí </p>
+                  <p>Apoyando estarás siendo parte de nuestra comunidad que deseamos tener aquí </p>
                   <p><a href="#">Leer más</a></p>
                 </div>
               </div>

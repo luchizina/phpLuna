@@ -1,30 +1,30 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-20 20:45:15
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-30 23:05:17
          compiled from "vistas\usuarios_modificar.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:179205ce2ee940db325-03162607%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:15774922715cf0458d2ba300-34896812%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '0b55c0502d49d65e122bfc0ca14f565e52708d1c' => 
     array (
       0 => 'vistas\\usuarios_modificar.tpl',
-      1 => 1558377909,
+      1 => 1558645113,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '179205ce2ee940db325-03162607',
+  'nocache_hash' => '15774922715cf0458d2ba300-34896812',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5ce2ee9421df12_74337115',
   'variables' => 
   array (
     'url_base' => 0,
     'usuario_log' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cf0458d425296_99405575',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5ce2ee9421df12_74337115')) {function content_5ce2ee9421df12_74337115($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5cf0458d425296_99405575')) {function content_5cf0458d425296_99405575($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -46,7 +46,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
     <?php echo $_smarty_tpl->getSubTemplate ("cabezal.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
-    <div style="margin: 0 auto">
+    
     <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg); height:100%"  data-stellar-background-ratio="0.1">
         <div class="container">
           <div class="row">
@@ -59,7 +59,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         </div>
 
       <section class="probootstrap-section" >
-        <div class="container >
+        <div class="container" >
           <div class="row" style="margin: 0 auto">
 
           <div class="col-md-5 probootstrap-animate mx-auto" style="margin: auto 0; color: white; font-family: Montserrat,Arial,sans-serif "  >
@@ -107,5 +107,4 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 >
     </section>          
   </section>
-    </div>
       </body></html><?php }} ?>

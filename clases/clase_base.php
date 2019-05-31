@@ -34,6 +34,23 @@ class ClaseBase{
      return $resultados;   
     }
 
+    public function getListadoProp()
+    {
+        $sql="select * from $this->tabla where NickUsuario NOT IN (SELECT Nick from usuario where activo = 0)  ";
+        $resultados=array();
+
+        $resultado =$this->db->query($sql)   
+            or die ("Fallo en la consulta");
+
+        while ( $fila = $resultado->fetch_object() )
+        {
+            
+            $objeto= new $this->modelo($fila);
+            $resultados[]=$objeto;
+        } 
+     return $resultados;   
+    }
+
     public function obtenerPorId($id){
         $sql="select * from $this->tabla where id=$id ";
         $res=NULL;
@@ -94,12 +111,54 @@ class ClaseBase{
     }
 
     public function obtenerPorNombreProp($nombre){
-        $sql="select * from $this->tabla where Nombre='$nombre' ";
+        $sql="select * from $this->tabla where Nombre='$nombre' AND NickUsuario NOT IN (SELECT Nick from usuario where activo = 0) ";
         $res=NULL;
         $resultado =$this->db->query($sql)   
             or die ("Fallo en la consulta propuesta");
          if($fila = $resultado->fetch_object()) {
            $res= new $this->modelo($fila);
+        }
+        return $res;
+    }
+
+    public function getListadoCat($texto)
+    {
+        $sql="select * from $this->tabla where Categoria like '%$texto%' AND NickUsuario NOT IN (SELECT Nick from usuario where activo = 0)";
+        $res=array();
+        $resultado=$this->db->query($sql)
+            or die("Fallo en la consulta propuesta cat");
+        while($fila = $resultado->fetch_object())
+        {
+            $objeto = new $this->modelo($fila);
+            $res[]=$objeto;
+        }
+        return $res;
+    }
+
+    public function getListadoDesc($texto)
+    {
+        $sql="select * from $this->tabla where Descripcion like '%$texto%' AND NickUsuario NOT IN (SELECT Nick from usuario where activo = 0)";
+        $res=array();
+        $resultado=$this->db->query($sql)
+            or die("Fallo en la consulta propuesta desc");
+        while($fila = $resultado->fetch_object())
+        {
+            $objeto = new $this->modelo($fila);
+            $res[]=$objeto;
+        }
+        return $res;
+    }
+
+    public function getListadoTit($texto)
+    {
+        $sql="select * from $this->tabla where Nombre like '%$texto%' AND NickUsuario NOT IN (SELECT Nick from usuario where activo = 0)";
+        $res=array();
+        $resultado=$this->db->query($sql)
+            or die("Fallo en la consulta propuesta tit");
+        while($fila = $resultado->fetch_object())
+        {
+            $objeto = new $this->modelo($fila);
+            $res[]=$objeto;
         }
         return $res;
     }
@@ -124,7 +183,7 @@ class ClaseBase{
     }
 
     public function traerRecompensas($propuesta){
-        $sql="select * from recompensa where TituloPropuesta = '$propuesta'";
+        $sql="SELECT * FROM recompensa WHERE TituloPropuesta='$propuesta' ORDER BY MontoaSuperar ASC"; 
         $resultados=array();
 
         $resultado =$this->db->query($sql)   
