@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-30 22:57:15
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-31 00:09:12
          compiled from "vistas\inicio.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:11428795935cf043abb99634-79646685%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c9a1123df06652abffdc7699f4d4134cd2f4681f' => 
     array (
       0 => 'vistas\\inicio.tpl',
-      1 => 1558645113,
+      1 => 1559254125,
       2 => 'file',
     ),
   ),
@@ -15,13 +15,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cf043ace8be00_55036661',
   'variables' => 
   array (
     'url_base' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cf043ace8be00_55036661',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5cf043ace8be00_55036661')) {function content_5cf043ace8be00_55036661($_smarty_tpl) {?><!DOCTYPE html>
 
@@ -83,7 +83,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 </div>
                 <div class="text">
                   <h2>Conviértete en voluntario...</h2>
-                  <p>Apoyando estarás siendo parte de nuestra comunidad que deseaoms tener aquí </p>
+                  <p>Apoyando estarás siendo parte de nuestra comunidad que deseamos tener aquí </p>
                   <p><a href="#">Leer más</a></p>
                 </div>
               </div>

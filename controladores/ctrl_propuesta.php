@@ -634,6 +634,30 @@ function likeCometario(){
   }
 }
 
+function likePropuestaCel(){
+ 
+  $usuario = new Usuario();
+  $u = $usuario->$obtenerPorMail($_POST['usuCorreo']);
+  $prop = new Propuesta();
+  $propuesta = $prop->obtenerPorNombreProp($_POST['propNombre']);
+
+  if($propuesta->likeProp($usu->getNick(),$propuesta->getNombre())){
+
+    $msg = "Bien";
+    $array = ["mens"=>$msg];
+    $arreglo=["status"=>"ok","message"=>[$array]];
+    echo json_encode($arreglo);
+  } else {
+    $msg = "Mal";
+    $array = ["mens"=>$msg];
+    $arreglo=["status"=>"ok","message"=>[$array]];
+    echo json_encode($arreglo);
+  }
+}
+
+
+
+
 function filtrar($params=array())
 {
     $texto = $params[0];

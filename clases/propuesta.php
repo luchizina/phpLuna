@@ -309,6 +309,17 @@ public function modificar()
    }
 
 
+public function likeProp($nombreUsu, $nombreProp)
+   {
+      $stmt = $this->getDB()->prepare( 
+            "INSERT INTO likepropuesta
+        (Usuario, Propuesta) 
+           VALUES (?,?)" );
+        $stmt->bind_param("ss",$nombreUsu,
+            $nombreProp);
+        return $stmt->execute();
+   }
+
 
 }
  ?>
