@@ -19,7 +19,11 @@
           <div class="row">
             <div class="col-md-12" >
               <div class="probootstrap-slider-text probootstrap-animate" data-animate-effect="fadeIn">
+                 {if $usuLogNick == $usuario->getNick()}
                 <h1 class="probootstrap-heading probootstrap-animate">¡Hola {$usuario->getNombre()}! Este es tu perfil.</h1>
+                 {else}
+                   <h1 class="probootstrap-heading probootstrap-animate">Este es el perfil de {$usuario->getNombre()}</h1>
+                 {/if}
               </div>
             </div>
           </div>

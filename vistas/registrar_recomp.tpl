@@ -55,9 +55,7 @@
               </div>
               
               <div class="form-group">
-                
                 <input type="submit" name="jaja" value="Guardar y agregar otra" class="btn btn-primary" onClick="window.location='{$url_base}propuesta/registrarRecom/{$tituloPropuesta}'"/>
-                  <input type="submit" name="que" value="Guardar y finalizar" class="btn btn-primary" onClick="window.location='{$url_base}propuesta/registrarRecomF/{$tituloPropuesta}'"/>
               </div>
                
             </form>
@@ -66,8 +64,8 @@
             <h2 style="color:#fff">Recompensas ya ingresadas</h2>
             <div class="row">
             <div class="col-sm-12  col-md-12  main">
-            <div class="table-responsive scrip">
-            <table class="table table-striped tabla " style=" background-color: #ecececb3">
+            <div class="table-responsive scrip src">
+            <table class="table table-striped tabla" style=" background-color: #ecececb3">
               <thead>
                 <tr>
                   <th style="background-color: #959090; color:#fff">Nombre: </th>
@@ -89,6 +87,9 @@
               </tbody>
             </table>
           </div>
+           <div class="form-group">
+                 <input type="button" name="que" value="Listo!" class="btn btn-primary" onClick="window.location='{$url_base}propuesta/listado'"/>
+              </div>
           </div>
           </div>
           </div>

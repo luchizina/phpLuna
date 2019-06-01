@@ -1,95 +1,82 @@
-
 <!DOCTYPE html>
-<html lang="es" >
+
+<html lang="en">
   <head>
-    <base href="{$url_base}">
     <meta charset="utf-8">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <base href="{$url_base}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="img/moon.png" type="image/png" />
+    <title>LUNA</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Montserrat:300,400,700,900" rel="stylesheet">
+     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/styles-merged.css">
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+     <link rel="stylesheet" href="css/dashboard.css">
 
-    <link href="css/dashboard.css" rel="stylesheet">
- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
-    
-    
+    <!--[if lt IE 9]>
+      <script src="js/vendor/html5shiv.min.js"></script>
+      <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
   </head>
+  <body>
+    {include file="cabezal.tpl"}  
+ <section class="probootstrap-hero bg" style="background-image: url(img/hero_bg_bw_1.jpg)"  data-stellar-background-ratio="0">
+  <br>
+  <br>
+     <section class="probootstrap-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 text-center section-heading probootstrap-animate" data-animate-effect="fadeIn">
+              <h2 class="caca">Propuestas a las que puedas apoyar </h2>
+              <p class="lead">miralas tranqui</p>
+            </div>
+            <button id="agregar" name="agregar" title="Agregar una propuestas" class="btn btn-primary pull-right" onClick="window.location='{$registrar_propuesta}'">Agregar</button>
 
-  <body class="bg">
-    {include file="cabezal.tpl"}
-    <br>
-    <br>
-    <section class="probootstrap-hero"  data-stellar-background-ratio="0.1">
-    <div class="container-fluid">
-      <div class="row " style="max-width: 1000px; margin: 0 auto">
-       
-        <div class="col-sm-12  col-md-12  main" >
-          <h1 class="page-header" style="color: #fff ; text-align: center;">Propuestas</h1>
-          <br>
-          <h2 class="sub-header" style="color: #fff">{$titulo} <button id="agregar" name="agregar" class="btn btn-success pull-right" onClick="window.location='{$registrar_propuesta}'">Agregar</button></h2>
-
-          {if $mensaje!=""}
-            <div class="alert alert-danger" role="alert">{$mensaje}</div>
-          {/if}
-          <div class="table-responsive tabla scr">
-            <table class="table table-striped  " style=" background-color: #ececec;">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Descripcion</th>
-                  <th>Monto</th>
-                  <th>Fecha agregada</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {foreach from=$propuestas item=prop}
-
-                  <tr>
-                    <td>{$prop->getNombre()|upper}</td>
-                    <td>{$prop->getDescripcion()}</td>
-                   <td>{$prop->getMonto()}</td>
-                    <td>{$prop->getFechaPublicada()}</td>
-                    <td>
-                <a class="btn" href="{$url_base}propuesta/detalleProp/{$prop->getNombre()}/">
-                  <i class="icon-eye"></i></a>
-                    
-                      {if $usuLogNick == $prop->getUsuario()}
-
-                         <a class="btn" href="{$url_base}propuesta/borrar/{$prop->getNombre()}/">
-                         <i class="icon-trash"></i></a>
-                          <a class="btn" href="{$url_base}propuesta/modificar/{$prop->getNombre()}/">
-                         <i class="icon-edit"></i></a>
-                       {/if}
-
-                       {if $prop->isFavoriteada($usuLogNick)}
-                        <a class="btn" href="{$url_base}propuesta/desfavoritear/{$prop->getNombre()}/">
-                         <i class="fa fa-star"></i></a>
-                      
-                       {/if}
-
-                       {if !$prop->isFavoriteada($usuLogNick)}
-                        <a class="btn" href="{$url_base}propuesta/favoritear/{$prop->getNombre()}/">
-                         <i class="fa fa-star-o"></i></a>
-                       
-                       {/if}
-                        <a class="btn" href="{$nueva_colaboracion}{$prop->getNombre()}/">
-                         <i class="fa fa-dollar"></i></a>
-                     
-                    </td>
-                  </tr>
-                {/foreach}
-              </tbody>
-            </table>
           </div>
-        </div>
-      </div>
-    </div>
-     </section>
+          <div class="row jajejo">
+            {foreach from=$propuestas item=prop}
+            {$img = $prop->traerImagen($prop->getNombre())}
+            {$prop->setImagen($img)}
+            <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 probootstrap-animate" data-animate-effect="fadeIn">
+              <div class="probootstrap-image-text-block probootstrap-cause">
+                <figure class="imk"  width="360" height="200">
+                  <img src="{$prop->getImagen()}" alt="{$prop->getNombre()|upper}" class="img2">
+                </figure>
+                <div class="probootstrap-cause-inner">
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-s2" data-percent="{$prop->calc()}"></div>
+                  </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+                  <div class="row mb30">
+                    <div class="col-md-6 col-sm-6 col-xs-6 probootstrap-raised">Monto actual: <span class="money">{$prop->getMontoActual()}</span></div>
+                    <div class="col-md-6 col-sm-6 col-xs-6 probootstrap-goal">Objetivo: <span class="money"> $ {$prop->getMonto()}</span></div>
+                  </div>
+                  <h2><a href="{$url_base}propuesta/detalleProp/{$prop->getNombre()}/">{$prop->getNombre()|upper} </a>
+                    {if $prop->isFavoriteada($usuLogNick)}
+                        <a class="btn estrella" href="{$url_base}propuesta/desfavoritear/{$prop->getNombre()}/">
+                         <i class="fa fa-star"></i></a>
+                       {/if}
+                       {if !$prop->isFavoriteada($usuLogNick)}
+                        <a class="btn estrella" href="{$url_base}propuesta/favoritear/{$prop->getNombre()}/">
+                         <i class="fa fa-star-o"></i></a>
+                      {/if}
+                      </h2>
+                  <div class="probootstrap-date"><i class="icon-calendar"></i> 2 hours remaining</div>  
+                  <p><a href="#" class="btn btn-primary btn-black">Colaborar!</a></p>
+                </div>
+              </div>
+            </div>
+                  {/foreach}
+  </div>
+      </section>
+ </section>
 
+
+    <script src="js/scripts.min.js"></script>
+    <script src="js/main.min.js"></script>
+    <script src="js/custom.js"></script>
+    
   </body>
 </html>
-

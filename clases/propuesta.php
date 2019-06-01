@@ -30,7 +30,9 @@ class Propuesta extends ClaseBase {
     }
 
 
-
+    public function __toString() {
+        return $this->Nombre;
+    }
 
     public function getArchivo(){
         return $this->Archivo;
@@ -218,7 +220,7 @@ class Propuesta extends ClaseBase {
 public function calc(){
   $moT = $this->getMonto();
   $moA = $this->getMontoActual();
-  $toT= ($moT * $moA)/100;
+  $toT= ($moA * 100)/$moT;
    return ($toT);
 }
 
