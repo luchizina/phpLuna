@@ -16,6 +16,10 @@ text-decoration: none;
  * Global add-ons
  */
 
+.jajejo{
+margin: 100px;
+}
+
 .sub-header {
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;
@@ -152,3 +156,4 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     max-width: 400px;
     padding-top: 200px;
 }
+

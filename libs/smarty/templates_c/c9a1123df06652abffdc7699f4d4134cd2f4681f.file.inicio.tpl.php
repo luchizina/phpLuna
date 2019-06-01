@@ -1,29 +1,29 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-31 01:00:11
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-01 01:06:25
          compiled from "vistas\inicio.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:289125cf0607b380d80-06032614%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:114625cf19fa4264e71-56193665%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'c9a1123df06652abffdc7699f4d4134cd2f4681f' => 
     array (
       0 => 'vistas\\inicio.tpl',
-      1 => 1558386644,
+      1 => 1559342823,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '289125cf0607b380d80-06032614',
+  'nocache_hash' => '114625cf19fa4264e71-56193665',
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cf19fa521eee0_37267361',
   'variables' => 
   array (
     'url_base' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cf0607b8bc762_76665275',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cf0607b8bc762_76665275')) {function content_5cf0607b8bc762_76665275($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5cf19fa521eee0_37267361')) {function content_5cf19fa521eee0_37267361($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -83,7 +83,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 </div>
                 <div class="text">
                   <h2>Conviértete en voluntario...</h2>
-                  <p>Apoyando estarás siendo parte de nuestra comunidad que deseaoms tener aquí </p>
+                  <p>Apoyando estarás siendo parte de nuestra comunidad que deseamos tener aquí </p>
                   <p><a href="#">Leer más</a></p>
                 </div>
               </div>
@@ -102,7 +102,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         </div>
       </section>
 
-    <!--  <section class="probootstrap-section">
+     <section class="probootstrap-section">
         <div class="container">
           <div class="row">
             <div class="col-md-12 text-center section-heading probootstrap-animate" data-animate-effect="fadeIn">
