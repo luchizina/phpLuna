@@ -57,6 +57,11 @@ class ControladorPropuesta extends ControladorIndex {
         }
        
        //Llamar a la vista
+        foreach ($propuestas as $p) {
+          $img = $p->traerImagen($p->getNombre());
+          $p->setImagen($img);
+          # code...
+        }
         $tpl = Template::getInstance();
         $datos = array(
        'propuestas' => $propuestas,
@@ -637,19 +642,45 @@ function likeCometario(){
 function likePropuestaCel(){
  
   $usuario = new Usuario();
-  $u = $usuario->$obtenerPorMail($_POST['usuCorreo']);
+  $u = $usuario->obtenerPorMail($_POST['usuCorreo']);
+  #$u = $usuario->obtenerPorMail($a[0]);
   $prop = new Propuesta();
   $propuesta = $prop->obtenerPorNombreProp($_POST['propNombre']);
+ # $propuesta = $prop->obtenerPorNombreProp($a[1]);
+  if($propuesta->likeProp($u->getCorreo(),$propuesta->getNombre())){
 
-  if($propuesta->likeProp($usu->getNick(),$propuesta->getNombre())){
-
-    $msg = "Bien";
+    $msg = "ingresar";
     $array = ["mens"=>$msg];
     $arreglo=["status"=>"ok","message"=>[$array]];
     echo json_encode($arreglo);
 
   } else {
-    $msg = "Mal";
+  	$propuesta->dislikeProp($u->getCorreo(),$propuesta->getNombre());
+    $msg = "borrar";
+    $array = ["mens"=>$msg];
+    $arreglo=["status"=>"ok","message"=>[$array]];
+    echo json_encode($arreglo);
+  }
+}
+
+
+function chequearLikePropCel(){
+ $prop = new Propuesta();
+# $nomUsu = $a[0];
+# $nomProp = $a[1];
+ $valor = $prop->chequearLikeProp($_POST['usuCorreo'],$_POST['propNombre']);
+#$valor = $prop->chequearLikeProp($nomUsu,$nomProp);
+
+  if($valor['gusta']==0){
+
+    $msg = "no tiene";
+    $array = ["mens"=>$msg];
+    $arreglo=["status"=>"ok","message"=>[$array]];
+    echo json_encode($arreglo);
+
+  } else {
+
+    $msg = "tiene";
     $array = ["mens"=>$msg];
     $arreglo=["status"=>"ok","message"=>[$array]];
     echo json_encode($arreglo);

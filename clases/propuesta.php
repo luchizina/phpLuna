@@ -220,7 +220,7 @@ class Propuesta extends ClaseBase {
 public function calc(){
   $moT = $this->getMonto();
   $moA = $this->getMontoActual();
-  $toT= ($moT * $moA)/100;
+  $toT= ($moA * 100)/$moT;
    return ($toT);
 }
 
@@ -309,6 +309,18 @@ public function modificar()
    }
 
 
+public function chequearLikeProp($nombreUsu, $nombreProp)
+{
+
+$sql="select count(*) as gusta from likepropuesta where Usuario ='$nombreUsu' and Propuesta = '$nombreProp'";
+      
+        $resultado =$this->getDB()->query($sql)   
+            or die ("Fallo en la consulta");
+            $fila = $resultado->fetch_assoc();
+         return $fila; 
+
+}
+
 public function likeProp($nombreUsu, $nombreProp)
    {
       $stmt = $this->getDB()->prepare( 
@@ -317,6 +329,14 @@ public function likeProp($nombreUsu, $nombreProp)
            VALUES (?,?)" );
         $stmt->bind_param("ss",$nombreUsu,
             $nombreProp);
+        return $stmt->execute();
+   }
+
+   public function dislikeProp($nombreUsu, $nombreProp)
+   {
+      $stmt = $this->getDB()->prepare( 
+            "DELETE FROM likepropuesta WHERE Usuario=? AND Propuesta=?");
+        $stmt->bind_param("ss",$nombreUsu,$nombreProp);
         return $stmt->execute();
    }
 

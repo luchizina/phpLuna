@@ -1,1 +1,42 @@
 /* Your custom css code goes here */
+.imk{
+  background-color: black !important;
+}
+.img2{
+max-height: 200px;
+min-height: 200px;
+max-width: 360px; 
+/*padding-left: 90px;*/
+}
+.caca{
+	color: white;
+ display: block;
+    font-size: 1.5em;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+.lead{
+color: white;
+
+}
+
+#agregar{
+	margin-bottom: 10px;
+}
+
+.estrella{
+color:yellow;
+}
+
+figure.imk {
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+}
+
+figure.imk img {
+  max-width: 100%;
+}
