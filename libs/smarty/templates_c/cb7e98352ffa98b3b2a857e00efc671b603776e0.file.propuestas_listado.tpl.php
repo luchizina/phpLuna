@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-31 22:12:05
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-01 19:11:13
          compiled from "vistas\propuestas_listado.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:124705cf1ab72a46d90-65572996%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cb7e98352ffa98b3b2a857e00efc671b603776e0' => 
     array (
       0 => 'vistas\\propuestas_listado.tpl',
-      1 => 1559351515,
+      1 => 1559427069,
       2 => 'file',
     ),
   ),
@@ -25,6 +25,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'prop' => 0,
     'img' => 0,
     'usuLogNick' => 0,
+    'est' => 0,
+    'paginas' => 0,
+    'foo' => 0,
+    'sig' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -118,13 +122,33 @@ propuesta/favoritear/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre
                       <?php }?>
                       </h2>
                   <div class="probootstrap-date"><i class="icon-calendar"></i> 2 hours remaining</div>  
-                  <p><a href="#" class="btn btn-primary btn-black">Colaborar!</a></p>
+                  <p><a href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/nuevaColaboracion/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
+" class="btn btn-primary btn-black">Colaborar!</a></p>
                 </div>
               </div>
             </div>
                   <?php } ?>
   </div>
-      </section>
+  <div id="pagination">
+<ul class="pagination justify-content-center" style="margin:20px 0"">
+<li class="page-item"><a class="page-link" href="<?php echo $_smarty_tpl->tpl_vars['est']->value;?>
+">Anterior</a></li>
+  <?php ob_start();?><?php echo $_smarty_tpl->tpl_vars['paginas']->value;?>
+<?php $_tmp1=ob_get_clean();?><?php $_smarty_tpl->tpl_vars['foo'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['foo']->step = 1;$_smarty_tpl->tpl_vars['foo']->total = (int) ceil(($_smarty_tpl->tpl_vars['foo']->step > 0 ? $_tmp1+1 - (1) : 1-($_tmp1)+1)/abs($_smarty_tpl->tpl_vars['foo']->step));
+if ($_smarty_tpl->tpl_vars['foo']->total > 0) {
+for ($_smarty_tpl->tpl_vars['foo']->value = 1, $_smarty_tpl->tpl_vars['foo']->iteration = 1;$_smarty_tpl->tpl_vars['foo']->iteration <= $_smarty_tpl->tpl_vars['foo']->total;$_smarty_tpl->tpl_vars['foo']->value += $_smarty_tpl->tpl_vars['foo']->step, $_smarty_tpl->tpl_vars['foo']->iteration++) {
+$_smarty_tpl->tpl_vars['foo']->first = $_smarty_tpl->tpl_vars['foo']->iteration == 1;$_smarty_tpl->tpl_vars['foo']->last = $_smarty_tpl->tpl_vars['foo']->iteration == $_smarty_tpl->tpl_vars['foo']->total;?>
+  <li class="page-item" id="<?php echo $_smarty_tpl->tpl_vars['foo']->value;?>
+"><a class="page-link" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/pagina/<?php echo $_smarty_tpl->tpl_vars['foo']->value;?>
+/"><?php echo $_smarty_tpl->tpl_vars['foo']->value;?>
+</a></li>
+  <?php }} ?>
+   <li class="page-item"><a class="page-link" href="<?php echo $_smarty_tpl->tpl_vars['sig']->value;?>
+">Siguiente</a></li>
+  </ul>
+    </section>
  </section>
 
 

@@ -25,7 +25,33 @@ class ControladorPropuesta extends ControladorIndex {
        $buscar="";
        $titulo="Listado";
        $mensaje="";
+       $estAnt = "";
+       $estSig = "";
        if(!empty($params)){
+        if($params[0] == ""){
+          $propuesta=new Propuesta();
+          $propuestas=$propuesta->getListadoProp(1);
+          $cant = $propuesta->cantPagProp();
+          $estAnt = "javascript:void(0);";
+          $estSig = "propuesta/pagina/2/";
+        }
+        else {
+          $pagina = $params[0];
+          if($pagina == 1){
+            $estAnt = "javascript:void(0);";
+          } else {
+            $p = $pagina - 1;
+            $estAnt = "propuesta/pagina/$p/";
+          }
+
+          $propuesta=new Propuesta();
+          $cant = $propuesta->cantPagProp();
+          if($pagina == $cant){
+            $estSig = "javascript:void(0);";
+          } else {
+            $p = $pagina + 1;
+            $estSig = "propuesta/pagina/$p/";
+          }
            if($params[0]=="borrar"){
                $propuesta=new Propuesta();
                $idABorrar=$params[1];
@@ -38,7 +64,8 @@ class ControladorPropuesta extends ControladorIndex {
                     $usr=$propuesta->obtenerPorId($idABorrar);
                     //$mensaje="Error!! No se pudo borrar el usuario  <b>".$usr->getNombre()." ".$usr->getApellido()."</b>";
                     $mensaje="ERROR. No existe la propuesta";
-                    $propuestas=$propuesta->getListadoProp();	
+                    $propuestas=$propuesta->getListadoProp($pagina);	
+                    $cant = $propuesta->cantPagProp();
                 }
                 if($params[0]=="colaborar"){
                   $this->nuevaColaboracion($params=array());
@@ -48,12 +75,16 @@ class ControladorPropuesta extends ControladorIndex {
             }
             else{
               $propuesta=new Propuesta();
-               $propuestas=$propuesta->getListadoProp();
+               $propuestas=$propuesta->getListadoProp($pagina);
+               $cant = $propuesta->cantPagProp();
 
             }
+        }
        }else{
             $propuesta=new Propuesta();
-               $propuestas=$propuesta->getListadoProp();
+               $propuestas=$propuesta->getListadoProp(1);
+               $cant = $propuesta->cantPagProp();
+               $estSig = "propuesta/pagina/2/";
         }
        
        //Llamar a la vista
@@ -68,6 +99,9 @@ class ControladorPropuesta extends ControladorIndex {
        'buscar' => $buscar,
        'titulo' => $titulo,
        'mensaje' => $mensaje,
+       'paginas' => $cant,
+       'est' => $estAnt,
+       'sig' => $estSig,
        );
     /*    for( $i=0; $i < count($propuestas); $i++){
            $this->consolita($propuestas[$i]->getNombre());
@@ -82,7 +116,6 @@ class ControladorPropuesta extends ControladorIndex {
        $tpl->mostrar('propuestas_listado',$datos);
    
    }
-
 
 
 function listadoPropsAgregadas($params=array()){

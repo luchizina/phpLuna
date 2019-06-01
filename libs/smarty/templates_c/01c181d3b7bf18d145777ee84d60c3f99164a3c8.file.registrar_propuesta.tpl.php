@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-31 21:46:15
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-01 17:46:23
          compiled from "vistas\registrar_propuesta.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:273975cf1cad70a17d9-76781200%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '01c181d3b7bf18d145777ee84d60c3f99164a3c8' => 
     array (
       0 => 'vistas\\registrar_propuesta.tpl',
-      1 => 1558363273,
+      1 => 1558376376,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cf1cad7410074_22883542',
   'variables' => 
   array (
     'url_base' => 0,
@@ -25,8 +27,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'persona' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cf1cad7410074_22883542',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5cf1cad7410074_22883542')) {function content_5cf1cad7410074_22883542($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en">

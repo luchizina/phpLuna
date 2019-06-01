@@ -64,13 +64,21 @@
                       {/if}
                       </h2>
                   <div class="probootstrap-date"><i class="icon-calendar"></i> 2 hours remaining</div>  
-                  <p><a href="#" class="btn btn-primary btn-black">Colaborar!</a></p>
+                  <p><a href="{$url_base}propuesta/nuevaColaboracion/{$prop->getNombre()}" class="btn btn-primary btn-black">Colaborar!</a></p>
                 </div>
               </div>
             </div>
                   {/foreach}
   </div>
-      </section>
+  <div id="pagination">
+<ul class="pagination justify-content-center" style="margin:20px 0"">
+<li class="page-item"><a class="page-link" href="{$est}">Anterior</a></li>
+  {for $foo=1 to {$paginas}}
+  <li class="page-item" id="{$foo}"><a class="page-link" href="{$url_base}propuesta/pagina/{$foo}/">{$foo}</a></li>
+  {/for}
+   <li class="page-item"><a class="page-link" href="{$sig}">Siguiente</a></li>
+  </ul>
+    </section>
  </section>
 
 

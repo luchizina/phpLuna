@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-05-31 21:46:58
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-01 17:47:43
          compiled from "vistas\registrar_recomp.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:311375cf1cb02db6418-61170715%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '871ac5eaba5bac2584c1bbbd51b51116bce58f11' => 
     array (
       0 => 'vistas\\registrar_recomp.tpl',
-      1 => 1559248704,
+      1 => 1559417558,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cf1cb03032ad2_04618178',
   'variables' => 
   array (
     'url_base' => 0,
@@ -24,8 +26,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'recompensa' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cf1cb03032ad2_04618178',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5cf1cb03032ad2_04618178')) {function content_5cf1cb03032ad2_04618178($_smarty_tpl) {?><!DOCTYPE html>
 
