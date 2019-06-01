@@ -635,6 +635,14 @@ function likeComentPagina(){
   //var_dump($_POST);
   $num =(int)$_POST['idCom'];
   $usuario = $_POST['nickUsu'];
+  if(empty($_POST['nickUsu'])){
+  	 $coment = new Comentario();
+ $valor = $coment->traerLikesComentario($num);
+   
+   echo $valor["cant"];  
+  }else{
+
+
   $coment = new Comentario();
   $com = $coment->obtenerPorId($num);
   $res=$coment->likeCom($usuario, $num);
@@ -647,7 +655,7 @@ function likeComentPagina(){
     $valor = $com->traerLikesComentario($num);
     echo $valor["cant"];
   }
-  
+   }
 }
 
 function likeCometario(){
