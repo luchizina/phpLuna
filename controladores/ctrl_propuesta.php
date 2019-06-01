@@ -647,6 +647,7 @@ function likePropuestaCel(){
     $array = ["mens"=>$msg];
     $arreglo=["status"=>"ok","message"=>[$array]];
     echo json_encode($arreglo);
+
   } else {
     $msg = "Mal";
     $array = ["mens"=>$msg];
