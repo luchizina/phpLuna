@@ -309,6 +309,37 @@ public function modificar()
    }
 
 
+public function chequearLikeProp($nombreUsu, $nombreProp)
+{
+
+$sql="select count(*) as gusta from likepropuesta where Usuario ='$nombreUsu' and Propuesta = '$nombreProp'";
+      
+        $resultado =$this->getDB()->query($sql)   
+            or die ("Fallo en la consulta");
+            $fila = $resultado->fetch_assoc();
+         return $fila; 
+
+}
+
+public function likeProp($nombreUsu, $nombreProp)
+   {
+      $stmt = $this->getDB()->prepare( 
+            "INSERT INTO likepropuesta
+        (Usuario, Propuesta) 
+           VALUES (?,?)" );
+        $stmt->bind_param("ss",$nombreUsu,
+            $nombreProp);
+        return $stmt->execute();
+   }
+
+   public function dislikeProp($nombreUsu, $nombreProp)
+   {
+      $stmt = $this->getDB()->prepare( 
+            "DELETE FROM likepropuesta WHERE Usuario=? AND Propuesta=?");
+        $stmt->bind_param("ss",$nombreUsu,$nombreProp);
+        return $stmt->execute();
+   }
+
 
 }
  ?>
