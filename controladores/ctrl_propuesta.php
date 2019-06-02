@@ -103,10 +103,6 @@ class ControladorPropuesta extends ControladorIndex {
        'est' => $estAnt,
        'sig' => $estSig,
        );
-    /*    for( $i=0; $i < count($propuestas); $i++){
-           $this->consolita($propuestas[$i]->getNombre());
-        }
-       */
       
    
        $tpl->asignar('registrar_propuesta',$this->getUrl("propuesta","nuevo"));
@@ -157,9 +153,8 @@ function listadoCel(){
 
 
   $prop = new Propuesta();
-  $propuestas=$prop->getListadoProp();
+  $propuestas=$prop->getListadoProp(1);
    $arreglo=["status"=>"ok","message"=>$propuestas];
-       //$this->consolita($usuarios[0]->getNombre());
        $listaProps = json_encode($arreglo);
        echo $listaProps;
 }
@@ -381,14 +376,21 @@ function nuevaColaboracionCel(){
   $Usuario = new Usuario();
   $propuesta = new Propuesta();
   $Recompensa = new Recompensa();
+  $recs = $Recompensa->traerRecompensas($_POST["nombre"]);
   $usu = $Usuario->obtenerPorMail($_POST['mail']);
   $prop=$propuesta->obtenerPorNombreProp($_POST["nombre"]);
-  $col->setMonto($_POST["monto"]);
-  $col->setFecha(date("Y-m-d"));
-  $col->setUsuario($usu);
-  $col->setTituloPropuesta($prop);
+   $col->setMonto($_POST["monto"]);
+    $col->setFecha(date("Y-m-d"));
+    $col->setUsuario($usu);
+    $col->setTituloPropuesta($prop);
+        foreach ($recs as $clave=>$r) {
+      if($col->getMonto() >= $r->getMontoaSuperar()){
+        $pos = $clave;
+      }
+    }
+    $this->recursiva($recs, $col, $pos, $prop);
     if($col->agregar()){
-      $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
+     $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
       $prop->actualizaMonto();
       $msg = "que rica ñery te la jugaste";
       $array = ["mensajito"=>$msg];
