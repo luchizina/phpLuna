@@ -228,9 +228,9 @@ $usr = new Usuario();
 $email = $_POST['email'];
 $pass = sha1($_POST['pass']);
 	if($usr->login($email,$pass)){
-		    $msg = "logueado con éxito";
-      $array = ["mens"=>$msg];
-      $arreglo=["status"=>"ok","message"=>[$array]];
+    $userit = $usr->obtenerPorMail($email);
+		  #  $u =["usuario"=>$userit];
+    $arreglo=["status"=>"ok","message"=>[$userit]];
             echo json_encode($arreglo);
 	}else{
 		 $msg = "no existe usuario";
@@ -238,7 +238,10 @@ $pass = sha1($_POST['pass']);
       $arreglo=["status"=>"error","message"=>[$array]];
             echo json_encode($arreglo);
 	}
+ 
 }
+
+
 function login(){
   $mensaje="";
   
@@ -262,11 +265,16 @@ function login(){
   $tpl->asignar('mensaje',$mensaje);
   $tpl->mostrar('usuarios_login',array());
 }
+
+
 function logout(){
   $usr= new Usuario();
   $usr->logout();
   $this->redirect("usuario","redirigir");
 }
+
+
+
 public function traerImagen($params = array()){
 $usr = new Usuario();
 $img=$usr->traerImagen($params[0]);
