@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/imagenes.css" rel="stylesheet">
     <!--[if lt IE 9]>
       <script src="js/vendor/html5shiv.min.js"></script>
       <script src="js/vendor/respond.min.js"></script>
@@ -53,11 +54,15 @@
                 <input type="text" class="form-control" value="{$usuario_log->getCelular()}" id="celular" name="celular">
               </div>
               <div class="form-group">
-                <label for="archivo">Seleccionar imagen de perfil
-
-                <input  id="archivo" name="archivo" type="file" class="form-control" accept="image/*"> 
-               
-                </label>
+               <div class="imgUp">
+                {if $usuario_log->getImagen() == ""}
+                <div class="imagePreview"></div>
+                {/if}
+                {if $usuario_log->getImagen() != ""}
+                <div class="imagePreview" style="background-image: url('./{$usuario_log->getImagen()}')"></div>
+                {/if}
+               <label class="btn btn-primary btn-lg">Elegir imagen<input type="file" name="archivo" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;"></label>
+              </div> 
               </div>
               <div class="form-group">
                 <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" value="MODIFICAR">
@@ -70,6 +75,7 @@
     <script src="js/scripts.min.js"></script>
     <script src="js/main.min.js"></script>
     <script src="js/custom.js"></script>
+    <script src="js/subirImg.js" type="text/javascript"></script>
     </section>          
   </section>
       </body></html>

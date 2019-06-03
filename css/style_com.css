@@ -27,6 +27,7 @@ body {
 .list-comment__comment {
   width: 100%;
   margin-bottom: 50px;
+  border-bottom: 1px solid #000;
 }
 .list-comment__comment::after, .list-comment__comment::before {
   display: table;
