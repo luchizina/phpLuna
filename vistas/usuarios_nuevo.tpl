@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/imagenes.css" rel="stylesheet">
     <!--[if lt IE 9]>
       <script src="js/vendor/html5shiv.min.js"></script>
       <script src="js/vendor/respond.min.js"></script>
@@ -66,11 +67,10 @@
                 <input id="cel" name="cel" type="tel" placeholder="Ej: 099999999" class="form-control" required="">
               </div>
               <div class="form-group">
-                <label for="archivo">Seleccionar imagen de perfil
-
-                <input  id="archivo" name="archivo" type="file" class="form-control" accept="image/*"> 
-               
-                </label>
+                <div class="imgUp">
+                <div class="imagePreview"></div>
+               <label class="btn btn-primary btn-lg">Elegir imagen<input type="file" name="archivo" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;"></label>
+              </div> 
               </div>
               <div class="form-group">
                 <input type="submit" class="btn btn-primary btn-lg" id="guardar" name="guardar" value="Registrarse">
@@ -84,6 +84,7 @@
     <script src="js/main.min.js"></script>
     <script src="js/custom.js"></script>
     <script src="js/validar.js" type="text/javascript"></script>
+    <script src="js/subirImg.js" type="text/javascript"></script>
     </section>          
   </section>
       </body></html>
