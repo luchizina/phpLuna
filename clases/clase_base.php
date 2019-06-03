@@ -34,9 +34,11 @@ class ClaseBase{
      return $resultados;   
     }
 
-    public function getListadoProp()
+    public function getListadoProp($pagina)
     {
-        $sql="select * from $this->tabla where NickUsuario NOT IN (SELECT Nick from usuario where activo = 0)  ";
+        $porPag = 9;
+        $comienzo = ($pagina-1)*$porPag;
+        $sql="select * from $this->tabla where NickUsuario NOT IN (SELECT Nick from usuario where activo = 0)  ORDER BY Nombre limit $comienzo, $porPag";
         $resultados=array();
 
         $resultado =$this->db->query($sql)   
@@ -50,6 +52,17 @@ class ClaseBase{
         } 
      return $resultados;   
     }
+
+    public function cantPagProp(){
+        $sql="select * from $this->tabla where NickUsuario NOT IN (SELECT Nick from usuario where activo = 0)  ";
+        $resultado =$this->db->query($sql)   
+            or die ("Fallo en la consulta");
+        $cant = $resultado->num_rows;
+        $porPag = 9;
+        $pag = ceil($cant/$porPag);
+        return $pag;
+    }
+
 
     public function obtenerPorId($id){
         $sql="select * from $this->tabla where id=$id ";

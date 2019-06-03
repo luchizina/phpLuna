@@ -25,7 +25,33 @@ class ControladorPropuesta extends ControladorIndex {
        $buscar="";
        $titulo="Listado";
        $mensaje="";
+       $estAnt = "";
+       $estSig = "";
        if(!empty($params)){
+        if($params[0] == ""){
+          $propuesta=new Propuesta();
+          $propuestas=$propuesta->getListadoProp(1);
+          $cant = $propuesta->cantPagProp();
+          $estAnt = "javascript:void(0);";
+          $estSig = "propuesta/pagina/2/";
+        }
+        else {
+          $pagina = $params[0];
+          if($pagina == 1){
+            $estAnt = "javascript:void(0);";
+          } else {
+            $p = $pagina - 1;
+            $estAnt = "propuesta/pagina/$p/";
+          }
+
+          $propuesta=new Propuesta();
+          $cant = $propuesta->cantPagProp();
+          if($pagina == $cant){
+            $estSig = "javascript:void(0);";
+          } else {
+            $p = $pagina + 1;
+            $estSig = "propuesta/pagina/$p/";
+          }
            if($params[0]=="borrar"){
                $propuesta=new Propuesta();
                $idABorrar=$params[1];
@@ -38,7 +64,8 @@ class ControladorPropuesta extends ControladorIndex {
                     $usr=$propuesta->obtenerPorId($idABorrar);
                     //$mensaje="Error!! No se pudo borrar el usuario  <b>".$usr->getNombre()." ".$usr->getApellido()."</b>";
                     $mensaje="ERROR. No existe la propuesta";
-                    $propuestas=$propuesta->getListadoProp();	
+                    $propuestas=$propuesta->getListadoProp($pagina);	
+                    $cant = $propuesta->cantPagProp();
                 }
                 if($params[0]=="colaborar"){
                   $this->nuevaColaboracion($params=array());
@@ -48,26 +75,34 @@ class ControladorPropuesta extends ControladorIndex {
             }
             else{
               $propuesta=new Propuesta();
-               $propuestas=$propuesta->getListadoProp();
+               $propuestas=$propuesta->getListadoProp($pagina);
+               $cant = $propuesta->cantPagProp();
 
             }
+        }
        }else{
             $propuesta=new Propuesta();
-               $propuestas=$propuesta->getListadoProp();
+               $propuestas=$propuesta->getListadoProp(1);
+               $cant = $propuesta->cantPagProp();
+               $estSig = "propuesta/pagina/2/";
         }
        
        //Llamar a la vista
+        foreach ($propuestas as $p) {
+          $img = $p->traerImagen($p->getNombre());
+          $p->setImagen($img);
+          # code...
+        }
         $tpl = Template::getInstance();
         $datos = array(
        'propuestas' => $propuestas,
        'buscar' => $buscar,
        'titulo' => $titulo,
        'mensaje' => $mensaje,
+       'paginas' => $cant,
+       'est' => $estAnt,
+       'sig' => $estSig,
        );
-    /*    for( $i=0; $i < count($propuestas); $i++){
-           $this->consolita($propuestas[$i]->getNombre());
-        }
-       */
       
    
        $tpl->asignar('registrar_propuesta',$this->getUrl("propuesta","nuevo"));
@@ -77,7 +112,6 @@ class ControladorPropuesta extends ControladorIndex {
        $tpl->mostrar('propuestas_listado',$datos);
    
    }
-
 
 
 function listadoPropsAgregadas($params=array()){
@@ -119,9 +153,8 @@ function listadoCel(){
 
 
   $prop = new Propuesta();
-  $propuestas=$prop->getListadoProp();
+  $propuestas=$prop->getListadoProp(1);
    $arreglo=["status"=>"ok","message"=>$propuestas];
-       //$this->consolita($usuarios[0]->getNombre());
        $listaProps = json_encode($arreglo);
        echo $listaProps;
 }
@@ -343,14 +376,21 @@ function nuevaColaboracionCel(){
   $Usuario = new Usuario();
   $propuesta = new Propuesta();
   $Recompensa = new Recompensa();
+  $recs = $Recompensa->traerRecompensas($_POST["nombre"]);
   $usu = $Usuario->obtenerPorMail($_POST['mail']);
   $prop=$propuesta->obtenerPorNombreProp($_POST["nombre"]);
-  $col->setMonto($_POST["monto"]);
-  $col->setFecha(date("Y-m-d"));
-  $col->setUsuario($usu);
-  $col->setTituloPropuesta($prop);
+   $col->setMonto($_POST["monto"]);
+    $col->setFecha(date("Y-m-d"));
+    $col->setUsuario($usu);
+    $col->setTituloPropuesta($prop);
+        foreach ($recs as $clave=>$r) {
+      if($col->getMonto() >= $r->getMontoaSuperar()){
+        $pos = $clave;
+      }
+    }
+    $this->recursiva($recs, $col, $pos, $prop);
     if($col->agregar()){
-      $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
+     $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
       $prop->actualizaMonto();
       $msg = "que rica ñery te la jugaste";
       $array = ["mensajito"=>$msg];
@@ -597,6 +637,14 @@ function likeComentPagina(){
   //var_dump($_POST);
   $num =(int)$_POST['idCom'];
   $usuario = $_POST['nickUsu'];
+  if(empty($_POST['nickUsu'])){
+  	 $coment = new Comentario();
+ $valor = $coment->traerLikesComentario($num);
+   
+   echo $valor["cant"];  
+  }else{
+
+
   $coment = new Comentario();
   $com = $coment->obtenerPorId($num);
   $res=$coment->likeCom($usuario, $num);
@@ -609,7 +657,7 @@ function likeComentPagina(){
     $valor = $com->traerLikesComentario($num);
     echo $valor["cant"];
   }
-  
+   }
 }
 
 function likeCometario(){
@@ -633,6 +681,57 @@ function likeCometario(){
     echo json_encode($arreglo);
   }
 }
+
+function likePropuestaCel(){
+ 
+  $usuario = new Usuario();
+  $u = $usuario->obtenerPorMail($_POST['usuCorreo']);
+  #$u = $usuario->obtenerPorMail($a[0]);
+  $prop = new Propuesta();
+  $propuesta = $prop->obtenerPorNombreProp($_POST['propNombre']);
+ # $propuesta = $prop->obtenerPorNombreProp($a[1]);
+  if($propuesta->likeProp($u->getCorreo(),$propuesta->getNombre())){
+
+    $msg = "ingresar";
+    $array = ["mens"=>$msg];
+    $arreglo=["status"=>"ok","message"=>[$array]];
+    echo json_encode($arreglo);
+
+  } else {
+  	$propuesta->dislikeProp($u->getCorreo(),$propuesta->getNombre());
+    $msg = "borrar";
+    $array = ["mens"=>$msg];
+    $arreglo=["status"=>"ok","message"=>[$array]];
+    echo json_encode($arreglo);
+  }
+}
+
+
+function chequearLikePropCel(){
+ $prop = new Propuesta();
+# $nomUsu = $a[0];
+# $nomProp = $a[1];
+ $valor = $prop->chequearLikeProp($_POST['usuCorreo'],$_POST['propNombre']);
+#$valor = $prop->chequearLikeProp($nomUsu,$nomProp);
+
+  if($valor['gusta']==0){
+
+    $msg = "no tiene";
+    $array = ["mens"=>$msg];
+    $arreglo=["status"=>"ok","message"=>[$array]];
+    echo json_encode($arreglo);
+
+  } else {
+
+    $msg = "tiene";
+    $array = ["mens"=>$msg];
+    $arreglo=["status"=>"ok","message"=>[$array]];
+    echo json_encode($arreglo);
+  }
+}
+
+
+
 
 function filtrar($params=array())
 {
