@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-03 22:00:52
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-03 22:54:57
          compiled from "vistas\usuarios_modificar.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:17474464965cf57c74bba685-13860616%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0b55c0502d49d65e122bfc0ca14f565e52708d1c' => 
     array (
       0 => 'vistas\\usuarios_modificar.tpl',
-      1 => 1558982365,
+      1 => 1559595293,
       2 => 'file',
     ),
   ),
@@ -15,14 +15,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cf57c74da1e80_87806079',
   'variables' => 
   array (
     'url_base' => 0,
     'usuario_log' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cf57c74da1e80_87806079',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5cf57c74da1e80_87806079')) {function content_5cf57c74da1e80_87806079($_smarty_tpl) {?><!DOCTYPE html>
 
@@ -33,6 +33,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/imagenes.css" rel="stylesheet">
     <!--[if lt IE 9]>
       <?php echo '<script'; ?>
  src="js/vendor/html5shiv.min.js"><?php echo '</script'; ?>
@@ -63,7 +64,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
           <div class="row" style="margin: 0 auto">
 
           <div class="col-md-5 probootstrap-animate mx-auto" style="margin: auto 0; color: white; font-family: Montserrat,Arial,sans-serif "  >
-            <form method="post" class="probootstrap-form">
+            <form method="post" enctype="multipart/form-data" class="probootstrap-form">
               <div class="form-group">
                 <label for="Nombre">Nombre</label>
                 <input type="text" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['usuario_log']->value->getNombre();?>
@@ -89,6 +90,18 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 " id="celular" name="celular">
               </div>
               <div class="form-group">
+               <div class="imgUp">
+                <?php if ($_smarty_tpl->tpl_vars['usuario_log']->value->getImagen()=='') {?>
+                <div class="imagePreview"></div>
+                <?php }?>
+                <?php if ($_smarty_tpl->tpl_vars['usuario_log']->value->getImagen()!='') {?>
+                <div class="imagePreview" style="background-image: url('./<?php echo $_smarty_tpl->tpl_vars['usuario_log']->value->getImagen();?>
+')"></div>
+                <?php }?>
+               <label class="btn btn-primary btn-lg">Elegir imagen<input type="file" name="archivo" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;"></label>
+              </div> 
+              </div>
+              <div class="form-group">
                 <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" value="MODIFICAR">
               </div>
             </form>
@@ -104,6 +117,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 >
     <?php echo '<script'; ?>
  src="js/custom.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/subirImg.js" type="text/javascript"><?php echo '</script'; ?>
 >
     </section>          
   </section>
