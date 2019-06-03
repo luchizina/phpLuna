@@ -31,7 +31,7 @@
           <div class="row" style="margin: 0 auto">
 
           <div class="col-md-5 probootstrap-animate mx-auto" style="margin: auto 0; color: white; font-family: Montserrat,Arial,sans-serif "  >
-            <form method="post" class="probootstrap-form">
+            <form method="post" enctype="multipart/form-data" class="probootstrap-form">
               <div class="form-group">
                 <label for="Nombre">Nombre</label>
                 <input type="text" class="form-control" value="{$usuario_log->getNombre()}" id="nombre" name="nombre">
