@@ -31,7 +31,7 @@
           <div class="row" style="margin: 0 auto">
 
           <div class="col-md-5 probootstrap-animate mx-auto" style="margin: auto 0; color: white; font-family: Montserrat,Arial,sans-serif "  >
-            <form method="post" class="probootstrap-form">
+            <form method="post" enctype="multipart/form-data" class="probootstrap-form">
               <div class="form-group">
                 <label for="Nombre">Nombre</label>
                 <input type="text" class="form-control" value="{$usuario_log->getNombre()}" id="nombre" name="nombre">
@@ -51,6 +51,13 @@
               <div class="form-group">
                 <label for="celular">Celular</label>
                 <input type="text" class="form-control" value="{$usuario_log->getCelular()}" id="celular" name="celular">
+              </div>
+              <div class="form-group">
+                <label for="archivo">Seleccionar imagen de perfil
+
+                <input  id="archivo" name="archivo" type="file" class="form-control" accept="image/*"> 
+               
+                </label>
               </div>
               <div class="form-group">
                 <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" value="MODIFICAR">
