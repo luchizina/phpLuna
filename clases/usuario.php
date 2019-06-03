@@ -8,9 +8,9 @@ class Usuario extends ClaseBase {
 	public $Correo = '';
 	public $Celular = '';
 	public $Imagen;
-    public $Archivo;
-    public $tipo;
-    public $tipoImg;
+        public $Archivo;
+        public $tipo;
+        public $tipoImg;
 	public $Comentarios = array();
 	public $PropuestasPropone = array();
 	public $PropuestasColabora = array();
@@ -365,8 +365,9 @@ public function traerImagen($nick){
 
     }*/
 
-public function modificar()
+public function modificar($tipo)
    {
+        $nick = $this->getNick();
         $nombre=$this->getNombre();
         $ape=$this->getApellido();
         $password = sha1($this->getPassword);
@@ -375,23 +376,34 @@ public function modificar()
         $null = null;
         $arch = $this->getArchivo();
         $img = $this->getImagen();
-        $tip = $this->getTipo();
-        $permitidos = array("image/jpg", "image/jpeg", "image/png");
+        $tipoImg = $this->getTipoImg();
+        $permitidos = array("image/jpg", "image/jpeg", "image/png", "");
         $target='';
-        if(in_array($tip, $permitidos)){
-            $extension=end(explode(".", $img));
-            $target = "imgUsus/".$nick.".".$extension;
+        if(in_array($tipoImg, $permitidos)){
+            //$target = "imgUsus/".basename($img);
+            if($tipoImg != ""){
+                $extension=end(explode(".", $img));
+            //rename($target, $nick.".".$extension);
+                $target = "imgUsus/".$this->getNick().".".$extension;
+            } else {
+                $target = "";
+            }
         } else {
             echo "El tipo de imagen es incorrecto";
         }
         $this->setImagen($target);
         $stmt = $this->getDB()->prepare( 
-            "UPDATE usuarios set
+            "UPDATE usuario set
         nombre=?, apellido=?, Correo=?, Password=?,Celular=?, Imagen=? WHERE Nick=?"); 
            
         $stmt->bind_param("sssssss",$nombre,
-            $ape,$email,$password,$cel,$target);
+            $ape,$email,$password,$cel,$target,$nick);
         if($target != ''){
+            if(file_exists('/phpLuna/imgUsus/'.$nick.$tipo))
+            {
+                chmod('/imgUsus/'.$nick.$tipo,7775);
+                unlink('/imgUsus/'.$nick.$tipo);
+            }
         move_uploaded_file($arch, $target);
     }
         return $stmt->execute();
