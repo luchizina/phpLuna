@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-03 15:28:42
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-03 23:08:32
          compiled from "vistas\usuario_perfil.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:15486012645cf51e38d5b7d1-14323620%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd70c4cfaaf427259fbf97c94c57fbf0d1e96ac25' => 
     array (
       0 => 'vistas\\usuario_perfil.tpl',
-      1 => 1559568510,
+      1 => 1559595599,
       2 => 'file',
     ),
   ),
@@ -34,6 +34,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
+      <link href="css/mdb.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
       <?php echo '<script'; ?>
  src="js/vendor/html5shiv.min.js"><?php echo '</script'; ?>
@@ -133,20 +134,17 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <h5 class="mt-1 mb-2"><?php echo $_smarty_tpl->tpl_vars['usuario']->value->getNombre();?>
  <?php echo $_smarty_tpl->tpl_vars['usuario']->value->getApellido();?>
 </h5>
-         <h5 class="mt-1 mb-2"><?php echo $_smarty_tpl->tpl_vars['usuario']->value->getNick();?>
-</h5>
-        <h5 class="mt-1 mb-2"><?php echo $_smarty_tpl->tpl_vars['usuario']->value->getCorreo();?>
-</h5>
+        <label data-error="wrong" data-success="right" for="form29" class="ml-0">Correo: <?php echo $_smarty_tpl->tpl_vars['usuario']->value->getCorreo();?>
+</label><br>
+        <label data-error="wrong" data-success="right" for="form29" class="ml-0">Usuario: <?php echo $_smarty_tpl->tpl_vars['usuario']->value->getNick();?>
+</label>
       </div>
 
     </div>
     <!--/.Content-->
   </div>
 </div>
-<!--Modal: Login with Avatar Form-->
-
 <div class="text-center">
-  <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#modalLoginAvatar">Launch
-    Modal Login with Avatar</a>
+  <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#modalLoginAvatar">Apretá aca</a>
 </div>
       </body></html><?php }} ?>

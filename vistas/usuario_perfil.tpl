@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
+      <link href="css/mdb.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
       <script src="js/vendor/html5shiv.min.js"></script>
       <script src="js/vendor/respond.min.js"></script>
@@ -84,18 +85,15 @@
       <div class="modal-body text-center mb-1">
 
         <h5 class="mt-1 mb-2">{$usuario->getNombre()} {$usuario->getApellido()}</h5>
-         <h5 class="mt-1 mb-2">{$usuario->getNick()}</h5>
-        <h5 class="mt-1 mb-2">{$usuario->getCorreo()}</h5>
+        <label data-error="wrong" data-success="right" for="form29" class="ml-0">Correo: {$usuario->getCorreo()}</label><br>
+        <label data-error="wrong" data-success="right" for="form29" class="ml-0">Usuario: {$usuario->getNick()}</label>
       </div>
 
     </div>
     <!--/.Content-->
   </div>
 </div>
-<!--Modal: Login with Avatar Form-->
-
 <div class="text-center">
-  <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#modalLoginAvatar">Launch
-    Modal Login with Avatar</a>
+  <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#modalLoginAvatar">Apretá aca</a>
 </div>
       </body></html>

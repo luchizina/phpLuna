@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-03 15:14:33
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-03 23:04:29
          compiled from "vistas\usuarios_listado.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:7207813125cf51d39303914-96499117%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'fc36a80b921661286b287e2df8d64e144a173838' => 
     array (
       0 => 'vistas\\usuarios_listado.tpl',
-      1 => 1559254125,
+      1 => 1559595866,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cf51d3a263315_20017468',
   'variables' => 
   array (
     'url_base' => 0,
@@ -27,8 +29,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'usuLogNick' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cf51d3a263315_20017468',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5cf51d3a263315_20017468')) {function content_5cf51d3a263315_20017468($_smarty_tpl) {?>
 <!DOCTYPE html>
@@ -113,10 +113,41 @@ usuario/listado/borrar/<?php echo $_smarty_tpl->tpl_vars['persona']->value->getN
 usuario/modificar/<?php echo $_smarty_tpl->tpl_vars['persona']->value->getNick();?>
 /'"/>
                        <?php }?>
-                      <input type="button" value="Ver perfil" class="btn btn-success" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+                         <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#modalLoginAvatar<?php echo $_smarty_tpl->tpl_vars['persona']->value->getNick();?>
+">Ver perfil</a>
+                     <!-- <input type="button" value="Ver perfil" class="btn btn-success" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 usuario/verPerfil/<?php echo $_smarty_tpl->tpl_vars['persona']->value->getNick();?>
-/'"/>
+/'"/>-->
                     <!--  <input type="button" value="Favoritos" class="btn btn-submit" onClick="cargarFavoritos();"/>-->
+                     <div class="modal fade" id="modalLoginAvatar<?php echo $_smarty_tpl->tpl_vars['persona']->value->getNick();?>
+" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+    <!--Content-->
+    <div class="modal-content">
+
+      <!--Header-->
+      <div class="modal-header">
+        <img src="./<?php echo $_smarty_tpl->tpl_vars['persona']->value->getImagen();?>
+" style="border-radius:50%;" alt="avatar" class="rounded-circle img-responsive">
+      </div>
+      <!--Body-->
+      <div class="modal-body text-center mb-1">
+
+        <h5 class="mt-1 mb-2"><?php echo $_smarty_tpl->tpl_vars['persona']->value->getNombre();?>
+ <?php echo $_smarty_tpl->tpl_vars['persona']->value->getApellido();?>
+</h5>
+        <label data-error="wrong" data-success="right" for="form29" class="ml-0">Correo: <?php echo $_smarty_tpl->tpl_vars['persona']->value->getCorreo();?>
+</label><br>
+        <label data-error="wrong" data-success="right" for="form29" class="ml-0">Usuario: <?php echo $_smarty_tpl->tpl_vars['persona']->value->getNick();?>
+</label>
+      </div>
+
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
                     </td>
                   </tr>
                 <?php } ?>
