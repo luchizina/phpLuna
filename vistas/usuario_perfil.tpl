@@ -69,4 +69,33 @@
     <script src="js/custom.js"></script>
     </section>          
   </section>
+
+  <div class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+    <!--Content-->
+    <div class="modal-content">
+
+      <!--Header-->
+      <div class="modal-header">
+        <img src="./{$usuario->getImagen()}" style="border-radius:50%;" alt="avatar" class="rounded-circle img-responsive">
+      </div>
+      <!--Body-->
+      <div class="modal-body text-center mb-1">
+
+        <h5 class="mt-1 mb-2">{$usuario->getNombre()} {$usuario->getApellido()}</h5>
+         <h5 class="mt-1 mb-2">{$usuario->getNick()}</h5>
+        <h5 class="mt-1 mb-2">{$usuario->getCorreo()}</h5>
+      </div>
+
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!--Modal: Login with Avatar Form-->
+
+<div class="text-center">
+  <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#modalLoginAvatar">Launch
+    Modal Login with Avatar</a>
+</div>
       </body></html>
