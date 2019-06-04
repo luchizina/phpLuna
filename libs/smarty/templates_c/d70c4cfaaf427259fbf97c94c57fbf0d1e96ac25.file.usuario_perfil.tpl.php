@@ -1,20 +1,22 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-03 21:50:36
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-04 02:09:11
          compiled from "vistas\usuario_perfil.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:19952635455cf57a0c5de848-41089976%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:15832812035cf5908009af97-27873010%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'd70c4cfaaf427259fbf97c94c57fbf0d1e96ac25' => 
     array (
       0 => 'vistas\\usuario_perfil.tpl',
-      1 => 1559417559,
+      1 => 1559598917,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '19952635455cf57a0c5de848-41089976',
+  'nocache_hash' => '15832812035cf5908009af97-27873010',
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cf590801be997_89127155',
   'variables' => 
   array (
     'url_base' => 0,
@@ -22,10 +24,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'usuario' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cf57a0c970942_17379031',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cf57a0c970942_17379031')) {function content_5cf57a0c970942_17379031($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5cf590801be997_89127155')) {function content_5cf590801be997_89127155($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -34,6 +34,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
+     
     <!--[if lt IE 9]>
       <?php echo '<script'; ?>
  src="js/vendor/html5shiv.min.js"><?php echo '</script'; ?>
@@ -115,4 +116,35 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 >
     </section>          
   </section>
+
+  <div class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+    <!--Content-->
+    <div class="modal-content">
+
+      <!--Header-->
+      <div class="modal-header">
+        <img src="./<?php echo $_smarty_tpl->tpl_vars['usuario']->value->getImagen();?>
+" style="border-radius:50%;" alt="avatar" class="rounded-circle img-responsive">
+      </div>
+      <!--Body-->
+      <div class="modal-body text-center mb-1">
+
+        <h5 class="mt-1 mb-2"><?php echo $_smarty_tpl->tpl_vars['usuario']->value->getNombre();?>
+ <?php echo $_smarty_tpl->tpl_vars['usuario']->value->getApellido();?>
+</h5>
+        <label data-error="wrong" data-success="right" for="form29" class="ml-0">Correo: <?php echo $_smarty_tpl->tpl_vars['usuario']->value->getCorreo();?>
+</label><br>
+        <label data-error="wrong" data-success="right" for="form29" class="ml-0">Usuario: <?php echo $_smarty_tpl->tpl_vars['usuario']->value->getNick();?>
+</label>
+      </div>
+
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<div class="text-center">
+  <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#modalLoginAvatar">Apretá aca</a>
+</div>
       </body></html><?php }} ?>

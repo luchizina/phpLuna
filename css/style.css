@@ -15,15 +15,19 @@
 
 html {
   overflow-x: hidden;
+
 }
 
 body {
+
   background: #fff;
   color: #637381;
   line-height: 26px;
   font-size: 16px;
   font-weight: 300;
   font-family: "Lato", Arial, sans-serif;
+  
+
 }
 
 h1, h2, h3, h4, h5, h6 {

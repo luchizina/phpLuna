@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-03 23:31:00
-         compiled from "vistas\usuarios_login.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:12447417915cf59194203c57-10039490%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-04 00:10:20
+         compiled from "vistas\aviso.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:201854415cf59acc73ebf3-14381347%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '0d397ea05cd87ce4d93b5889f42f577c4e3d5bf8' => 
+    'a741d3c079ea38b6b243e03db85cbe980262492f' => 
     array (
-      0 => 'vistas\\usuarios_login.tpl',
-      1 => 1559594067,
+      0 => 'vistas\\aviso.tpl',
+      1 => 1559083971,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '12447417915cf59194203c57-10039490',
+  'nocache_hash' => '201854415cf59acc73ebf3-14381347',
   'function' => 
   array (
   ),
@@ -19,15 +19,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   array (
     'url_base' => 0,
     'proyecto' => 0,
-    'mensaje' => 0,
     'url_regis' => 0,
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cf5919438a4c3_76076049',
+  'unifunc' => 'content_5cf59acc839139_52358468',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cf5919438a4c3_76076049')) {function content_5cf5919438a4c3_76076049($_smarty_tpl) {?>
-<!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5cf59acc839139_52358468')) {function content_5cf59acc839139_52358468($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en">
   <head>
     <base href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
@@ -60,7 +58,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
           <div class="row">
             <div class="col-sm-12  col-md-12  main">
               <div class="probootstrap-slider-text probootstrap-animate" data-animate-effect="fadeIn">
-                <h1 class="probootstrap-heading probootstrap-animate">Iniciar sesión</h1>
+                <h2 style="color:#fff" class="probootstrap-heading probootstrap-animate">El usuario ha sido registrado correctamente, para activarlo debe ingresar al link enviado a su correo</h2>
               </div>
             </div>
           </div>
@@ -71,24 +69,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
           <div class="row" style="margin: 0 auto">
 
           <div class="col-md-5 probootstrap-animate mx-auto" style="margin: auto 0; color: white; font-family: Montserrat,Arial,sans-serif "  >
-        <form class="form-signin" method="POST" >
-        <?php if ($_smarty_tpl->tpl_vars['mensaje']->value!='') {?>
-            <div class="alert alert-danger" role="alert"><?php echo $_smarty_tpl->tpl_vars['mensaje']->value;?>
-</div>
-          <?php }?>
-        <label for="inputEmail" class="sr-only">Email</label>
-        <input type="email" id="email" name="email" class="form-control" placeholder="nombre de usuario" required="" autofocus="">
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required="">
-        
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button> 
-        </form>
           </div>
           <div class="col-md-6 col-md-push-1 probootstrap-animate">            
             <h2 style="color:#fff">¿Qué puedes encontrar en LUNA?</h2>
             <ul style="color:#fff" class="probootstrap-contact-info">
               <li><i class="icon-edit"></i> <span>Proponer ideas</span></li>
-              <li><i class="fa fa-dollar"></i><span>Colaborar y hacer realidad sueños</span></li>
+              <li><i class="fa fa-dollar"></i><span>Colaborar a hacer realidad sueños</span></li>
               <li><i class="fa fa-sign-in"></i><span>¿Aún no tienes cuenta? ¿Qué esperas? <a href="<?php echo $_smarty_tpl->tpl_vars['url_regis']->value;?>
 ">Haz click aquí</a></span></li>
             </ul>

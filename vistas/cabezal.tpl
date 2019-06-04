@@ -45,6 +45,7 @@
                   <li><a href="/phpLuna/propuesta/listado/">Listado</a></li>
                   {if $usuLogNick != "" and $usuLogTipo == 0}
                   <li><a href="/phpLuna/propuesta/listadoPropsAgregadas/1">Aceptar/rechazar propuestas</a></li>
+                   <li><a href="/phpLuna/propuesta/listadoCat">Agregar categoría</a></li>
                    {/if}
                 </ul>
               </li>

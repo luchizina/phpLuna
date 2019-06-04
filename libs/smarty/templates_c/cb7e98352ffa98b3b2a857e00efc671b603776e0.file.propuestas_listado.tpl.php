@@ -1,20 +1,22 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-03 16:21:42
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-03 20:00:57
          compiled from "vistas\propuestas_listado.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:449008125cf573460e78f0-89358547%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:12705688905cf593c5461f71-99906308%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'cb7e98352ffa98b3b2a857e00efc671b603776e0' => 
     array (
       0 => 'vistas\\propuestas_listado.tpl',
-      1 => 1559427069,
+      1 => 1559602852,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '449008125cf573460e78f0-89358547',
+  'nocache_hash' => '12705688905cf593c5461f71-99906308',
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cf593c55cb0b5_22981890',
   'variables' => 
   array (
     'url_base' => 0,
@@ -29,10 +31,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'sig' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cf57346348ef2_11776582',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cf57346348ef2_11776582')) {function content_5cf57346348ef2_11776582($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5cf593c55cb0b5_22981890')) {function content_5cf593c55cb0b5_22981890($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -59,10 +59,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 >
     <![endif]-->
   </head>
-  <body>
+  <body class="bg">
     <?php echo $_smarty_tpl->getSubTemplate ("cabezal.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
   
- <section class="probootstrap-hero bg" style="background-image: url(img/hero_bg_bw_1.jpg)"  data-stellar-background-ratio="0">
+ <section class="probootstrap-hero bg" >
   <br>
   <br>
      <section class="probootstrap-section">
@@ -121,7 +121,7 @@ propuesta/favoritear/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre
                          <i class="fa fa-star-o"></i></a>
                       <?php }?>
                       </h2>
-                  <div class="probootstrap-date"><i class="icon-calendar"></i> 2 hours remaining</div>  
+                  <div class="probootstrap-date"><i class="icon-calendar"></i> Implementar tiempo queda</div>  
                   <p><a href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 propuesta/nuevaColaboracion/<?php echo $_smarty_tpl->tpl_vars['prop']->value->getNombre();?>
 " class="btn btn-primary btn-black">Colaborar!</a></p>
@@ -131,7 +131,7 @@ propuesta/nuevaColaboracion/<?php echo $_smarty_tpl->tpl_vars['prop']->value->ge
                   <?php } ?>
   </div>
   <div id="pagination">
-<ul class="pagination justify-content-center" style="margin:20px 0"">
+<ul class="pagination justify-content-center" style="margin:20px 0">
 <li class="page-item"><a class="page-link" href="<?php echo $_smarty_tpl->tpl_vars['est']->value;?>
 ">Anterior</a></li>
   <?php ob_start();?><?php echo $_smarty_tpl->tpl_vars['paginas']->value;?>

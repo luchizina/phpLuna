@@ -1,29 +1,29 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-03 22:39:42
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-04 00:58:05
          compiled from "vistas\usuarios_nuevo.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:672588005cf5732fdd7e98-80634588%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:12746258855cf594cfee02b1-18581411%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '1c8ee8b714c2a77826cf3b8b4ca6f42cfcdb50bc' => 
     array (
       0 => 'vistas\\usuarios_nuevo.tpl',
-      1 => 1559594380,
+      1 => 1559602680,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '672588005cf5732fdd7e98-80634588',
+  'nocache_hash' => '12746258855cf594cfee02b1-18581411',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cf573305b9c95_07026217',
+  'unifunc' => 'content_5cf594d00cd153_67364220',
   'variables' => 
   array (
     'url_base' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cf573305b9c95_07026217')) {function content_5cf573305b9c95_07026217($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5cf594d00cd153_67364220')) {function content_5cf594d00cd153_67364220($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -42,11 +42,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 >
     <![endif]-->
   </head>
-  <body >
+  <body class="bg">
 
     <?php echo $_smarty_tpl->getSubTemplate ("cabezal.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
-    <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg); height:100%"  data-stellar-background-ratio="0.1">
+    <section class="probootstrap-hero" data-stellar-background-ratio="0.1">
         <div class="container">
           <div class="row">
             <div class="col-md-12" >

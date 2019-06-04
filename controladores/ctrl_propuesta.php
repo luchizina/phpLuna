@@ -626,14 +626,21 @@ function comentarEnPagina(){
 
   $prop = $propuesta->obtenerPorNombreProp($_POST['nomPropCom']);
   $usuario = new Usuario();
+    if (isset($_SESSION['usuario_nick'])) {
   $u = $usuario->obtenerPorNick(Session::get('usuario_nick'));
   $c = new Comentario();
   $c->setUsuario($u);
   $c->setPropuesta($prop);
   $c->setTexto($_POST['textoComentario']);
   $c->comentar();
-     }
+     }else{
+     echo '<script type="text/javascript">'; 
+echo 'alert("Tenés que estar logueado para comentar");'; 
+echo 'window.location.href = "http://localhost/phpLuna/usuario/login/";';
+echo '</script>';
 
+     }
+}
 }
 
 function borrarComEnPagina($params=array()){

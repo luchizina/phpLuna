@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
+     
     <!--[if lt IE 9]>
       <script src="js/vendor/html5shiv.min.js"></script>
       <script src="js/vendor/respond.min.js"></script>
@@ -69,4 +70,30 @@
     <script src="js/custom.js"></script>
     </section>          
   </section>
+
+  <div class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+    <!--Content-->
+    <div class="modal-content">
+
+      <!--Header-->
+      <div class="modal-header">
+        <img src="./{$usuario->getImagen()}" style="border-radius:50%;" alt="avatar" class="rounded-circle img-responsive">
+      </div>
+      <!--Body-->
+      <div class="modal-body text-center mb-1">
+
+        <h5 class="mt-1 mb-2">{$usuario->getNombre()} {$usuario->getApellido()}</h5>
+        <label data-error="wrong" data-success="right" for="form29" class="ml-0">Correo: {$usuario->getCorreo()}</label><br>
+        <label data-error="wrong" data-success="right" for="form29" class="ml-0">Usuario: {$usuario->getNick()}</label>
+      </div>
+
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<div class="text-center">
+  <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#modalLoginAvatar">Apretá aca</a>
+</div>
       </body></html>

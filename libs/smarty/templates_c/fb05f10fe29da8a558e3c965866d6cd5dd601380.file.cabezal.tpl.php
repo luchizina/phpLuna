@@ -1,20 +1,22 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-03 21:21:20
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-03 23:31:32
          compiled from "vistas\cabezal.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:2520166385cf57330727690-54076984%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:3547106965cf590808b77c7-05914924%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'fb05f10fe29da8a558e3c965866d6cd5dd601380' => 
     array (
       0 => 'vistas\\cabezal.tpl',
-      1 => 1559417558,
+      1 => 1559597490,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2520166385cf57330727690-54076984',
+  'nocache_hash' => '3547106965cf590808b77c7-05914924',
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cf590808dde48_08354710',
   'variables' => 
   array (
     'usuLogNick' => 0,
@@ -26,10 +28,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'url_logout' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cf573307de3a4_05031257',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cf573307de3a4_05031257')) {function content_5cf573307de3a4_05031257($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_5cf590808dde48_08354710')) {function content_5cf590808dde48_08354710($_smarty_tpl) {?>
  <head>
     <link rel="shortcut icon" href="img/moon.png" type="image/png" />
     <title>LUNA</title>
@@ -76,6 +76,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                   <li><a href="/phpLuna/propuesta/listado/">Listado</a></li>
                   <?php if ($_smarty_tpl->tpl_vars['usuLogNick']->value!=''&&$_smarty_tpl->tpl_vars['usuLogTipo']->value==0) {?>
                   <li><a href="/phpLuna/propuesta/listadoPropsAgregadas/1">Aceptar/rechazar propuestas</a></li>
+                   <li><a href="/phpLuna/propuesta/listadoCat">Agregar categoría</a></li>
                    <?php }?>
                 </ul>
               </li>
