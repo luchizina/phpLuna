@@ -102,17 +102,17 @@
         </div>
       </li>
       {/foreach}
-      <form method="post" action="{$url_base}propuesta/comentarEnPagina" class="probootstrap-form">
+      <div class="probootstrap-form">
       <li>
         <textarea rows="5" cols="57" name="textoComentario" id="textoComentario"></textarea>
       </li>
       <li>
         <div class="form-group" >
-          <input type="hidden" value="{$propuesta->getNombre()}" name="nomPropCom" id="nomPropCom">
-            <input type="submit" class="btn btn-primary btn-lg" id="com" name="com" value="COMENTAR">
+          <!-- <input type="hidden" value="{$propuesta->getNombre()}" name="nomPropCom" id="nomPropCom">
+           --> <a id="submit" href="javascript:void(0)" class="btn btn-primary btn-lg" id="com" name="com">COMENTAR</a>
           </div>
       </li>
-    </form>
+    </div>
     </ul>
   </div>
 </div>
@@ -122,7 +122,36 @@
     <script src="js/main.min.js"></script>
     <script src="js/custom.js"></script>
      <script src="js/validar.js" type="text/javascript"></script>
+     <script type="text/javascript">
+      function listCom(){
+          $.ajax({
+            url: '{$url_base}propuesta/listComs/{$propuesta->getNombre()}',
+            success:function(){
+              console.log("Lista");
+              console.log('{$url_base}propuesta/listComs/{$propuesta->getNombre()}');
+            }
+          })
+        }
+       $(function(){
+          listCom();
+          $('#submit').click(function(){
+            var texto = $('#textoComentario').val();
+            var nomPropCom = '{$propuesta->getNombre()}';
+            $.ajax({
+              url: '{$url_base}propuesta/comentarEnPagina',
+              data: 'textoComentario='+texto+'&nomPropCom='+nomPropCom,
+              type: 'post',
+              success:function(){
+                alert('Comentario agregado');
+                document.getElementById("textoComentario").value = "";
+                listCom();
+              }
+            })
+          })
+       })
+     </script>
     </section>          
   </section>
       </body></html>
+
       

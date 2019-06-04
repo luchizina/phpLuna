@@ -33,7 +33,8 @@
             <form method="post" class="probootstrap-form">
               <div class="form-group">
                 <label for="monto">Monto</label>
-                <input id="monto" name="monto" type="number" placeholder="Ej: 500" class="form-control" required="">
+                <input id="monto" name="monto"  onkeyup="javascript:verRec()" type="number" placeholder="Ej: 500" class="form-control" required="">
+                <span id="mensajito"></span>
               </div>
              <!-- <label for="rec">Recompensa</label>
               <select name="rec">
@@ -54,6 +55,23 @@
     <script src="js/scripts.min.js"></script>
     <script src="js/main.min.js"></script>
     <script src="js/custom.js"></script>
+    <script type="text/javascript">
+      function verRec(){
+        var monto = $('#monto').val();
+        var propuesta = window.location.pathname;
+        var array = propuesta.split('/');
+        var nombre = array[4];
+        console.log(monto);
+        $.ajax({
+          url: '{$url_base}propuesta/verrecPrecio',
+          data: 'propuesta='+nombre+'&monto='+monto,
+          type: 'post',
+          success:function(res){
+            $('#mensajito').html(res);
+          }
+        })
+      }
+    </script>
     </section>          
   </section>
       </body></html>

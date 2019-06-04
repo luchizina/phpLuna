@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-03 22:54:57
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-04 19:56:38
          compiled from "vistas\usuarios_modificar.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:17474464965cf57c74bba685-13860616%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0b55c0502d49d65e122bfc0ca14f565e52708d1c' => 
     array (
       0 => 'vistas\\usuarios_modificar.tpl',
-      1 => 1559595293,
+      1 => 1559670690,
       2 => 'file',
     ),
   ),
@@ -64,7 +64,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
           <div class="row" style="margin: 0 auto">
 
           <div class="col-md-5 probootstrap-animate mx-auto" style="margin: auto 0; color: white; font-family: Montserrat,Arial,sans-serif "  >
-            <form method="post" enctype="multipart/form-data" class="probootstrap-form">
+            <form method="post" enctype="multipart/form-data" class="probootstrap-form" id="from1" action="">
               <div class="form-group">
                 <label for="Nombre">Nombre</label>
                 <input type="text" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['usuario_log']->value->getNombre();?>
@@ -102,7 +102,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
               </div> 
               </div>
               <div class="form-group">
-                <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" value="MODIFICAR">
+                <input type="submit" class="btn btn-primary btn-lg" id="modificar" name="submit" value="MODIFICAR">
               </div>
             </form>
           </div>
@@ -119,7 +119,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
  src="js/custom.js"><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
+ src="js/sweetalert.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
  src="js/subirImg.js" type="text/javascript"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/busca.js" type="text/javascript"><?php echo '</script'; ?>
 >
     </section>          
   </section>

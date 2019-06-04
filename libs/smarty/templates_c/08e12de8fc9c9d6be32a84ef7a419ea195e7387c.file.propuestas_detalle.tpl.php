@@ -1,20 +1,22 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-03 16:21:53
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-04 18:48:15
          compiled from "vistas\propuestas_detalle.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:6520454045cf57351528b33-69662355%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:13309837765cf6bd51530757-70349685%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '08e12de8fc9c9d6be32a84ef7a419ea195e7387c' => 
     array (
       0 => 'vistas\\propuestas_detalle.tpl',
-      1 => 1559589662,
+      1 => 1559676155,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '6520454045cf57351528b33-69662355',
+  'nocache_hash' => '13309837765cf6bd51530757-70349685',
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cf6bd516db056_61268527',
   'variables' => 
   array (
     'url_base' => 0,
@@ -24,10 +26,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'usuLogNick' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cf573516d3436_90878665',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cf573516d3436_90878665')) {function content_5cf573516d3436_90878665($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5cf6bd516db056_61268527')) {function content_5cf6bd516db056_61268527($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -163,19 +163,18 @@ echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
         </div>
       </li>
       <?php } ?>
-      <form method="post" action="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-propuesta/comentarEnPagina" class="probootstrap-form">
+      <div class="probootstrap-form">
       <li>
         <textarea rows="5" cols="57" name="textoComentario" id="textoComentario"></textarea>
       </li>
       <li>
         <div class="form-group" >
-          <input type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
+          <!-- <input type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
 " name="nomPropCom" id="nomPropCom">
-            <input type="submit" class="btn btn-primary btn-lg" id="com" name="com" value="COMENTAR">
+           --> <a id="submit" href="javascript:void(0)" class="btn btn-primary btn-lg" id="com" name="com">COMENTAR</a>
           </div>
       </li>
-    </form>
+    </div>
     </ul>
   </div>
 </div>
@@ -193,7 +192,44 @@ propuesta/comentarEnPagina" class="probootstrap-form">
      <?php echo '<script'; ?>
  src="js/validar.js" type="text/javascript"><?php echo '</script'; ?>
 >
+     <?php echo '<script'; ?>
+ type="text/javascript">
+      function listCom(){
+          $.ajax({
+            url: '<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/listComs/<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
+',
+            success:function(){
+              console.log("Lista");
+              console.log('<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/listComs/<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
+');
+            }
+          })
+        }
+       $(function(){
+          listCom();
+          $('#submit').click(function(){
+            var texto = $('#textoComentario').val();
+            var nomPropCom = '<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
+';
+            $.ajax({
+              url: '<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/comentarEnPagina',
+              data: 'textoComentario='+texto+'&nomPropCom='+nomPropCom,
+              type: 'post',
+              success:function(){
+                alert('Comentario agregado');
+                document.getElementById("textoComentario").value = "";
+                listCom();
+              }
+            })
+          })
+       })
+     <?php echo '</script'; ?>
+>
     </section>          
   </section>
       </body></html>
+
       <?php }} ?>

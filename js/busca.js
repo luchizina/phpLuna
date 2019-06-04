@@ -1,19 +1,18 @@
-
-	
-function Paginator(items, page) {
- 
-  var page = page || 1,
-  per_page = 9,
-  offset = (page - 1) * per_page,
- 
-  paginatedItems = items.slice(offset).slice(0, per_page),
-  total_pages = Math.ceil(items.length / per_page);
-  return {
-  page: page,
-  per_page: per_page,
-  pre_page: page - 1 ? page - 1 : null,
-  next_page: (total_pages > page) ? page + 1 : null,
-  total: items.length,
-  total_pages: total_pages,
-  data: paginatedItems
-  };
+document.getElementById("from1").onsubmit = function (e) {
+  e.preventDefault();
+  Swal.fire({
+    title: 'Sus datos seran modificados',
+    text: "Aceptar para continuar",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Aceptar'
+  }).then((result) => {
+      if (result.value) {
+        return true;
+      } else {
+        return false;
+      }
+    })
+  }

@@ -311,7 +311,6 @@ $this->redirect("propuesta","listado");
 }
 
 
-
 function nuevaColaboracion($params=array()){
   $mensaje="";
   $col = new Colaboracion();
@@ -368,6 +367,16 @@ public function recursiva($recs, $col, $pos, $prop){
           $this->recursiva($recs, $col, $pos, $prop);
         }
       }
+  }
+
+  function verrecPrecio(){
+    $r = new Recompensa();
+    $recs = $r->traerRecompensasAjax($_POST["propuesta"], $_POST["monto"]);
+    if($recs != null){
+    echo $recs[0]->Nombre;
+  } else {
+    echo "No hay recompensa para ese monto";
+  }
   }
 
 
@@ -490,10 +499,6 @@ function detalleProp($params=array()){
 $propuesta = new Propuesta();
 $com = new Comentario();
 $coms = $com->com($params[0]);
-foreach ($coms as $comentario) {
-    
-}
-
 $u = new Usuario();
 foreach ($coms as $c) {
   $usu = $u->obtenerPorNick($c->NickUsuario);
@@ -515,6 +520,19 @@ $imagen = $propuesta->traerImagen($prop->getNombre());
 
 }
 
+function listComs($params=array()){
+$com = new Comentario();
+$coms = $com->com($params[0]);
+$u = new Usuario();
+foreach ($coms as $c) {
+  $usu = $u->obtenerPorNick($c->NickUsuario);
+  $c->setUsuario($usu);
+  $valor = $c->traerLikesComentario($c->getId());  
+  $c->setLike($valor["cant"]);
+}
+$tpl = Template::getInstance();
+$tpl->asignar('comentarios', $coms);
+}
 
 function desfavoritear($params=array()){
   $propuesta = new Propuesta();
@@ -614,9 +632,6 @@ function comentarEnPagina(){
   $c->setPropuesta($prop);
   $c->setTexto($_POST['textoComentario']);
   $c->comentar();
-  $algo = array();
-  $algo[] =$prop->getNombre();
-   $this->redirect("propuesta","detalleProp",$algo);
      }
 
 }
