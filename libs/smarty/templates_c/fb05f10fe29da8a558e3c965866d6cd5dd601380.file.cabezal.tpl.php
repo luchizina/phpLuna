@@ -1,4 +1,35 @@
-
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-03 23:31:32
+         compiled from "vistas\cabezal.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:3547106965cf590808b77c7-05914924%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'fb05f10fe29da8a558e3c965866d6cd5dd601380' => 
+    array (
+      0 => 'vistas\\cabezal.tpl',
+      1 => 1559597490,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '3547106965cf590808b77c7-05914924',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cf590808dde48_08354710',
+  'variables' => 
+  array (
+    'usuLogNick' => 0,
+    'usuLogTipo' => 0,
+    'url_base' => 0,
+    'url_login' => 0,
+    'url_regis' => 0,
+    'usuLogueado' => 0,
+    'url_logout' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5cf590808dde48_08354710')) {function content_5cf590808dde48_08354710($_smarty_tpl) {?>
  <head>
     <link rel="shortcut icon" href="img/moon.png" type="image/png" />
     <title>LUNA</title>
@@ -43,10 +74,10 @@
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Propuestas</a>
                 <ul class="dropdown-menu">
                   <li><a href="/phpLuna/propuesta/listado/">Listado</a></li>
-                  {if $usuLogNick != "" and $usuLogTipo == 0}
+                  <?php if ($_smarty_tpl->tpl_vars['usuLogNick']->value!=''&&$_smarty_tpl->tpl_vars['usuLogTipo']->value==0) {?>
                   <li><a href="/phpLuna/propuesta/listadoPropsAgregadas/1">Aceptar/rechazar propuestas</a></li>
                    <li><a href="/phpLuna/propuesta/listadoCat">Agregar categoría</a></li>
-                   {/if}
+                   <?php }?>
                 </ul>
               </li>
                           <li>
@@ -61,23 +92,30 @@
                     <input type="text" class="input" id="xD" placeholder="&nbsp;">
                     <span class="label">Buscar propuesta</span>
                     <span class="highlight"></span>
-                    <div class="search-btn" onClick="location.href='{$url_base}propuesta/filtrar/'+ document.getElementById('xD').value;">
+                    <div class="search-btn" onClick="location.href='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/filtrar/'+ document.getElementById('xD').value;">
                          <svg class="icon icon-18">
                            <use xlink:href="#magnify"></use>
                           </svg>
                     </div>
                   </div>
                   </li>
-               {if $usuLogNick == ""}
-              <li class="probootstra-cta-button last"><a href="{$url_login}" class="btn btn-primary">INICIAR SESIÓN</a></li>
-              <li class="probootstra-cta-button last"><a href="{$url_regis}" class="btn btn-primary">REGISTRARSE</a></li>
-               {else}
-                <li><a href="/phpLuna/usuario/verPerfil/{$usuLogNick}">¡Hola {$usuLogueado}!</a></li>
-                <li class="probootstra-cta-button last"><a href="{$url_logout}" class="btn btn-primary">CERRAR SESIÓN</a></li>
+               <?php if ($_smarty_tpl->tpl_vars['usuLogNick']->value=='') {?>
+              <li class="probootstra-cta-button last"><a href="<?php echo $_smarty_tpl->tpl_vars['url_login']->value;?>
+" class="btn btn-primary">INICIAR SESIÓN</a></li>
+              <li class="probootstra-cta-button last"><a href="<?php echo $_smarty_tpl->tpl_vars['url_regis']->value;?>
+" class="btn btn-primary">REGISTRARSE</a></li>
+               <?php } else { ?>
+                <li><a href="/phpLuna/usuario/verPerfil/<?php echo $_smarty_tpl->tpl_vars['usuLogNick']->value;?>
+">¡Hola <?php echo $_smarty_tpl->tpl_vars['usuLogueado']->value;?>
+!</a></li>
+                <li class="probootstra-cta-button last"><a href="<?php echo $_smarty_tpl->tpl_vars['url_logout']->value;?>
+" class="btn btn-primary">CERRAR SESIÓN</a></li>
                
-                 {/if}
+                 <?php }?>
       
             </ul>
           </div>
         </div>
       </nav>
+<?php }} ?>

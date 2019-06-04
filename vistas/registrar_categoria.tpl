@@ -19,7 +19,7 @@
   </head>
   <body>
     {include file="cabezal.tpl"}
-     <section class="probootstrap-hero" style="background-image: url(img/img_sq_3.jpg); height:100%"  data-stellar-background-ratio="0.1">
+<section class="probootstrap-hero bg" style="background-image: url(img/hero_bg_bw_1.jpg)"  data-stellar-background-ratio="0">
     <div class="container-fluid" > 
                
       <div class="row" style="max-width: 700px; margin: 0 auto">  
