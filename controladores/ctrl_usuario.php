@@ -229,7 +229,6 @@ $email = $_POST['email'];
 $pass = sha1($_POST['pass']);
 	if($usr->login($email,$pass)){
     $userit = $usr->obtenerPorMail($email);
-		  #  $u =["usuario"=>$userit];
     $arreglo=["status"=>"ok","message"=>[$userit]];
             echo json_encode($arreglo);
 	}else{
