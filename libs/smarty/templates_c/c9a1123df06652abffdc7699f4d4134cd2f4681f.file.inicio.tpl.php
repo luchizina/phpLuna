@@ -1,9 +1,35 @@
-<!DOCTYPE html>
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-04 01:06:57
+         compiled from "vistas\inicio.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:16088861725cf59087c41dc3-41750654%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'c9a1123df06652abffdc7699f4d4134cd2f4681f' => 
+    array (
+      0 => 'vistas\\inicio.tpl',
+      1 => 1559603215,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '16088861725cf59087c41dc3-41750654',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cf59087d8a344_62617721',
+  'variables' => 
+  array (
+    'url_base' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5cf59087d8a344_62617721')) {function content_5cf59087d8a344_62617721($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <base href="{$url_base}">
+    <base href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="img/moon.png" type="image/png" />
     <title>LUNA</title>
@@ -13,12 +39,17 @@
     <link rel="stylesheet" href="css/custom.css">
     <link rel="stylesheet" href="css/dashboard.css">
     <!--[if lt IE 9]>
-      <script src="js/vendor/html5shiv.min.js"></script>
-      <script src="js/vendor/respond.min.js"></script>
+      <?php echo '<script'; ?>
+ src="js/vendor/html5shiv.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="js/vendor/respond.min.js"><?php echo '</script'; ?>
+>
     <![endif]-->
   </head>
   <body>
-    {include file="cabezal.tpl"}  
+    <?php echo $_smarty_tpl->getSubTemplate ("cabezal.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+  
     <br>
     <br>
     <br>        
@@ -399,9 +430,16 @@
       </footer>
      
 
-    <script src="js/scripts.min.js"></script>
-    <script src="js/main.min.js"></script>
-    <script src="js/custom.js"></script>
+    <?php echo '<script'; ?>
+ src="js/scripts.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/main.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/custom.js"><?php echo '</script'; ?>
+>
     
   </body>
 </html>
+<?php }} ?>

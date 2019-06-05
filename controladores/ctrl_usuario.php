@@ -167,28 +167,33 @@ public function activarU($a = array()){
 public function modificar($params = array())
    {
      $mensaje = "";
-     $u = new Usuario();
-     $usuario = $u->obtenerPorNick(Session::get('usuario_nick'));
+     $usuario = new Usuario();
+
+     $u = $usuario->obtenerPorNick(Session::get('usuario_nick'));
      if(isset($_POST["nombre"]))
   { 
+    $var = $u->getTipoImg();
     $u->setNombre($_POST["nombre"]);
     $u->setApellido($_POST["apellido"]);
     $u->setCelular($_POST["celular"]);
     $u->setCorreo($_POST["correo"]);
     $u->setPassword($_POST["password"]);
-    if($u->modificar())
+    $u->setArchivo($_FILES['archivo']['tmp_name']);
+    $u->setImagen($_FILES['archivo']['name']);
+    $u->setTipoImg($_FILES['archivo']['type']);
+    if($u->modificar($var))
     {
       $this->redirect("usuario","redirigir");
       exit;
     }else{
-      $mensaje="Error! No se pudo modificar el usuario";
+      echo "Error! No se pudo modificar el usuario";
     }
   }
   $tpl = Template::getInstance();
   $tpl->asignar('titulo',"Modificar Usuario");
   $tpl->asignar('buscar',"");
-  $tpl->asignar('usuario_log', $usuario);
-  $tpl->mostrar('usuarios_modificar', $usuario);
+  $tpl->asignar('usuario_log', $u);
+  $tpl->mostrar('usuarios_modificar', $u);
    }
 public function existeCi(){
   if(isset($_POST['ci'])){

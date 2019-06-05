@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/imagenes.css" rel="stylesheet">
     <!--[if lt IE 9]>
       <script src="js/vendor/html5shiv.min.js"></script>
       <script src="js/vendor/respond.min.js"></script>
@@ -31,7 +32,7 @@
           <div class="row" style="margin: 0 auto">
 
           <div class="col-md-5 probootstrap-animate mx-auto" style="margin: auto 0; color: white; font-family: Montserrat,Arial,sans-serif "  >
-            <form method="post" class="probootstrap-form">
+            <form method="post" enctype="multipart/form-data" class="probootstrap-form">
               <div class="form-group">
                 <label for="Nombre">Nombre</label>
                 <input type="text" class="form-control" value="{$usuario_log->getNombre()}" id="nombre" name="nombre">
@@ -53,6 +54,17 @@
                 <input type="text" class="form-control" value="{$usuario_log->getCelular()}" id="celular" name="celular">
               </div>
               <div class="form-group">
+               <div class="imgUp">
+                {if $usuario_log->getImagen() == ""}
+                <div class="imagePreview"></div>
+                {/if}
+                {if $usuario_log->getImagen() != ""}
+                <div class="imagePreview" style="background-image: url('./{$usuario_log->getImagen()}')"></div>
+                {/if}
+               <label class="btn btn-primary btn-lg">Elegir imagen<input type="file" name="archivo" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;"></label>
+              </div> 
+              </div>
+              <div class="form-group">
                 <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" value="MODIFICAR">
               </div>
             </form>
@@ -63,6 +75,7 @@
     <script src="js/scripts.min.js"></script>
     <script src="js/main.min.js"></script>
     <script src="js/custom.js"></script>
+    <script src="js/subirImg.js" type="text/javascript"></script>
     </section>          
   </section>
       </body></html>
