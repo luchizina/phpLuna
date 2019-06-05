@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-04 19:56:38
+=======
 <?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-04 02:15:45
+>>>>>>> 72018e22c9c4254323b46565cbd0a2409643f5eb
          compiled from "vistas\usuarios_modificar.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:9924244255cf5b831111dd7-70448237%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +11,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0b55c0502d49d65e122bfc0ca14f565e52708d1c' => 
     array (
       0 => 'vistas\\usuarios_modificar.tpl',
+<<<<<<< HEAD
+      1 => 1559670690,
+=======
       1 => 1559596731,
+>>>>>>> 72018e22c9c4254323b46565cbd0a2409643f5eb
       2 => 'file',
     ),
   ),
@@ -64,7 +72,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
           <div class="row" style="margin: 0 auto">
 
           <div class="col-md-5 probootstrap-animate mx-auto" style="margin: auto 0; color: white; font-family: Montserrat,Arial,sans-serif "  >
-            <form method="post" enctype="multipart/form-data" class="probootstrap-form">
+            <form method="post" enctype="multipart/form-data" class="probootstrap-form" id="from1" action="">
               <div class="form-group">
                 <label for="Nombre">Nombre</label>
                 <input type="text" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['usuario_log']->value->getNombre();?>
@@ -102,7 +110,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
               </div> 
               </div>
               <div class="form-group">
-                <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" value="MODIFICAR">
+                <input type="submit" class="btn btn-primary btn-lg" id="modificar" name="submit" value="MODIFICAR">
               </div>
             </form>
           </div>
@@ -119,7 +127,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
  src="js/custom.js"><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
+ src="js/sweetalert.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
  src="js/subirImg.js" type="text/javascript"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/busca.js" type="text/javascript"><?php echo '</script'; ?>
 >
     </section>          
   </section>

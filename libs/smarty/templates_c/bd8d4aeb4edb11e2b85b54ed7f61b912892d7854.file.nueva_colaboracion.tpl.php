@@ -1,12 +1,30 @@
+<<<<<<< HEAD
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-04 18:38:00
+         compiled from "vistas\nueva_colaboracion.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:1074885955cf6e1db335474-06700167%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+=======
 <?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-03 18:46:00
          compiled from "vistas\nueva_colaboracion.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:17726656165cf595180f4464-12674814%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+>>>>>>> 72018e22c9c4254323b46565cbd0a2409643f5eb
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'bd8d4aeb4edb11e2b85b54ed7f61b912892d7854' => 
     array (
       0 => 'vistas\\nueva_colaboracion.tpl',
+<<<<<<< HEAD
+      1 => 1559684277,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '1074885955cf6e1db335474-06700167',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cf6e1db596a72_66271873',
+=======
       1 => 1559084310,
       2 => 'file',
     ),
@@ -15,6 +33,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+>>>>>>> 72018e22c9c4254323b46565cbd0a2409643f5eb
   'variables' => 
   array (
     'url_base' => 0,
@@ -22,10 +41,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'rec' => 0,
   ),
   'has_nocache_code' => false,
+<<<<<<< HEAD
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5cf6e1db596a72_66271873')) {function content_5cf6e1db596a72_66271873($_smarty_tpl) {?>
+=======
   'version' => 'Smarty-3.1.21-dev',
   'unifunc' => 'content_5cf595182bc1c6_09000935',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5cf595182bc1c6_09000935')) {function content_5cf595182bc1c6_09000935($_smarty_tpl) {?>
+>>>>>>> 72018e22c9c4254323b46565cbd0a2409643f5eb
 <!DOCTYPE html>
 
 <html lang="en">
@@ -66,7 +90,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <form method="post" class="probootstrap-form">
               <div class="form-group">
                 <label for="monto">Monto</label>
+<<<<<<< HEAD
+                <input id="monto" name="monto"  onkeyup="javascript:verRec()" type="number" placeholder="Ej: 500" class="form-control" required="">
+                <span id="mensajito"></span>
+=======
                 <input id="monto" name="monto" type="number" placeholder="Ej: 500" class="form-control" required="">
+>>>>>>> 72018e22c9c4254323b46565cbd0a2409643f5eb
               </div>
              <!-- <label for="rec">Recompensa</label>
               <select name="rec">
@@ -99,6 +128,29 @@ $_smarty_tpl->tpl_vars['rec']->_loop = true;
     <?php echo '<script'; ?>
  src="js/custom.js"><?php echo '</script'; ?>
 >
+<<<<<<< HEAD
+    <?php echo '<script'; ?>
+ type="text/javascript">
+      function verRec(){
+        var monto = $('#monto').val();
+        var propuesta = window.location.pathname;
+        var array = propuesta.split('/');
+        var nombre = array[4];
+        console.log(monto);
+        $.ajax({
+          url: '<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/verrecPrecio',
+          data: 'propuesta='+nombre+'&monto='+monto,
+          type: 'post',
+          success:function(res){
+            $('#mensajito').html(res);
+          }
+        })
+      }
+    <?php echo '</script'; ?>
+>
+=======
+>>>>>>> 72018e22c9c4254323b46565cbd0a2409643f5eb
     </section>          
   </section>
       </body></html>

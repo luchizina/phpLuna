@@ -102,17 +102,22 @@
           </div>
  
       {/foreach}
+
+      <div class="comment" id="nuevo">
+        
+      </div>
+
+
          <div class="jaja">
       <form method="post" action="{$url_base}propuesta/comentarEnPagina" class="probootstrap-form">
         <textarea rows="5" cols="57" name="textoComentario" id="textoComentario"></textarea>
         <div class="form-group" >
-          <input type="hidden" value="{$propuesta->getNombre()}" name="nomPropCom" id="nomPropCom">
-            <input type="submit" class="btn btn-primary btn-lg" id="com" name="com" value="COMENTAR">
+            <a onclick="Coment('{$url_base}','{$propuesta->getNombre()}');" id="submit" name="submit" class="btn btn-primary btn-lg">COMENTAR</a>
           </div>
     </form>
     </div>
     <br>
-  </div>
+</div>
 
   
 
@@ -123,4 +128,5 @@
     </section>          
   </section>
       </body></html>
+
       

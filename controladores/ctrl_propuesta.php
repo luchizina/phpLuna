@@ -3,7 +3,6 @@ require "clases/clase_base.php";
 require "clases/propuesta.php";
 //require "clases/estados.php";
 //require "clases/list_estado.php";
-
 require "clases/listaestados.php";
 require "clases/recompensa.php";
 require "clases/usuario.php";
@@ -19,9 +18,7 @@ date_default_timezone_set('UTC');
 date_default_timezone_set("America/Montevideo");
 error_reporting(E_ALL);
 class ControladorPropuesta extends ControladorIndex {
-
  function listado($params=array()){
-
        $buscar="";
        $titulo="Listado";
        $mensaje="";
@@ -43,7 +40,6 @@ class ControladorPropuesta extends ControladorIndex {
             $p = $pagina - 1;
             $estAnt = "propuesta/pagina/$p/";
           }
-
           $propuesta=new Propuesta();
           $cant = $propuesta->cantPagProp();
           if($pagina == $cant){
@@ -64,20 +60,19 @@ class ControladorPropuesta extends ControladorIndex {
                     $usr=$propuesta->obtenerPorId($idABorrar);
                     //$mensaje="Error!! No se pudo borrar el usuario  <b>".$usr->getNombre()." ".$usr->getApellido()."</b>";
                     $mensaje="ERROR. No existe la propuesta";
-                    $propuestas=$propuesta->getListadoProp($pagina);	
+                    $propuestas=$propuesta->getListadoProp($pagina);  
                     $cant = $propuesta->cantPagProp();
                 }
                 if($params[0]=="colaborar"){
                   $this->nuevaColaboracion($params=array());
                 }
            }else if ($params[0]=="filtrar"){
-               $propuestas=$params[1];	
+               $propuestas=$params[1];  
             }
             else{
               $propuesta=new Propuesta();
                $propuestas=$propuesta->getListadoProp($pagina);
                $cant = $propuesta->cantPagProp();
-
             }
         }
        }else{
@@ -112,10 +107,7 @@ class ControladorPropuesta extends ControladorIndex {
        $tpl->mostrar('propuestas_listado',$datos);
    
    }
-
-
 function listadoPropsAgregadas($params=array()){
-
   $prop = new Propuesta();
   $propsAgre = $prop->getListadoAgregadas($params[0]);
   #$propsNue = $prop->getListado();
@@ -123,42 +115,29 @@ function listadoPropsAgregadas($params=array()){
         $datos = array(
        'propsAgre' => $propsAgre
        );
-
-
    $tpl->mostrar('propuestas_listAgregadas',$datos);
-
 }
-
-
 function publicarPropuesta($params=array()){
 $prop = new Propuesta();
 $propuesta = $prop->obtenerPorNombreProp($params[0]);
 $propuesta->setEstadoActual(3);
 $propuesta->actualizarEstadoProp();
 $this->redirect("propuesta","listado");
-
 }
-
 function cancelarPropuesta($params=array()){
 $prop = new Propuesta();
 $propuesta = $prop->obtenerPorNombreProp($params[0]);
 $propuesta->setEstadoActual(2);
 $propuesta->actualizarEstadoProp();
 $this->redirect("propuesta","listado");
-
 }
-
-
 function listadoCel(){
-
-
   $prop = new Propuesta();
   $propuestas=$prop->getListadoProp(1);
    $arreglo=["status"=>"ok","message"=>$propuestas];
        $listaProps = json_encode($arreglo);
        echo $listaProps;
 }
-
 function listComent($a = array()){
   //$prop = $_GET['prop'];
   $prop = $a[0];
@@ -168,7 +147,6 @@ function listComent($a = array()){
   $listComs = json_encode($arreglo);
   echo $listComs;
 }
-
 function borrComent($a = array()){
   $com = new Comentario();
   $num = (int)$a[0];
@@ -184,36 +162,29 @@ function borrComent($a = array()){
     echo json_encode($arreglo);
   }
 }
-
-
 function consolita( $data ) {
     $output = $data;
     if ( is_array( $output ) )
         $output = implode( ',', $output);
-
     echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
 }
-
-
    function nuevo(){
-	$mensaje="";
-
-	if(isset($_POST["nombre"])){
+  $mensaje="";
+  if(isset($_POST["nombre"])){
     $p = new Propuesta();
   //  if($p->obtenerPorNombreProp($_POST["nombre"])==null){
     $usr = new Usuario();
-	$prop= new Propuesta();
+  $prop= new Propuesta();
     $categ = new categoria();
-	$prop->setNombre($_POST["nombre"]);
-	$prop->setDescripcion($_POST["desc"]);
+  $prop->setNombre($_POST["nombre"]);
+  $prop->setDescripcion($_POST["desc"]);
     $fecha =  date("Y-m-d");
-	$prop->setFechaPublicada($fecha);
-	$prop->setMonto($_POST["monto"]);
+  $prop->setFechaPublicada($fecha);
+  $prop->setMonto($_POST["monto"]);
     $prop->setCategoria($categ->obtenerPorNombreCat($_POST["catego"]));
     $prop->setUsuario($usr->obtenerPorNick(Session::get('usuario_nick')));
-	$prop->setMontoActual(0);
+  $prop->setMontoActual(0);
     $prop->setEstadoActual(1);
-
     $arch =($_FILES['archivo']['tmp_name']);
     $img =($_FILES['archivo']['name']);
     $tipo = ($_FILES['archivo']['type']);
@@ -229,10 +200,10 @@ function consolita( $data ) {
         }
             if($target != ''){
             move_uploaded_file($arch, $target);
-    		}
+        }
     $prop->setImagen($target);
     $EstadoActual = 1;
-		if($prop->agregarP()){
+    if($prop->agregarP()){
         $prop->insertarImagen($prop->getNombre(),$target);
         $listEstado = new listaestados();
         $listEstado->setEstado(1);
@@ -243,35 +214,31 @@ function consolita( $data ) {
         $listEstado->agregarE(); 
         $rec = new recompensa();
         $reco = $rec->getListadoR($prop->getNombre());
-        $dato =$prop->getNombre();	
+        $dato =$prop->getNombre();  
         $this->redirect("propuesta","registrarRecom/$dato");
-		}else{
-			$mensaje="Error! No se pudo agregar la propuesta ";
-		}
-		
-	}else{
-	$categ = new categoria();
-	$categorias = $categ->getListado();
-	$tpl = Template::getInstance();
-	$tpl->asignar('titulo',"Nueva propuesta");
-	$tpl->asignar('buscar',"");
+    }else{
+      $mensaje="Error! No se pudo agregar la propuesta ";
+    }
+    
+  }else{
+  $categ = new categoria();
+  $categorias = $categ->getListado();
+  $tpl = Template::getInstance();
+  $tpl->asignar('titulo',"Nueva propuesta");
+  $tpl->asignar('buscar',"");
     $tpl->asignar('categorias',$categorias);
-	$tpl->asignar('mensaje',$mensaje);
-	$tpl->mostrar('registrar_propuesta',array());
+  $tpl->asignar('mensaje',$mensaje);
+  $tpl->mostrar('registrar_propuesta',array());
     }
 }
-
-
 public function modificar($params = array())
    {
     $mensaje = "";
      $propuesta  = new Propuesta();
      $u = new Usuario();
      $usuario = $u->obtenerPorNick(Session::get('usuario_nick'));
-
    
      $p = $propuesta->obtenerPorNombreProp($params[0]);
-
      if(isset($_POST["nombre"]))
   { 
     $p->setNombre($_POST["nombre"]);
@@ -285,7 +252,6 @@ public function modificar($params = array())
     }else{
       $mensaje="Error! No se pudo modificar la propuesta";
     }
-
   }
   $tpl = Template::getInstance();
   $tpl->asignar('titulo',"Modificar Propuesta");
@@ -294,24 +260,13 @@ public function modificar($params = array())
   $tpl->asignar('propuesta', $p);
   $tpl->mostrar('propuestas_modificar',$p);
    }
-
-
-
-
-
 public function borrar($params = array()){
 $propuesta = new Propuesta();
-
 $prop = $propuesta->obtenerPorNombreProp($params[0]);
 $prop->setEstadoActual(2);
 $prop->actualizarEstadoProp();
 $this->redirect("propuesta","listado");
-
-
 }
-
-
-
 function nuevaColaboracion($params=array()){
   $mensaje="";
   $col = new Colaboracion();
@@ -333,9 +288,7 @@ function nuevaColaboracion($params=array()){
         $pos = $clave;
       }
     }
-
     $this->recursiva($recs, $col, $pos, $prop);
-
     if($col->agregar()){
       array_push($usu->getPropuestasColabora(), $prop);
       $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
@@ -354,7 +307,6 @@ function nuevaColaboracion($params=array()){
   $tpl->asignar('recompensas',$recs);
   $tpl->mostrar('nueva_colaboracion',array());
 }
-
 public function recursiva($recs, $col, $pos, $prop){
   $r = $recs[$pos];
   $r->setTituloPropuesta($prop);
@@ -369,8 +321,6 @@ public function recursiva($recs, $col, $pos, $prop){
         }
       }
   }
-
-
 function nuevaColaboracionCel(){
   $col = new Colaboracion();
   $Usuario = new Usuario();
@@ -404,7 +354,6 @@ function nuevaColaboracionCel(){
           echo json_encode($arreglo);
     }
 }
-
 function borrarCa($params=array()){
                $categoria=new categoria();
                $stringABorrar=$params[0];
@@ -414,11 +363,8 @@ function borrarCa($params=array()){
                     $this->redirect("propuesta","listadoCat");
                     exit;
                 }
-
 }       
-
 function traerPropuesta($params=array()){
-
   $prop = new Propuesta();
   $propuesta = $prop->obtenerPorNombreProp($params[0]);
    $p=["propuesta"=>$propuesta];
@@ -426,9 +372,7 @@ function traerPropuesta($params=array()){
       $nuevo = json_encode($arreglo);
       echo $nuevo;
 }
-
   function listadoCat($params=array()){
-
      $buscar="";
      $titulo="Listado";
      $mensaje="";
@@ -452,21 +396,18 @@ function traerPropuesta($params=array()){
        'titulo' => $titulo,
        'mensaje' => $mensaje,
        );
-
     $tpl->asignar('borrar_catego',$this->getUrl("propuesta","borrarCo"));
        $tpl->asignar('usuario_nuevo',$this->getUrl("usuario","nuevo"));
        $tpl->asignar('usuario_modificado',$this->getUrl("usuario","modificar"));
        $tpl->mostrar('registrar_categoria',$datos);
    
    }
-
 function consolita2( $data ) {
     $output = $data;
     if ( is_array( $output ) )
         $output = implode( ',', $output);
     echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
 }
-
 function favoritear($params=array()){
   $propuesta = new Propuesta();
   $prop = $propuesta->obtenerPorNombreProp($params[0]);
@@ -483,38 +424,47 @@ function favoritear($params=array()){
   }
   $this->redirect("propuesta","listado");
 } 
-
 function detalleProp($params=array()){
-
-
 $propuesta = new Propuesta();
 $com = new Comentario();
 $coms = $com->com($params[0]);
 foreach ($coms as $comentario) {
     
 }
-
 $u = new Usuario();
 foreach ($coms as $c) {
   $usu = $u->obtenerPorNick($c->NickUsuario);
   $c->setUsuario($usu);
-
   $valor = $c->traerLikesComentario($c->getId());  
   $c->setLike($valor["cant"]);
 }
-
-
 $prop = $propuesta->obtenerPorNombreProp($params[0]);
 $imagen = $propuesta->traerImagen($prop->getNombre());
-
     $tpl = Template::getInstance();
     $prop->setImagen($imagen);
   $tpl->asignar('propuesta', $prop);
   $tpl->asignar('comentarios', $coms);
   $tpl->mostrar('propuestas_detalle',$prop);
-
 }
 
+function listComs($params=array()){
+$com = new Comentario();
+$coms = $com->com2($params[0]);
+$u = new Usuario();
+$log = $_SESSION['usuario_nick'];
+$c = $coms[0];
+  $usu = $u->obtenerPorNick($c->NickUsuario);
+  $c->setUsuario($usu);
+  $valor = $c->traerLikesComentario($c->getId());  
+  $c->setLike($valor["cant"]);
+  $i ='';
+  if($c->getUsuario()->getImagen() == ""){
+    $i = "./imgUsus/pepito.png";
+  } else {
+    $i = "./".$c->getUsuario()->getImagen();
+  }
+  echo $c->getId()."-".$c->getTexto()."-".$c->getUsuario()->getNick()."-".$i."-".$c->getLikes()."-".$log;
+}
 
 function desfavoritear($params=array()){
   $propuesta = new Propuesta();
@@ -544,8 +494,6 @@ function desfavoritear($params=array()){
   }
   $this->redirect("propuesta","listado");
 }
-
-
 function comentar(){
   $propuesta = new Propuesta();
   $prop = $propuesta->obtenerPorNombreProp($_POST['nombre']); 
@@ -570,8 +518,6 @@ function comentar(){
     echo json_encode($arreglo);
   }
 }
-
-
 function registrarRecom($params = array())
 {
  $mensaje="";
@@ -590,22 +536,19 @@ function registrarRecom($params = array())
      
     }else $mensaje="Error! No se pudo agregar la colaboracion";
   }else{
-	  $rec = new recompensa();
-	  $reco = $rec->getListadoR($params[0]);
-	  $tpl = Template::getInstance();
-	  $tpl->asignar('reco', $reco);
-	  $tpl->asignar('mensaje', $mensaje);
-	  $tpl->asignar('tituloPropuesta', $params[0]);
-	  $tpl->mostrar('registrar_recomp',array());
+    $rec = new recompensa();
+    $reco = $rec->getListadoR($params[0]);
+    $tpl = Template::getInstance();
+    $tpl->asignar('reco', $reco);
+    $tpl->asignar('mensaje', $mensaje);
+    $tpl->asignar('tituloPropuesta', $params[0]);
+    $tpl->mostrar('registrar_recomp',array());
   }
 }
-
-
 function comentarEnPagina(){
   $propuesta = new Propuesta();
  $this->consolita($_POST['textoComentario']);
   if(isset($_POST["nomPropCom"])){
-
   $prop = $propuesta->obtenerPorNombreProp($_POST['nomPropCom']);
   $usuario = new Usuario();
     if (isset($_SESSION['usuario_nick'])) {
@@ -615,15 +558,11 @@ function comentarEnPagina(){
   $c->setPropuesta($prop);
   $c->setTexto($_POST['textoComentario']);
   $c->comentar();
-  $algo = array();
-  $algo[] =$prop->getNombre();
-   $this->redirect("propuesta","detalleProp",$algo);
      }else{
      echo '<script type="text/javascript">'; 
 echo 'alert("Tenés que estar logueado para comentar");'; 
 echo 'window.location.href = "http://localhost/phpLuna/usuario/login/";';
 echo '</script>';
-
      }
 }
 }
@@ -638,20 +577,16 @@ function borrarComEnPagina($params=array()){
      $this->redirect("propuesta","detalleProp",$algo);
   }
 }
-
-
 function likeComentPagina(){
   //var_dump($_POST);
   $num =(int)$_POST['idCom'];
   $usuario = $_POST['nickUsu'];
   if(empty($_POST['nickUsu'])){
-  	 $coment = new Comentario();
+     $coment = new Comentario();
  $valor = $coment->traerLikesComentario($num);
    
    echo $valor["cant"];  
   }else{
-
-
   $coment = new Comentario();
   $com = $coment->obtenerPorId($num);
   $res=$coment->likeCom($usuario, $num);
@@ -666,7 +601,6 @@ function likeComentPagina(){
   }
    }
 }
-
 function likeCometario(){
   $num =(int)$_POST['idCom'];
   $usuario = new Usuario();
@@ -688,7 +622,6 @@ function likeCometario(){
     echo json_encode($arreglo);
   }
 }
-
 function likePropuestaCel(){
  
   $usuario = new Usuario();
@@ -698,48 +631,36 @@ function likePropuestaCel(){
   $propuesta = $prop->obtenerPorNombreProp($_POST['propNombre']);
  # $propuesta = $prop->obtenerPorNombreProp($a[1]);
   if($propuesta->likeProp($u->getCorreo(),$propuesta->getNombre())){
-
     $msg = "ingresar";
     $array = ["mens"=>$msg];
     $arreglo=["status"=>"ok","message"=>[$array]];
     echo json_encode($arreglo);
-
   } else {
-  	$propuesta->dislikeProp($u->getCorreo(),$propuesta->getNombre());
+    $propuesta->dislikeProp($u->getCorreo(),$propuesta->getNombre());
     $msg = "borrar";
     $array = ["mens"=>$msg];
     $arreglo=["status"=>"ok","message"=>[$array]];
     echo json_encode($arreglo);
   }
 }
-
-
 function chequearLikePropCel(){
  $prop = new Propuesta();
 # $nomUsu = $a[0];
 # $nomProp = $a[1];
  $valor = $prop->chequearLikeProp($_POST['usuCorreo'],$_POST['propNombre']);
 #$valor = $prop->chequearLikeProp($nomUsu,$nomProp);
-
   if($valor['gusta']==0){
-
     $msg = "no tiene";
     $array = ["mens"=>$msg];
     $arreglo=["status"=>"ok","message"=>[$array]];
     echo json_encode($arreglo);
-
   } else {
-
     $msg = "tiene";
     $array = ["mens"=>$msg];
     $arreglo=["status"=>"ok","message"=>[$array]];
     echo json_encode($arreglo);
   }
 }
-
-
-
-
 function filtrar($params=array())
 {
     $texto = $params[0];
@@ -754,7 +675,6 @@ function filtrar($params=array())
     $array[] = $listaFinal;
     $this->listado($array);
 }
-
 function dislikeCometario(){
   $num =(int)$_POST['idCom'];
   $usuario = new Usuario();
@@ -776,7 +696,5 @@ function dislikeCometario(){
     echo json_encode($arreglo);
   }
 }
-
 }
-
 ?>

@@ -1,22 +1,22 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-03 20:57:37
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-05 17:28:16
          compiled from "vistas\propuestas_detalle.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:19869852855cf5922e4db471-69579055%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:8104847265cf6ec6171e727-64502248%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '08e12de8fc9c9d6be32a84ef7a419ea195e7387c' => 
     array (
       0 => 'vistas\\propuestas_detalle.tpl',
-      1 => 1559606254,
+      1 => 1559766446,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '19869852855cf5922e4db471-69579055',
+  'nocache_hash' => '8104847265cf6ec6171e727-64502248',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cf5922e638680_50468320',
+  'unifunc' => 'content_5cf6ec6184f230_12975706',
   'variables' => 
   array (
     'url_base' => 0,
@@ -27,7 +27,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cf5922e638680_50468320')) {function content_5cf5922e638680_50468320($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5cf6ec6184f230_12975706')) {function content_5cf6ec6184f230_12975706($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -163,19 +163,25 @@ echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
           </div>
  
       <?php } ?>
+
+      <div class="comment" id="nuevo">
+        
+      </div>
+
+
          <div class="jaja">
       <form method="post" action="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 propuesta/comentarEnPagina" class="probootstrap-form">
         <textarea rows="5" cols="57" name="textoComentario" id="textoComentario"></textarea>
         <div class="form-group" >
-          <input type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
-" name="nomPropCom" id="nomPropCom">
-            <input type="submit" class="btn btn-primary btn-lg" id="com" name="com" value="COMENTAR">
+            <a onclick="Coment('<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+','<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
+');" id="submit" name="submit" class="btn btn-primary btn-lg">COMENTAR</a>
           </div>
     </form>
     </div>
     <br>
-  </div>
+</div>
 
   
 
@@ -194,4 +200,5 @@ propuesta/comentarEnPagina" class="probootstrap-form">
     </section>          
   </section>
       </body></html>
+
       <?php }} ?>
