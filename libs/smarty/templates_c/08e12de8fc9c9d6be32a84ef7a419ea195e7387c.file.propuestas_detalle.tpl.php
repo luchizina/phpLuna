@@ -1,40 +1,22 @@
-<<<<<<< HEAD
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-04 18:48:15
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-05 17:28:16
          compiled from "vistas\propuestas_detalle.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:13309837765cf6bd51530757-70349685%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
-=======
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-03 20:57:37
-         compiled from "vistas\propuestas_detalle.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:19869852855cf5922e4db471-69579055%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
->>>>>>> 72018e22c9c4254323b46565cbd0a2409643f5eb
+<?php /*%%SmartyHeaderCode:8104847265cf6ec6171e727-64502248%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '08e12de8fc9c9d6be32a84ef7a419ea195e7387c' => 
     array (
       0 => 'vistas\\propuestas_detalle.tpl',
-<<<<<<< HEAD
-      1 => 1559676155,
+      1 => 1559766446,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '13309837765cf6bd51530757-70349685',
-=======
-      1 => 1559606254,
-      2 => 'file',
-    ),
-  ),
-  'nocache_hash' => '19869852855cf5922e4db471-69579055',
->>>>>>> 72018e22c9c4254323b46565cbd0a2409643f5eb
+  'nocache_hash' => '8104847265cf6ec6171e727-64502248',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-<<<<<<< HEAD
-  'unifunc' => 'content_5cf6bd516db056_61268527',
-=======
-  'unifunc' => 'content_5cf5922e638680_50468320',
->>>>>>> 72018e22c9c4254323b46565cbd0a2409643f5eb
+  'unifunc' => 'content_5cf6ec6184f230_12975706',
   'variables' => 
   array (
     'url_base' => 0,
@@ -45,11 +27,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<<<<<<< HEAD
-<?php if ($_valid && !is_callable('content_5cf6bd516db056_61268527')) {function content_5cf6bd516db056_61268527($_smarty_tpl) {?><!DOCTYPE html>
-=======
-<?php if ($_valid && !is_callable('content_5cf5922e638680_50468320')) {function content_5cf5922e638680_50468320($_smarty_tpl) {?><!DOCTYPE html>
->>>>>>> 72018e22c9c4254323b46565cbd0a2409643f5eb
+<?php if ($_valid && !is_callable('content_5cf6ec6184f230_12975706')) {function content_5cf6ec6184f230_12975706($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -185,30 +163,25 @@ echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
           </div>
  
       <?php } ?>
-<<<<<<< HEAD
-      <div class="probootstrap-form">
-      <li>
-=======
+
+      <div class="comment" id="nuevo">
+        
+      </div>
+
+
          <div class="jaja">
       <form method="post" action="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 propuesta/comentarEnPagina" class="probootstrap-form">
->>>>>>> 72018e22c9c4254323b46565cbd0a2409643f5eb
         <textarea rows="5" cols="57" name="textoComentario" id="textoComentario"></textarea>
         <div class="form-group" >
-          <!-- <input type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
-" name="nomPropCom" id="nomPropCom">
-           --> <a id="submit" href="javascript:void(0)" class="btn btn-primary btn-lg" id="com" name="com">COMENTAR</a>
+            <a onclick="Coment('<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+','<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
+');" id="submit" name="submit" class="btn btn-primary btn-lg">COMENTAR</a>
           </div>
-<<<<<<< HEAD
-      </li>
-    </div>
-    </ul>
-=======
     </form>
     </div>
     <br>
->>>>>>> 72018e22c9c4254323b46565cbd0a2409643f5eb
-  </div>
+</div>
 
   
 
@@ -223,42 +196,6 @@ propuesta/comentarEnPagina" class="probootstrap-form">
 >
      <?php echo '<script'; ?>
  src="js/validar.js" type="text/javascript"><?php echo '</script'; ?>
->
-     <?php echo '<script'; ?>
- type="text/javascript">
-      function listCom(){
-          $.ajax({
-            url: '<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-propuesta/listComs/<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
-',
-            success:function(){
-              console.log("Lista");
-              console.log('<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-propuesta/listComs/<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
-');
-            }
-          })
-        }
-       $(function(){
-          listCom();
-          $('#submit').click(function(){
-            var texto = $('#textoComentario').val();
-            var nomPropCom = '<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
-';
-            $.ajax({
-              url: '<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-propuesta/comentarEnPagina',
-              data: 'textoComentario='+texto+'&nomPropCom='+nomPropCom,
-              type: 'post',
-              success:function(){
-                alert('Comentario agregado');
-                document.getElementById("textoComentario").value = "";
-                listCom();
-              }
-            })
-          })
-       })
-     <?php echo '</script'; ?>
 >
     </section>          
   </section>

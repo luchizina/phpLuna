@@ -102,28 +102,22 @@
           </div>
  
       {/foreach}
-<<<<<<< HEAD
-      <div class="probootstrap-form">
-      <li>
-=======
+
+      <div class="comment" id="nuevo">
+        
+      </div>
+
+
          <div class="jaja">
       <form method="post" action="{$url_base}propuesta/comentarEnPagina" class="probootstrap-form">
->>>>>>> 72018e22c9c4254323b46565cbd0a2409643f5eb
         <textarea rows="5" cols="57" name="textoComentario" id="textoComentario"></textarea>
         <div class="form-group" >
-          <!-- <input type="hidden" value="{$propuesta->getNombre()}" name="nomPropCom" id="nomPropCom">
-           --> <a id="submit" href="javascript:void(0)" class="btn btn-primary btn-lg" id="com" name="com">COMENTAR</a>
+            <a onclick="Coment('{$url_base}','{$propuesta->getNombre()}');" id="submit" name="submit" class="btn btn-primary btn-lg">COMENTAR</a>
           </div>
-<<<<<<< HEAD
-      </li>
-    </div>
-    </ul>
-=======
     </form>
     </div>
     <br>
->>>>>>> 72018e22c9c4254323b46565cbd0a2409643f5eb
-  </div>
+</div>
 
   
 
@@ -131,34 +125,6 @@
     <script src="js/main.min.js"></script>
     <script src="js/custom.js"></script>
      <script src="js/validar.js" type="text/javascript"></script>
-     <script type="text/javascript">
-      function listCom(){
-          $.ajax({
-            url: '{$url_base}propuesta/listComs/{$propuesta->getNombre()}',
-            success:function(){
-              console.log("Lista");
-              console.log('{$url_base}propuesta/listComs/{$propuesta->getNombre()}');
-            }
-          })
-        }
-       $(function(){
-          listCom();
-          $('#submit').click(function(){
-            var texto = $('#textoComentario').val();
-            var nomPropCom = '{$propuesta->getNombre()}';
-            $.ajax({
-              url: '{$url_base}propuesta/comentarEnPagina',
-              data: 'textoComentario='+texto+'&nomPropCom='+nomPropCom,
-              type: 'post',
-              success:function(){
-                alert('Comentario agregado');
-                document.getElementById("textoComentario").value = "";
-                listCom();
-              }
-            })
-          })
-       })
-     </script>
     </section>          
   </section>
       </body></html>
