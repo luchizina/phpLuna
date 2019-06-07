@@ -52,7 +52,7 @@
             <h2 style="color:#fff">¿Qué puedes encontrar en LUNA?</h2>
             <ul style="color:#fff" class="probootstrap-contact-info">
               <li><i class="icon-edit"></i> <span>Proponer ideas</span></li>
-              <li><i class="fa fa-dollar"></i><span>Colaborar a hacer realidad sueños</span></li>
+              <li><i class="fa fa-dollar"></i><span>Colaborar y hacer realidad sueños</span></li>
               <li><i class="fa fa-sign-in"></i><span>¿Aún no tienes cuenta? ¿Qué esperas? <a href="{$url_regis}">Haz click aquí</a></span></li>
             </ul>
 
