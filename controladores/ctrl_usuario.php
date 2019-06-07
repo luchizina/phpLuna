@@ -349,6 +349,24 @@ $imagen = $usuario->traerImagen($usu->getNick());
 }
 
 
+public function notifUsuario(){
+  $usuario = new Usuario();
+  $valorCheck = $_POST['checkNotif'];
+  $usu = $usuario->obtenerPorNick($_POST['nomUsu']);
+
+  
+  if($valorCheck=="on"){
+    $usu->setNotificacion(0);
+    $usu->actualizarNotificacion(0);
+    
+  }else{
+    $usu->setNotificacion(1);
+    $usu->actualizarNotificacion(1);
+  }
+  $algo = array();
+  $algo[] =$usu->getNick();
+  $this->redirect("usuario","verPerfil",$algo);
+}
 
 
 

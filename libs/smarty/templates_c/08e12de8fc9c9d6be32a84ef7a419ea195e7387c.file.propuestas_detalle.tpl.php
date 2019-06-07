@@ -1,22 +1,20 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-05 17:28:16
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-07 14:39:45
          compiled from "vistas\propuestas_detalle.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:8104847265cf6ec6171e727-64502248%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:17923276445cfaa161b63406-88696199%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '08e12de8fc9c9d6be32a84ef7a419ea195e7387c' => 
     array (
       0 => 'vistas\\propuestas_detalle.tpl',
-      1 => 1559766446,
+      1 => 1559929094,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '8104847265cf6ec6171e727-64502248',
+  'nocache_hash' => '17923276445cfaa161b63406-88696199',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cf6ec6184f230_12975706',
   'variables' => 
   array (
     'url_base' => 0,
@@ -26,8 +24,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'usuLogNick' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cfaa161cf75e3_57970715',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cf6ec6184f230_12975706')) {function content_5cf6ec6184f230_12975706($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5cfaa161cf75e3_57970715')) {function content_5cfaa161cf75e3_57970715($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -147,11 +147,16 @@ $_smarty_tpl->tpl_vars['com']->_loop = true;
                 </span>
            </div>
               <?php if ($_smarty_tpl->tpl_vars['com']->value->getUsuario()->getNick()==$_smarty_tpl->tpl_vars['usuLogNick']->value) {?>
-           <a class="btn" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+          <!-- <a class="btn" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 propuesta/borrarComEnPagina/<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
 /<?php echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
 ">
-                         <i class="icon-trash"></i></a>
+                         <i class="icon-trash"></i></a>-->
+               <a class="btn" onclick="borrarComent('<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+','<?php echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
+','<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
+',this);">
+                         <i class="icon-trash"></i></a>          
          <?php }?>
          <a class="btn" onclick="javascript:likeComentario('<?php echo $_smarty_tpl->tpl_vars['usuLogNick']->value;?>
 ',<?php echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
