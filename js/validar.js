@@ -35,7 +35,7 @@ function listCom(nombre, url){
               html+='<div class="comment-content"><p class="author"><strong>'+usu+'</strong></p>';
               html+='<span>'+texto+'</span></div>';
               if(usu === logue){
-                html+='<a class="btn" href="{$url_base}propuesta/borrarComEnPagina/{$propuesta->getNombre()}/'+id+'"><i class="icon-trash"></i></a>';
+                html+='<a class="btn" onclick="borrarComent('+url+','+id+','+nombre+',this);"><i class="icon-trash"></i></a>';
               }
               html+='<a class="btn" onclick="javascript:likeComentario('+logue+','+id+');">';
               html+='<i class="fa fa-thumbs-up"></i> <span id="'+logue+id+'">'+likes+'</span></a></div>';
