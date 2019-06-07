@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-04 02:09:11
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-05 21:08:58
          compiled from "vistas\usuario_perfil.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:15832812035cf5908009af97-27873010%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd70c4cfaaf427259fbf97c94c57fbf0d1e96ac25' => 
     array (
       0 => 'vistas\\usuario_perfil.tpl',
-      1 => 1559598917,
+      1 => 1559761726,
       2 => 'file',
     ),
   ),
@@ -102,6 +102,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
               </div>
             </form>
           </div>
+
+          <form method="post" action="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+usuario/notifUsuario">
+              <?php if ($_smarty_tpl->tpl_vars['usuario']->value->getNotificacion()==1) {?>
+  <input type="checkbox" name="checkNotif" id="checkNotif"> Activar/Desactivar notificaciones<br>
+    <?php } else { ?>
+     <input type="checkbox" name="checkNotif" id="checkNotif" checked> Activar/Desactivar notificaciones<br>
+     <?php }?>
+  <input type="hidden" name="nomUsu" id="nomUsu" value="<?php echo $_smarty_tpl->tpl_vars['usuario']->value->getNick();?>
+">
+  <input type="submit" value="Guardar cambios">
+</form>
+
         </div>
         </div>
 
@@ -117,34 +130,5 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     </section>          
   </section>
 
-  <div class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
-    <!--Content-->
-    <div class="modal-content">
-
-      <!--Header-->
-      <div class="modal-header">
-        <img src="./<?php echo $_smarty_tpl->tpl_vars['usuario']->value->getImagen();?>
-" style="border-radius:50%;" alt="avatar" class="rounded-circle img-responsive">
-      </div>
-      <!--Body-->
-      <div class="modal-body text-center mb-1">
-
-        <h5 class="mt-1 mb-2"><?php echo $_smarty_tpl->tpl_vars['usuario']->value->getNombre();?>
- <?php echo $_smarty_tpl->tpl_vars['usuario']->value->getApellido();?>
-</h5>
-        <label data-error="wrong" data-success="right" for="form29" class="ml-0">Correo: <?php echo $_smarty_tpl->tpl_vars['usuario']->value->getCorreo();?>
-</label><br>
-        <label data-error="wrong" data-success="right" for="form29" class="ml-0">Usuario: <?php echo $_smarty_tpl->tpl_vars['usuario']->value->getNick();?>
-</label>
-      </div>
-
-    </div>
-    <!--/.Content-->
-  </div>
-</div>
-<div class="text-center">
-  <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#modalLoginAvatar">Apretá aca</a>
-</div>
-      </body></html><?php }} ?>
+     </body>
+      </html><?php }} ?>

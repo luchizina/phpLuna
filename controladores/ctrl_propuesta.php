@@ -337,6 +337,11 @@ function nuevaColaboracion($params=array()){
     $this->recursiva($recs, $col, $pos, $prop);
 
     if($col->agregar()){
+      $usuProp = $Usuario->obtenerPorNick($prop->getUsuario());
+      if($usuProp->getNotificacion() == 0){
+
+      $this->enviarMailColaboracion($prop,$col);
+  }
       array_push($usu->getPropuestasColabora(), $prop);
       $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
       $prop->actualizaMonto();
@@ -353,6 +358,23 @@ function nuevaColaboracion($params=array()){
   $tpl->asignar('usuario',$usu);
   $tpl->asignar('recompensas',$recs);
   $tpl->mostrar('nueva_colaboracion',array());
+}
+
+
+
+public function enviarMailColaboracion($prop,$col){
+  $Usuario = new Usuario();
+  $usuProp = $Usuario->obtenerPorNick($prop->getUsuario());
+  $correo = $usuProp->getCorreo();
+  $nombre = $usuProp->getNombre();
+  $propNomb = $prop->getNombre();
+  $monto = $col->getMonto();
+  
+    $body = "";
+    $nombreC = $nombre." ".$apellido;
+      $bodyhtml = "Hola $nombre!, Te han colaborado en $propNomb con $monto pesos, Felicitaciones!";
+      Utils::enviarEmail($correo,$nombreC, $body, $bodyhtml);
+
 }
 
 public function recursiva($recs, $col, $pos, $prop){
@@ -603,7 +625,7 @@ function registrarRecom($params = array())
 
 function comentarEnPagina(){
   $propuesta = new Propuesta();
- $this->consolita($_POST['textoComentario']);
+
   if(isset($_POST["nomPropCom"])){
 
   $prop = $propuesta->obtenerPorNombreProp($_POST['nomPropCom']);

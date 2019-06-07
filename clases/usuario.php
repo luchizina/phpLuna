@@ -8,6 +8,7 @@ class Usuario extends ClaseBase {
 	public $Correo = '';
 	public $Celular = '';
 	public $Imagen;
+    public $notificacion = 0;
         public $Archivo;
         public $tipo;
         public $tipoImg;
@@ -28,6 +29,14 @@ class Usuario extends ClaseBase {
         $tabla="usuario";
         parent::__construct($tabla);
 
+    }
+
+    public function getNotificacion(){
+        return $this->notificacion;
+    }
+
+    public function setNotificacion($notif){
+        $this->notificacion=$notif;
     }
 
     public function getToken(){
@@ -364,6 +373,16 @@ public function traerImagen($nick){
 
 
     }*/
+
+public function actualizarNotificacion($nueva){
+
+    $nick = $this->getNick();
+    $stmt = $this->getDB()->prepare( 
+        "UPDATE usuario set notificacion=? WHERE Nick=?");     
+        $stmt->bind_param("is", $nueva, $nick);
+        return $stmt->execute();
+}
+
 
 public function modificar($tipo)
    {
