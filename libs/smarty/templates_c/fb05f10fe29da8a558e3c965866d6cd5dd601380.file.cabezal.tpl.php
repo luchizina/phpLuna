@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-04 02:18:25
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-07 18:40:46
          compiled from "vistas\cabezal.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:212835cf5b8d149ab51-49486333%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:192195cfa938ecd0894-56417577%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'fb05f10fe29da8a558e3c965866d6cd5dd601380' => 
     array (
       0 => 'vistas\\cabezal.tpl',
-      1 => 1559341888,
+      1 => 1559914875,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '212835cf5b8d149ab51-49486333',
+  'nocache_hash' => '192195cfa938ecd0894-56417577',
   'function' => 
   array (
   ),
@@ -27,9 +27,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cf5b8d1844501_97884402',
+  'unifunc' => 'content_5cfa938f1c4095_72792779',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cf5b8d1844501_97884402')) {function content_5cf5b8d1844501_97884402($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_5cfa938f1c4095_72792779')) {function content_5cfa938f1c4095_72792779($_smarty_tpl) {?>
  <head>
     <link rel="shortcut icon" href="img/moon.png" type="image/png" />
     <title>LUNA</title>
@@ -76,6 +76,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                   <li><a href="/phpLuna/propuesta/listado/">Listado</a></li>
                   <?php if ($_smarty_tpl->tpl_vars['usuLogNick']->value!=''&&$_smarty_tpl->tpl_vars['usuLogTipo']->value==0) {?>
                   <li><a href="/phpLuna/propuesta/listadoPropsAgregadas/1">Aceptar/rechazar propuestas</a></li>
+                   <li><a href="/phpLuna/propuesta/listadoCat">Agregar categoría</a></li>
                    <?php }?>
                 </ul>
               </li>

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/styles-merged.css">
     <link rel="stylesheet" href="css/style.min.css">
     <link rel="stylesheet" href="css/custom.css">
-
+    <link rel="stylesheet" href="css/dashboard.css">
     <!--[if lt IE 9]>
       <script src="js/vendor/html5shiv.min.js"></script>
       <script src="js/vendor/respond.min.js"></script>
@@ -22,7 +22,7 @@
     <br>
     <br>
     <br>        
-      <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg)"  data-stellar-background-ratio="0.5">
+      <section class="probootstrap-hero bg" tellar-background-ratio="0.5">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
@@ -397,7 +397,7 @@
         </div>
 
       </footer>
-       -->
+     
 
     <script src="js/scripts.min.js"></script>
     <script src="js/main.min.js"></script>

@@ -178,9 +178,13 @@ public function modificar($params = array())
     $u->setCelular($_POST["celular"]);
     $u->setCorreo($_POST["correo"]);
     $u->setPassword($_POST["password"]);
+    if($_FILES['archivo']['name'] != ""){
     $u->setArchivo($_FILES['archivo']['tmp_name']);
     $u->setImagen($_FILES['archivo']['name']);
     $u->setTipoImg($_FILES['archivo']['type']);
+  } else {
+    $u->setArchivo("NoModificar");
+  }
     if($u->modificar($var))
     {
       $this->redirect("usuario","redirigir");
@@ -345,10 +349,14 @@ $imagen = $usuario->traerImagen($usu->getNick());
 
 }
 
-
-
-
-
+function traerPerfilM($params=array()){
+  $usu= new Usuario();
+  $usuario = $usu->obtenerPorNick($params[0]);
+   $u=["usuario"=>$usuario];
+    $arreglo=["status"=>"ok","message"=>[$usuario]];
+      $nuevo = json_encode($arreglo);
+      echo $nuevo;
+}
 
 }
 ?>

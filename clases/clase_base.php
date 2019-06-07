@@ -111,7 +111,20 @@ class ClaseBase{
     }
 
     public function com($prop){
-        $sql="select * from $this->tabla where TituloPropuesta = '$prop'";
+        $sql="select * from $this->tabla where TituloPropuesta = '$prop'  ORDER BY id ASC";
+        $resultados=array();
+        $resultado =$this->db->query($sql)   
+            or die ("Fallo en la consulta");
+        while ( $fila = $resultado->fetch_object() )
+        {   
+            $objeto= new $this->modelo($fila);
+            $resultados[]=$objeto;
+        } 
+     return $resultados; 
+    }
+
+    public function com2($prop){
+        $sql="select * from $this->tabla where TituloPropuesta = '$prop'  ORDER BY id DESC";
         $resultados=array();
         $resultado =$this->db->query($sql)   
             or die ("Fallo en la consulta");

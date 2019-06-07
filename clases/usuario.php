@@ -379,6 +379,9 @@ public function modificar($tipo)
         $tipoImg = $this->getTipoImg();
         $permitidos = array("image/jpg", "image/jpeg", "image/png", "");
         $target='';
+        if($arch == "NoModificar"){
+            $target = $img;
+        } else {
         if(in_array($tipoImg, $permitidos)){
             //$target = "imgUsus/".basename($img);
             if($tipoImg != ""){
@@ -391,6 +394,7 @@ public function modificar($tipo)
         } else {
             echo "El tipo de imagen es incorrecto";
         }
+    }
         $this->setImagen($target);
         $stmt = $this->getDB()->prepare( 
             "UPDATE usuario set
@@ -398,7 +402,7 @@ public function modificar($tipo)
            
         $stmt->bind_param("sssssss",$nombre,
             $ape,$email,$password,$cel,$target,$nick);
-        if($target != ''){
+        if($target != '' && $arch != "NoModificar"){
             if(file_exists('/phpLuna/imgUsus/'.$nick.$tipo))
             {
                 chmod('/imgUsus/'.$nick.$tipo,7775);

@@ -28,7 +28,7 @@
        
         <div class="col-sm-12  col-md-12  main">
           <h1 class="page-header">Usuarios</h1>
-          <h2 class="sub-header">{$titulo} <button id="agregar" name="agregar" class="btn btn-success pull-right" onClick="window.location='{$usuario_nuevo}'">Agregar</button></h2>
+          <h2 class="sub-header">{$titulo}</h2>
           {if $mensaje!=""}
             <div class="alert alert-danger" role="alert">{$mensaje}</div>
           {/if}
@@ -55,8 +55,32 @@
                       <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='{$url_base}usuario/listado/borrar/{$persona->getNick()}/'"/>
                       <input type="button" value="Modificar" class="btn btn-success" onClick="window.location='{$url_base}usuario/modificar/{$persona->getNick()}/'"/>
                        {/if}
-                      <input type="button" value="Ver perfil" class="btn btn-success" onClick="window.location='{$url_base}usuario/verPerfil/{$persona->getNick()}/'"/>
+                         <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#modalLoginAvatar{$persona->getNick()}">Ver perfil</a>
+                     <!-- <input type="button" value="Ver perfil" class="btn btn-success" onClick="window.location='{$url_base}usuario/verPerfil/{$persona->getNick()}/'"/>-->
                     <!--  <input type="button" value="Favoritos" class="btn btn-submit" onClick="cargarFavoritos();"/>-->
+                     <div class="modal fade" id="modalLoginAvatar{$persona->getNick()}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+    <!--Content-->
+    <div class="modal-content">
+
+      <!--Header-->
+      <div class="modal-header">
+        <img src="./{$persona->getImagen()}" style="border-radius:50%;" alt="avatar" class="rounded-circle img-responsive">
+      </div>
+      <!--Body-->
+      <div class="modal-body text-center mb-1">
+
+        <h5 class="mt-1 mb-2">{$persona->getNombre()} {$persona->getApellido()}</h5>
+        <label data-error="wrong" data-success="right" for="form29" class="ml-0">Correo: {$persona->getCorreo()}</label><br>
+        <label data-error="wrong" data-success="right" for="form29" class="ml-0">Usuario: {$persona->getNick()}</label>
+      </div>
+
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
                     </td>
                   </tr>
                 {/foreach}

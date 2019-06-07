@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-04 02:18:22
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-07 18:40:38
          compiled from "vistas\usuarios_listado.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:52025cf5b8ce38fd42-21306763%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:138265cfa93868e2304-98503862%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'fc36a80b921661286b287e2df8d64e144a173838' => 
     array (
       0 => 'vistas\\usuarios_listado.tpl',
-      1 => 1559338817,
+      1 => 1559914875,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '52025cf5b8ce38fd42-21306763',
+  'nocache_hash' => '138265cfa93868e2304-98503862',
   'function' => 
   array (
   ),
@@ -20,7 +20,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'url_base' => 0,
     'proyecto' => 0,
     'titulo' => 0,
-    'usuario_nuevo' => 0,
     'mensaje' => 0,
     'usuarios' => 0,
     'persona' => 0,
@@ -28,9 +27,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cf5b8d0dd0031_69494248',
+  'unifunc' => 'content_5cfa938cb516f7_28028912',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cf5b8d0dd0031_69494248')) {function content_5cf5b8d0dd0031_69494248($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_5cfa938cb516f7_28028912')) {function content_5cfa938cb516f7_28028912($_smarty_tpl) {?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -72,8 +71,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <div class="col-sm-12  col-md-12  main">
           <h1 class="page-header">Usuarios</h1>
           <h2 class="sub-header"><?php echo $_smarty_tpl->tpl_vars['titulo']->value;?>
- <button id="agregar" name="agregar" class="btn btn-success pull-right" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['usuario_nuevo']->value;?>
-'">Agregar</button></h2>
+</h2>
           <?php if ($_smarty_tpl->tpl_vars['mensaje']->value!='') {?>
             <div class="alert alert-danger" role="alert"><?php echo $_smarty_tpl->tpl_vars['mensaje']->value;?>
 </div>
@@ -113,10 +111,41 @@ usuario/listado/borrar/<?php echo $_smarty_tpl->tpl_vars['persona']->value->getN
 usuario/modificar/<?php echo $_smarty_tpl->tpl_vars['persona']->value->getNick();?>
 /'"/>
                        <?php }?>
-                      <input type="button" value="Ver perfil" class="btn btn-success" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+                         <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#modalLoginAvatar<?php echo $_smarty_tpl->tpl_vars['persona']->value->getNick();?>
+">Ver perfil</a>
+                     <!-- <input type="button" value="Ver perfil" class="btn btn-success" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 usuario/verPerfil/<?php echo $_smarty_tpl->tpl_vars['persona']->value->getNick();?>
-/'"/>
+/'"/>-->
                     <!--  <input type="button" value="Favoritos" class="btn btn-submit" onClick="cargarFavoritos();"/>-->
+                     <div class="modal fade" id="modalLoginAvatar<?php echo $_smarty_tpl->tpl_vars['persona']->value->getNick();?>
+" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+    <!--Content-->
+    <div class="modal-content">
+
+      <!--Header-->
+      <div class="modal-header">
+        <img src="./<?php echo $_smarty_tpl->tpl_vars['persona']->value->getImagen();?>
+" style="border-radius:50%;" alt="avatar" class="rounded-circle img-responsive">
+      </div>
+      <!--Body-->
+      <div class="modal-body text-center mb-1">
+
+        <h5 class="mt-1 mb-2"><?php echo $_smarty_tpl->tpl_vars['persona']->value->getNombre();?>
+ <?php echo $_smarty_tpl->tpl_vars['persona']->value->getApellido();?>
+</h5>
+        <label data-error="wrong" data-success="right" for="form29" class="ml-0">Correo: <?php echo $_smarty_tpl->tpl_vars['persona']->value->getCorreo();?>
+</label><br>
+        <label data-error="wrong" data-success="right" for="form29" class="ml-0">Usuario: <?php echo $_smarty_tpl->tpl_vars['persona']->value->getNick();?>
+</label>
+      </div>
+
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
                     </td>
                   </tr>
                 <?php } ?>

@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-07 15:39:02
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-07 18:50:32
          compiled from "vistas\inicio.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:26635cfa68f65ad472-54994856%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:60575cfa95d89fe636-76656124%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'c9a1123df06652abffdc7699f4d4134cd2f4681f' => 
     array (
       0 => 'vistas\\inicio.tpl',
-      1 => 1559342823,
+      1 => 1559914875,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '26635cfa68f65ad472-54994856',
+  'nocache_hash' => '60575cfa95d89fe636-76656124',
   'function' => 
   array (
   ),
@@ -21,9 +21,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cfa68f7aa9074_07419344',
+  'unifunc' => 'content_5cfa95da1e1997_27698367',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5cfa68f7aa9074_07419344')) {function content_5cfa68f7aa9074_07419344($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5cfa95da1e1997_27698367')) {function content_5cfa95da1e1997_27698367($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -37,7 +37,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <link rel="stylesheet" href="css/styles-merged.css">
     <link rel="stylesheet" href="css/style.min.css">
     <link rel="stylesheet" href="css/custom.css">
-
+    <link rel="stylesheet" href="css/dashboard.css">
     <!--[if lt IE 9]>
       <?php echo '<script'; ?>
  src="js/vendor/html5shiv.min.js"><?php echo '</script'; ?>
@@ -53,7 +53,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <br>
     <br>
     <br>        
-      <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg)"  data-stellar-background-ratio="0.5">
+      <section class="probootstrap-hero bg" tellar-background-ratio="0.5">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
@@ -428,7 +428,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         </div>
 
       </footer>
-       -->
+     
 
     <?php echo '<script'; ?>
  src="js/scripts.min.js"><?php echo '</script'; ?>

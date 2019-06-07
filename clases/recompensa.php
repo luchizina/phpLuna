@@ -98,6 +98,21 @@ class Recompensa extends ClaseBase {
         return $recompensas;
  } 
 
+ public function traerRecompensasAjax($propuesta, $monto){
+         $recompensas=array();
+        $stmt = $this->getDB()->prepare("SELECT * FROM recompensa WHERE TituloPropuesta=? AND MontoaSuperar <= ? AND limiteUsuarios > cantActual ORDER BY MontoaSuperar DESC");
+        $stmt->bind_param( "si",$propuesta, $monto);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        while ($fila=$resultado->fetch_object()) {
+            $recomp= new recompensa($fila);
+                $recompensas[]=$recomp;
+        }
+        
+        return $recompensas;
+ } 
+
+
  public function actualizaCant(){
     $id = $this->getId();
     $stmt = $this->getDB()->prepare( 
