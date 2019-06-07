@@ -19,6 +19,46 @@ function validarci(){
 	});
 }
 
+function listCom(nombre, url){
+          $.ajax({
+            url: url+'propuesta/listComs/'+nombre,
+            success:function(res){
+              var cont = res.split("-");
+              var id = cont[0];
+              var texto = cont[1];
+              var usu = cont[2];
+              var img = cont[3];
+              var likes = cont[4];
+              var logue = cont[5];
+              var html = '';
+              html+='<img src="'+img+'">';
+              html+='<div class="comment-content"><p class="author"><strong>'+usu+'</strong></p>';
+              html+='<span>'+texto+'</span></div>';
+              if(usu === logue){
+                html+='<a class="btn" href="{$url_base}propuesta/borrarComEnPagina/{$propuesta->getNombre()}/'+id+'"><i class="icon-trash"></i></a>';
+              }
+              html+='<a class="btn" onclick="javascript:likeComentario('+logue+','+id+');">';
+              html+='<i class="fa fa-thumbs-up"></i> <span id="'+logue+id+'">'+likes+'</span></a></div>';
+              $('#nuevo').html(html);
+            }
+          })
+        }
+
+        function Coment(url,nombre){
+            var texto = $('#textoComentario').val();
+            var nomPropCom = nombre;
+            $.ajax({
+              url: url+'propuesta/comentarEnPagina',
+              data: 'textoComentario='+texto+'&nomPropCom='+nomPropCom,
+              type: 'post',
+              success:function(){
+                alert('Comentario agregado');
+                document.getElementById("textoComentario").value = "";
+                listCom(nombre, url);
+              }
+            })
+          }
+
 
 function likeComentario(usuario, idComent){
 

@@ -32,7 +32,7 @@
           <div class="row" style="margin: 0 auto">
 
           <div class="col-md-5 probootstrap-animate mx-auto" style="margin: auto 0; color: white; font-family: Montserrat,Arial,sans-serif "  >
-            <form method="post" enctype="multipart/form-data" class="probootstrap-form">
+            <form method="post" enctype="multipart/form-data" class="probootstrap-form" id="from1" action="">
               <div class="form-group">
                 <label for="Nombre">Nombre</label>
                 <input type="text" class="form-control" value="{$usuario_log->getNombre()}" id="nombre" name="nombre">
@@ -65,7 +65,7 @@
               </div> 
               </div>
               <div class="form-group">
-                <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" value="MODIFICAR">
+                <input type="submit" class="btn btn-primary btn-lg" id="modificar" name="submit" value="MODIFICAR">
               </div>
             </form>
           </div>
@@ -75,7 +75,9 @@
     <script src="js/scripts.min.js"></script>
     <script src="js/main.min.js"></script>
     <script src="js/custom.js"></script>
+    <script src="js/sweetalert.js"></script>
     <script src="js/subirImg.js" type="text/javascript"></script>
+    <script src="js/busca.js" type="text/javascript"></script>
     </section>          
   </section>
       </body></html>
