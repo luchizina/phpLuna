@@ -591,11 +591,11 @@ echo '</script>';
 }
 }
 
-function borrarComEnPagina($params=array()){
+function borrarComEnPagina(){
   $comentario = new Comentario();
-   $num = (int)$params[1];
+   $num = (int)$_POST["idCom"];
    $algo = array();
-  $algo[] =$params[0];
+  $algo[] =$_POST["nomPropCom"];
   if($comentario->borrar($num)){
     $comentario->borrarLikesCom($num);
      $this->redirect("propuesta","detalleProp",$algo);
