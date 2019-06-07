@@ -604,9 +604,9 @@ function likeComentPagina(){
 function likeCometario(){
   $num =(int)$_POST['idCom'];
   $usuario = new Usuario();
-  $u = $usuario->$obtenerPorMail($_POST['mail']);
+  $u = $usuario->obtenerPorMail($_POST['mail']);
   $comentario = new Comentario();
-  $c = $comentario->obtenerPorId();
+  $c = $comentario->obtenerPorId($num);
   if($c->likeCom($u->getNick(), $c->getId($num))){
     //$array = $c->getLikes();
     //array_push($array, $u);

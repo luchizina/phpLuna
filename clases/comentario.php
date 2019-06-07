@@ -66,7 +66,7 @@ class Comentario extends ClaseBase {
 
     public function likeCom($nick, $idCom){
         $stmt = $this->getDB()->prepare( 
-            "INSERT INTO likeComentario 
+            "INSERT INTO likecomentario 
         (Usuario, Comentario) 
            VALUES (?,?)" );
         $stmt->bind_param("si",$nick,
@@ -79,7 +79,7 @@ class Comentario extends ClaseBase {
 
     public function dislikeCom($nick, $idCom){
         $stmt = $this->getDB()->prepare( 
-            "DELETE FROM likeComentario 
+            "DELETE FROM likecomentario 
         WHERE Usuario=? AND Comentario=?");
         $stmt->bind_param("si",$nick,
             $idCom);
