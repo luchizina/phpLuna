@@ -96,7 +96,7 @@
               {if $com->getUsuario()->getNick() == $usuLogNick}
           <!-- <a class="btn" href="{$url_base}propuesta/borrarComEnPagina/{$propuesta->getNombre()}/{$com->getId()}">
                          <i class="icon-trash"></i></a>-->
-               <a class="btn" onclick="borrarComent('{$url_base}','{$com->getId()}','{$propuesta->getNombre()}');">
+               <a class="btn" onclick="borrarComent('{$url_base}','{$com->getId()}','{$propuesta->getNombre()}',this);">
                          <i class="icon-trash"></i></a>          
          {/if}
          <a class="btn" onclick="javascript:likeComentario('{$usuLogNick}',{$com->getId()});">

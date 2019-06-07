@@ -60,7 +60,7 @@ function listCom(nombre, url){
           }
 
 
-       function borrarComent(url,id, nombre){
+       function borrarComent(url,id, nombre,e){
        	var idCom = id;
        	var nomPropCom = nombre;
 
@@ -70,6 +70,7 @@ function listCom(nombre, url){
               type: 'post',
               success:function(){
                 alert('Comentario eliminado');
+                e.parentNode.parentNode.removeChild(e.parentNode);
                 
               }
             })
