@@ -1,6 +1,7 @@
 <?php  
 require "clases/clase_base.php";
 require "clases/usuario.php";
+require "clases/propuesta.php";
 require_once('clases/template.php');
 require_once('clases/Utils.php');
 require_once('clases/session.php');
@@ -340,9 +341,18 @@ public function nuevoUsuCel(){
 function verPerfil($params=array()){
 $usuario = new Usuario();
 $usu = $usuario->obtenerPorNick($params[0]);
+
+$prop = new Propuesta();
+$propsUsu = $prop->traerMisProps($usu->getNick());
+$propsFavs = $prop->traerPropsFavoritas($usu->getNick());
+$propsColab = $prop->traerPropsColaboradas($usu->getNick());
 $imagen = $usuario->traerImagen($usu->getNick());
+
     $tpl = Template::getInstance();
     $usu->setImagen($imagen);
+    $tpl->asignar('misProps', $propsUsu);
+    $tpl->asignar('propsFavoritas',$propsFavs);
+    $tpl->asignar('propsColaboradas',$propsColab);
    $tpl->asignar('usuario', $usu);
   $tpl->mostrar('usuario_perfil',$usu);
 

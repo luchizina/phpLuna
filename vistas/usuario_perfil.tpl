@@ -76,6 +76,52 @@
         </div>
         </div>
 
+
+<h2>Mis propuestas</h2>
+        <table>
+  <tr>
+    <th>Nombre</th>
+ 
+  </tr>
+     {foreach from=$misProps item=mProp}
+  <tr>
+    <td>{$mProp->getNombre()}</td>
+    
+  </tr>
+  {/foreach}
+ 
+</table>
+
+<h2>Propuestas favoritas</h2>
+        <table>
+  <tr>
+    <th>Nombre</th>
+ 
+  </tr>
+     {foreach from=$propsFavoritas item=favProp}
+  <tr>
+    <td>{$favProp->getNombre()}</td>
+    
+  </tr>
+  {/foreach}
+ 
+</table>
+
+<h2>Propuestas colaboradas</h2>
+        <table>
+  <tr>
+    <th>Nombre</th>
+    <th>Monto colaborado en total</th>
+  </tr>
+     {foreach from=$propsColaboradas item=colProp}
+  <tr>
+    <td>{$colProp->getNombre()}</td>
+    <td>{$colProp->totalMontoColaborado($usuLogNick)}</td>
+  </tr>
+  {/foreach}
+ 
+</table>
+
     <script src="js/scripts.min.js"></script>
     <script src="js/main.min.js"></script>
     <script src="js/custom.js"></script>
