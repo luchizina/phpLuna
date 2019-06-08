@@ -204,6 +204,13 @@ class Usuario extends ClaseBase {
         return $usuarios;
     }
 
+
+
+
+  
+
+
+
 public function agregar(){ 
         $nombre=$this->getNombre();
         $ape=$this->getApellido();
