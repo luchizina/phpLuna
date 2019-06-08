@@ -95,6 +95,41 @@ $.ajax({
 	});
 }
 
+
+function favoritear(nomProp,url, usuario){
+$.ajax({
+		url: url+"propuesta/favoritear",
+		method: "POST",
+		data:{nombreProp:nomProp},
+		//dataType:"text",
+		success:function(valor){
+		
+			 var element = document.getElementById(usuario+nomProp);
+			 
+			if(valor == 1){
+			 	
+  				element.classList.remove("fa-star-o");
+  				element.classList.add("fa-star");
+			}else{
+				element.classList.remove("fa-star");
+  				element.classList.add("fa-star-o");	
+			}
+			
+			
+				
+
+
+				
+			
+			
+		},
+		error:function(valor){
+		console.log(valor);
+		}
+	});
+
+}
+
 function validarnick(){
 	var ced = $("#nick").val();
 	$.ajax({
