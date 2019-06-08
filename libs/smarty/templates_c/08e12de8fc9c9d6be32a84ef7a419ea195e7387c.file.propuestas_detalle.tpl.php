@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-07 14:39:45
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-08 14:32:29
          compiled from "vistas\propuestas_detalle.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:17923276445cfaa161b63406-88696199%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '08e12de8fc9c9d6be32a84ef7a419ea195e7387c' => 
     array (
       0 => 'vistas\\propuestas_detalle.tpl',
-      1 => 1559929094,
+      1 => 1560015145,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cfaa161cf75e3_57970715',
   'variables' => 
   array (
     'url_base' => 0,
@@ -24,8 +26,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'usuLogNick' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cfaa161cf75e3_57970715',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5cfaa161cf75e3_57970715')) {function content_5cfaa161cf75e3_57970715($_smarty_tpl) {?><!DOCTYPE html>
 
@@ -125,6 +125,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         </div>
         </div>
 
+<div class="jajaja"  >
         <div class="jajaja"  >
       <?php  $_smarty_tpl->tpl_vars['com'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['com']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['comentarios']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -172,9 +173,9 @@ echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
       <div class="comment" id="nuevo">
         
       </div>
-
-
-         <div class="jaja">
+    <br>
+</div>
+<div class="jaja">
       <form method="post" action="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 propuesta/comentarEnPagina" class="probootstrap-form">
         <textarea rows="5" cols="57" name="textoComentario" id="textoComentario"></textarea>
@@ -185,8 +186,7 @@ propuesta/comentarEnPagina" class="probootstrap-form">
           </div>
     </form>
     </div>
-    <br>
-</div>
+     </div>
 
   
 

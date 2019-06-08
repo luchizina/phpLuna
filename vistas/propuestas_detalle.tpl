@@ -79,6 +79,7 @@
         </div>
         </div>
 
+<div class="jajaja"  >
         <div class="jajaja"  >
       {foreach from=$comentarios item=com}
               <div class="comment">
@@ -108,9 +109,9 @@
       <div class="comment" id="nuevo">
         
       </div>
-
-
-         <div class="jaja">
+    <br>
+</div>
+<div class="jaja">
       <form method="post" action="{$url_base}propuesta/comentarEnPagina" class="probootstrap-form">
         <textarea rows="5" cols="57" name="textoComentario" id="textoComentario"></textarea>
         <div class="form-group" >
@@ -118,8 +119,7 @@
           </div>
     </form>
     </div>
-    <br>
-</div>
+     </div>
 
   
 

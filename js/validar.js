@@ -6,22 +6,24 @@ function validarci(){
 	var ced = $("#ci").val();
 	$.ajax({
 		url:"/phpLuna/usuario/existeCi",
-		method: "POST",
-		data:{ci:ced},
+		data: 'ci='+ced,
+        type: 'post',
 		//dataType:"text",
 		success:function(html){
 			$("#avisaCe").html(html);
 			Chequear();
 		},
 		error:function(){
-			document.getElementById("message1").style.display = "block";
+			$("#message1").style.display = "block";
 		}
 	});
 }
 
 function listCom(nombre, url){
           $.ajax({
-            url: url+'propuesta/listComs/'+nombre,
+            url: url+'propuesta/listComs/',
+            data: 'textoComentario='+nombre,
+            type: 'post',
             success:function(res){
               var cont = res.split("-");
               var id = cont[0];
@@ -35,10 +37,10 @@ function listCom(nombre, url){
               html+='<div class="comment-content"><p class="author"><strong>'+usu+'</strong></p>';
               html+='<span>'+texto+'</span></div>';
               if(usu === logue){
-                html+='<a class="btn" href="{$url_base}propuesta/borrarComEnPagina/{$propuesta->getNombre()}/'+id+'"><i class="icon-trash"></i></a>';
+                html+='<a class="btn" onclick="e => { console.log(e); borrarComent(\''+url+'\','+id+',\''+nombre+'\',this); }"><i class="icon-trash"></i></a>';
               }
-              html+='<a class="btn" onclick="javascript:likeComentario('+logue+','+id+');">';
-              html+='<i class="fa fa-thumbs-up"></i> <span id="'+logue+id+'">'+likes+'</span></a></div>';
+              html+='<a class="btn" onclick="likeComentario("'+logue+'",'+id+');">';
+              html+='<i class="fa fa-thumbs-up"></i> <span id="\''+logue+id+'\'">'+likes+'</span></a></div>';
               $('#nuevo').html(html);
             }
           })
@@ -99,14 +101,14 @@ function validarnick(){
 	var ced = $("#nick").val();
 	$.ajax({
 		url:"/phpLuna/usuario/existeNick",
-		method: "POST",
-		data:{nick:ced},
+		data: 'nick='+ced,
+        type: 'post',
 		//dataType:"text",
 		success:function(html){
 			$("#avisa").html(html);
 		},
 		error:function(){
-			document.getElementById("message1").style.display = "block";
+			$("#message1").style.display = "block";
 		}
 	});
 }
@@ -115,15 +117,15 @@ function validarcorreo(){
 	var ced = $("#email").val();
 	$.ajax({
 		url:"/phpLuna/usuario/existeCorreo",
-		method: "POST",
-		data:{correo:ced},
+		data: 'correo='+ced,
+        type: 'post',
 		//dataType:"text",
 		success:function(html){
 			$("#avisaC").html(html);
 			Chequear();
 		},
 		error:function(){
-			document.getElementById("message1").style.display = "block";
+			$("#message1").style.display = "block";
 		}
 	});
 }
