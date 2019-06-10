@@ -337,10 +337,11 @@ public function modificar()
 
    public function actualizaMonto(){
    	$monto = $this->getMontoActual();
+    $nombre =  $this->getNombre();
    	$stmt = $this->getDB()->prepare( 
             "UPDATE propuesta set MontoActual=? WHERE Nombre=?"); 
            
-        $stmt->bind_param("is", $monto, $this->getNombre());
+        $stmt->bind_param("is", $monto, $nombre);
         return $stmt->execute();
    }
 

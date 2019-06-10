@@ -12,6 +12,7 @@ $tpl->asignar('url_base',"http://localhost/phpLuna/");
 $tpl->asignar('url_logout',$controlIndex->getUrl("usuario","logout"));
 $tpl->asignar('url_login',$controlIndex->getUrl("usuario","login"));
 $tpl->asignar('url_regis',$controlIndex->getUrl("usuario","nuevo"));
+$tpl->asignar('url_recuperar', $controlIndex->getUrl("usuario","RecuperarCont"));
 
 session_start();
 $nombre = Session::get('usuario_nombre');

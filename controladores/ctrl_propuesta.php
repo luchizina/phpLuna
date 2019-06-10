@@ -276,13 +276,16 @@ function nuevaColaboracion($params=array()){
   $recs = $Recompensa->traerRecompensas($params[0]);
   $usu = $Usuario->obtenerPorNick(Session::get('usuario_nick'));
   $prop=$propuesta->obtenerPorNombreProp($params[0]);
+  if($col->existeCol($params[0], Session::get('usuario_nick'))){
+    $mensaje="Usted ya ha colaborado con esta propuesta";
+  } else {
   //$rec = $Recompensa->obtenerPorId($_POST['rec']);
   if(isset($_POST["monto"])){
     $col->setMonto($_POST["monto"]);
     $col->setFecha(date("Y-m-d"));
     $col->setUsuario($usu);
     $col->setTituloPropuesta($prop);
-    //$col->setRecompensa($Recompensa->obtenerPorId($_POST['rec']));
+    //$col->setRecompensa($Recompensa->obtenerPorId($_POST['rec']))
     foreach ($recs as $clave=>$r) {
       if($col->getMonto() >= $r->getMontoaSuperar()){
         $pos = $clave;
@@ -303,6 +306,7 @@ function nuevaColaboracion($params=array()){
     }else $mensaje="Error! No se pudo agregar la colaboracion";
   
   }
+}
   $tpl = Template::getInstance();
   $tpl->asignar('titulo',"Nueva colaboracion");
   $tpl->asignar('buscar',"");
@@ -326,7 +330,7 @@ public function enviarMailColaboracion($prop,$col){
     $body = "";
     $nombreC = $nombre." ".$apellido;
       $bodyhtml = "Hola $nombre!, Te han colaborado en $propNomb con $monto pesos, Felicitaciones!";
-      Utils::enviarEmail($correo,$nombreC, $body, $bodyhtml);
+      Utils::enviarEmail($correo,$nombreC, $body, $bodyhtml, "Aviso de colaboracion");
 
 }
 
@@ -339,8 +343,8 @@ public function recursiva($recs, $col, $pos, $prop){
         $col->setRecompensa($r);
         $r->actualizaCant();
         } else {
-          if($pos != 0){
-          $pos = $pos - 1;
+          if($pos != 0){ 
+          $pos--;
           $this->recursiva($recs, $col, $pos, $prop);
         }
       }
@@ -350,10 +354,14 @@ function nuevaColaboracionCel(){
   $Usuario = new Usuario();
   $propuesta = new Propuesta();
   $Recompensa = new Recompensa();
-  $recs = $Recompensa->traerRecompensas($_POST["nombre"]);
-  $usu = $Usuario->obtenerPorMail($_POST['mail']);
-  $prop=$propuesta->obtenerPorNombreProp($_POST["nombre"]);
-   $col->setMonto($_POST["monto"]);
+  //$recs = $Recompensa->traerRecompensas($_POST["nombre"]);
+  //$usu = $Usuario->obtenerPorMail($_POST['mail']);
+  //$prop=$propuesta->obtenerPorNombreProp($_POST["nombre"]);
+   //$col->setMonto($_POST["monto"]);
+  $recs = $Recompensa->traerRecompensas("nueva propb");
+  $usu = $Usuario->obtenerPorMail("nambroa@gmail.com");
+  $prop=$propuesta->obtenerPorNombreProp("nueva propb");
+  $col->setMonto(500);
     $col->setFecha(date("Y-m-d"));
     $col->setUsuario($usu);
     $col->setTituloPropuesta($prop);
@@ -364,15 +372,16 @@ function nuevaColaboracionCel(){
     }
     $this->recursiva($recs, $col, $pos, $prop);
     if($col->agregar()){
-     $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
+     //$prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
+      $prop->setMontoActual($prop->getMontoActual() + 500);
       $prop->actualizaMonto();
-      $msg = "que rica ñery te la jugaste";
+      $msg = "que rica compa te la jugaste";
       $array = ["mensajito"=>$msg];
       $arreglo=["status"=>"ok","message"=>[$array]];
             echo json_encode($arreglo);
     }else 
     {
-      $msg = "mal ahí ñery";
+      $msg = "mal ahi compa";
           $array = ["mensajito"=>$msg];
           $arreglo=["status"=>"error","message"=>[$array]];
           echo json_encode($arreglo);
@@ -504,11 +513,12 @@ $imagen = $propuesta->traerImagen($prop->getNombre());
   $tpl->mostrar('propuestas_detalle',$prop);
 }
 
-function listComs($params=array()){
+function listComs(){
+$propu = $_POST['prop'];
 $com = new Comentario();
-$coms = $com->com2($params[0]);
+$coms = $com->com2($propu);
 $u = new Usuario();
-$log = $_SESSION['usuario_nick'];
+$log = Session::get('usuario_nick');
 $c = $coms[0];
   $usu = $u->obtenerPorNick($c->NickUsuario);
   $c->setUsuario($usu);
@@ -520,7 +530,7 @@ $c = $coms[0];
   } else {
     $i = "./".$c->getUsuario()->getImagen();
   }
-  echo $c->getId()."-".$c->getTexto()."-".$c->getUsuario()->getNick()."-".$i."-".$c->getLikes()."-".$log;
+echo $c->getId().'-'.$c->getTexto().'-'.$c->getUsuario()->getNick().'-'.$i.'-'.$c->getLikes()."-".$log;
 }
 
 function desfavoritear($params=array()){
@@ -756,5 +766,16 @@ function dislikeCometario(){
     echo json_encode($arreglo);
   }
 }
+
+function verrecPrecio(){
+    $r = new Recompensa();
+    $recs = $r->traerRecompensasAjax($_POST["propuesta"], $_POST["monto"]);
+    if($recs != null){
+    echo $recs[0]->Nombre;
+  } else {
+    echo "No hay recompensa para ese monto";
+  }
+  }
+
 }
 ?>

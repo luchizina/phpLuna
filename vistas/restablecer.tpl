@@ -17,7 +17,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     
   </head>
-<body>
+
   {include file="cabezal.tpl"}
     
     <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg);"  data-stellar-background-ratio="0.1">
@@ -25,7 +25,7 @@
           <div class="row">
             <div class="col-sm-12  col-md-12  main">
               <div class="probootstrap-slider-text probootstrap-animate" data-animate-effect="fadeIn">
-                <h1 class="probootstrap-heading probootstrap-animate">Iniciar sesión</h1>
+                <h1 class="probootstrap-heading probootstrap-animate">Ingrese su nueva contraseña</h1>
               </div>
             </div>
           </div>
@@ -40,14 +40,14 @@
         {if $mensaje!=""}
             <div class="alert alert-danger" role="alert">{$mensaje}</div>
           {/if}
-        <label for="inputEmail" class="sr-only">Email</label>
-        <input type="email" id="email" name="email" class="form-control" placeholder="nombre de usuario" required="" autofocus="">
-        <label for="inputPassword" class="sr-only">Password</label>
+        <label for="inputPassword" class="sr-only">Contraseña</label>
         <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required="">
-        
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button> 
+        <label for="inputPassword" class="sr-only">Repetir contraseña</label>
+        <input type="password" id="password" name="password2" class="form-control" placeholder="Repetir contraseña" required="">
+        <input type="hidden" id="nick" name="nick" class="form-control" value="{$nick}">
+        <input type="hidden" id="token" name="token" class="form-control" value="{$token}">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Modificar</button> 
 
-        <a href="{$url_recuperar}">¿Se olvido su contraseña?</a>
         </form>
           </div>
           <div class="col-md-6 col-md-push-1 probootstrap-animate">            
