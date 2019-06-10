@@ -343,8 +343,8 @@ public function recursiva($recs, $col, $pos, $prop){
         $col->setRecompensa($r);
         $r->actualizaCant();
         } else {
-          if($pos != 0){
-          $pos = $pos - 1;
+          if($pos != 0){ 
+          $pos--;
           $this->recursiva($recs, $col, $pos, $prop);
         }
       }
@@ -354,10 +354,14 @@ function nuevaColaboracionCel(){
   $Usuario = new Usuario();
   $propuesta = new Propuesta();
   $Recompensa = new Recompensa();
-  $recs = $Recompensa->traerRecompensas($_POST["nombre"]);
-  $usu = $Usuario->obtenerPorMail($_POST['mail']);
-  $prop=$propuesta->obtenerPorNombreProp($_POST["nombre"]);
-   $col->setMonto($_POST["monto"]);
+  //$recs = $Recompensa->traerRecompensas($_POST["nombre"]);
+  //$usu = $Usuario->obtenerPorMail($_POST['mail']);
+  //$prop=$propuesta->obtenerPorNombreProp($_POST["nombre"]);
+   //$col->setMonto($_POST["monto"]);
+  $recs = $Recompensa->traerRecompensas("nueva propb");
+  $usu = $Usuario->obtenerPorMail("nambroa@gmail.com");
+  $prop=$propuesta->obtenerPorNombreProp("nueva propb");
+  $col->setMonto(500);
     $col->setFecha(date("Y-m-d"));
     $col->setUsuario($usu);
     $col->setTituloPropuesta($prop);
@@ -368,15 +372,16 @@ function nuevaColaboracionCel(){
     }
     $this->recursiva($recs, $col, $pos, $prop);
     if($col->agregar()){
-     $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
+     //$prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
+      $prop->setMontoActual($prop->getMontoActual() + 500);
       $prop->actualizaMonto();
-      $msg = "que rica ñery te la jugaste";
+      $msg = "que rica compa te la jugaste";
       $array = ["mensajito"=>$msg];
       $arreglo=["status"=>"ok","message"=>[$array]];
             echo json_encode($arreglo);
     }else 
     {
-      $msg = "mal ahí ñery";
+      $msg = "mal ahi compa";
           $array = ["mensajito"=>$msg];
           $arreglo=["status"=>"error","message"=>[$array]];
           echo json_encode($arreglo);
@@ -436,6 +441,38 @@ function consolita2( $data ) {
         $output = implode( ',', $output);
     echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
 }
+
+
+
+function favoritear(){
+    $nomProp = $_POST['nombreProp'];
+$valor = 0;
+  $propuesta = new Propuesta();
+  $prop = $propuesta->obtenerPorNombreProp($nomProp);
+  $usuario = new Usuario();
+  $u = $usuario->obtenerPorNick(Session::get('usuario_nick'));
+
+  if($prop->isFavoriteada($u->getNick())){
+    $propus = array();
+    $propus[] = $nomProp;
+    $this->desfavoritear($propus);
+    
+  }else{
+
+  if($prop->favoritear($nomProp,Session::get('usuario_nick')))
+  {
+    $array = $u->getFavoritos();
+    $array2 = $prop->getFavoritos();
+    array_push($array, $prop);
+    array_push($array2, $u);
+    $u->setFavoritos($array);
+    $prop->setFavoritos($array2);
+    $valor = 1;
+  }
+    }
+ echo $valor; 
+} 
+/*
 function favoritear($params=array()){
   $propuesta = new Propuesta();
   $prop = $propuesta->obtenerPorNombreProp($params[0]);
@@ -452,13 +489,14 @@ function favoritear($params=array()){
   }
   $this->redirect("propuesta","listado");
 } 
+*/
+
+
 function detalleProp($params=array()){
 $propuesta = new Propuesta();
 $com = new Comentario();
 $coms = $com->com($params[0]);
-foreach ($coms as $comentario) {
-    
-}
+
 $u = new Usuario();
 foreach ($coms as $c) {
   $usu = $u->obtenerPorNick($c->NickUsuario);
@@ -519,10 +557,13 @@ function desfavoritear($params=array()){
       consolita2($key2); 
       unset($u->getFavoritos[$key2]);
     }
-    print("xD");
+   
   }
-  $this->redirect("propuesta","listado");
+ return true;
 }
+
+
+
 function comentar(){
   $propuesta = new Propuesta();
   $prop = $propuesta->obtenerPorNombreProp($_POST['nombre']); 

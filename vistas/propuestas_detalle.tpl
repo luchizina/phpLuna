@@ -97,10 +97,11 @@
             <a class="btn" onclick="borrarComent('{$com->getId()}','{$propuesta->getNombre()}',this);">
                          <i class="icon-trash"></i></a>  
          {/if}
-         <a class="btn" onclick="javascript:likeComentario('{$usuLogNick}',{$com->getId()});">
-                         <i class="fa fa-thumbs-up"></i> <span id="{$usuLogNick}{$com->getId()}">{$com->getLikes()}</span></a>
 
-        </div>
+         <a class="btn" onclick="likeComentario('{$usuLogNick}',{$com->getId()});">
+<i class="fa fa-thumbs-up"></i> <span id="{$usuLogNick}{$com->getId()}">{$com->getLikes()}</span></a>
+          </div>
+ 
       {/foreach}
       <div class="comment" id="nuevo">
 
