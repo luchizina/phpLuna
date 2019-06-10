@@ -43,8 +43,9 @@ function listCom(nombre, url){
                 html+='<a id="'+id+'" class="btn" onclick="borrarComentNuevo('+id+',\''+nombre+'\');"><i class="icon-trash"></i></a>';
               }
               html+='<a class="btn" onclick="likeComentario(\''+logue+'\','+otroid+');">';
-              html+='<i class="fa fa-thumbs-up"></i> <span id="\''+idL+'\'">'+likes+'</span></a></div>';
+              html+='<i class="fa fa-thumbs-up"></i> <span id="'+idL+'">'+likes+'</span></a></div>';
               $('#nuevo').html(html);
+              console.log(idL);
             }
           })
         }
@@ -57,7 +58,6 @@ function listCom(nombre, url){
               data: 'textoComentario='+texto+'&nomPropCom='+nomPropCom,
               type: 'post',
               success:function(){
-                alert('Comentario agregado');
                 document.getElementById("textoComentario").value = "";
                 listCom(nombre, url);
               }
@@ -115,6 +115,8 @@ $.ajax({
 		//dataType:"text",
 		success:function(valor){
 			$("#"+usuario+idComent).html(valor);
+			console.log("#"+usuario+idComent);
+			console.log(valor);
 			
 		},
 		error:function(){
