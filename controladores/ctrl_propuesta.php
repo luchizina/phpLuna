@@ -179,8 +179,10 @@ function consolita( $data ) {
   $prop->setNombre($_POST["nombre"]);
   $prop->setDescripcion($_POST["desc"]);
     $fecha =  date("Y-m-d");
-  $prop->setFechaPublicada($fecha);
+  $prop->setFechaAgregada($fecha);
   $prop->setMonto($_POST["monto"]);
+  $date = date("Y-m-d", strtotime($_POST["fec"]));
+  $prop->setFechaPublicada($date);
     $prop->setCategoria($categ->obtenerPorNombreCat($_POST["catego"]));
     $prop->setUsuario($usr->obtenerPorNick(Session::get('usuario_nick')));
   $prop->setMontoActual(0);
@@ -290,6 +292,11 @@ function nuevaColaboracion($params=array()){
     }
     $this->recursiva($recs, $col, $pos, $prop);
     if($col->agregar()){
+      $usuProp = $Usuario->obtenerPorNick($prop->getUsuario());
+      if($usuProp->getNotificacion() == 0){
+
+      $this->enviarMailColaboracion($prop,$col);
+  }
       array_push($usu->getPropuestasColabora(), $prop);
       $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
       $prop->actualizaMonto();
@@ -307,6 +314,25 @@ function nuevaColaboracion($params=array()){
   $tpl->asignar('recompensas',$recs);
   $tpl->mostrar('nueva_colaboracion',array());
 }
+
+
+
+public function enviarMailColaboracion($prop,$col){
+  $Usuario = new Usuario();
+  $usuProp = $Usuario->obtenerPorNick($prop->getUsuario());
+  $correo = $usuProp->getCorreo();
+  $nombre = $usuProp->getNombre();
+  $propNomb = $prop->getNombre();
+  $monto = $col->getMonto();
+  
+    $body = "";
+    $nombreC = $nombre." ".$apellido;
+      $bodyhtml = "Hola $nombre!, Te han colaborado en $propNomb con $monto pesos, Felicitaciones!";
+      Utils::enviarEmail($correo,$nombreC, $body, $bodyhtml);
+
+}
+
+
 public function recursiva($recs, $col, $pos, $prop){
   $r = $recs[$pos];
   $r->setTituloPropuesta($prop);
@@ -547,7 +573,7 @@ function registrarRecom($params = array())
 }
 function comentarEnPagina(){
   $propuesta = new Propuesta();
- $this->consolita($_POST['textoComentario']);
+
   if(isset($_POST["nomPropCom"])){
   $prop = $propuesta->obtenerPorNombreProp($_POST['nomPropCom']);
   $usuario = new Usuario();
@@ -567,11 +593,11 @@ echo '</script>';
 }
 }
 
-function borrarComEnPagina($params=array()){
+function borrarComEnPagina(){
   $comentario = new Comentario();
-   $num = (int)$params[1];
+   $num = (int)$_POST["idCom"];
    $algo = array();
-  $algo[] =$params[0];
+  $algo[] =$_POST["nomPropCom"];
   if($comentario->borrar($num)){
     $comentario->borrarLikesCom($num);
      $this->redirect("propuesta","detalleProp",$algo);
@@ -604,9 +630,9 @@ function likeComentPagina(){
 function likeCometario(){
   $num =(int)$_POST['idCom'];
   $usuario = new Usuario();
-  $u = $usuario->$obtenerPorMail($_POST['mail']);
+  $u = $usuario->obtenerPorMail($_POST['mail']);
   $comentario = new Comentario();
-  $c = $comentario->obtenerPorId();
+  $c = $comentario->obtenerPorId($num);
   if($c->likeCom($u->getNick(), $c->getId($num))){
     //$array = $c->getLikes();
     //array_push($array, $u);

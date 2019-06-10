@@ -71,9 +71,9 @@
             </div> 
            <!-- Text input-->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="ci">Recompensa</label>  
+              <label class="col-md-4 control-label" for="fec">Fecha realización</label>  
               <div class="col-md-4">
-              <input id="recom" name="recom" type="text" placeholder="Entradas gratis" class="form-control input-md" required="">
+              <input id="fec" name="fec" type="date" class="form-control input-md" required="">
                 
               </div>
             </div>

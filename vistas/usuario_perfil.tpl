@@ -62,6 +62,17 @@
               </div>
             </form>
           </div>
+
+          <form method="post" action="{$url_base}usuario/notifUsuario">
+              {if $usuario->getNotificacion() == 1}
+  <input type="checkbox" name="checkNotif" id="checkNotif"> Activar/Desactivar notificaciones<br>
+    {else}
+     <input type="checkbox" name="checkNotif" id="checkNotif" checked> Activar/Desactivar notificaciones<br>
+     {/if}
+  <input type="hidden" name="nomUsu" id="nomUsu" value="{$usuario->getNick()}">
+  <input type="submit" value="Guardar cambios">
+</form>
+
         </div>
         </div>
 
@@ -71,29 +82,5 @@
     </section>          
   </section>
 
-  <div class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
-    <!--Content-->
-    <div class="modal-content">
-
-      <!--Header-->
-      <div class="modal-header">
-        <img src="./{$usuario->getImagen()}" style="border-radius:50%;" alt="avatar" class="rounded-circle img-responsive">
-      </div>
-      <!--Body-->
-      <div class="modal-body text-center mb-1">
-
-        <h5 class="mt-1 mb-2">{$usuario->getNombre()} {$usuario->getApellido()}</h5>
-        <label data-error="wrong" data-success="right" for="form29" class="ml-0">Correo: {$usuario->getCorreo()}</label><br>
-        <label data-error="wrong" data-success="right" for="form29" class="ml-0">Usuario: {$usuario->getNick()}</label>
-      </div>
-
-    </div>
-    <!--/.Content-->
-  </div>
-</div>
-<div class="text-center">
-  <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#modalLoginAvatar">Apretá aca</a>
-</div>
-      </body></html>
+     </body>
+      </html>

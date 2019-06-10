@@ -60,6 +60,23 @@ function listCom(nombre, url){
           }
 
 
+       function borrarComent(url,id, nombre,e){
+       	var idCom = id;
+       	var nomPropCom = nombre;
+
+       	$.ajax({
+              url: url+'propuesta/borrarComEnPagina',
+              data: 'idCom='+idCom+'&nomPropCom='+nomPropCom,
+              type: 'post',
+              success:function(){
+                alert('Comentario eliminado');
+                e.parentNode.parentNode.removeChild(e.parentNode);
+                
+              }
+            })
+       }
+
+
 function likeComentario(usuario, idComent){
 
 $.ajax({

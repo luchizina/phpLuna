@@ -22,7 +22,7 @@ class ControladorUsuario extends ControladorIndex {
        if(!empty($params)){
            if($params[0]=="borrar"){
                $usuario=new Usuario();
-               $nickABorrar=$params[1];
+               $nickABorrar=$paramheas[1];
                 if($usuario->borrar($nickABorrar)){
                   $usuario->logout();
                     //Redirigir al listado
@@ -238,7 +238,6 @@ $email = $_POST['email'];
 $pass = sha1($_POST['pass']);
 	if($usr->login($email,$pass)){
     $userit = $usr->obtenerPorMail($email);
-		  #  $u =["usuario"=>$userit];
     $arreglo=["status"=>"ok","message"=>[$userit]];
             echo json_encode($arreglo);
 	}else{
@@ -349,6 +348,7 @@ $imagen = $usuario->traerImagen($usu->getNick());
 
 }
 
+
 function traerPerfilM($params=array()){
   $usu= new Usuario();
   $usuario = $usu->obtenerPorNick($params[0]);
@@ -356,6 +356,26 @@ function traerPerfilM($params=array()){
     $arreglo=["status"=>"ok","message"=>[$usuario]];
       $nuevo = json_encode($arreglo);
       echo $nuevo;
+}
+
+
+public function notifUsuario(){
+  $usuario = new Usuario();
+  $valorCheck = $_POST['checkNotif'];
+  $usu = $usuario->obtenerPorNick($_POST['nomUsu']);
+
+  
+  if($valorCheck=="on"){
+    $usu->setNotificacion(0);
+    $usu->actualizarNotificacion(0);
+    
+  }else{
+    $usu->setNotificacion(1);
+    $usu->actualizarNotificacion(1);
+  }
+  $algo = array();
+  $algo[] =$usu->getNick();
+  $this->redirect("usuario","verPerfil",$algo);
 }
 
 }
