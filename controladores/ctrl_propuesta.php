@@ -176,10 +176,12 @@ function consolita( $data ) {
     $usr = new Usuario();
   $prop= new Propuesta();
     $categ = new categoria();
+    $fechaFin = $_POST['fechaFin'];
+    
   $prop->setNombre($_POST["nombre"]);
   $prop->setDescripcion($_POST["desc"]);
     $fecha =  date("Y-m-d");
-  $prop->setFechaPublicada($fecha);
+  $prop->setFechaAgregada($fecha);
   $prop->setMonto($_POST["monto"]);
     $prop->setCategoria($categ->obtenerPorNombreCat($_POST["catego"]));
     $prop->setUsuario($usr->obtenerPorNick(Session::get('usuario_nick')));

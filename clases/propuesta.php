@@ -5,8 +5,9 @@ class Propuesta extends ClaseBase {
 //estos atributos tienen que tener el mismo nombre que en la bd
 	public $Nombre = '';
 	public $Descripcion = '';
-	public $FechaAgregada = null;
+	public $fechaAgregada = null;
 	public $FechaPublicada = null;
+  public $fechaFinalizacion = null;
 	public $Monto = 0;
 	public $MontoActual = 0;
 	public $NickUsuario = null; //objeto usuario
@@ -85,11 +86,11 @@ class Propuesta extends ClaseBase {
 	}
 
 	public function getFechaAgregada(){
-		return $this->FechaAgregada;
+		return $this->fechaAgregada;
 	}
 
 	public function setFechaAgregada($FechaAgregada){
-		$this->FechaAgregada=$FechaAgregada;
+		$this->fechaAgregada=$FechaAgregada;
 	}
 
 	public function getFechaPublicada(){
@@ -99,6 +100,14 @@ class Propuesta extends ClaseBase {
 	public function setFechaPublicada($FechaPublicada){
 		$this->FechaPublicada=$FechaPublicada;
 	}
+
+  public function getFechaFinalizacion(){
+    return $this->fechaFinalizacion;
+  }
+
+  public function setFechaFinalizacion($FechaFin){
+    $this->fechaFinalizacion=$FechaFin;
+  }
 
 	public function getMonto(){
 		return $this->Monto;
@@ -257,7 +266,7 @@ $propuestas=array();
  public function agregarP(){
         $nombre=$this->getNombre();
         $Descripcion=$this->getDescripcion();
-       	$FechaPublicada=$this->getFechaPublicada();
+       	$FechaAgregada=$this->getFechaAgregada();
         $Monto = $this->getMonto();
         $MontoActual=0;
         $Usuario = $this->getUsuario()->getNick();
@@ -266,10 +275,10 @@ $propuestas=array();
         
         $stmt = $this->getDB()->prepare( 
             "INSERT INTO propuesta 
-        (Nombre,Descripcion, FechaPublicada,Monto,MontoActual,NickUsuario,Categoria,EstadoActual) 
+        (Nombre,Descripcion, fechaAgregada,Monto,MontoActual,NickUsuario,Categoria,EstadoActual) 
            VALUES (?,?,?,?,?,?,?,?)" );
         $stmt->bind_param("sssiissi",$nombre,
-            $Descripcion,$FechaPublicada,$Monto,$MontoActual,$Usuario,$Categ,$EstadoActual);
+            $Descripcion,$FechaAgregada,$Monto,$MontoActual,$Usuario,$Categ,$EstadoActual);
 
         return $stmt->execute();
     }
