@@ -23,7 +23,7 @@ class ControladorUsuario extends ControladorIndex {
        if(!empty($params)){
            if($params[0]=="borrar"){
                $usuario=new Usuario();
-               $nickABorrar=$params[1];
+               $nickABorrar=$paramheas[1];
                 if($usuario->borrar($nickABorrar)){
                   $usuario->logout();
                     //Redirigir al listado
@@ -359,6 +359,16 @@ $imagen = $usuario->traerImagen($usu->getNick());
 }
 
 
+function traerPerfilM($params=array()){
+  $usu= new Usuario();
+  $usuario = $usu->obtenerPorNick($params[0]);
+   $u=["usuario"=>$usuario];
+    $arreglo=["status"=>"ok","message"=>[$usuario]];
+      $nuevo = json_encode($arreglo);
+      echo $nuevo;
+}
+
+
 public function notifUsuario(){
   $usuario = new Usuario();
   $valorCheck = $_POST['checkNotif'];
@@ -377,6 +387,7 @@ public function notifUsuario(){
   $algo[] =$usu->getNick();
   $this->redirect("usuario","verPerfil",$algo);
 }
+
 
 public function RecuperarCont(){
   

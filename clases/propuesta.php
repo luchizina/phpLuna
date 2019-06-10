@@ -257,6 +257,7 @@ $propuestas=array();
  public function agregarP(){
         $nombre=$this->getNombre();
         $Descripcion=$this->getDescripcion();
+        $FechaAgregada = $this->getFechaAgregada();
        	$FechaPublicada=$this->getFechaPublicada();
         $Monto = $this->getMonto();
         $MontoActual=0;
@@ -266,10 +267,10 @@ $propuestas=array();
         
         $stmt = $this->getDB()->prepare( 
             "INSERT INTO propuesta 
-        (Nombre,Descripcion, FechaPublicada,Monto,MontoActual,NickUsuario,Categoria,EstadoActual) 
-           VALUES (?,?,?,?,?,?,?,?)" );
-        $stmt->bind_param("sssiissi",$nombre,
-            $Descripcion,$FechaPublicada,$Monto,$MontoActual,$Usuario,$Categ,$EstadoActual);
+        (Nombre,Descripcion, FechaPublicada,fechaAgregada,Monto,MontoActual,NickUsuario,Categoria,EstadoActual) 
+           VALUES (?,?,?,?,?,?,?,?,?)" );
+        $stmt->bind_param("ssssiissi",$nombre,
+            $Descripcion,$FechaPublicada,$FechaAgregada,$Monto,$MontoActual,$Usuario,$Categ,$EstadoActual);
 
         return $stmt->execute();
     }
