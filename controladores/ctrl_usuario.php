@@ -1,6 +1,7 @@
 <?php  
 require "clases/clase_base.php";
 require "clases/usuario.php";
+require "clases/propuesta.php";
 require_once('clases/template.php');
 require_once('clases/Utils.php');
 require_once('clases/session.php');
@@ -134,7 +135,7 @@ function nuevo(){
       $url="http://localhost/phpLuna/usuario/activarU/".$token;
       $body = "Para activar su cuenta debe entrar al siguiente enlace: ".$url;
       $bodyhtml = "Para activar su cuenta haga click aqui <a href='$url'>Activar cuenta</a>";
-      Utils::enviarEmail($usr->getCorreo(),$nombreC, $body, $bodyhtml);
+      Utils::enviarEmail($usr->getCorreo(),$nombreC, $body, $bodyhtml, "Bienvenida a Luna-Activar cuenta");
       $this->redirect("usuario","aviso");
       exit;
     }else{
@@ -340,9 +341,18 @@ public function nuevoUsuCel(){
 function verPerfil($params=array()){
 $usuario = new Usuario();
 $usu = $usuario->obtenerPorNick($params[0]);
+
+$prop = new Propuesta();
+$propsUsu = $prop->traerMisProps($usu->getNick());
+$propsFavs = $prop->traerPropsFavoritas($usu->getNick());
+$propsColab = $prop->traerPropsColaboradas($usu->getNick());
 $imagen = $usuario->traerImagen($usu->getNick());
+
     $tpl = Template::getInstance();
     $usu->setImagen($imagen);
+    $tpl->asignar('misProps', $propsUsu);
+    $tpl->asignar('propsFavoritas',$propsFavs);
+    $tpl->asignar('propsColaboradas',$propsColab);
    $tpl->asignar('usuario', $usu);
   $tpl->mostrar('usuario_perfil',$usu);
 
@@ -378,5 +388,79 @@ public function notifUsuario(){
   $this->redirect("usuario","verPerfil",$algo);
 }
 
+<<<<<<< HEAD
+=======
+public function RecuperarCont(){
+  
+  $mensaje="";
+  if(isset($_POST["email"])){
+    $correo = $_POST['email'];
+  $u = new Usuario();
+  if($u->correo($correo)){
+    $usr = $u->obtenerPorMail($correo);
+    $nick = $usr->getNick();
+    $token = md5(uniqid(mt_rand(), false));
+    $usr->setTokenPass($token);
+    $usr->setSolicitoPass(1);
+    $usr->solicitoCambCont();
+    $nombreC = $usr->getNombre()." ".$usr->getApellido();
+    $url="http://localhost/phpLuna/usuario/cambiarCont/".$nick."/".$token;
+    $body = "Para restaurar su contraseña debe entrar al siguiente enlace: ".$url;
+    $bodyhtml = "Para restaurar su contraseña haga click aqui <a href='$url'>restaurar contraseña</a>";
+    Utils::enviarEmail($correo,$nombreC, $body, $bodyhtml, "Restablecer contraseña");
+    $this->redirect('usuario', 'aviso2');
+  } else {
+    $mensaje = "El correo no existe en el sistema";
+  }
+} 
+  $tpl = Template::getInstance();
+  $tpl->asignar('titulo',"Recuperar contraseña");
+  $tpl->asignar('buscar',"");
+  $tpl->asignar('mensaje',$mensaje);
+  $tpl->mostrar('recuperar_cont',array());
+}
+
+public function aviso2(){
+  $tpl = Template::getInstance();
+  $tpl->mostrar('aviso2', array());
+}
+
+
+public function cambiarCont($a = array()){
+  $nick = $a[0];
+  $token = $a[1];
+  $u = new Usuario();
+  if($u->Solicito($token, $nick)){
+    $e = ["nick" => $nick, "token" => $token];
+    $this->redirect("usuario","cambiaPass", $e);
+  } else {
+    echo "Error, los datos no coinciden";
+  }
+}
+
+public function cambiaPass($params=array()){
+  $nick = $params[0];
+  $token = $params[1];
+  $mensaje="";
+  if(isset($_POST['password']) && isset($_POST['password2'])){
+    $usu = $_POST['nick'];
+    $tok = $_POST['token'];
+    if($_POST['password'] == $_POST['password2']){
+      $u = new Usuario();
+      $u->CambiaPass($tok, $usu, $_POST['password']);
+      $this->redirect("usuario","login");
+    } else {
+      $mensaje="Las contraseñas no coinciden";
+    }
+  }
+  $tpl = Template::getInstance();
+  $tpl->asignar('buscar',"");
+  $tpl->asignar('mensaje',$mensaje);
+  $tpl->asignar('nick',$nick);
+  $tpl->asignar('token',$token);
+  $tpl->mostrar('restablecer',array());
+}
+
+>>>>>>> 178870865b7716aa78496ec345b47afd666132d9
 }
 ?>

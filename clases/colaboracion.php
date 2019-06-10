@@ -77,5 +77,20 @@ class Colaboracion extends ClaseBase{
     
     }
 
+    public function existeCol($propuesta, $usuario){
+        $stmt = $this->getDB()->prepare( 
+            "SELECT * FROM colaboracion 
+            WHERE NickUsuario =? AND TituloPropuesta = ?");
+        $stmt->bind_param("ss",$usuario, $propuesta);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->fetch();
+        //$resultado = $stmt->get_result();
+        $row_cnt = $stmt->num_rows;
+        if($row_cnt > 0) {
+            return true; 
+        }
+    }
+
 }
  ?>

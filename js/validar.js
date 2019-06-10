@@ -6,24 +6,26 @@ function validarci(){
 	var ced = $("#ci").val();
 	$.ajax({
 		url:"/phpLuna/usuario/existeCi",
-		method: "POST",
-		data:{ci:ced},
+		data: 'ci='+ced,
+        type: 'post',
 		//dataType:"text",
 		success:function(html){
 			$("#avisaCe").html(html);
 			Chequear();
 		},
 		error:function(){
-			document.getElementById("message1").style.display = "block";
+			$("#message1").style.display = "block";
 		}
 	});
 }
 
 function listCom(nombre, url){
           $.ajax({
-            url: url+'propuesta/listComs/'+nombre,
+            url: url+'propuesta/listComs/',
+            data: 'prop='+nombre,
+            type: 'post',
             success:function(res){
-              var cont = res.split("-");
+             var cont = res.split("-");
               var id = cont[0];
               var texto = cont[1];
               var usu = cont[2];
@@ -31,14 +33,17 @@ function listCom(nombre, url){
               var likes = cont[4];
               var logue = cont[5];
               var html = '';
+              var idLike = logue+id;
+              var idL = idLike.replace(/^\s+|\s+$/gm,'');
+              var otroid = id.replace(/^\s+|\s+$/gm,'');
               html+='<img src="'+img+'">';
               html+='<div class="comment-content"><p class="author"><strong>'+usu+'</strong></p>';
               html+='<span>'+texto+'</span></div>';
               if(usu === logue){
-                html+='<a class="btn" href="{$url_base}propuesta/borrarComEnPagina/{$propuesta->getNombre()}/'+id+'"><i class="icon-trash"></i></a>';
+                html+='<a id="'+id+'" class="btn" onclick="borrarComentNuevo('+id+',\''+nombre+'\');"><i class="icon-trash"></i></a>';
               }
-              html+='<a class="btn" onclick="javascript:likeComentario('+logue+','+id+');">';
-              html+='<i class="fa fa-thumbs-up"></i> <span id="'+logue+id+'">'+likes+'</span></a></div>';
+              html+='<a class="btn" onclick="likeComentario(\''+logue+'\','+otroid+');">';
+              html+='<i class="fa fa-thumbs-up"></i> <span id="\''+idL+'\'">'+likes+'</span></a></div>';
               $('#nuevo').html(html);
             }
           })
@@ -60,18 +65,41 @@ function listCom(nombre, url){
           }
 
 
-       function borrarComent(url,id, nombre,e){
-       	var idCom = id;
+          function borrarComentNuevo(id, nombre){
+          	 	var idCom = id;
        	var nomPropCom = nombre;
-
+       	
+       	var nuevo = document.getElementById("nuevo");
        	$.ajax({
-              url: url+'propuesta/borrarComEnPagina',
+              url: '/phpLuna/propuesta/borrarComEnPagina',
               data: 'idCom='+idCom+'&nomPropCom='+nomPropCom,
               type: 'post',
               success:function(){
                 alert('Comentario eliminado');
-                e.parentNode.parentNode.removeChild(e.parentNode);
+             
+                while (nuevo.firstChild) {
+   				 nuevo.removeChild(nuevo.firstChild);
+					}
+              }
+            })
+
+          }
+
+
+       function borrarComent(id, nombre){
+       	var idCom = id;
+       	var nomPropCom = nombre;
+       	var element = document.getElementById(id);
+       //	var nuevo = document.getElementById("nuevo");
+       	$.ajax({
+              url: '/phpLuna/propuesta/borrarComEnPagina',
+              data: 'idCom='+idCom+'&nomPropCom='+nomPropCom,
+              type: 'post',
+              success:function(){
+                alert('Comentario eliminado');
                 
+                element.parentNode.parentNode.removeChild(element.parentNode);
+                //nuevo.parentNode.removeChild(nuevo);
               }
             })
        }
@@ -95,18 +123,53 @@ $.ajax({
 	});
 }
 
+
+function favoritear(nomProp,url, usuario){
+$.ajax({
+		url: url+"propuesta/favoritear",
+		method: "POST",
+		data:{nombreProp:nomProp},
+		//dataType:"text",
+		success:function(valor){
+		
+			 var element = document.getElementById(usuario+nomProp);
+			 
+			if(valor == 1){
+			 	
+  				element.classList.remove("fa-star-o");
+  				element.classList.add("fa-star");
+			}else{
+				element.classList.remove("fa-star");
+  				element.classList.add("fa-star-o");	
+			}
+			
+			
+				
+
+
+				
+			
+			
+		},
+		error:function(valor){
+		console.log(valor);
+		}
+	});
+
+}
+
 function validarnick(){
 	var ced = $("#nick").val();
 	$.ajax({
 		url:"/phpLuna/usuario/existeNick",
-		method: "POST",
-		data:{nick:ced},
+		data: 'nick='+ced,
+        type: 'post',
 		//dataType:"text",
 		success:function(html){
 			$("#avisa").html(html);
 		},
 		error:function(){
-			document.getElementById("message1").style.display = "block";
+			$("#message1").style.display = "block";
 		}
 	});
 }
@@ -115,15 +178,15 @@ function validarcorreo(){
 	var ced = $("#email").val();
 	$.ajax({
 		url:"/phpLuna/usuario/existeCorreo",
-		method: "POST",
-		data:{correo:ced},
+		data: 'correo='+ced,
+        type: 'post',
 		//dataType:"text",
 		success:function(html){
 			$("#avisaC").html(html);
 			Chequear();
 		},
 		error:function(){
-			document.getElementById("message1").style.display = "block";
+			$("#message1").style.display = "block";
 		}
 	});
 }

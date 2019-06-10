@@ -55,12 +55,14 @@
                   </div>
                   <h2><a href="{$url_base}propuesta/detalleProp/{$prop->getNombre()}/">{$prop->getNombre()|upper} </a>
                     {if $prop->isFavoriteada($usuLogNick)}
-                        <a class="btn estrella" href="{$url_base}propuesta/desfavoritear/{$prop->getNombre()}/">
-                         <i class="fa fa-star"></i></a>
+                        <a class="btn estrella" onclick="favoritear('{$prop->getNombre()}','{$url_base}','{$usuLogNick}');">
+                         <i class="fa fa-star" id="{$usuLogNick}{$prop->getNombre()}"></i></a>
                        {/if}
                        {if !$prop->isFavoriteada($usuLogNick)}
-                        <a class="btn estrella" href="{$url_base}propuesta/favoritear/{$prop->getNombre()}/">
-                         <i class="fa fa-star-o"></i></a>
+                        <!-- <a class="btn estrella" href="{$url_base}propuesta/favoritear/{$prop->getNombre()}/">
+                         <i class="fa fa-star-o"></i></a> -->
+                         <a class="btn estrella"  onclick="favoritear('{$prop->getNombre()}','{$url_base}','{$usuLogNick}');">
+                         <i class="fa fa-star-o" id="{$usuLogNick}{$prop->getNombre()}"></i></a>
                       {/if}
                       </h2>
                   <div class="probootstrap-date"><i class="icon-calendar"></i> Implementar tiempo queda</div>  
@@ -85,6 +87,6 @@
     <script src="js/scripts.min.js"></script>
     <script src="js/main.min.js"></script>
     <script src="js/custom.js"></script>
-    
+     <script src="js/validar.js"></script>
   </body>
 </html>

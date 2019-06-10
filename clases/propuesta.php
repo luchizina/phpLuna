@@ -195,6 +195,63 @@ class Propuesta extends ClaseBase {
 
  } 
 
+   public function traerMisProps($nick){
+     $propuestas=array();
+        $stmt = $this->getDB()->prepare( 
+            "SELECT * FROM propuesta 
+            WHERE NickUsuario = ? " );
+     
+        $stmt->bind_param( "s",$nick);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        while ($fila=$resultado->fetch_object()) {
+            $prop = new Propuesta($fila);
+                $propuestas[]=$prop;
+                 
+        }
+     
+        return $propuestas;
+
+ } 
+
+ public function traerPropsFavoritas($nick){
+
+ $propuestas=array();
+        $stmt = $this->getDB()->prepare( 
+            " SELECT propuesta.* FROM propuesta, favorito WHERE favorito.usuario = ? AND propuesta.Nombre = favorito.propuesta " );
+     
+        $stmt->bind_param( "s",$nick);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        while ($fila=$resultado->fetch_object()) {
+            $prop= new Propuesta($fila);
+                $propuestas[]=$prop;
+        }
+        return $propuestas;
+
+ }
+
+
+ public function traerPropsColaboradas($nick){
+$propuestas=array();
+        $stmt = $this->getDB()->prepare( 
+            " SELECT DISTINCT propuesta.* from colaboracion, propuesta where colaboracion.NickUsuario = ? AND colaboracion.TituloPropuesta = propuesta.Nombre" );
+     
+        $stmt->bind_param( "s",$nick);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        while ($fila=$resultado->fetch_object()) {
+            $prop= new Propuesta($fila);
+                $propuestas[]=$prop;
+        }
+        return $propuestas;
+
+ }
+
+
+
+
 
 
  public function agregarP(){
@@ -281,10 +338,11 @@ public function modificar()
 
    public function actualizaMonto(){
    	$monto = $this->getMontoActual();
+    $nombre =  $this->getNombre();
    	$stmt = $this->getDB()->prepare( 
             "UPDATE propuesta set MontoActual=? WHERE Nombre=?"); 
            
-        $stmt->bind_param("is", $monto, $this->getNombre());
+        $stmt->bind_param("is", $monto, $nombre);
         return $stmt->execute();
    }
 
@@ -322,6 +380,19 @@ $sql="select count(*) as gusta from likepropuesta where Usuario ='$nombreUsu' an
 
 }
 
+
+
+
+public function totalMontoColaborado($nick){
+$nombreProp = $this->getNombre();
+$sql="SELECT SUM(Monto) as suma from colaboracion where NickUsuario = '$nick' AND TituloPropuesta='$nombreProp'";
+      
+        $resultado =$this->getDB()->query($sql)   
+            or die ("Fallo en la consulta");
+            $fila = $resultado->fetch_assoc();
+         return $fila['suma']; 
+
+}
 public function likeProp($nombreUsu, $nombreProp)
    {
       $stmt = $this->getDB()->prepare( 
