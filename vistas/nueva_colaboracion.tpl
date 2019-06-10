@@ -30,24 +30,21 @@
         <div class="container">
           <div class="row">
           <div class="col-md-5 probootstrap-animate" style="color: white; font-family: Montserrat,Arial,sans-serif" >
+            {if $mensaje!=""}
+            <div class="alert alert-danger" role="alert">{$mensaje}</div>
+            {/if}
+            {if $mensaje==""}
             <form method="post" class="probootstrap-form">
               <div class="form-group">
                 <label for="monto">Monto</label>
                 <input id="monto" name="monto"  onkeyup="javascript:verRec()" type="number" placeholder="Ej: 500" class="form-control" required="">
                 <span id="mensajito"></span>
               </div>
-             <!-- <label for="rec">Recompensa</label>
-              <select name="rec">
-              <div class="form-group">
-                {foreach from=$recompensas item=rec}
-              <option value="{$rec->getId()}">{$rec->getNombre()}</option>
-                {/foreach}
-              </div>
-            </select> -->
               <div class="form-group">
                 <input type="submit" class="btn btn-primary btn-lg" id="guardar" name="guardar" value="Colaborar">
               </div>
             </form>
+            {/if}
           </div>
         </div>
         </div>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-08 14:32:29
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-09 22:37:54
          compiled from "vistas\propuestas_detalle.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:17923276445cfaa161b63406-88696199%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '08e12de8fc9c9d6be32a84ef7a419ea195e7387c' => 
     array (
       0 => 'vistas\\propuestas_detalle.tpl',
-      1 => 1560015145,
+      1 => 1560130054,
       2 => 'file',
     ),
   ),
@@ -126,13 +126,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         </div>
 
 <div class="jajaja"  >
-        <div class="jajaja"  >
-      <?php  $_smarty_tpl->tpl_vars['com'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['com']->_loop = false;
+        <?php  $_smarty_tpl->tpl_vars['com'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['com']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['comentarios']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['com']->key => $_smarty_tpl->tpl_vars['com']->value) {
 $_smarty_tpl->tpl_vars['com']->_loop = true;
 ?>
-              <div class="comment">
+        <div class="comment">
               <?php if ($_smarty_tpl->tpl_vars['com']->value->getUsuario()->getImagen()!=null) {?>
                 <img src="./<?php echo $_smarty_tpl->tpl_vars['com']->value->getUsuario()->getImagen();?>
 ">
@@ -148,45 +147,35 @@ $_smarty_tpl->tpl_vars['com']->_loop = true;
                 </span>
            </div>
               <?php if ($_smarty_tpl->tpl_vars['com']->value->getUsuario()->getNick()==$_smarty_tpl->tpl_vars['usuLogNick']->value) {?>
-          <!-- <a class="btn" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-propuesta/borrarComEnPagina/<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
-/<?php echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
-">
-                         <i class="icon-trash"></i></a>-->
-               <a class="btn" onclick="borrarComent('<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-','<?php echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
+            <a class="btn" onclick="borrarComent('<?php echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
 ','<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
 ',this);">
-                         <i class="icon-trash"></i></a>          
+                         <i class="icon-trash"></i></a>  
          <?php }?>
          <a class="btn" onclick="javascript:likeComentario('<?php echo $_smarty_tpl->tpl_vars['usuLogNick']->value;?>
 ',<?php echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
 );">
-<i class="fa fa-thumbs-up"></i> <span id="<?php echo $_smarty_tpl->tpl_vars['usuLogNick']->value;
+                         <i class="fa fa-thumbs-up"></i> <span id="<?php echo $_smarty_tpl->tpl_vars['usuLogNick']->value;
 echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
 "><?php echo $_smarty_tpl->tpl_vars['com']->value->getLikes();?>
 </span></a>
-          </div>
- 
-      <?php } ?>
 
+        </div>
+      <?php } ?>
       <div class="comment" id="nuevo">
-        
-      </div>
-    <br>
-</div>
+
+        </div>
 <div class="jaja">
-      <form method="post" action="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-propuesta/comentarEnPagina" class="probootstrap-form">
+      <form method="post" class="probootstrap-form">
         <textarea rows="5" cols="57" name="textoComentario" id="textoComentario"></textarea>
         <div class="form-group" >
-            <a onclick="Coment('<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+            <a onclick="javascript:Coment('<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 ','<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
 ');" id="submit" name="submit" class="btn btn-primary btn-lg">COMENTAR</a>
           </div>
     </form>
     </div>
-     </div>
+</div>
 
   
 

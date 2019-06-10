@@ -80,9 +80,8 @@
         </div>
 
 <div class="jajaja"  >
-        <div class="jajaja"  >
-      {foreach from=$comentarios item=com}
-              <div class="comment">
+        {foreach from=$comentarios item=com}
+        <div class="comment">
               {if $com->getUsuario()->getImagen() != null}
                 <img src="./{$com->getUsuario()->getImagen()}">
                 {/if}
@@ -95,31 +94,26 @@
                 </span>
            </div>
               {if $com->getUsuario()->getNick() == $usuLogNick}
-          <!-- <a class="btn" href="{$url_base}propuesta/borrarComEnPagina/{$propuesta->getNombre()}/{$com->getId()}">
-                         <i class="icon-trash"></i></a>-->
-               <a class="btn" onclick="borrarComent('{$url_base}','{$com->getId()}','{$propuesta->getNombre()}',this);">
-                         <i class="icon-trash"></i></a>          
+            <a class="btn" onclick="borrarComent('{$com->getId()}','{$propuesta->getNombre()}',this);">
+                         <i class="icon-trash"></i></a>  
          {/if}
          <a class="btn" onclick="javascript:likeComentario('{$usuLogNick}',{$com->getId()});">
-<i class="fa fa-thumbs-up"></i> <span id="{$usuLogNick}{$com->getId()}">{$com->getLikes()}</span></a>
-          </div>
- 
-      {/foreach}
+                         <i class="fa fa-thumbs-up"></i> <span id="{$usuLogNick}{$com->getId()}">{$com->getLikes()}</span></a>
 
+        </div>
+      {/foreach}
       <div class="comment" id="nuevo">
-        
-      </div>
-    <br>
-</div>
+
+        </div>
 <div class="jaja">
-      <form method="post" action="{$url_base}propuesta/comentarEnPagina" class="probootstrap-form">
+      <form method="post" class="probootstrap-form">
         <textarea rows="5" cols="57" name="textoComentario" id="textoComentario"></textarea>
         <div class="form-group" >
-            <a onclick="Coment('{$url_base}','{$propuesta->getNombre()}');" id="submit" name="submit" class="btn btn-primary btn-lg">COMENTAR</a>
+            <a onclick="javascript:Coment('{$url_base}','{$propuesta->getNombre()}');" id="submit" name="submit" class="btn btn-primary btn-lg">COMENTAR</a>
           </div>
     </form>
     </div>
-     </div>
+</div>
 
   
 

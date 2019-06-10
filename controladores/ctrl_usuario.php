@@ -135,7 +135,7 @@ function nuevo(){
       $url="http://localhost/phpLuna/usuario/activarU/".$token;
       $body = "Para activar su cuenta debe entrar al siguiente enlace: ".$url;
       $bodyhtml = "Para activar su cuenta haga click aqui <a href='$url'>Activar cuenta</a>";
-      Utils::enviarEmail($usr->getCorreo(),$nombreC, $body, $bodyhtml);
+      Utils::enviarEmail($usr->getCorreo(),$nombreC, $body, $bodyhtml, "Bienvenida a Luna-Activar cuenta");
       $this->redirect("usuario","aviso");
       exit;
     }else{
@@ -378,8 +378,68 @@ public function notifUsuario(){
   $this->redirect("usuario","verPerfil",$algo);
 }
 
+public function RecuperarCont(){
+  
+  $mensaje="";
+  if(isset($_POST["email"])){
+    $correo = $_POST['email'];
+  $u = new Usuario();
+  if($u->correo($correo)){
+    $usr = $u->obtenerPorMail($correo);
+    $nick = $usr->getNick();
+    $token = md5(uniqid(mt_rand(), false));
+    $u->solicitoCambCont($nick, $token);
+    $usr->setTokenPass($token);
+    $nombreC = $usr->getNombre()." ".$usr->getApellido();
+    $url="http://localhost/phpLuna/usuario/cambiarCont/".$nick."/".$token;
+    $body = "Para restaurar su contraseña debe entrar al siguiente enlace: ".$url;
+    $bodyhtml = "Para restaurar su contraseña haga click aqui <a href='$url'>restaurar contraseña</a>";
+    Utils::enviarEmail($correo,$nombreC, $body, $bodyhtml, "Restablecer contraseña");
+  } else {
+    $mensaje = "El correo no existe en el sistema";
+  }
+} 
+  $tpl = Template::getInstance();
+  $tpl->asignar('titulo',"Recuperar contraseña");
+  $tpl->asignar('buscar',"");
+  $tpl->asignar('mensaje',$mensaje);
+  $tpl->mostrar('recuperar_cont',array());
+}
 
 
+public function cambiarCont($a = array()){
+  $nick = $a[0];
+  $token = $a[1];
+  $u = new Usuario();
+  if($u->Solicito($token, $nick)){
+    $tpl = Template::getInstance();
+    $tpl->asignar('nick', $nick);
+    $tpl->asignar('token', $token);
+    $tpl->asignar('buscar',"");
+    $tpl->mostrar('restablecer',array());
+  } else {
+    echo "Error, los datos no coinciden";
+  }
+}
+
+public function cambiaPass(){
+  $mensaje="";
+  if(isset($_POST['password']) && isset($_POST['password2'])){
+    $usu = $_POST['nick'];
+    $token = $_POST['token'];
+    if($_POST['password'] == $_POST['password2']){
+      $u = new Usuario();
+      $u->CambiaPass($token, $usu, $_POST['password']);
+      $this->redirect("usuario","login");
+    } else {
+      $mensaje="Las contraseñas no coinciden";
+    }
+  }
+  $tpl = Template::getInstance();
+  $tpl->asignar('buscar',"");
+  $tpl->asignar('mensaje',$mensaje);
+  $tpl->mostrar('restablecer',array());
+}
 
 }
 ?>

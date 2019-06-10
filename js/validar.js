@@ -22,10 +22,10 @@ function validarci(){
 function listCom(nombre, url){
           $.ajax({
             url: url+'propuesta/listComs/',
-            data: 'textoComentario='+nombre,
+            data: 'prop='+nombre,
             type: 'post',
             success:function(res){
-              var cont = res.split("-");
+             var cont = res.split("-");
               var id = cont[0];
               var texto = cont[1];
               var usu = cont[2];
@@ -33,14 +33,17 @@ function listCom(nombre, url){
               var likes = cont[4];
               var logue = cont[5];
               var html = '';
+              var idLike = logue+id;
+              var idL = idLike.replace(/^\s+|\s+$/gm,'');
+              var otroid = id.replace(/^\s+|\s+$/gm,'');
               html+='<img src="'+img+'">';
               html+='<div class="comment-content"><p class="author"><strong>'+usu+'</strong></p>';
               html+='<span>'+texto+'</span></div>';
               if(usu === logue){
-                html+='<a class="btn" onclick="e => { console.log(e); borrarComent(\''+url+'\','+id+',\''+nombre+'\',this); }"><i class="icon-trash"></i></a>';
+                html+='<a class="btn" onclick="borrarComent(\''+url+'\','+id+',\''+nombre+'\',this);"><i class="icon-trash"></i></a>';
               }
-              html+='<a class="btn" onclick="likeComentario("'+logue+'",'+id+');">';
-              html+='<i class="fa fa-thumbs-up"></i> <span id="\''+logue+id+'\'">'+likes+'</span></a></div>';
+              html+='<a class="btn" onclick="likeComentario(\''+logue+'\','+otroid+');">';
+              html+='<i class="fa fa-thumbs-up"></i> <span id="\''+idL+'\'">'+likes+'</span></a></div>';
               $('#nuevo').html(html);
             }
           })
@@ -62,12 +65,12 @@ function listCom(nombre, url){
           }
 
 
-       function borrarComent(url,id, nombre,e){
+       function borrarComent(id, nombre,e){
        	var idCom = id;
        	var nomPropCom = nombre;
 
        	$.ajax({
-              url: url+'propuesta/borrarComEnPagina',
+              url: '/phpLuna/propuesta/borrarComEnPagina',
               data: 'idCom='+idCom+'&nomPropCom='+nomPropCom,
               type: 'post',
               success:function(){

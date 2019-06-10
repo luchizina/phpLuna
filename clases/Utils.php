@@ -2,7 +2,7 @@
 
 class Utils{
 
-	public function enviarEmail($email,$nombre_completo, $body, $bodyhtml){
+	public function enviarEmail($email,$nombre_completo, $body, $bodyhtml, $asunto){
 
 	
 	//Create a new PHPMailer instance
@@ -48,7 +48,7 @@ class Utils{
 	$mail->addAddress($email, $nombre_completo);
 
 	//Set the subject line
-	$mail->Subject = 'Bienvenida a Luna';
+	$mail->Subject = $asunto;
 
 	//Read an HTML message body from an external file, convert referenced images to embedded,
 	//convert HTML into a basic plain-text alternative body

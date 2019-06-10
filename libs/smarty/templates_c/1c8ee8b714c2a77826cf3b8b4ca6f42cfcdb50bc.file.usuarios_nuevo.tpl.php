@@ -1,20 +1,51 @@
-<!DOCTYPE html>
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-10 00:40:04
+         compiled from "vistas\usuarios_nuevo.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:9368480245cfdd114852984-66640189%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '1c8ee8b714c2a77826cf3b8b4ca6f42cfcdb50bc' => 
+    array (
+      0 => 'vistas\\usuarios_nuevo.tpl',
+      1 => 1559685577,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '9368480245cfdd114852984-66640189',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'url_base' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cfdd114983482_04133576',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5cfdd114983482_04133576')) {function content_5cfdd114983482_04133576($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
-    <base href="{$url_base}">
+    <base href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+">
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
     <link href="css/imagenes.css" rel="stylesheet">
     <!--[if lt IE 9]>
-      <script src="js/vendor/html5shiv.min.js"></script>
-      <script src="js/vendor/respond.min.js"></script>
+      <?php echo '<script'; ?>
+ src="js/vendor/html5shiv.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="js/vendor/respond.min.js"><?php echo '</script'; ?>
+>
     <![endif]-->
   </head>
   <body class="bg">
 
-    {include file="cabezal.tpl"}
+    <?php echo $_smarty_tpl->getSubTemplate ("cabezal.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
     <section class="probootstrap-hero" data-stellar-background-ratio="0.1">
         <div class="container">
           <div class="row">
@@ -69,8 +100,7 @@
               <div class="form-group">
                 <div class="imgUp">
                 <div class="imagePreview"></div>
-               <label class="btn btn-primary btn-lg">Elegir imagen<input type="file" name="archivo" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;" required=""></label>
-               <span>Solo imagenes jpg</span>
+               <label class="btn btn-primary btn-lg">Elegir imagen<input type="file" name="archivo" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;"></label>
               </div> 
               </div>
               <div class="form-group">
@@ -81,12 +111,23 @@
         </div>
         </div>
 
-    <script src="js/scripts.min.js"></script>
-    <script src="js/main.min.js"></script>
-    <script src="js/custom.js"></script>
-    <script src="js/validar.js" type="text/javascript"></script>
-    <script src="js/subirImg.js" type="text/javascript"></script>
+    <?php echo '<script'; ?>
+ src="js/scripts.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/main.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/custom.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/validar.js" type="text/javascript"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/subirImg.js" type="text/javascript"><?php echo '</script'; ?>
+>
     </section>          
   </section>
       </body></html>
 
+<?php }} ?>
