@@ -388,8 +388,7 @@ public function notifUsuario(){
   $this->redirect("usuario","verPerfil",$algo);
 }
 
-<<<<<<< HEAD
-=======
+
 public function RecuperarCont(){
   
   $mensaje="";
@@ -461,6 +460,5 @@ public function cambiaPass($params=array()){
   $tpl->mostrar('restablecer',array());
 }
 
->>>>>>> 178870865b7716aa78496ec345b47afd666132d9
 }
 ?>
