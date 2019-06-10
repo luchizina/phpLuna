@@ -65,7 +65,7 @@
                          <i class="fa fa-star-o" id="{$usuLogNick}{$prop->getNombre()}"></i></a>
                       {/if}
                       </h2>
-                  <div class="probootstrap-date"><i class="icon-calendar"></i> Implementar tiempo queda</div>  
+                  <div class="probootstrap-date"><i class="fa fa-history"></i>Quedan {$prop->traerFechaRestante()} días restantes</div>  
                   <p><a href="{$url_base}propuesta/nuevaColaboracion/{$prop->getNombre()}" class="btn btn-primary btn-black">Colaborar!</a></p>
                 </div>
               </div>

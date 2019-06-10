@@ -494,10 +494,12 @@ public function modificar($tipo)
    }
 
 
-   public function solicitoCambCont($nick, $token){
-    $solicito = 1;
-    $stmt = $this->getDB()->prepare( 
-    "UPDATE usuario set token_pass=? AND solicitoPass=? WHERE Nick=?"); 
+   public function solicitoCambCont(){
+    $solicito = $this->getSolicitoPass();
+    $token = $this->getTokenPass();
+    $nick = $this->getNick();
+    $stmt = $this->getDB()->prepare(            
+    "UPDATE usuario set tokenpass=?, solicitoPass=? WHERE Nick=?"); 
     $stmt->bind_param("sis", $token, $solicito, $nick);
     return $stmt->execute();
    }
@@ -506,7 +508,7 @@ public function modificar($tipo)
     $solicito = 1;
         $stmt = $this->getDB()->prepare( 
             "SELECT * FROM usuario 
-            WHERE Nick =? AND token_pass = ? AND solicitoPass = ?");
+            WHERE Nick =? AND tokenpass = ? AND solicitoPass = ?");
         $stmt->bind_param("ssi",$usuario, $token, $solicito);
         $stmt->execute();
         $stmt->store_result();
@@ -521,8 +523,7 @@ public function modificar($tipo)
     public function CambiaPass($token, $usuario, $pass){
         $p = sha1($pass);
          $stmt = $this->getDB()->prepare( 
-            "UPDATE usuario set Password = ? AND token_pass='' AND solicitoPass=0 WHERE Nick=? AND token_pass=?"); 
-           
+            "UPDATE usuario set Password=?, tokenpass='', solicitoPass=0 WHERE Nick=? AND tokenpass=?"); 
         $stmt->bind_param("sss",$p, $usuario, $token);
         $stmt->execute();
     }

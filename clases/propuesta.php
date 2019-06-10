@@ -266,7 +266,10 @@ $propuestas=array();
  public function agregarP(){
         $nombre=$this->getNombre();
         $Descripcion=$this->getDescripcion();
-       	$FechaAgregada=$this->getFechaAgregada();
+
+        $FechaAgregada = $this->getFechaAgregada();
+       	$FechaFin= $this->getFechaFinalizacion();
+
         $Monto = $this->getMonto();
         $MontoActual=0;
         $Usuario = $this->getUsuario()->getNick();
@@ -275,10 +278,11 @@ $propuestas=array();
         
         $stmt = $this->getDB()->prepare( 
             "INSERT INTO propuesta 
-        (Nombre,Descripcion, fechaAgregada,Monto,MontoActual,NickUsuario,Categoria,EstadoActual) 
-           VALUES (?,?,?,?,?,?,?,?)" );
-        $stmt->bind_param("sssiissi",$nombre,
-            $Descripcion,$FechaAgregada,$Monto,$MontoActual,$Usuario,$Categ,$EstadoActual);
+        (Nombre,Descripcion,fechaAgregada,fechaFinalizacion,Monto,MontoActual,NickUsuario,Categoria,EstadoActual) 
+           VALUES (?,?,?,?,?,?,?,?,?)" );
+        $stmt->bind_param("ssssiissi",$nombre,
+            $Descripcion,$FechaAgregada,$FechaFin,$Monto,$MontoActual,$Usuario,$Categ,$EstadoActual);
+
 
         return $stmt->execute();
     }
@@ -388,6 +392,16 @@ $sql="select count(*) as gusta from likepropuesta where Usuario ='$nombreUsu' an
 
 }
 
+
+public function traerFechaRestante(){
+
+  $fechaFin = strtotime($this->getFechaFinalizacion());
+ // $fechaActual = date("Y-m-d");
+$now = time();
+ 
+$datediff = $fechaFin - $now;
+return round($datediff / (60 * 60 * 24));
+}
 
 
 

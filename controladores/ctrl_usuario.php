@@ -23,7 +23,7 @@ class ControladorUsuario extends ControladorIndex {
        if(!empty($params)){
            if($params[0]=="borrar"){
                $usuario=new Usuario();
-               $nickABorrar=$params[1];
+               $nickABorrar=$paramheas[1];
                 if($usuario->borrar($nickABorrar)){
                   $usuario->logout();
                     //Redirigir al listado
@@ -359,6 +359,16 @@ $imagen = $usuario->traerImagen($usu->getNick());
 }
 
 
+function traerPerfilM($params=array()){
+  $usu= new Usuario();
+  $usuario = $usu->obtenerPorNick($params[0]);
+   $u=["usuario"=>$usuario];
+    $arreglo=["status"=>"ok","message"=>[$usuario]];
+      $nuevo = json_encode($arreglo);
+      echo $nuevo;
+}
+
+
 public function notifUsuario(){
   $usuario = new Usuario();
   $valorCheck = $_POST['checkNotif'];
@@ -378,6 +388,7 @@ public function notifUsuario(){
   $this->redirect("usuario","verPerfil",$algo);
 }
 
+
 public function RecuperarCont(){
   
   $mensaje="";
@@ -388,13 +399,15 @@ public function RecuperarCont(){
     $usr = $u->obtenerPorMail($correo);
     $nick = $usr->getNick();
     $token = md5(uniqid(mt_rand(), false));
-    $u->solicitoCambCont($nick, $token);
     $usr->setTokenPass($token);
+    $usr->setSolicitoPass(1);
+    $usr->solicitoCambCont();
     $nombreC = $usr->getNombre()." ".$usr->getApellido();
     $url="http://localhost/phpLuna/usuario/cambiarCont/".$nick."/".$token;
     $body = "Para restaurar su contraseña debe entrar al siguiente enlace: ".$url;
     $bodyhtml = "Para restaurar su contraseña haga click aqui <a href='$url'>restaurar contraseña</a>";
     Utils::enviarEmail($correo,$nombreC, $body, $bodyhtml, "Restablecer contraseña");
+    $this->redirect('usuario', 'aviso2');
   } else {
     $mensaje = "El correo no existe en el sistema";
   }
@@ -406,30 +419,34 @@ public function RecuperarCont(){
   $tpl->mostrar('recuperar_cont',array());
 }
 
+public function aviso2(){
+  $tpl = Template::getInstance();
+  $tpl->mostrar('aviso2', array());
+}
+
 
 public function cambiarCont($a = array()){
   $nick = $a[0];
   $token = $a[1];
   $u = new Usuario();
   if($u->Solicito($token, $nick)){
-    $tpl = Template::getInstance();
-    $tpl->asignar('nick', $nick);
-    $tpl->asignar('token', $token);
-    $tpl->asignar('buscar',"");
-    $tpl->mostrar('restablecer',array());
+    $e = ["nick" => $nick, "token" => $token];
+    $this->redirect("usuario","cambiaPass", $e);
   } else {
     echo "Error, los datos no coinciden";
   }
 }
 
-public function cambiaPass(){
+public function cambiaPass($params=array()){
+  $nick = $params[0];
+  $token = $params[1];
   $mensaje="";
   if(isset($_POST['password']) && isset($_POST['password2'])){
     $usu = $_POST['nick'];
-    $token = $_POST['token'];
+    $tok = $_POST['token'];
     if($_POST['password'] == $_POST['password2']){
       $u = new Usuario();
-      $u->CambiaPass($token, $usu, $_POST['password']);
+      $u->CambiaPass($tok, $usu, $_POST['password']);
       $this->redirect("usuario","login");
     } else {
       $mensaje="Las contraseñas no coinciden";
@@ -438,6 +455,8 @@ public function cambiaPass(){
   $tpl = Template::getInstance();
   $tpl->asignar('buscar',"");
   $tpl->asignar('mensaje',$mensaje);
+  $tpl->asignar('nick',$nick);
+  $tpl->asignar('token',$token);
   $tpl->mostrar('restablecer',array());
 }
 
