@@ -94,7 +94,7 @@
                 </span>
            </div>
               {if $com->getUsuario()->getNick() == $usuLogNick}
-            <a class="btn" onclick="borrarComent('{$com->getId()}','{$propuesta->getNombre()}',this);">
+            <a id="{$com->getId()}" class="btn" onclick="borrarComent('{$com->getId()}','{$propuesta->getNombre()}');">
                          <i class="icon-trash"></i></a>  
          {/if}
 

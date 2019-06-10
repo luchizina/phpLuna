@@ -40,7 +40,7 @@ function listCom(nombre, url){
               html+='<div class="comment-content"><p class="author"><strong>'+usu+'</strong></p>';
               html+='<span>'+texto+'</span></div>';
               if(usu === logue){
-                html+='<a class="btn" onclick="borrarComent(\''+url+'\','+id+',\''+nombre+'\',this);"><i class="icon-trash"></i></a>';
+                html+='<a id="'+id+'" class="btn" onclick="borrarComentNuevo('+id+',\''+nombre+'\');"><i class="icon-trash"></i></a>';
               }
               html+='<a class="btn" onclick="likeComentario(\''+logue+'\','+otroid+');">';
               html+='<i class="fa fa-thumbs-up"></i> <span id="\''+idL+'\'">'+likes+'</span></a></div>';
@@ -65,18 +65,41 @@ function listCom(nombre, url){
           }
 
 
-       function borrarComent(id, nombre,e){
-       	var idCom = id;
+          function borrarComentNuevo(id, nombre){
+          	 	var idCom = id;
        	var nomPropCom = nombre;
-
+       	
+       	var nuevo = document.getElementById("nuevo");
        	$.ajax({
               url: '/phpLuna/propuesta/borrarComEnPagina',
               data: 'idCom='+idCom+'&nomPropCom='+nomPropCom,
               type: 'post',
               success:function(){
                 alert('Comentario eliminado');
-                e.parentNode.parentNode.removeChild(e.parentNode);
+             
+                while (nuevo.firstChild) {
+   				 nuevo.removeChild(nuevo.firstChild);
+					}
+              }
+            })
+
+          }
+
+
+       function borrarComent(id, nombre){
+       	var idCom = id;
+       	var nomPropCom = nombre;
+       	var element = document.getElementById(id);
+       //	var nuevo = document.getElementById("nuevo");
+       	$.ajax({
+              url: '/phpLuna/propuesta/borrarComEnPagina',
+              data: 'idCom='+idCom+'&nomPropCom='+nomPropCom,
+              type: 'post',
+              success:function(){
+                alert('Comentario eliminado');
                 
+                element.parentNode.parentNode.removeChild(element.parentNode);
+                //nuevo.parentNode.removeChild(nuevo);
               }
             })
        }
