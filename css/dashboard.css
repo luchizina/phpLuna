@@ -155,4 +155,13 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     max-width: 400px;
     padding-top: 200px;
 }
-
+.blanca{
+  color:white;
+}
+.imgRedonda {
+    width:350px;
+    height:350px;
+    border-radius:106px;
+    border:10px solid #ede7e7eb;
+    border-style: outset;
+}
