@@ -1,14 +1,14 @@
 <?php  
-require "clases/clase_base.php";
-require "clases/propuesta.php";
+require_once "clases/clase_base.php";
+require_once "clases/propuesta.php";
 //require "clases/estados.php";
 //require "clases/list_estado.php";
-require "clases/listaestados.php";
-require "clases/recompensa.php";
-require "clases/usuario.php";
-require "clases/categoria.php";
-require "clases/comentario.php";
-require "clases/colaboracion.php";
+require_once "clases/listaestados.php";
+require_once "clases/recompensa.php";
+require_once "clases/usuario.php";
+require_once "clases/categoria.php";
+require_once "clases/comentario.php";
+require_once "clases/colaboracion.php";
 require_once('clases/template.php');
 require_once('clases/Utils.php');
 require_once('clases/session.php');
@@ -742,18 +742,28 @@ function chequearLikePropCel(){
 }
 function filtrar($params=array())
 {
-    $texto = $params[0];
+    $texto = $params[1];
+    //$this->consolita2($params[0]);
     $listaFinal = array();
     $prop = new Propuesta();
+    if($params[0] == "todas"){
     $propuestasCat = $prop->getListadoCat($texto);
     $propuestasDesc = $prop->getListadoDesc($texto);
     $propuestasTit = $prop->getListadoTit($texto);
+    
     $listaFinal = array_unique((array_merge($propuestasCat, $propuestasDesc, $propuestasTit)));
+    }else{
+      $propuestasPorCat = $prop->getPropsPorCategoria($params[0], $texto);
+     
+      $listaFinal = array_unique((array_merge($propuestasPorCat)));
+    }
     $array = array();
     $array[] = "filtrar";
     $array[] = $listaFinal;
     $this->listado($array);
 }
+
+
 function dislikeCometario(){
   $num =(int)$_POST['idCom'];
   $usuario = new Usuario();
