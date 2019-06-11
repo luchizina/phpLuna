@@ -117,11 +117,16 @@ function listadoPropsAgregadas($params=array()){
        );
    $tpl->mostrar('propuestas_listAgregadas',$datos);
 }
+
+
 function publicarPropuesta($params=array()){
 $prop = new Propuesta();
 $propuesta = $prop->obtenerPorNombreProp($params[0]);
 $propuesta->setEstadoActual(3);
+$fecha =  date("Y-m-d");
+$propuesta->setFechaPublicada($fecha);
 $propuesta->actualizarEstadoProp();
+$propuesta->actualizarFechaPublicada();
 $this->redirect("propuesta","listado");
 }
 function cancelarPropuesta($params=array()){

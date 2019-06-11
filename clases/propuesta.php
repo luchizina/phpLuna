@@ -317,6 +317,15 @@ public function actualizarEstadoProp(){
 
 }
 
+public function actualizarFechaPublicada(){
+$fecha = $this->getFechaPublicada();
+$stmt = $this->getDB()->prepare( 
+            "UPDATE propuesta set FechaPublicada=? WHERE Nombre=?"); 
+           
+        $stmt->bind_param("ss", $fecha, $this->getNombre());
+        return $stmt->execute();
+}
+
 
 
 public function insertarImagen($nombre,$path){
