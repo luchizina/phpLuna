@@ -505,8 +505,9 @@ function detalleProp($params=array()){
 $propuesta = new Propuesta();
 $com = new Comentario();
 $coms = $com->com($params[0]);
-
+$recom = new recompensa();
 $u = new Usuario();
+
 foreach ($coms as $c) {
   $usu = $u->obtenerPorNick($c->NickUsuario);
   $c->setUsuario($usu);
@@ -514,9 +515,13 @@ foreach ($coms as $c) {
   $c->setLike($valor["cant"]);
 }
 $prop = $propuesta->obtenerPorNombreProp($params[0]);
+$recompensas = $recom->listarRecompensasPagina($params[0]);
+
 $imagen = $propuesta->traerImagen($prop->getNombre());
+
     $tpl = Template::getInstance();
     $prop->setImagen($imagen);
+  $tpl->asignar('recompensas', $recompensas);
   $tpl->asignar('propuesta', $prop);
   $tpl->asignar('comentarios', $coms);
   $tpl->mostrar('propuestas_detalle',$prop);
@@ -656,6 +661,9 @@ function borrarComEnPagina(){
      $this->redirect("propuesta","detalleProp",$algo);
   }
 }
+
+
+
 function likeComentPagina(){
   //var_dump($_POST);
   $num =(int)$_POST['idCom'];
