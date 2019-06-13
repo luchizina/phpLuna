@@ -25,9 +25,18 @@ function redondear(numero, digitos){
     return entero / base;
 }
 
-function listProp(p){
+
+
+function listarPropBien(p){
+listProp(p,'no','no');
+}
+
+function listProp(p,nombreCat,nombreProp){
+  urlList = '/phpLuna/propuesta/listProps/';
+  if(nombreCat == 'no'){
+
   $.ajax({
-    url: '/phpLuna/propuesta/listProps/',
+    url: urlList,
     data: 'p='+p,
     type: 'post',
     dataType: 'json', 
@@ -71,6 +80,57 @@ function listProp(p){
       $('#propuestitas').html(html);
     }
   })
+
+  }else{
+  
+$.ajax({
+ 
+    url: urlList,
+    data: 'p='+p+'&nombreCat='+nombreCat+'&nombreProp='+nombreProp,
+    type: 'post',
+    dataType: 'json', 
+    success:function(res){
+      var html='';
+      for(var i=0; i<res.length; i++){
+        let por = (res[i]['MontoActual'] * 100)/res[i]['Monto'];
+        let porc = redondear(por, 3);
+        let id = traeLog()+res[i]['Nombre'];
+        let otroid = id.replace(/^\s+|\s+$/gm,'');
+        html += '<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12" data-animate-effect="fadeIn">';
+        html += '<div class="probootstrap-image-text-block probootstrap-cause">';
+        html += '<figure class="imk"  width="360" height="200">';
+        html += '<img src="./'+res[i]['Imagen']+'" alt="'+res[i]['Nombre']+'" class="img2">';
+        html += '</figure>';
+        html += '<div class="probootstrap-cause-inner">';
+        html += '<div class="progress">';
+        html += '<div class="progress-bar progress-bar-s2" data-percent="'+porc+'" style="width:'+porc+'%;"><span>'+porc+'%</span></div>';
+        html += '</div>';
+        html += '<div class="row mb30">';
+        html += '<div class="col-md-6 col-sm-6 col-xs-6 probootstrap-raised">Monto actual: <span class="money">'+res[i]['MontoActual']+'</span></div>';
+        html += '<div class="col-md-6 col-sm-6 col-xs-6 probootstrap-goal">Objetivo: <span class="money"> '+res[i]['Monto']+'</span></div>';
+        html += '</div>';
+        html += '<h2><a href="/phpLuna/propuesta/detalleProp/'+res[i]['Nombre']+'/">'+res[i]['Nombre']+'</a>';
+        if(res[i]['tipo'] !== null){
+          html += '<a class="btn estrella" onclick="favoritear(\''+res[i]['Nombre']+'\', /phpLuna/ ,\''+traeLog().replace(/^\s+|\s+$/gm,'')+'\');">';
+          html += '<i class="fa fa-star" id="'+otroid+'"></i></a>';
+        } 
+        else{
+          html += '<a class="btn estrella" onclick="favoritear(\''+res[i]['Nombre']+'\', /phpLuna/ ,\''+traeLog().replace(/^\s+|\s+$/gm,'')+'\');">';
+          html += '<i class="fa fa-star-o" id="'+otroid+'"></i></a>';
+        }
+        html += '</h2>';
+        html += '<div class="probootstrap-date"><i class="icon-calendar"></i> Implementar tiempo queda</div>';
+        html += '<p><a href="/phpLuna/propuesta/nuevaColaboracion/'+res[i]['Nombre']+'" class="btn btn-primary btn-black">Colaborar!</a></p>'
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        
+      }
+      $('#propuestitas').html(html);
+    }
+  })
+
+}
 } 
 
 function paginar(){
@@ -79,10 +139,11 @@ function paginar(){
     type: 'post',
     success:function(res){
       html = '';
+      no = 'no';
       html += '<ul class="pagination justify-content-center" style="margin:20px 0">';
       html += '<li class="page-item" id="ant"><a id="anta" class="page-link" onclick="anterior();">Anterior</a></li>';
       for(let i=1; i<=res; i++){
-        html += '<li class="page-item" id="'+i+'"><a class="page-link" onclick="listProp('+i+'); vuelve(); tomaval('+i+')">'+i+'</a></li>';
+        html += '<li class="page-item" id="'+i+'"><a class="page-link" onclick="listarPropBien('+i+'); vuelve(); tomaval('+i+')">'+i+'</a></li>';
       }
       html += '<li class="page-item" id="sig"><a class="page-link" id="sigui" onclick="sig();">Siguiente</a></li>';
       html += '</ul>';
@@ -254,7 +315,8 @@ function listCom(nombre, url){
           function filtrarProp(url){
             var e = document.getElementById("elegirCate");
             var strUser = e.options[e.selectedIndex].value;
-            location.href=url+'propuesta/filtrar/'+strUser+'/'+ document.getElementById('xD').value;
+          //  location.href=url+'propuesta/listadoBusqueda/';
+          listProp(1,strUser,document.getElementById('xD').value)          
           }
 
 

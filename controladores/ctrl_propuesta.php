@@ -107,6 +107,18 @@ class ControladorPropuesta extends ControladorIndex {
        $tpl->mostrar('propuestas_listado',$datos);
    
    }
+
+
+
+   function listadoBusqueda(){
+
+    $datos = array();
+    $tpl = Template::getInstance();
+    $tpl->mostrar('propuestas_listadoBusqueda',$datos);
+   }
+
+
+   
 function listadoPropsAgregadas($params=array()){
   $prop = new Propuesta();
   $propsAgre = $prop->getListadoAgregadas($params[0]);
@@ -549,7 +561,35 @@ echo $c->getId().'-'.$c->getTexto().'-'.$c->getUsuario()->getNick().'-'.$i.'-'.$
 
 function listProps(){
   $pag = $_POST['p'];
-  $p = new Propuesta();
+   $p = new Propuesta();
+  if(isset($_POST['nombreCat'])){
+    if($_POST['nombreCat'] == "todas"){
+
+
+$propuestasCat = $p->getListadoCat($_POST['nombreProp']);
+    $propuestasDesc = $p->getListadoDesc($_POST['nombreProp']);
+    $propuestasTit = $p->getListadoTit($_POST['nombreProp']);
+    $e = array_unique((array_merge($propuestasCat, $propuestasDesc, $propuestasTit)));
+
+  }else{
+    $propuestasPorCat = $p->getPropsPorCategoria($_POST['nombreCat'], $_POST['nombreProp']);
+  $e = array_unique((array_merge($propuestasPorCat)));
+ 
+  }
+     // $propuestasPorCat = $prop->getPropsPorCategoria($params[0], $texto);
+  foreach ($e as $clave => $p) {
+    $img = $p->traerImagen($p->getNombre());
+    $p->setImagen($img);
+    $propu = $p->obtenerPorNombreProp($p->getNombre());
+    if($propu->isFavoriteada(Session::get('usuario_nick'))){
+      //$fav = $p->getNombre();
+      $p->tipo = "si";
+    } 
+  }
+  }else{
+
+
+ 
   $e = $p->getListadoProp($pag);
   foreach ($e as $clave => $p) {
     $img = $p->traerImagen($p->getNombre());
@@ -560,9 +600,14 @@ function listProps(){
       $p->tipo = "si";
     } 
   }
-  $json =  json_encode($e);
-  echo $json;
+  
 }
+$json =  json_encode($e);
+  echo $json;
+ }
+
+
+
 
 function cantPag(){
   $p = new Propuesta();
