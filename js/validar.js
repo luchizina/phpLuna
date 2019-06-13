@@ -251,6 +251,13 @@ function listCom(nombre, url){
           }
 
 
+          function filtrarProp(url){
+            var e = document.getElementById("elegirCate");
+            var strUser = e.options[e.selectedIndex].value;
+            location.href=url+'propuesta/filtrar/'+strUser+'/'+ document.getElementById('xD').value;
+          }
+
+
        function borrarComent(id, nombre){
        	var idCom = id;
        	var nomPropCom = nombre;

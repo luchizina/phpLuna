@@ -5,8 +5,9 @@ class Propuesta extends ClaseBase {
 //estos atributos tienen que tener el mismo nombre que en la bd
 	public $Nombre = '';
 	public $Descripcion = '';
-	public $FechaAgregada = null;
+	public $fechaAgregada = null;
 	public $FechaPublicada = null;
+  public $fechaFinalizacion = null;
 	public $Monto = 0;
 	public $MontoActual = 0;
 	public $NickUsuario = null; //objeto usuario
@@ -85,11 +86,11 @@ class Propuesta extends ClaseBase {
 	}
 
 	public function getFechaAgregada(){
-		return $this->FechaAgregada;
+		return $this->fechaAgregada;
 	}
 
 	public function setFechaAgregada($FechaAgregada){
-		$this->FechaAgregada=$FechaAgregada;
+		$this->fechaAgregada=$FechaAgregada;
 	}
 
 	public function getFechaPublicada(){
@@ -99,6 +100,14 @@ class Propuesta extends ClaseBase {
 	public function setFechaPublicada($FechaPublicada){
 		$this->FechaPublicada=$FechaPublicada;
 	}
+
+  public function getFechaFinalizacion(){
+    return $this->fechaFinalizacion;
+  }
+
+  public function setFechaFinalizacion($FechaFin){
+    $this->fechaFinalizacion=$FechaFin;
+  }
 
 	public function getMonto(){
 		return $this->Monto;
@@ -257,8 +266,10 @@ $propuestas=array();
  public function agregarP(){
         $nombre=$this->getNombre();
         $Descripcion=$this->getDescripcion();
+
         $FechaAgregada = $this->getFechaAgregada();
-       	$FechaPublicada=$this->getFechaPublicada();
+       	$FechaFin= $this->getFechaFinalizacion();
+
         $Monto = $this->getMonto();
         $MontoActual=0;
         $Usuario = $this->getUsuario()->getNick();
@@ -267,10 +278,11 @@ $propuestas=array();
         
         $stmt = $this->getDB()->prepare( 
             "INSERT INTO propuesta 
-        (Nombre,Descripcion, FechaPublicada,fechaAgregada,Monto,MontoActual,NickUsuario,Categoria,EstadoActual) 
+        (Nombre,Descripcion,fechaAgregada,fechaFinalizacion,Monto,MontoActual,NickUsuario,Categoria,EstadoActual) 
            VALUES (?,?,?,?,?,?,?,?,?)" );
         $stmt->bind_param("ssssiissi",$nombre,
-            $Descripcion,$FechaPublicada,$FechaAgregada,$Monto,$MontoActual,$Usuario,$Categ,$EstadoActual);
+            $Descripcion,$FechaAgregada,$FechaFin,$Monto,$MontoActual,$Usuario,$Categ,$EstadoActual);
+
 
         return $stmt->execute();
     }
@@ -303,6 +315,15 @@ public function actualizarEstadoProp(){
         return $stmt->execute();
    
 
+}
+
+public function actualizarFechaPublicada(){
+$fecha = $this->getFechaPublicada();
+$stmt = $this->getDB()->prepare( 
+            "UPDATE propuesta set FechaPublicada=? WHERE Nombre=?"); 
+           
+        $stmt->bind_param("ss", $fecha, $this->getNombre());
+        return $stmt->execute();
 }
 
 
@@ -380,6 +401,16 @@ $sql="select count(*) as gusta from likepropuesta where Usuario ='$nombreUsu' an
 
 }
 
+
+public function traerFechaRestante(){
+
+  $fechaFin = strtotime($this->getFechaFinalizacion());
+ // $fechaActual = date("Y-m-d");
+$now = time();
+ 
+$datediff = $fechaFin - $now;
+return round($datediff / (60 * 60 * 24));
+}
 
 
 

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/busqueda.css">
     <link rel="stylesheet" href="css/custom.css">
     <link rel="stylesheet" href="css/busca.css">
-    
+    <script src="js/validar.js"></script>
   </head>
       <nav class="navbar navbar-default probootstrap-navbar">
 
@@ -57,11 +57,16 @@
                   </svg>
 
                   <div class="search-bar">
-                    
+                    <select id="elegirCate">
+                      <option value="todas">Todas las categorías</option>
+                      {foreach from=$categorias item=cat}
+                      <option value="{$cat->getNombreP()}">{$cat->getNombreP()}</option>
+                      {/foreach}
+                    </select>
                     <input type="text" class="input" id="xD" placeholder="&nbsp;">
                     <span class="label">Buscar propuesta</span>
                     <span class="highlight"></span>
-                    <div class="search-btn" onClick="location.href='{$url_base}propuesta/filtrar/'+ document.getElementById('xD').value;">
+                    <div class="search-btn" onclick="filtrarProp('{$url_base}')">
                          <svg class="icon icon-18">
                            <use xlink:href="#magnify"></use>
                           </svg>
