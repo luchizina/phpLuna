@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-10 20:58:14
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-12 22:23:57
          compiled from "vistas\cabezal.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:14358717905cfeee9656b777-65341545%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'fb05f10fe29da8a558e3c965866d6cd5dd601380' => 
     array (
       0 => 'vistas\\cabezal.tpl',
-      1 => 1559685577,
+      1 => 1560388419,
       2 => 'file',
     ),
   ),
@@ -15,10 +15,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5cfeee965a8670_65326586',
   'variables' => 
   array (
     'usuLogNick' => 0,
     'usuLogTipo' => 0,
+    'categorias' => 0,
+    'cat' => 0,
     'url_base' => 0,
     'url_login' => 0,
     'url_regis' => 0,
@@ -26,8 +30,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'url_logout' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5cfeee965a8670_65326586',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5cfeee965a8670_65326586')) {function content_5cfeee965a8670_65326586($_smarty_tpl) {?>
  <head>
@@ -39,7 +41,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <link rel="stylesheet" href="css/busqueda.css">
     <link rel="stylesheet" href="css/custom.css">
     <link rel="stylesheet" href="css/busca.css">
-    
+    <?php echo '<script'; ?>
+ src="js/validar.js"><?php echo '</script'; ?>
+>
   </head>
       <nav class="navbar navbar-default probootstrap-navbar">
 
@@ -88,12 +92,23 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                   </svg>
 
                   <div class="search-bar">
-                    
+                    <select id="elegirCate">
+                      <option value="todas">Todas las categorías</option>
+                      <?php  $_smarty_tpl->tpl_vars['cat'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['cat']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['categorias']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['cat']->key => $_smarty_tpl->tpl_vars['cat']->value) {
+$_smarty_tpl->tpl_vars['cat']->_loop = true;
+?>
+                      <option value="<?php echo $_smarty_tpl->tpl_vars['cat']->value->getNombreP();?>
+"><?php echo $_smarty_tpl->tpl_vars['cat']->value->getNombreP();?>
+</option>
+                      <?php } ?>
+                    </select>
                     <input type="text" class="input" id="xD" placeholder="&nbsp;">
                     <span class="label">Buscar propuesta</span>
                     <span class="highlight"></span>
-                    <div class="search-btn" onClick="location.href='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-propuesta/filtrar/'+ document.getElementById('xD').value;">
+                    <div class="search-btn" onclick="filtrarProp('<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+')">
                          <svg class="icon icon-18">
                            <use xlink:href="#magnify"></use>
                           </svg>

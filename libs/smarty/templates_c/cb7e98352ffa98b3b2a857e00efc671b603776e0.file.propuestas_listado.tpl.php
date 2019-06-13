@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-12 20:11:20
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-12 22:23:56
          compiled from "vistas\propuestas_listado.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:10319321215cfeee962cd279-40829395%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cb7e98352ffa98b3b2a857e00efc671b603776e0' => 
     array (
       0 => 'vistas\\propuestas_listado.tpl',
-      1 => 1560380805,
+      1 => 1560389001,
       2 => 'file',
     ),
   ),
@@ -70,6 +70,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
           </div>
           <div class="row jajejo" id="propuestitas">
             
+
   </div>
   <div id="pagination">
 
