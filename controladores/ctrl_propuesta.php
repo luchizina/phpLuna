@@ -5,7 +5,7 @@ require "clases/propuesta.php";
 //require "clases/list_estado.php";
 require "clases/listaestados.php";
 require "clases/recompensa.php";
-require "clases/usuario.php";
+require "clases/usuario.php"; 
 require "clases/categoria.php";
 require "clases/comentario.php";
 require "clases/colaboracion.php";
@@ -190,7 +190,7 @@ function consolita( $data ) {
     $arch =($_FILES['archivo']['tmp_name']);
     $img =($_FILES['archivo']['name']);
     $tipo = ($_FILES['archivo']['type']);
-    $permitidos = array("image/jpg", "image/jpeg", "image/png");
+    $permitidos = array("image/jpg", "image/jpeg");
         $target='';
         if(in_array($tipo, $permitidos)){
             //$target = "imgUsus/".basename($img);
@@ -535,6 +535,34 @@ $c = $coms[0];
 echo $c->getId().'-'.$c->getTexto().'-'.$c->getUsuario()->getNick().'-'.$i.'-'.$c->getLikes()."-".$log;
 }
 
+function listProps(){
+  $pag = $_POST['p'];
+  $p = new Propuesta();
+  $e = $p->getListadoProp($pag);
+  foreach ($e as $clave => $p) {
+    $img = $p->traerImagen($p->getNombre());
+    $p->setImagen($img);
+    $propu = $p->obtenerPorNombreProp($p->getNombre());
+    if($propu->isFavoriteada(Session::get('usuario_nick'))){
+      //$fav = $p->getNombre();
+      $p->tipo = "si";
+    } 
+  }
+  $json =  json_encode($e);
+  echo $json;
+}
+
+function cantPag(){
+  $p = new Propuesta();
+  $c = $p->cantPagProp();
+  echo $c;
+}
+
+function e(){
+  $tpl = Template::getInstance();
+  $tpl->mostrar('e',array());
+}
+
 function desfavoritear($params=array()){
   $propuesta = new Propuesta();
   $prop = $propuesta->obtenerPorNombreProp($params[0]);
@@ -777,6 +805,21 @@ function verrecPrecio(){
   } else {
     echo "No hay recompensa para ese monto";
   }
+  }
+
+  function dioFav(){
+    $nom = $_POST['prop'];
+    $p = new Propuesta();
+    $propu = $p->obtenerPorNombreProp($nom);
+    if($propu->isFavoriteada(Session::get('usuario_nick'))){
+      echo "1";
+    } else {
+      echo "0";
+    }
+  }
+
+  function traeLog(){
+    echo Session::get('usuario_nick');
   }
 
 }
