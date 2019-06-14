@@ -110,10 +110,18 @@ class ControladorPropuesta extends ControladorIndex {
 
 
 
-   function listadoBusqueda(){
+   function listadoBusqueda($params = array()){
+ $textoBuscado = $params[0];
+$nombreCat = $params[1];
+     $datos = array(
+     
+       'textoBuscado' => $textoBuscado,
+       'nombreCat' => $nombreCat,
+       );
 
-    $datos = array();
     $tpl = Template::getInstance();
+    $tpl->asignar('textoBuscado',$textoBuscado);
+     $tpl->asignar('nombreCat',$nombreCat );
     $tpl->mostrar('propuestas_listadoBusqueda',$datos);
    }
 

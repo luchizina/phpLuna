@@ -315,8 +315,9 @@ function listCom(nombre, url){
           function filtrarProp(url){
             var e = document.getElementById("elegirCate");
             var strUser = e.options[e.selectedIndex].value;
-          //  location.href=url+'propuesta/listadoBusqueda/';
-          listProp(1,strUser,document.getElementById('xD').value)          
+            textoBuscado = document.getElementById('xD').value;
+           location.href=url+'propuesta/listadoBusqueda/'+textoBuscado+'/'+strUser+'/';
+         // listProp(1,strUser,document.getElementById('xD').value)          
           }
 
 
