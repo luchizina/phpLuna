@@ -19,6 +19,8 @@ class Propuesta extends ClaseBase {
 	public $Imagen;
     public $Archivo;
     public $tipo;
+    public $Tiemrest;
+    public $UsuFav;
 
 	public function __construct($obj=NULL) {
         if(isset($obj)){
@@ -33,6 +35,22 @@ class Propuesta extends ClaseBase {
 
     public function __toString() {
         return $this->Nombre;
+    }
+
+    public function getTiemrest(){
+        return $this->Tiemrest;
+    }
+
+    public function getUsuFav(){
+        return $this->UsuFav;
+    }
+
+    public function setTiemrest($Tiemrest){
+        $this->Tiemrest=$Tiemrest;
+    }
+
+    public function setUsuFav($UsuFav){
+        $this->UsuFav=$UsuFav;
     }
 
     public function getArchivo(){

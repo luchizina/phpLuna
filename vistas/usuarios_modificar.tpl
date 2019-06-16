@@ -77,7 +77,6 @@
     <script src="js/custom.js"></script>
     <script src="js/sweetalert.js"></script>
     <script src="js/subirImg.js" type="text/javascript"></script>
-    <script src="js/busca.js" type="text/javascript"></script>
     </section>          
   </section>
       </body></html>

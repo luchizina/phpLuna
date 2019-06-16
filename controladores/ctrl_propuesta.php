@@ -574,7 +574,7 @@ echo $c->getId().'-'.$c->getTexto().'-'.$c->getUsuario()->getNick().'-'.$i.'-'.$
 }
 
 function listProps(){
-  $pag = $_POST['p'];
+ // $pag = $_POST['p'];
    $p = new Propuesta();
   if(isset($_POST['nombreCat'])){
     if($_POST['nombreCat'] == "todas"){
@@ -595,24 +595,26 @@ $propuestasCat = $p->getListadoCat($_POST['nombreProp']);
     $img = $p->traerImagen($p->getNombre());
     $p->setImagen($img);
     $propu = $p->obtenerPorNombreProp($p->getNombre());
+    $p->Tiemrest = $p->traerFechaRestante();
     if($propu->isFavoriteada(Session::get('usuario_nick'))){
       //$fav = $p->getNombre();
-      $p->tipo = "si";
+      $p->UsuFav = "si";
     } 
   }
   }else{
 
 
  
-  $e = $p->getListadoProp($pag);
+  $e = $p->getListadoProp(1);
   foreach ($e as $clave => $p) {
     $img = $p->traerImagen($p->getNombre());
     $p->setImagen($img);
     $propu = $p->obtenerPorNombreProp($p->getNombre());
     if($propu->isFavoriteada(Session::get('usuario_nick'))){
       //$fav = $p->getNombre();
-      $p->tipo = "si";
-    } 
+      $p->UsuFav = "si";
+    }
+    $p->Tiemrest = $p->traerFechaRestante();
   }
   
 }
@@ -885,7 +887,7 @@ function verrecPrecio(){
     $r = new Recompensa();
     $recs = $r->traerRecompensasAjax($_POST["propuesta"], $_POST["monto"]);
     if($recs != null){
-    echo $recs[0]->Nombre;
+    echo "La recompensa para el monto ingresados es: ".$recs[0]->Nombre;
   } else {
     echo "No hay recompensa para ese monto";
   }
