@@ -5,6 +5,7 @@
     <base href="{$url_base}">
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/carrusel.css">
     <link href="css/dashboard.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -132,12 +133,32 @@
 </table>
   
 
-    <script src="js/scripts.min.js"></script>
+   
+    </section>  
+
+
+    <div id="carousel" class="carousel">
+  <div class="slides">
+    <div class="slide" data-state="active">
+      <img src="./imgUsus/pepito.png">
+    </div>
+    <div class="slide">Slide 2</div>
+    <div class="slide">Slide 3</div>
+    <div class="slide">Slide 4</div>
+  </div>
+  <div class="indicators">
+    <input class="indicator" name="indicator" data-slide="1" data-state="active" checked type="radio" />
+    <input class="indicator" name="indicator" data-slide="2" type="radio" />
+    <input class="indicator" name="indicator" data-slide="3" type="radio" />
+     <input class="indicator" name="indicator" data-slide="4" type="radio" />
+  </div>
+</div>        
+  </section>
+   <script src="js/scripts.min.js"></script>
+   <script src="js/carrusel.js"></script>
     <script src="js/main.min.js"></script>
     <script src="js/custom.js"></script>
      <script src="js/validar.js" type="text/javascript"></script>
-    </section>          
-  </section>
       </body></html>
 
       

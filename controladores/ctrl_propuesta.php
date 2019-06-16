@@ -322,6 +322,8 @@ function nuevaColaboracion($params=array()){
     }
     $this->recursiva($recs, $col, $pos, $prop);
     if($col->agregar()){
+
+     
       $usuProp = $Usuario->obtenerPorNick($prop->getUsuario());
       if($usuProp->getNotificacion() == 0){
 
@@ -330,6 +332,10 @@ function nuevaColaboracion($params=array()){
       array_push($usu->getPropuestasColabora(), $prop);
       $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
       $prop->actualizaMonto();
+       if($prop->getMontoActual()>=$prop->getMonto()){
+        $prop->setEstadoActual(4);
+        $prop->actualizarEstadoProp();
+      }
       $this->redirect("propuesta","listado");
       exit;
     }else $mensaje="Error! No se pudo agregar la colaboracion";
