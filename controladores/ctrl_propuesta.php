@@ -927,5 +927,22 @@ function verrecPrecio(){
     echo Session::get('usuario_nick');
   }
 
+function sendRegistrationToServer($token, $nombre){
+$noti = new notificacion();
+$noti->setToken($token);
+$noti->setUsuario($nombre);
+ if($noti->agregarToken()){
+      $msg = "bien";
+      $array = ["mensajito"=>$msg];
+      $arreglo=["status"=>"ok","message"=>[$array]];
+            echo json_encode($arreglo);
+    }else{
+      $msg = "mal";
+          $array = ["mensajito"=>$msg];
+          $arreglo=["status"=>"error","message"=>[$array]];
+          echo json_encode($arreglo);
+    }
+}
+
 }
 ?>
