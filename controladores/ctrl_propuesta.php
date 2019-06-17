@@ -383,14 +383,10 @@ function nuevaColaboracionCel(){
   $Usuario = new Usuario();
   $propuesta = new Propuesta();
   $Recompensa = new Recompensa();
-  //$recs = $Recompensa->traerRecompensas($_POST["nombre"]);
-  //$usu = $Usuario->obtenerPorMail($_POST['mail']);
-  //$prop=$propuesta->obtenerPorNombreProp($_POST["nombre"]);
-   //$col->setMonto($_POST["monto"]);
-  $recs = $Recompensa->traerRecompensas("nueva propb");
-  $usu = $Usuario->obtenerPorMail("nambroa@gmail.com");
-  $prop=$propuesta->obtenerPorNombreProp("nueva propb");
-  $col->setMonto(500);
+  $recs = $Recompensa->traerRecompensas($_POST["nombre"]);
+  $usu = $Usuario->obtenerPorMail($_POST['mail']);
+  $prop=$propuesta->obtenerPorNombreProp($_POST["nombre"]);
+  $col->setMonto($_POST["monto"]);
     $col->setFecha(date("Y-m-d"));
     $col->setUsuario($usu);
     $col->setTituloPropuesta($prop);
@@ -401,8 +397,7 @@ function nuevaColaboracionCel(){
     }
     $this->recursiva($recs, $col, $pos, $prop);
     if($col->agregar()){
-     //$prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
-      $prop->setMontoActual($prop->getMontoActual() + 500);
+    $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
       $prop->actualizaMonto();
       $msg = "que rica compa te la jugaste";
       $array = ["mensajito"=>$msg];
