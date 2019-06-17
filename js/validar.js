@@ -263,15 +263,17 @@ function listCom(nombre, url){
               var idLike = logue+id;
               var idL = idLike.replace(/^\s+|\s+$/gm,'');
               var otroid = id.replace(/^\s+|\s+$/gm,'');
+              html += '<div class="comment">';
               html+='<img src="'+img+'">';
               html+='<div class="comment-content"><p class="author"><strong>'+usu+'</strong></p>';
               html+='<span>'+texto+'</span></div>';
               if(usu === logue){
-                html+='<a id="'+id+'" class="btn" onclick="borrarComentNuevo('+id+',\''+nombre+'\');"><i class="icon-trash"></i></a>';
+                html+='<a id="'+otroid+'" class="btn" onclick="borrarComentNuevo('+otroid+',\''+nombre+'\');"><i class="icon-trash"></i></a>';
               }
               html+='<a class="btn" onclick="likeComentario(\''+logue+'\','+otroid+');">';
               html+='<i class="fa fa-thumbs-up"></i> <span id="'+idL+'">'+likes+'</span></a></div>';
-              $('#nuevo').html(html);
+              html += '</div>';
+              $('#coments').append(html);
             }
           })
         }
@@ -294,18 +296,15 @@ function listCom(nombre, url){
           function borrarComentNuevo(id, nombre){
           	 	var idCom = id;
        	var nomPropCom = nombre;
-       	
-       	var nuevo = document.getElementById("nuevo");
+       	console.log(idCom);
+       	var nuevo = document.getElementById(idCom);
        	$.ajax({
               url: '/phpLuna/propuesta/borrarComEnPagina',
               data: 'idCom='+idCom+'&nomPropCom='+nomPropCom,
               type: 'post',
               success:function(){
                 alert('Comentario eliminado');
-             
-                while (nuevo.firstChild) {
-   				 nuevo.removeChild(nuevo.firstChild);
-					}
+                nuevo.parentNode.parentNode.removeChild(nuevo.parentNode);
               }
             })
 

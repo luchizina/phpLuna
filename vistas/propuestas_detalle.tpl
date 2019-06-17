@@ -80,7 +80,7 @@
         </div>
         </div>
 
-<div class="jajaja"  >
+<div class="jajaja" id="coments">
         {foreach from=$comentarios item=com}
         <div class="comment">
               {if $com->getUsuario()->getImagen() != null}
@@ -104,10 +104,10 @@
           </div>
  
       {/foreach}
-      <div class="comment" id="nuevo">
 
-        </div>
-<div class="jaja">
+</div>
+<div class="jajaja">
+  <div class="jaja">
       <form method="post" class="probootstrap-form">
         <textarea rows="5" cols="57" name="textoComentario" id="textoComentario"></textarea>
         <div class="form-group" >
@@ -115,7 +115,7 @@
           </div>
     </form>
     </div>
-</div>
+  </div>
 
 <h2 class="blanca">Recompensas</h2>
 <table class="table table-striped tabla" style=" background-color: #ecececb3">
