@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-16 14:43:56
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-17 17:31:55
          compiled from "vistas\usuarios_login.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:14639477715d067fdcbddca9-55850576%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0d397ea05cd87ce4d93b5889f42f577c4e3d5bf8' => 
     array (
       0 => 'vistas\\usuarios_login.tpl',
-      1 => 1560212127,
+      1 => 1560707111,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5d067fdd4767b8_62361977',
   'variables' => 
   array (
     'url_base' => 0,
@@ -24,8 +26,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'url_regis' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5d067fdd4767b8_62361977',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5d067fdd4767b8_62361977')) {function content_5d067fdd4767b8_62361977($_smarty_tpl) {?>
 <!DOCTYPE html>
@@ -100,10 +100,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
           </div>
         </div>
         </div>
-
-        <button class="btn btn-lg btn-primary btn-block" onclick="listProp();">Ingresar</button> 
-        
-
     <?php echo '<script'; ?>
  src="js/scripts.min.js"><?php echo '</script'; ?>
 >
