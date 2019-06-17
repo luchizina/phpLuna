@@ -61,11 +61,10 @@
           </div>
         </div>
         </div>
-        
-
     <script src="js/scripts.min.js"></script>
     <script src="js/main.min.js"></script>
     <script src="js/custom.js"></script>
+    <script src="js/validar.js"></script>
     </section>          
   </section>
       </body></html>

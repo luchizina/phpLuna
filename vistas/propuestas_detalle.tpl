@@ -116,6 +116,20 @@
     </div>
 </div>
 
+<h2 class="blanca">Recompensas</h2>
+<table class="table table-striped tabla" style=" background-color: #ecececb3">
+  <tr>
+    <th>Nombre</th>
+   <th>Monto a superar</th> 
+  </tr>
+
+     {foreach from=$recompensas item=rec}
+  <tr>
+    <td>{$rec->getNombre()}</td>
+    <td>{$rec->getMontoaSuperar()}</td>
+  </tr>
+  {/foreach}
+</table>
   
 
     <script src="js/scripts.min.js"></script>

@@ -1,14 +1,14 @@
 <?php  
-require "clases/clase_base.php";
-require "clases/propuesta.php";
+require_once "clases/clase_base.php";
+require_once "clases/propuesta.php";
 //require "clases/estados.php";
 //require "clases/list_estado.php";
-require "clases/listaestados.php";
-require "clases/recompensa.php";
-require "clases/usuario.php";
-require "clases/categoria.php";
-require "clases/comentario.php";
-require "clases/colaboracion.php";
+require_once "clases/listaestados.php";
+require_once "clases/recompensa.php";
+require_once "clases/usuario.php";
+require_once "clases/categoria.php";
+require_once "clases/comentario.php";
+require_once "clases/colaboracion.php";
 require_once('clases/template.php');
 require_once('clases/Utils.php');
 require_once('clases/session.php');
@@ -107,6 +107,26 @@ class ControladorPropuesta extends ControladorIndex {
        $tpl->mostrar('propuestas_listado',$datos);
    
    }
+
+
+
+   function listadoBusqueda($params = array()){
+ $textoBuscado = $params[0];
+$nombreCat = $params[1];
+     $datos = array(
+     
+       'textoBuscado' => $textoBuscado,
+       'nombreCat' => $nombreCat,
+       );
+
+    $tpl = Template::getInstance();
+    $tpl->asignar('textoBuscado',$textoBuscado);
+     $tpl->asignar('nombreCat',$nombreCat );
+    $tpl->mostrar('propuestas_listadoBusqueda',$datos);
+   }
+
+
+   
 function listadoPropsAgregadas($params=array()){
   $prop = new Propuesta();
   $propsAgre = $prop->getListadoAgregadas($params[0]);
@@ -117,11 +137,16 @@ function listadoPropsAgregadas($params=array()){
        );
    $tpl->mostrar('propuestas_listAgregadas',$datos);
 }
+
+
 function publicarPropuesta($params=array()){
 $prop = new Propuesta();
 $propuesta = $prop->obtenerPorNombreProp($params[0]);
 $propuesta->setEstadoActual(3);
+$fecha =  date("Y-m-d");
+$propuesta->setFechaPublicada($fecha);
 $propuesta->actualizarEstadoProp();
+$propuesta->actualizarFechaPublicada();
 $this->redirect("propuesta","listado");
 }
 function cancelarPropuesta($params=array()){
@@ -176,13 +201,15 @@ function consolita( $data ) {
     $usr = new Usuario();
   $prop= new Propuesta();
     $categ = new categoria();
+ 
+    
   $prop->setNombre($_POST["nombre"]);
   $prop->setDescripcion($_POST["desc"]);
     $fecha =  date("Y-m-d");
   $prop->setFechaAgregada($fecha);
   $prop->setMonto($_POST["monto"]);
   $date = date("Y-m-d", strtotime($_POST["fec"]));
-  $prop->setFechaPublicada($date);
+  $prop->setFechaFinalizacion($date);
     $prop->setCategoria($categ->obtenerPorNombreCat($_POST["catego"]));
     $prop->setUsuario($usr->obtenerPorNick(Session::get('usuario_nick')));
   $prop->setMontoActual(0);
@@ -190,7 +217,7 @@ function consolita( $data ) {
     $arch =($_FILES['archivo']['tmp_name']);
     $img =($_FILES['archivo']['name']);
     $tipo = ($_FILES['archivo']['type']);
-    $permitidos = array("image/jpg", "image/jpeg", "image/png");
+    $permitidos = array("image/jpg", "image/jpeg");
         $target='';
         if(in_array($tipo, $permitidos)){
             //$target = "imgUsus/".basename($img);
@@ -498,8 +525,9 @@ function detalleProp($params=array()){
 $propuesta = new Propuesta();
 $com = new Comentario();
 $coms = $com->com($params[0]);
-
+$recom = new recompensa();
 $u = new Usuario();
+
 foreach ($coms as $c) {
   $usu = $u->obtenerPorNick($c->NickUsuario);
   $c->setUsuario($usu);
@@ -507,9 +535,13 @@ foreach ($coms as $c) {
   $c->setLike($valor["cant"]);
 }
 $prop = $propuesta->obtenerPorNombreProp($params[0]);
+$recompensas = $recom->listarRecompensasPagina($params[0]);
+
 $imagen = $propuesta->traerImagen($prop->getNombre());
+
     $tpl = Template::getInstance();
     $prop->setImagen($imagen);
+  $tpl->asignar('recompensas', $recompensas);
   $tpl->asignar('propuesta', $prop);
   $tpl->asignar('comentarios', $coms);
   $tpl->mostrar('propuestas_detalle',$prop);
@@ -533,6 +565,69 @@ $c = $coms[0];
     $i = "./".$c->getUsuario()->getImagen();
   }
 echo $c->getId().'-'.$c->getTexto().'-'.$c->getUsuario()->getNick().'-'.$i.'-'.$c->getLikes()."-".$log;
+}
+
+function listProps(){
+ // $pag = $_POST['p'];
+   $p = new Propuesta();
+  if(isset($_POST['nombreCat'])){
+    if($_POST['nombreCat'] == "todas"){
+
+
+$propuestasCat = $p->getListadoCat($_POST['nombreProp']);
+    $propuestasDesc = $p->getListadoDesc($_POST['nombreProp']);
+    $propuestasTit = $p->getListadoTit($_POST['nombreProp']);
+    $e = array_unique((array_merge($propuestasCat, $propuestasDesc, $propuestasTit)));
+
+  }else{
+    $propuestasPorCat = $p->getPropsPorCategoria($_POST['nombreCat'], $_POST['nombreProp']);
+  $e = array_unique((array_merge($propuestasPorCat)));
+ 
+  }
+     // $propuestasPorCat = $prop->getPropsPorCategoria($params[0], $texto);
+  foreach ($e as $clave => $p) {
+    $img = $p->traerImagen($p->getNombre());
+    $p->setImagen($img);
+    $propu = $p->obtenerPorNombreProp($p->getNombre());
+    $p->Tiemrest = $p->traerFechaRestante();
+    if($propu->isFavoriteada(Session::get('usuario_nick'))){
+      //$fav = $p->getNombre();
+      $p->UsuFav = "si";
+    } 
+  }
+  }else{
+
+
+ 
+  $e = $p->getListadoProp(1);
+  foreach ($e as $clave => $p) {
+    $img = $p->traerImagen($p->getNombre());
+    $p->setImagen($img);
+    $propu = $p->obtenerPorNombreProp($p->getNombre());
+    if($propu->isFavoriteada(Session::get('usuario_nick'))){
+      //$fav = $p->getNombre();
+      $p->UsuFav = "si";
+    }
+    $p->Tiemrest = $p->traerFechaRestante();
+  }
+  
+}
+$json =  json_encode($e);
+  echo $json;
+ }
+
+
+
+
+function cantPag(){
+  $p = new Propuesta();
+  $c = $p->cantPagProp();
+  echo $c;
+}
+
+function e(){
+  $tpl = Template::getInstance();
+  $tpl->mostrar('e',array());
 }
 
 function desfavoritear($params=array()){
@@ -649,6 +744,9 @@ function borrarComEnPagina(){
      $this->redirect("propuesta","detalleProp",$algo);
   }
 }
+
+
+
 function likeComentPagina(){
   //var_dump($_POST);
   $num =(int)$_POST['idCom'];
@@ -735,18 +833,28 @@ function chequearLikePropCel(){
 }
 function filtrar($params=array())
 {
-    $texto = $params[0];
+    $texto = $params[1];
+    //$this->consolita2($params[0]);
     $listaFinal = array();
     $prop = new Propuesta();
+    if($params[0] == "todas"){
     $propuestasCat = $prop->getListadoCat($texto);
     $propuestasDesc = $prop->getListadoDesc($texto);
     $propuestasTit = $prop->getListadoTit($texto);
+    
     $listaFinal = array_unique((array_merge($propuestasCat, $propuestasDesc, $propuestasTit)));
+    }else{
+      $propuestasPorCat = $prop->getPropsPorCategoria($params[0], $texto);
+     
+      $listaFinal = array_unique((array_merge($propuestasPorCat)));
+    }
     $array = array();
     $array[] = "filtrar";
     $array[] = $listaFinal;
     $this->listado($array);
 }
+
+
 function dislikeCometario(){
   $num =(int)$_POST['idCom'];
   $usuario = new Usuario();
@@ -773,10 +881,25 @@ function verrecPrecio(){
     $r = new Recompensa();
     $recs = $r->traerRecompensasAjax($_POST["propuesta"], $_POST["monto"]);
     if($recs != null){
-    echo $recs[0]->Nombre;
+    echo "La recompensa para el monto ingresados es: ".$recs[0]->Nombre;
   } else {
     echo "No hay recompensa para ese monto";
   }
+  }
+
+  function dioFav(){
+    $nom = $_POST['prop'];
+    $p = new Propuesta();
+    $propu = $p->obtenerPorNombreProp($nom);
+    if($propu->isFavoriteada(Session::get('usuario_nick'))){
+      echo "1";
+    } else {
+      echo "0";
+    }
+  }
+
+  function traeLog(){
+    echo Session::get('usuario_nick');
   }
 
 }
