@@ -1,22 +1,20 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-17 17:40:07
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-17 19:10:21
          compiled from "vistas\propuestas_detalle.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:17082966495d07f8d3da4bb7-99335811%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:16388331295d080fcda54c70-35284255%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '08e12de8fc9c9d6be32a84ef7a419ea195e7387c' => 
     array (
       0 => 'vistas\\propuestas_detalle.tpl',
-      1 => 1560804004,
+      1 => 1560804970,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '17082966495d07f8d3da4bb7-99335811',
+  'nocache_hash' => '16388331295d080fcda54c70-35284255',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5d07f8d400d0b0_25282221',
   'variables' => 
   array (
     'url_base' => 0,
@@ -26,10 +24,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'usuLogNick' => 0,
     'recompensas' => 0,
     'rec' => 0,
+    'propsCatego' => 0,
+    'propC' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5d080fcdbff574_94448875',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5d07f8d400d0b0_25282221')) {function content_5d07f8d400d0b0_25282221($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5d080fcdbff574_94448875')) {function content_5d080fcdbff574_94448875($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -37,6 +39,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 ">
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/carrusel.css">
     <link href="css/dashboard.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -101,7 +104,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                     <?php ob_start();?><?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getImagen();?>
 <?php $_tmp1=ob_get_clean();?><?php if ($_tmp1!=null) {?>
                     <img src="./<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getImagen();?>
-" />
+ " height="200" width="400" />
                     <?php }?>
                     <?php ob_start();?><?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getImagen();?>
 <?php $_tmp2=ob_get_clean();?><?php if ($_tmp2==null) {?>
@@ -203,8 +206,36 @@ $_smarty_tpl->tpl_vars['rec']->_loop = true;
 </table>
   
 
-    <?php echo '<script'; ?>
+   
+    </section>  
+
+<div class="accordion">
+  <ul>
+     <?php  $_smarty_tpl->tpl_vars['propC'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['propC']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['propsCatego']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['propC']->key => $_smarty_tpl->tpl_vars['propC']->value) {
+$_smarty_tpl->tpl_vars['propC']->_loop = true;
+?>
+ 
+    <li>
+      <div class="image_title">
+        <a href="#"><?php echo $_smarty_tpl->tpl_vars['propC']->value->getNombre();?>
+</a>
+      </div>
+      <a href="https://ibb.co/gGv6QS"><img src="./<?php echo $_smarty_tpl->tpl_vars['propC']->value->getImagen();?>
+" height="320" width="640" alt="transformers4_640x320" border="0"></a>
+    </li>
+     <?php } ?>
+   
+  </ul>
+</div>
+          
+  </section>
+   <?php echo '<script'; ?>
  src="js/scripts.min.js"><?php echo '</script'; ?>
+>
+   <?php echo '<script'; ?>
+ src="js/carrusel.js"><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
  src="js/main.min.js"><?php echo '</script'; ?>
@@ -215,8 +246,6 @@ $_smarty_tpl->tpl_vars['rec']->_loop = true;
      <?php echo '<script'; ?>
  src="js/validar.js" type="text/javascript"><?php echo '</script'; ?>
 >
-    </section>          
-  </section>
       </body></html>
 
       <?php }} ?>
