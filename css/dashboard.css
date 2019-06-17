@@ -114,6 +114,7 @@ margin: 100px;
 
 .tabla{
 box-shadow: 15px 5px 10px #000;
+color:black;
 }
 
 .scr{
@@ -159,8 +160,8 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
   color:white;
 }
 .imgRedonda {
-    width:350px;
-    height:350px;
+    width:150px;
+    height:150px;
     border-radius:106px;
     border:10px solid #ede7e7eb;
     border-style: outset;

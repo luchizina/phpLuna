@@ -7,6 +7,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
      <link href="css/pop.css" rel="stylesheet">
+     <link href="css/perfil.css" rel="stylesheet">
     <!--[if lt IE 9]>
       <script src="js/vendor/html5shiv.min.js"></script>
       <script src="js/vendor/respond.min.js"></script>
@@ -34,27 +35,36 @@
           <div class="row">
             <div class="col-md-6 col-md-push-1 probootstrap-animate">     
 
-           <div class="form-group">
-                <img src="./{$usuario->getImagen()}" class="imgRedonda" width="250" height="250">
-           </div>
-           <div id="all">
-  <article>
-     <input id="jaja" type="button" class="btn btn-primary" value=" Ver informacion personal">
-  </article>
+          <div class="services">
+<section class="pricecol">
+<div style="text-align: center;">
+ <img src="./{$usuario->getImagen()}" class="imgRedonda" width="150" height="150">
+</div>
+<h3 style="text-align: center;"><Span>Datos personales:</span></h3>
+<ul>
+<li>Nombre: {$usuario->getNombre()}</li>
+<li>Apellido:    {$usuario->getApellido()}</li>
+<li>Nick:    {$usuario->getNick()}</li>
+<li>Correo:    {$usuario->getCorreo()}</li>
+</ul>
+</section>
 
-  <div id="popup">
-                <label for="Nombre">Nombre:    {$usuario->getNombre()}</label><br>
-                <label for="Descripción">Apellido:    {$usuario->getApellido()}</label><br>
-                <label for="celular">Nick:    {$usuario->getNick()}</label><br>
-                <label for="fecha_pub">Correo:    {$usuario->getCorreo()}</label><br>
-  </div>
-</div>         
-          </div>
+   
+
           <div class="col-md-5 probootstrap-animate ">
-            <h2 class="probootstrap-heading probootstrap-animate ">Información personal</h2>
-            <div class="table-responsive">
-           <h2 class="blanca">Mis propuestas</h2>
-            <table class="table table-striped tabla" style=" background-color: #ecececb3">
+           
+<h2>Propuestas</h2>
+
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')">Propuestas</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">Favoritas</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Colaboradas</button>
+</div>
+
+<div id="London" class="tabcontent">
+  <div> 
+            <div class="table-responsive scr">
+            <table class="table table-striped tabla" >
   <tr>
     <th>Nombre</th>
  
@@ -75,10 +85,12 @@
   {/if}
 </table>
 </div>
- 
-<div class="table-responsive">
-            <h2 class="blanca">Propuestas favoritas</h2>
-            <table class="table table-striped tabla" style=" background-color: #ecececb3">
+</div>
+</div>
+
+<div id="Paris" class="tabcontent">
+  <div class="table-responsive ">
+            <table class="table table-striped tabla " style=" background-color: #ecececb3">
   <tr>
     <th>Nombre</th>
   </tr>
@@ -97,9 +109,11 @@
   {/if}
 </table>
 </div>
+</div>
 
+<div id="Tokyo" class="tabcontent">
+ 
 <div class="table-responsive ">
-          <h2 class="blanca">Propuestas colaboradas</h2>
             <table class="table table-striped tabla" style=" background-color: #ecececb3">
   <tr>
     <th>Nombre</th>
@@ -120,6 +134,26 @@
   {/if}
 </table>
 </div>
+</div>
+
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+ 
+
+
   <form method="post" action="{$url_base}usuario/notifUsuario">
     {if $usuario->getNotificacion() == 1}
   <input type="checkbox" name="checkNotif" id="checkNotif"> Activar/Desactivar notificaciones<br>

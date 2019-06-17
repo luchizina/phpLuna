@@ -57,7 +57,7 @@
                   </svg>
 
                   <div class="search-bar">
-                    <select id="elegirCate">
+                    <select class="selectita" id="elegirCate">
                       <option value="todas">Todas las categorías</option>
                       {foreach from=$categorias item=cat}
                       <option value="{$cat->getNombreP()}">{$cat->getNombreP()}</option>
