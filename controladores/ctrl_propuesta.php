@@ -220,8 +220,9 @@ function consolita( $data ) {
     $permitidos = array("image/jpg", "image/jpeg");
         $target='';
         if(in_array($tipo, $permitidos)){
-            //$target = "imgUsus/".basename($img);
-            $extension=end(explode(".", $img));
+            //$target = "imgUsus/".basename($img)
+          $hola = explode(".", $img);
+            $extension=end($hola);
             //rename($target, $nick.".".$extension);
             $target = "imgProps/".$prop->getNombre().".".$extension;
         } else {
