@@ -555,13 +555,24 @@ foreach ($coms as $c) {
 }
 $prop = $propuesta->obtenerPorNombreProp($params[0]);
 $recompensas = $recom->listarRecompensasPagina($params[0]);
-
 $imagen = $propuesta->traerImagen($prop->getNombre());
+
+
+$propsCat = $propuesta->propSugeridas($prop->getCategoria(), $prop->getNombre());
+
+
+foreach ($propsCat as $clave => $p) {
+    $img = $p->traerImagen($p->getNombre());
+    $p->setImagen($img);
+
+    } 
+
 
     $tpl = Template::getInstance();
     $prop->setImagen($imagen);
   $tpl->asignar('recompensas', $recompensas);
   $tpl->asignar('propuesta', $prop);
+  $tpl->asignar('propsCatego', $propsCat);
   $tpl->asignar('comentarios', $coms);
   $tpl->mostrar('propuestas_detalle',$prop);
 }

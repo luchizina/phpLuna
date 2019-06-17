@@ -58,7 +58,7 @@
            <div class="col-md-6 col-md-push-1 probootstrap-animate"  style="color: white;">            
              <div class="form-group" style="max-width: 300px;max-height: 300px">
                     {if {$propuesta->getImagen()}!=null}
-                    <img src="./{$propuesta->getImagen()}" />
+                    <img src="./{$propuesta->getImagen()} " height="200" width="400" />
                     {/if}
                     {if {$propuesta->getImagen()}==null}
                    <img src="/img/person_7.jpg" />
@@ -136,23 +136,21 @@
    
     </section>  
 
-
-    <div id="carousel" class="carousel">
-  <div class="slides">
-    <div class="slide" data-state="active">
-      <img src="./imgUsus/pepito.png">
-    </div>
-    <div class="slide">Slide 2</div>
-    <div class="slide">Slide 3</div>
-    <div class="slide">Slide 4</div>
-  </div>
-  <div class="indicators">
-    <input class="indicator" name="indicator" data-slide="1" data-state="active" checked type="radio" />
-    <input class="indicator" name="indicator" data-slide="2" type="radio" />
-    <input class="indicator" name="indicator" data-slide="3" type="radio" />
-     <input class="indicator" name="indicator" data-slide="4" type="radio" />
-  </div>
-</div>        
+<div class="accordion">
+  <ul>
+     {foreach from=$propsCatego item=propC}
+ 
+    <li>
+      <div class="image_title">
+        <a href="#">{$propC->getNombre()}</a>
+      </div>
+      <a href="https://ibb.co/gGv6QS"><img src="./{$propC->getImagen()}" height="320" width="640" alt="transformers4_640x320" border="0"></a>
+    </li>
+     {/foreach}
+   
+  </ul>
+</div>
+          
   </section>
    <script src="js/scripts.min.js"></script>
    <script src="js/carrusel.js"></script>
