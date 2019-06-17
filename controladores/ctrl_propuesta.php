@@ -333,6 +333,8 @@ function nuevaColaboracion($params=array()){
       $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
       $prop->actualizaMonto();
        if($prop->getMontoActual()>=$prop->getMonto()){
+        $colaboradores = $usu->traerColaboradores($prop->getNombre());
+        $this->enviarMailColaboradores($colaboradores);
         $prop->setEstadoActual(4);
         $prop->actualizarEstadoProp();
       }
@@ -352,13 +354,24 @@ function nuevaColaboracion($params=array()){
   $tpl->mostrar('nueva_colaboracion',array());
 }
 
+public function enviarMailColaboradores($colabs){
+foreach ($colabs as $usuC) {
+$correo = $usuC->getCorreo();
+$bodyHtml = "Hola Nahuel! este es el correo : $correo";
+$body = "";
+Utils::enviarMail("nambroa@gmail.com","Nahuel Ambroa", $body, $bodyHtml, "Mando correo");
 
+
+}
+
+}
 
 public function enviarMailColaboracion($prop,$col){
   $Usuario = new Usuario();
   $usuProp = $Usuario->obtenerPorNick($prop->getUsuario());
   $correo = $usuProp->getCorreo();
   $nombre = $usuProp->getNombre();
+  $apellido = $usuProp->getApellido();
   $propNomb = $prop->getNombre();
   $monto = $col->getMonto();
   
@@ -574,7 +587,7 @@ echo $c->getId().'-'.$c->getTexto().'-'.$c->getUsuario()->getNick().'-'.$i.'-'.$
 }
 
 function listProps(){
- // $pag = $_POST['p'];
+  $pag = $_POST['p'];
    $p = new Propuesta();
   if(isset($_POST['nombreCat'])){
     if($_POST['nombreCat'] == "todas"){
@@ -605,7 +618,7 @@ $propuestasCat = $p->getListadoCat($_POST['nombreProp']);
 
 
  
-  $e = $p->getListadoProp(1);
+  $e = $p->getListadoProp($pag);
   foreach ($e as $clave => $p) {
     $img = $p->traerImagen($p->getNombre());
     $p->setImagen($img);
