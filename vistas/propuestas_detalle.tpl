@@ -5,6 +5,7 @@
     <base href="{$url_base}">
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/carrusel.css">
     <link href="css/dashboard.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -57,7 +58,7 @@
            <div class="col-md-6 col-md-push-1 probootstrap-animate"  style="color: white;">            
              <div class="form-group" style="max-width: 300px;max-height: 300px">
                     {if {$propuesta->getImagen()}!=null}
-                    <img src="./{$propuesta->getImagen()}" />
+                    <img src="./{$propuesta->getImagen()} " height="200" width="400" />
                     {/if}
                     {if {$propuesta->getImagen()}==null}
                    <img src="/img/person_7.jpg" />
@@ -132,12 +133,30 @@
 </table>
   
 
-    <script src="js/scripts.min.js"></script>
+   
+    </section>  
+
+<div class="accordion">
+  <ul>
+     {foreach from=$propsCatego item=propC}
+ 
+    <li>
+      <div class="image_title">
+        <a href="#">{$propC->getNombre()}</a>
+      </div>
+      <a href="https://ibb.co/gGv6QS"><img src="./{$propC->getImagen()}" height="320" width="640" alt="transformers4_640x320" border="0"></a>
+    </li>
+     {/foreach}
+   
+  </ul>
+</div>
+          
+  </section>
+   <script src="js/scripts.min.js"></script>
+   <script src="js/carrusel.js"></script>
     <script src="js/main.min.js"></script>
     <script src="js/custom.js"></script>
      <script src="js/validar.js" type="text/javascript"></script>
-    </section>          
-  </section>
       </body></html>
 
       

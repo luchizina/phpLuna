@@ -161,6 +161,21 @@ class ClaseBase{
         return $res;
     }
 
+      public function propSugeridas($nombreCat, $nombreProp)
+    {
+        $sql="select * from $this->tabla where Categoria = '$nombreCat' AND Nombre != '$nombreProp' AND NickUsuario NOT IN (SELECT Nick from usuario where activo = 0)";
+        $res=array();
+        $resultado=$this->db->query($sql)
+            or die("Fallo en la consulta propuesta cat");
+        while($fila = $resultado->fetch_object())
+        {
+            $objeto = new $this->modelo($fila);
+            $res[]=$objeto;
+        }
+        return $res;
+    }
+
+
 
        public function getPropsPorCategoria($nombreCat, $texto)
     {

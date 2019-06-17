@@ -92,5 +92,16 @@ class Colaboracion extends ClaseBase{
         }
     }
 
+/* public function totalMontoColaborado($nombreProp){
+        $sql="SELECT SUM(colaboracion.monto) as totalColabs from colaboracion where colaboracion.TituloPropuesta='$nombreProp'";
+        $resultados=array();
+        $resultado =$this->getDB()->query($sql)   
+            or die ("Fallo en la consulta");
+            $fila = $resultado->fetch_assoc();
+         return $fila["totalColabs"]; 
+
+    }*/
+     
+
 }
  ?>

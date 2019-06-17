@@ -322,6 +322,8 @@ function nuevaColaboracion($params=array()){
     }
     $this->recursiva($recs, $col, $pos, $prop);
     if($col->agregar()){
+
+     
       $usuProp = $Usuario->obtenerPorNick($prop->getUsuario());
       if($usuProp->getNotificacion() == 0){
 
@@ -330,6 +332,12 @@ function nuevaColaboracion($params=array()){
       array_push($usu->getPropuestasColabora(), $prop);
       $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
       $prop->actualizaMonto();
+       if($prop->getMontoActual()>=$prop->getMonto()){
+        $colaboradores = $usu->traerColaboradores($prop->getNombre());
+        $this->enviarMailColaboradores($colaboradores);
+        $prop->setEstadoActual(4);
+        $prop->actualizarEstadoProp();
+      }
       $this->redirect("propuesta","listado");
       exit;
     }else $mensaje="Error! No se pudo agregar la colaboracion";
@@ -346,13 +354,24 @@ function nuevaColaboracion($params=array()){
   $tpl->mostrar('nueva_colaboracion',array());
 }
 
+public function enviarMailColaboradores($colabs){
+foreach ($colabs as $usuC) {
+$correo = $usuC->getCorreo();
+$bodyHtml = "Hola Nahuel! este es el correo : $correo";
+$body = "";
+Utils::enviarMail("nambroa@gmail.com","Nahuel Ambroa", $body, $bodyHtml, "Mando correo");
 
+
+}
+
+}
 
 public function enviarMailColaboracion($prop,$col){
   $Usuario = new Usuario();
   $usuProp = $Usuario->obtenerPorNick($prop->getUsuario());
   $correo = $usuProp->getCorreo();
   $nombre = $usuProp->getNombre();
+  $apellido = $usuProp->getApellido();
   $propNomb = $prop->getNombre();
   $monto = $col->getMonto();
   
@@ -531,13 +550,24 @@ foreach ($coms as $c) {
 }
 $prop = $propuesta->obtenerPorNombreProp($params[0]);
 $recompensas = $recom->listarRecompensasPagina($params[0]);
-
 $imagen = $propuesta->traerImagen($prop->getNombre());
+
+
+$propsCat = $propuesta->propSugeridas($prop->getCategoria(), $prop->getNombre());
+
+
+foreach ($propsCat as $clave => $p) {
+    $img = $p->traerImagen($p->getNombre());
+    $p->setImagen($img);
+
+    } 
+
 
     $tpl = Template::getInstance();
     $prop->setImagen($imagen);
   $tpl->asignar('recompensas', $recompensas);
   $tpl->asignar('propuesta', $prop);
+  $tpl->asignar('propsCatego', $propsCat);
   $tpl->asignar('comentarios', $coms);
   $tpl->mostrar('propuestas_detalle',$prop);
 }
@@ -563,7 +593,7 @@ echo $c->getId().'-'.$c->getTexto().'-'.$c->getUsuario()->getNick().'-'.$i.'-'.$
 }
 
 function listProps(){
- // $pag = $_POST['p'];
+  $pag = $_POST['p'];
    $p = new Propuesta();
   if(isset($_POST['nombreCat'])){
     if($_POST['nombreCat'] == "todas"){
@@ -594,7 +624,7 @@ $propuestasCat = $p->getListadoCat($_POST['nombreProp']);
 
 
  
-  $e = $p->getListadoProp(1);
+  $e = $p->getListadoProp($pag);
   foreach ($e as $clave => $p) {
     $img = $p->traerImagen($p->getNombre());
     $p->setImagen($img);

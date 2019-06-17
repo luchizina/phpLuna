@@ -528,6 +528,25 @@ public function modificar($tipo)
         $stmt->execute();
     }
 
+    public function traerColaboradores($nombreProp){
+
+
+      $sql="SELECT DISTINCT usuario.* FROM usuario, colaboracion where colaboracion.TituloPropuesta = '$nombreProp' and colaboracion.NickUsuario = usuario.Nick";
+        $resultados=array();
+
+        $resultado =$this->db->query($sql)   
+            or die ("Fallo en la consulta");
+
+        while ( $fila = $resultado->fetch_object() )
+        {
+            
+            $objeto= new $this->modelo($fila);
+            $resultados[]=$objeto;
+        } 
+     return $resultados;  
+
+    }
+
 
 
 
