@@ -13,6 +13,7 @@ require_once('clases/template.php');
 require_once('clases/Utils.php');
 require_once('clases/session.php');
 require_once('clases/auth.php');
+require_once('clases/token_usu.php');
 ini_set('display_errors', 'On');
 date_default_timezone_set('UTC');
 date_default_timezone_set("America/Montevideo");
@@ -928,8 +929,12 @@ function verrecPrecio(){
     echo Session::get('usuario_nick');
   }
 
-function sendRegistrationToServer($token, $nombre){
-$noti = new notificacion();
+function sendRegistrationToServer(){
+$noti = new token_usu();
+
+$token = $_POST['token'];
+$nombre = $_POST['nombre'];
+
 $noti->setToken($token);
 $noti->setUsuario($nombre);
  if($noti->agregarToken()){
