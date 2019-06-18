@@ -30,4 +30,24 @@ public function agregarToken(){
     }
 }
 
+
+public sendNoti($tokens, $message)
+{
+ $resultado=array();
+        $stmt = $this->getDB()->prepare( 
+            "SELECT token FROM propuesta 
+            WHERE EstadoActual = ? " );
+     
+        $stmt->bind_param( "i",$id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        while ($fila=$resultado->fetch_object()) {
+            $prop= new Propuesta($fila);
+                $propuestas[]=$prop;
+        }
+        return $propuestas;
+
+}
+
+
 ?>
