@@ -67,13 +67,15 @@
             <table class="table table-striped tabla" >
   <tr>
     <th>Nombre</th>
- 
+  <th>Opciones</th>
   </tr>
    {if $misProps != null}
      {foreach from=$misProps item=mProp}
   <tr>
     <td>{$mProp->getNombre()}</td>
-    
+    <td>
+     <input type="button" value="Modificar" id="modificar" onClick="window.location='{$url_base}propuesta/modificar/{$mProp->getNombre()}/'" class="btn btn-success" >
+   </td>
   </tr>
   {/foreach}
   {/if}

@@ -61,17 +61,19 @@ function listProp(p,nombreCat,nombreProp){
         html += '<div class="col-md-6 col-sm-6 col-xs-6 probootstrap-goal">Objetivo: <span class="money"> '+res[i]['Monto']+'</span></div>';
         html += '</div>';
         html += '<h2><a href="/phpLuna/propuesta/detalleProp/'+res[i]['Nombre']+'/">'+res[i]['Nombre']+'</a>';
-        if(res[i]['UsuFav'] !== null){
+       
+        html += '</h2>';
+        html += '<div class="probootstrap-date"><i class="fa fa-history"></i>Quedan '+res[i]['Tiemrest']+' dias restantes</div>';
+        html += '<p><a href="/phpLuna/propuesta/nuevaColaboracion/'+res[i]['Nombre']+'" class="btn btn-primary btn-black">Colaborar!</a>'
+         if(res[i]['UsuFav'] !== null){
           html += '<a class="btn estrella" onclick="favoritear(\''+res[i]['Nombre']+'\', /phpLuna/ ,\''+traeLog().replace(/^\s+|\s+$/gm,'')+'\');">';
           html += '<i class="fa fa-star" id="'+otroid+'"></i></a>';
         } 
         else{
           html += '<a class="btn estrella" onclick="favoritear(\''+res[i]['Nombre']+'\', /phpLuna/ ,\''+traeLog().replace(/^\s+|\s+$/gm,'')+'\');">';
           html += '<i class="fa fa-star-o" id="'+otroid+'"></i></a>';
-        }
-        html += '</h2>';
-        html += '<div class="probootstrap-date"><i class="fa fa-history"></i>Quedan '+res[i]['Tiemrest']+' dias restantes</div>';
-        html += '<p><a href="/phpLuna/propuesta/nuevaColaboracion/'+res[i]['Nombre']+'" class="btn btn-primary btn-black">Colaborar!</a></p>'
+        }       
+        html += '</p>';
         html += '</div>';
         html += '</div>';
         html += '</div>';
@@ -110,7 +112,11 @@ $.ajax({
         html += '<div class="col-md-6 col-sm-6 col-xs-6 probootstrap-goal">Objetivo: <span class="money"> '+res[i]['Monto']+'</span></div>';
         html += '</div>';
         html += '<h2><a href="/phpLuna/propuesta/detalleProp/'+res[i]['Nombre']+'/">'+res[i]['Nombre']+'</a>';
-        if(res[i]['UsuFav'] !== null){
+       
+        html += '</h2>';
+        html += '<div class="probootstrap-date"><i class="fa fa-history"></i>Quedan '+res[i]['Tiemrest']+' dias restantes</div>';
+        html += '<p><a href="/phpLuna/propuesta/nuevaColaboracion/'+res[i]['Nombre']+'" class="btn btn-primary btn-black">Colaborar!</a>'
+           if(res[i]['UsuFav'] !== null){
           html += '<a class="btn estrella" onclick="favoritear(\''+res[i]['Nombre']+'\', /phpLuna/ ,\''+traeLog().replace(/^\s+|\s+$/gm,'')+'\');">';
           html += '<i class="fa fa-star" id="'+otroid+'"></i></a>';
         } 
@@ -118,9 +124,7 @@ $.ajax({
           html += '<a class="btn estrella" onclick="favoritear(\''+res[i]['Nombre']+'\', /phpLuna/ ,\''+traeLog().replace(/^\s+|\s+$/gm,'')+'\');">';
           html += '<i class="fa fa-star-o" id="'+otroid+'"></i></a>';
         }
-        html += '</h2>';
-        html += '<div class="probootstrap-date"><i class="fa fa-history"></i>Quedan '+res[i]['Tiemrest']+' dias restantes</div>';
-        html += '<p><a href="/phpLuna/propuesta/nuevaColaboracion/'+res[i]['Nombre']+'" class="btn btn-primary btn-black">Colaborar!</a></p>'
+        html += '</p>';        
         html += '</div>';
         html += '</div>';
         html += '</div>';
@@ -518,4 +522,4 @@ $("#avisaFor").html("Cedula entre 7 y 8 caracteres");
 }
 }
 catch(ex) {throw(ex)}
-} 
+}

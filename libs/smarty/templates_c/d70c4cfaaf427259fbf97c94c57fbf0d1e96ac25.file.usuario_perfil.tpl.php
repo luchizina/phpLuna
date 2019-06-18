@@ -1,31 +1,17 @@
-<<<<<<< HEAD
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-17 18:46:09
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-18 19:31:44
          compiled from "vistas\usuario_perfil.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:19046972965d080a214ede73-73719615%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
-=======
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-17 15:29:08
-         compiled from "vistas\usuario_perfil.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:5635d07dbf484b375-63269006%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
->>>>>>> 7f277980dafb8245f820a9fc6b0207265e7111e3
+<?php /*%%SmartyHeaderCode:5107653225d096650053ab3-61056839%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'd70c4cfaaf427259fbf97c94c57fbf0d1e96ac25' => 
     array (
       0 => 'vistas\\usuario_perfil.tpl',
-<<<<<<< HEAD
-      1 => 1560804970,
+      1 => 1560895697,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '19046972965d080a214ede73-73719615',
-=======
-      1 => 1560206380,
-      2 => 'file',
-    ),
-  ),
-  'nocache_hash' => '5635d07dbf484b375-63269006',
->>>>>>> 7f277980dafb8245f820a9fc6b0207265e7111e3
+  'nocache_hash' => '5107653225d096650053ab3-61056839',
   'function' => 
   array (
   ),
@@ -43,15 +29,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-<<<<<<< HEAD
-  'unifunc' => 'content_5d080a2161e979_17845698',
+  'unifunc' => 'content_5d0966502781b2_66768909',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5d080a2161e979_17845698')) {function content_5d080a2161e979_17845698($_smarty_tpl) {?><!DOCTYPE html>
-=======
-  'unifunc' => 'content_5d07dbf4d08707_02450826',
-),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5d07dbf4d08707_02450826')) {function content_5d07dbf4d08707_02450826($_smarty_tpl) {?><!DOCTYPE html>
->>>>>>> 7f277980dafb8245f820a9fc6b0207265e7111e3
+<?php if ($_valid && !is_callable('content_5d0966502781b2_66768909')) {function content_5d0966502781b2_66768909($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -61,10 +41,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
      <link href="css/pop.css" rel="stylesheet">
-<<<<<<< HEAD
      <link href="css/perfil.css" rel="stylesheet">
-=======
->>>>>>> 7f277980dafb8245f820a9fc6b0207265e7111e3
     <!--[if lt IE 9]>
       <?php echo '<script'; ?>
  src="js/vendor/html5shiv.min.js"><?php echo '</script'; ?>
@@ -99,7 +76,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
           <div class="row">
             <div class="col-md-6 col-md-push-1 probootstrap-animate">     
 
-<<<<<<< HEAD
           <div class="services">
 <section class="pricecol">
 <div style="text-align: center;">
@@ -135,37 +111,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   <div> 
             <div class="table-responsive scr">
             <table class="table table-striped tabla" >
-=======
-           <div class="form-group">
-                <img src="./<?php echo $_smarty_tpl->tpl_vars['usuario']->value->getImagen();?>
-" class="imgRedonda" width="250" height="250">
-           </div>
-           <div id="all">
-  <article>
-     <input id="jaja" type="button" class="btn btn-primary" value=" Ver informacion personal">
-  </article>
-
-  <div id="popup">
-                <label for="Nombre">Nombre:    <?php echo $_smarty_tpl->tpl_vars['usuario']->value->getNombre();?>
-</label><br>
-                <label for="Descripción">Apellido:    <?php echo $_smarty_tpl->tpl_vars['usuario']->value->getApellido();?>
-</label><br>
-                <label for="celular">Nick:    <?php echo $_smarty_tpl->tpl_vars['usuario']->value->getNick();?>
-</label><br>
-                <label for="fecha_pub">Correo:    <?php echo $_smarty_tpl->tpl_vars['usuario']->value->getCorreo();?>
-</label><br>
-  </div>
-</div>         
-          </div>
-          <div class="col-md-5 probootstrap-animate ">
-            <h2 class="probootstrap-heading probootstrap-animate ">Información personal</h2>
-            <div class="table-responsive">
-           <h2 class="blanca">Mis propuestas</h2>
-            <table class="table table-striped tabla" style=" background-color: #ecececb3">
->>>>>>> 7f277980dafb8245f820a9fc6b0207265e7111e3
   <tr>
     <th>Nombre</th>
- 
+  <th>Opciones</th>
   </tr>
    <?php if ($_smarty_tpl->tpl_vars['misProps']->value!=null) {?>
      <?php  $_smarty_tpl->tpl_vars['mProp'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['mProp']->_loop = false;
@@ -176,7 +124,11 @@ $_smarty_tpl->tpl_vars['mProp']->_loop = true;
   <tr>
     <td><?php echo $_smarty_tpl->tpl_vars['mProp']->value->getNombre();?>
 </td>
-    
+    <td>
+     <input type="button" value="Modificar" id="modificar" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/modificar/<?php echo $_smarty_tpl->tpl_vars['mProp']->value->getNombre();?>
+/'" class="btn btn-success" >
+   </td>
   </tr>
   <?php } ?>
   <?php }?>
@@ -188,19 +140,12 @@ $_smarty_tpl->tpl_vars['mProp']->_loop = true;
   <?php }?>
 </table>
 </div>
-<<<<<<< HEAD
 </div>
 </div>
 
 <div id="Paris" class="tabcontent">
   <div class="table-responsive ">
             <table class="table table-striped tabla " style=" background-color: #ecececb3">
-=======
- 
-<div class="table-responsive">
-            <h2 class="blanca">Propuestas favoritas</h2>
-            <table class="table table-striped tabla" style=" background-color: #ecececb3">
->>>>>>> 7f277980dafb8245f820a9fc6b0207265e7111e3
   <tr>
     <th>Nombre</th>
   </tr>
@@ -224,17 +169,11 @@ $_smarty_tpl->tpl_vars['favProp']->_loop = true;
   <?php }?>
 </table>
 </div>
-<<<<<<< HEAD
 </div>
 
 <div id="Tokyo" class="tabcontent">
  
 <div class="table-responsive ">
-=======
-
-<div class="table-responsive ">
-          <h2 class="blanca">Propuestas colaboradas</h2>
->>>>>>> 7f277980dafb8245f820a9fc6b0207265e7111e3
             <table class="table table-striped tabla" style=" background-color: #ecececb3">
   <tr>
     <th>Nombre</th>
@@ -261,7 +200,6 @@ $_smarty_tpl->tpl_vars['colProp']->_loop = true;
   <?php }?>
 </table>
 </div>
-<<<<<<< HEAD
 </div>
 
 <?php echo '<script'; ?>
@@ -284,8 +222,6 @@ function openCity(evt, cityName) {
  
 
 
-=======
->>>>>>> 7f277980dafb8245f820a9fc6b0207265e7111e3
   <form method="post" action="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 usuario/notifUsuario">
     <?php if ($_smarty_tpl->tpl_vars['usuario']->value->getNotificacion()==1) {?>
