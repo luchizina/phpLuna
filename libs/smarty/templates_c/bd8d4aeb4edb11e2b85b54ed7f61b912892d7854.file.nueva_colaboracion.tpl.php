@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-17 19:39:47
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-18 19:04:20
          compiled from "vistas\nueva_colaboracion.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:15810452115d0816b3159156-66465967%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'bd8d4aeb4edb11e2b85b54ed7f61b912892d7854' => 
     array (
       0 => 'vistas\\nueva_colaboracion.tpl',
-      1 => 1560707436,
+      1 => 1560895457,
       2 => 'file',
     ),
   ),
@@ -15,17 +15,18 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5d0816b320fe58_84556589',
   'variables' => 
   array (
     'url_base' => 0,
     'mensaje' => 0,
+    'recompensas' => 0,
+    'recompensa' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5d0816b320fe58_84556589',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5d0816b320fe58_84556589')) {function content_5d0816b320fe58_84556589($_smarty_tpl) {?>
-<!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5d0816b320fe58_84556589')) {function content_5d0816b320fe58_84556589($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -79,6 +80,56 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             </form>
             <?php }?>
           </div>
+          <div class="col-md-6 col-md-push-1 probootstrap-animate">            
+            <h2 style="color:#fff">Recompensas para la propuesta a colaborar</h2>
+            <div class="row">
+            <div class="col-sm-12  col-md-12  main">
+            <div class="table-responsive scrip src">
+            <table class="table table-striped tabla" style=" background-color: #ecececb3">
+              <thead>
+                <tr>
+                  <th style="background-color: #959090; color:#fff">Nombre: </th>
+                  <th style="background-color: #959090; color:#fff">Monto minimo necesario: </th>
+                  <th style="background-color: #959090; color:#fff">Limite de usuarios: </th>
+                  <th style="background-color: #959090; color:#fff">Usuarios actuales: </th>
+                  <th style="background-color: #959090; color:#fff">Descripcion: </th>
+                </tr>
+              </thead>
+              <tbody>
+                 <?php if ($_smarty_tpl->tpl_vars['recompensas']->value!=null) {?>                 
+                <?php  $_smarty_tpl->tpl_vars['recompensa'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['recompensa']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['recompensas']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['recompensa']->key => $_smarty_tpl->tpl_vars['recompensa']->value) {
+$_smarty_tpl->tpl_vars['recompensa']->_loop = true;
+?>
+                  <tr>
+                    <td><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['recompensa']->value->getNombre(), 'UTF-8');?>
+</td>
+                    <td><?php echo $_smarty_tpl->tpl_vars['recompensa']->value->getMontoaSuperar();?>
+</td>
+                    <td><?php echo $_smarty_tpl->tpl_vars['recompensa']->value->getLimiteUsuarios();?>
+</td>
+                    <td><?php echo $_smarty_tpl->tpl_vars['recompensa']->value->getCantActual();?>
+</td>
+                    <td><?php echo $_smarty_tpl->tpl_vars['recompensa']->value->getDescripcion();?>
+</td>
+                  </tr>
+                <?php } ?>
+               <?php }?> 
+               <?php if ($_smarty_tpl->tpl_vars['recompensas']->value==null) {?>                 
+                  <tr>
+                    <td>No hay recompensas para esta propuesta</td>
+                  </tr>
+               <?php }?> 
+               <tfoot>
+                 <h5 style="color: #fff">Si el limite de usuarios es superado se le otorgara la recompensa anterior a la que el monto ingresado corresponde</h5>
+               </tfoot>
+              </tbody>
+            </table>
+          </div>
+          </div>
+          </div>
+          </div>
         </div>
         </div>
 
@@ -113,5 +164,4 @@ propuesta/verrecPrecio',
 >
     </section>          
   </section>
-      </body></html>
-<?php }} ?>
+      </body></html><?php }} ?>

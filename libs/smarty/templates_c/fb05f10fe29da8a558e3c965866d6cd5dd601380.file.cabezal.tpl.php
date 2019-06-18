@@ -1,39 +1,20 @@
-<<<<<<< HEAD
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-17 18:43:50
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-18 18:51:55
          compiled from "vistas\cabezal.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:19273662295d08099628f7c4-03363031%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
-=======
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-17 19:05:28
-         compiled from "vistas\cabezal.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:30585d07d3b714c492-14065285%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
->>>>>>> 7f277980dafb8245f820a9fc6b0207265e7111e3
+<?php /*%%SmartyHeaderCode:19208721675d095cfbe79535-30104239%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'fb05f10fe29da8a558e3c965866d6cd5dd601380' => 
     array (
       0 => 'vistas\\cabezal.tpl',
-<<<<<<< HEAD
       1 => 1560804970,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '19273662295d08099628f7c4-03363031',
+  'nocache_hash' => '19208721675d095cfbe79535-30104239',
   'function' => 
   array (
   ),
-=======
-      1 => 1560804746,
-      2 => 'file',
-    ),
-  ),
-  'nocache_hash' => '30585d07d3b714c492-14065285',
-  'function' => 
-  array (
-  ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5d07d3b778cf13_51577275',
->>>>>>> 7f277980dafb8245f820a9fc6b0207265e7111e3
   'variables' => 
   array (
     'usuLogNick' => 0,
@@ -47,15 +28,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'url_logout' => 0,
   ),
   'has_nocache_code' => false,
-<<<<<<< HEAD
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5d0809962cc6c9_75153963',
+  'unifunc' => 'content_5d095cfc02ad36_92009077',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5d0809962cc6c9_75153963')) {function content_5d0809962cc6c9_75153963($_smarty_tpl) {?>
-=======
-),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5d07d3b778cf13_51577275')) {function content_5d07d3b778cf13_51577275($_smarty_tpl) {?>
->>>>>>> 7f277980dafb8245f820a9fc6b0207265e7111e3
+<?php if ($_valid && !is_callable('content_5d095cfc02ad36_92009077')) {function content_5d095cfc02ad36_92009077($_smarty_tpl) {?>
  <head>
     <link rel="shortcut icon" href="img/moon.png" type="image/png" />
     <title>LUNA</title>
