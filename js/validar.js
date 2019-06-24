@@ -63,8 +63,21 @@ function listProp(p,nombreCat,nombreProp){
         html += '<h2><a href="/phpLuna/propuesta/detalleProp/'+res[i]['Nombre']+'/">'+res[i]['Nombre']+'</a>';
        
         html += '</h2>';
+        if(res[i]['Tiemrest'] > 1){
         html += '<div class="probootstrap-date"><i class="fa fa-history"></i>Quedan '+res[i]['Tiemrest']+' dias restantes</div>';
         html += '<p><a href="/phpLuna/propuesta/nuevaColaboracion/'+res[i]['Nombre']+'" class="btn btn-primary btn-black">Colaborar!</a>'
+      }
+      if(res[i]['Tiemrest'] == 1){
+        html += '<div class="probootstrap-date"><i class="fa fa-history"></i>Queda '+res[i]['Tiemrest']+' dia restante</div>';
+        html += '<p><a href="/phpLuna/propuesta/nuevaColaboracion/'+res[i]['Nombre']+'" class="btn btn-primary btn-black">Colaborar!</a>'
+      }
+      if(res[i]['Tiemrest'] == 0){
+        html += '<div class="probootstrap-date"><i class="fa fa-history"></i>La propuesta finalizara hoy</div>';
+        html += '<p><a href="/phpLuna/propuesta/nuevaColaboracion/'+res[i]['Nombre']+'" class="btn btn-primary btn-black">Colaborar!</a>'
+      }
+      if(res[i]['Tiemrest'] < 0){
+        html += '<div class="probootstrap-date"><i class="fa fa-history"></i>La propuesta esta finalizada</div>';
+      }
          if(res[i]['UsuFav'] !== null){
           html += '<a class="btn estrella" onclick="favoritear(\''+res[i]['Nombre']+'\', /phpLuna/ ,\''+traeLog().replace(/^\s+|\s+$/gm,'')+'\');">';
           html += '<i class="fa fa-star" id="'+otroid+'"></i></a>';

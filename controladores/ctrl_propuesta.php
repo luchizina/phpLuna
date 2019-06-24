@@ -370,6 +370,11 @@ public function enviarMailColaboracion($prop,$col){
 public function recursiva($recs, $col, $pos, $prop){
   $r = $recs[$pos];
   $r->setTituloPropuesta($prop);
+  if($r->getLimiteUsuarios() == 0){
+    $r->setCantActual($r->getCantActual() + 1);
+        $col->setRecompensa($r);
+        $r->actualizaCant();
+      } else{
       if($r->getLimiteUsuarios() > $r->getCantActual()){
         $r->setCantActual($r->getCantActual() + 1);
         $col->setRecompensa($r);
@@ -380,6 +385,7 @@ public function recursiva($recs, $col, $pos, $prop){
           $this->recursiva($recs, $col, $pos, $prop);
         }
       }
+    }
   }
 function nuevaColaboracionCel(){
   $col = new Colaboracion();
@@ -690,6 +696,17 @@ function registrarRecom($params = array())
     $tpl->mostrar('registrar_recomp',array());
   }
 }
+
+function menorRecompensa($a = array()){
+  $propuesta = $a[0];
+  $Recompensa = new Recompensa();
+  $recs = $Recompensa->traerRecompensas($propuesta);
+  $menorRec = $recs[0];
+  $menorRec->setLimiteUsuarios(0);
+  $menorRec->menorRec();
+  $this->redirect("propuesta","listado");
+}
+
 function comentarEnPagina(){
   $propuesta = new Propuesta();
   if(isset($_POST["nomPropCom"])){

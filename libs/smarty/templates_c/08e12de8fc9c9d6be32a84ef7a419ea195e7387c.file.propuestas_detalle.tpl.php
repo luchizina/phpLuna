@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-17 19:10:21
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-24 18:41:20
          compiled from "vistas\propuestas_detalle.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:16388331295d080fcda54c70-35284255%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '08e12de8fc9c9d6be32a84ef7a419ea195e7387c' => 
     array (
       0 => 'vistas\\propuestas_detalle.tpl',
-      1 => 1560804970,
+      1 => 1561412476,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5d080fcdbff574_94448875',
   'variables' => 
   array (
     'url_base' => 0,
@@ -28,8 +30,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'propC' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5d080fcdbff574_94448875',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5d080fcdbff574_94448875')) {function content_5d080fcdbff574_94448875($_smarty_tpl) {?><!DOCTYPE html>
 
@@ -124,6 +124,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                     <div class="progress-bar progress-bar-s2" data-percent="<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->calc();?>
 "></div>
                   </div>
+                  <a href="/phpLuna/propuesta/nuevaColaboracion/<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
+" class="btn btn-primary btn-black">Colaborar!</a>
                   </div>
 
           </div>

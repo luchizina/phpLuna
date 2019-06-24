@@ -74,6 +74,7 @@
                <div class="progress" style="max-width: 400px">
                     <div class="progress-bar progress-bar-s2" data-percent="{$propuesta->calc()}"></div>
                   </div>
+                  <a href="/phpLuna/propuesta/nuevaColaboracion/{$propuesta->getNombre()}" class="btn btn-primary btn-black">Colaborar!</a>
                   </div>
 
           </div>
