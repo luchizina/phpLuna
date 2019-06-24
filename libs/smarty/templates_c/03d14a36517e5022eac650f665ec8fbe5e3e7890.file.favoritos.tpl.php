@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-17 14:54:00
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-18 19:36:10
          compiled from "vistas\favoritos.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:42885d07d3b8ac6e34-09435114%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:231115d09675ada12d2-81882306%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,15 +11,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '42885d07d3b8ac6e34-09435114',
+  'nocache_hash' => '231115d09675ada12d2-81882306',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5d07d3b8c0b318_38974581',
+  'unifunc' => 'content_5d09675aeacb45_58267776',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5d07d3b8c0b318_38974581')) {function content_5d07d3b8c0b318_38974581($_smarty_tpl) {?><div class="modal fade" id="favoritosModal">
+<?php if ($_valid && !is_callable('content_5d09675aeacb45_58267776')) {function content_5d09675aeacb45_58267776($_smarty_tpl) {?><div class="modal fade" id="favoritosModal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
