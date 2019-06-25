@@ -279,7 +279,7 @@ function login(){
 function logout(){
   $usr= new Usuario();
   $usr->logout();
-  $this->redirect("usuario","redirigir");
+  return $this->getUrl("usuario","redirigir");
 }
 
 
@@ -459,6 +459,55 @@ public function cambiaPass($params=array()){
   $tpl->asignar('token',$token);
   $tpl->mostrar('restablecer',array());
 }
+
+
+
+public function mandarPropsQueVencen(){
+    $propsQueVencen = array();
+    $propuesta = new Propuesta();
+    $props = $propuesta->getListado();
+
+    foreach($props as $p){
+      if($p->traerFechaRestante() >= 7 && $p->traerFechaRestante() <= 14){
+        array_push($propsQueVencen,$p->getNombre());
+      }
+
+    }  
+    $arrlength = count($propsQueVencen);
+     $bodyhtml = "Estas son las propuestas";
+       $bodyhtml = "Hola querido cliente, a continuación, te mostraremos las propuestas que vencen la semana que viene <br>";
+    $bodyhtml = $bodyhtml."<hr>";
+    for($x = 0; $x < $arrlength; $x++) {
+    
+
+    $bodyhtml = $bodyhtml."<h3>".$propsQueVencen[$x]."</h3>";
+    
+}
+  $usuario=new Usuario();
+  $usuarios=$usuario->getListado();
+
+foreach ($usuarios as $usu) {
+$correo = $usu->getCorreo();
+$nombreC = $usu->getNombre()." ".$usu->getApellido();
+      $url="#";
+      $body = "Esto es una prueba";
+    
+      Utils::enviarEmail($correo,$nombreC, $body, $bodyhtml, "Bienvenida a Luna");
+
+}
+
+  
+}
+
+
+
+
+
+
+
+
+
+
 
 }
 ?>

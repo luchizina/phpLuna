@@ -448,6 +448,34 @@ function validar(){
 	}
 }
 
+$(document).ready(function(){
+    $("#axD").on("click",function(e){
+      e.preventDefault();
+      Swal.fire({
+  title: 'Cerrar Sesión',
+  text: "Estás seguro?",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  cancelButtonText:'¡Todavía no!',
+  confirmButtonText: 'Estoy seguro'
+}).then((result) => {
+  if (result.value) {
+    $.ajax({
+    url:"/phpLuna/usuario/logout",
+    type: 'post',
+    success:function(html){
+        window.location.replace(html);
+     },
+    error:function(){
+    }
+  });
+  }
+})   
+    });
+});
+
 function Chequear(){
 try
 {

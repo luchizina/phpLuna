@@ -636,6 +636,7 @@ $propuestasCat = $p->getListadoCat($_POST['nombreProp']);
       $p->UsuFav = "si";
     }
     $p->Tiemrest = $p->traerFechaRestante();
+ 
   }
   
 }
