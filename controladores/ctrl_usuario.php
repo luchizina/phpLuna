@@ -319,8 +319,16 @@ public function nuevoUsuCel(){
     $u->setCelular($_POST['cel']);
     $u->setCorreo($_POST['correo']);
     $u->setPassword($_POST['cont']);
-    $u->setActivo(1);
+    $u->setTipo(1);
+    $u->setActivo(0);
+    $token = md5(uniqid(mt_rand(), false));
+    $u->setToken($token);
     if($u->agregarCel()){
+      $nombreC = $u->getNombre()." ".$u->getApellido();
+      $url="http://localhost/phpLuna/usuario/activarU/".$token;
+      $body = "Para activar su cuenta debe entrar al siguiente enlace: ".$url;
+      $bodyhtml = "Para activar su cuenta haga click aqui <a href='$url'>Activar cuenta</a>";
+      Utils::enviarEmail($u->getCorreo(),$nombreC, $body, $bodyhtml, "Bienvenida a Luna-Activar cuenta");
       $msg = "Usuario registrado";
       $array = ["mensajito"=>$msg];
       $arreglo=["status"=>"ok","message"=>[$array]];

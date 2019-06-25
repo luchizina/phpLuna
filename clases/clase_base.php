@@ -38,7 +38,7 @@ class ClaseBase{
     {
         $porPag = 9;
         $comienzo = ($pagina-1)*$porPag;
-        $sql="select * from $this->tabla where NickUsuario NOT IN (SELECT Nick from usuario where activo = 0)  ORDER BY Nombre limit $comienzo, $porPag";
+        $sql="select * from $this->tabla where (EstadoActual = 3 OR EstadoActual = 4 OR EstadoActual = 5) AND NickUsuario NOT IN (SELECT Nick from usuario where activo = 0)  ORDER BY Nombre limit $comienzo, $porPag";
         $resultados=array();
 
         $resultado =$this->db->query($sql)   
@@ -54,7 +54,7 @@ class ClaseBase{
     }
 
     public function cantPagProp(){
-        $sql="select * from $this->tabla where NickUsuario NOT IN (SELECT Nick from usuario where activo = 0)  ";
+        $sql="select * from $this->tabla where (EstadoActual = 3 OR EstadoActual = 4 OR EstadoActual = 5) AND NickUsuario NOT IN (SELECT Nick from usuario where activo = 0)  ";
         $resultado =$this->db->query($sql)   
             or die ("Fallo en la consulta");
         $cant = $resultado->num_rows;

@@ -1,19 +1,53 @@
-<!DOCTYPE html>
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-25 17:57:45
+         compiled from "vistas\nueva_colaboracion.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:15810452115d0816b3159156-66465967%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'bd8d4aeb4edb11e2b85b54ed7f61b912892d7854' => 
+    array (
+      0 => 'vistas\\nueva_colaboracion.tpl',
+      1 => 1561496262,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '15810452115d0816b3159156-66465967',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5d0816b320fe58_84556589',
+  'variables' => 
+  array (
+    'url_base' => 0,
+    'mensaje' => 0,
+    'recompensas' => 0,
+    'recompensa' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5d0816b320fe58_84556589')) {function content_5d0816b320fe58_84556589($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
-    <base href="{$url_base}">
+    <base href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+">
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
     <!--[if lt IE 9]>
-      <script src="js/vendor/html5shiv.min.js"></script>
-      <script src="js/vendor/respond.min.js"></script>
+      <?php echo '<script'; ?>
+ src="js/vendor/html5shiv.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="js/vendor/respond.min.js"><?php echo '</script'; ?>
+>
     <![endif]-->
   </head>
   <body >
 
-    {include file="cabezal.tpl"}
+    <?php echo $_smarty_tpl->getSubTemplate ("cabezal.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
     <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg); height:100%"  data-stellar-background-ratio="0.1">
         <div class="container">
           <div class="row">
@@ -29,10 +63,11 @@
         <div class="container">
           <div class="row">
           <div class="col-md-5 probootstrap-animate" style="color: white; font-family: Montserrat,Arial,sans-serif" >
-            {if $mensaje!=""}
-            <div class="alert alert-danger" role="alert">{$mensaje}</div>
-            {/if}
-            {if $mensaje==""}
+            <?php if ($_smarty_tpl->tpl_vars['mensaje']->value!='') {?>
+            <div class="alert alert-danger" role="alert"><?php echo $_smarty_tpl->tpl_vars['mensaje']->value;?>
+</div>
+            <?php }?>
+            <?php if ($_smarty_tpl->tpl_vars['mensaje']->value=='') {?>
             <form method="post" class="probootstrap-form">
               <div class="form-group">
                 <label for="monto">Monto</label>
@@ -61,22 +96,31 @@
                 </tr>
               </thead>
               <tbody>
-                 {if $recompensas != null }                 
-                {foreach from=$recompensas item=recompensa}
+                 <?php if ($_smarty_tpl->tpl_vars['recompensas']->value!=null) {?>                 
+                <?php  $_smarty_tpl->tpl_vars['recompensa'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['recompensa']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['recompensas']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['recompensa']->key => $_smarty_tpl->tpl_vars['recompensa']->value) {
+$_smarty_tpl->tpl_vars['recompensa']->_loop = true;
+?>
                   <tr>
-                    <td>{$recompensa->getNombre()|upper}</td>
-                    <td>{$recompensa->getMontoaSuperar()}</td>
-                    <td>{$recompensa->getLimiteUsuarios()}</td>
-                    <td>{$recompensa->getCantActual()}</td>
-                    <td>{$recompensa->getDescripcion()}</td>
+                    <td><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['recompensa']->value->getNombre(), 'UTF-8');?>
+</td>
+                    <td><?php echo $_smarty_tpl->tpl_vars['recompensa']->value->getMontoaSuperar();?>
+</td>
+                    <td><?php echo $_smarty_tpl->tpl_vars['recompensa']->value->getLimiteUsuarios();?>
+</td>
+                    <td><?php echo $_smarty_tpl->tpl_vars['recompensa']->value->getCantActual();?>
+</td>
+                    <td><?php echo $_smarty_tpl->tpl_vars['recompensa']->value->getDescripcion();?>
+</td>
                   </tr>
-                {/foreach}
-               {/if} 
-               {if  $recompensas == null}                 
+                <?php } ?>
+               <?php }?> 
+               <?php if ($_smarty_tpl->tpl_vars['recompensas']->value==null) {?>                 
                   <tr>
                     <td>No hay recompensas para esta propuesta</td>
                   </tr>
-               {/if} 
+               <?php }?> 
                <tfoot>
                  <h5 style="color: #fff">Si el limite de usuarios es superado se le otorgara la recompensa anterior a la que el monto ingresado corresponde</h5>
                </tfoot>
@@ -86,14 +130,21 @@
           </div>
           </div>
           </div>
-           {/if}
+           <?php }?>
         </div>
         </div>
 
-    <script src="js/scripts.min.js"></script>
-    <script src="js/main.min.js"></script>
-    <script src="js/custom.js"></script>
-    <script type="text/javascript">
+    <?php echo '<script'; ?>
+ src="js/scripts.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/main.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/custom.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ type="text/javascript">
       function verRec(){
         var monto = $('#monto').val();
         var propuesta = window.location.pathname;
@@ -101,7 +152,8 @@
         var nombre = array[4];
         console.log(monto);
         $.ajax({
-          url: '{$url_base}propuesta/verrecPrecio',
+          url: '<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/verrecPrecio',
           data: 'propuesta='+nombre+'&monto='+monto,
           type: 'post',
           success:function(res){
@@ -109,7 +161,8 @@
           }
         })
       }
-    </script>
+    <?php echo '</script'; ?>
+>
     </section>          
   </section>
-      </body></html>
+      </body></html><?php }} ?>
