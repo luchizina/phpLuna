@@ -155,8 +155,9 @@ function paginar(){
     url: '/phpLuna/propuesta/cantPag/',
     type: 'post',
     success:function(res){
-      html = '';
-      no = 'no';
+      if(res > 1){
+      let html = '';
+      let no = 'no';
       html += '<ul class="pagination justify-content-center" style="margin:20px 0">';
       html += '<li class="page-item" id="ant"><a id="anta" class="page-link" onclick="anterior();">Anterior</a></li>';
       for(let i=1; i<=res; i++){
@@ -166,6 +167,14 @@ function paginar(){
       html += '</ul>';
       $('#pagination').html(html);
     }
+    if(res == 0){
+      let html = '';
+      html += '<div class="col-md-12 text-center">';
+      html += '<h2 class="caca">Aún no hay propuestas </h2>'; 
+      html += '</div>';
+      $('#propuestitas').html(html);
+    }
+  }
   })
 }
 

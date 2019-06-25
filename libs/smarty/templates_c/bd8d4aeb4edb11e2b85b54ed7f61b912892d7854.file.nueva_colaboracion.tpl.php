@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-18 19:04:20
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-25 17:57:45
          compiled from "vistas\nueva_colaboracion.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:15810452115d0816b3159156-66465967%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'bd8d4aeb4edb11e2b85b54ed7f61b912892d7854' => 
     array (
       0 => 'vistas\\nueva_colaboracion.tpl',
-      1 => 1560895457,
+      1 => 1561496262,
       2 => 'file',
     ),
   ),
@@ -78,7 +78,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 <input type="submit" class="btn btn-primary btn-lg" id="guardar" name="guardar" value="Colaborar">
               </div>
             </form>
-            <?php }?>
+      
           </div>
           <div class="col-md-6 col-md-push-1 probootstrap-animate">            
             <h2 style="color:#fff">Recompensas para la propuesta a colaborar</h2>
@@ -130,6 +130,7 @@ $_smarty_tpl->tpl_vars['recompensa']->_loop = true;
           </div>
           </div>
           </div>
+           <?php }?>
         </div>
         </div>
 

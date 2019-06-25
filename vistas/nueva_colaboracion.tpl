@@ -43,7 +43,7 @@
                 <input type="submit" class="btn btn-primary btn-lg" id="guardar" name="guardar" value="Colaborar">
               </div>
             </form>
-            {/if}
+      
           </div>
           <div class="col-md-6 col-md-push-1 probootstrap-animate">            
             <h2 style="color:#fff">Recompensas para la propuesta a colaborar</h2>
@@ -86,6 +86,7 @@
           </div>
           </div>
           </div>
+           {/if}
         </div>
         </div>
 

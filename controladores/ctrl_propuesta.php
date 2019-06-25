@@ -299,6 +299,12 @@ function nuevaColaboracion($params=array()){
   $recs = $Recompensa->traerRecompensas($params[0]);
   $usu = $Usuario->obtenerPorNick(Session::get('usuario_nick'));
   $prop=$propuesta->obtenerPorNombreProp($params[0]);
+  if($prop == null){
+    $mensaje="La propuesta no existe en el sistema";
+  } else {
+  if($prop->getEstadoActual() == 1 || $prop->getEstadoActual() == 2 || $prop->getEstadoActual() == 5){
+    $mensaje="No puede colaborar con esta propuesta";
+  } else {
   if($col->existeCol($params[0], Session::get('usuario_nick'))){
     $mensaje="Usted ya ha colaborado con esta propuesta";
   } else {
@@ -335,6 +341,8 @@ function nuevaColaboracion($params=array()){
     }else $mensaje="Error! No se pudo agregar la colaboracion";
   
   }
+}
+}
 }
   $tpl = Template::getInstance();
   $tpl->asignar('titulo',"Nueva colaboracion");

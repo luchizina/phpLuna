@@ -143,6 +143,7 @@ class Recompensa extends ClaseBase {
    public function menorRec(){
     $cant = 0;
     $id = $this->getId();
+    $stmt = $this->getDB()->prepare( 
         "UPDATE recompensa set limiteUsuarios=? WHERE id=?"); 
         $stmt->bind_param("ii", $cant, $id);
         return $stmt->execute();
