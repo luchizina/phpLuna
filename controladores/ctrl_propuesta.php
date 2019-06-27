@@ -950,18 +950,24 @@ $noti->setUsuario($nombre);
     }
 }
 
-function send_notification($tokens, $message)
+function sendnotification($tokens = array(), $message, $titl,$mensaje)
 {
   $noti = new token_usu();
 $url = 'https://fcm.googleapis.com/fcm/send';
 
 $fields = array(
 'registration_ids' => $tokens,
-'data' => $message
+'data' => $message,
+'notification' => array(
+        'title' => $titl,
+        'body' => sprintf($mensaje.' %s.', date('H:i')),
+        'icon' => 'https://eralash.ru.rsz.io/sites/all/themes/eralash_v5/logo.png?width=192&height=192',
+        'click_action' => 'http://eralash.ru/',
+    )
 );
 
 $headers = array(
-'Authorization:key =  AIzaSyCnTV52lPhHPmZ96xktWjPbt-8R64FsAJU',
+'Authorization:key=AAAAhFFpia8:APA91bFSiGHPTBSXvZmyR8ijvqy9OEQ9KZ7QIhH7c-kNJ3DNi2d_u1S29ucMAfGMPfn2JnnYiMmV49XGcvPOeqUTNJeeytaJhna8PagiEcuq0HhVPeWgH27Cip_bTbbkXg27uU9qj92o',
 'Content-Type: application/json'
 );
 
@@ -981,18 +987,87 @@ $headers = array(
        return $result;
 }
 
-public function propuestasFinalizarUnaSemana(){
+function propuestasNoti(){
  $propuestas = array();
  $propuesta = new propuesta();
  $propuestas = $propuesta->pFUNS();
 $tok = new token_usu();
 $tokens = $tok->getListado();
+$resultados = array();
+   foreach ($tokens as $p) {
+            $tok =  $p->getToken();
+            $resultados[]=$tok;
+        }
+  
 $message = array("message" => "holi");
-$message_status = send_notification($tokens, $message);
+$titl = "jajaja";
+$mensaje = "q te pasa";
+$message_status = $this->sendnotification($resultados, $message, $titl,$mensaje);
+echo $message_status;
+}
+function propuestasPorFinal(){
+ $propuestas = array();
+ $propuesta = new propuesta();
+ $propuestas = $propuesta->pFUNS();
+$tok = new token_usu();
+$tokens = $tok->getListado();
+$resultados = array();
+$resultadosProp = array();
+   foreach ($tokens as $p) {
+            $tok =  $p->getToken();
+            $resultados[]=$tok;
+        }
+foreach ($propuestas as $p) {
+            $prop =  $p->getNombre();
+            $message = array("message" => "holi");
+            $titl = "jajaja";
+            $mensaje = "q te pasa";
+            $message_status = $this->propuestasFinalizar($prop);
+                       
+ }
+
 echo $message_status;
 }
 
+function propuestasFinalizar($prop = "no"){
+  $otra = "/topics/".$prop;
+$noti = new token_usu();
+$message="MUY BIEN";
+$url = 'https://fcm.googleapis.com/fcm/send';
+$titl = "hola";
+$mensaje = "jaja";
+$fields = array(
+'to'  => $otra,
+'data' => $message,
+'notification' => array(
+        'title' => $titl,
+        'body' => sprintf($mensaje.' %s.', date('H:i')),
+        'icon' => 'https://eralash.ru.rsz.io/sites/all/themes/eralash_v5/logo.png?width=192&height=192',
+        'click_action' => 'http://eralash.ru/',
+    )
+);
 
+$headers = array(
+'Authorization:key=AAAAhFFpia8:APA91bFSiGHPTBSXvZmyR8ijvqy9OEQ9KZ7QIhH7c-kNJ3DNi2d_u1S29ucMAfGMPfn2JnnYiMmV49XGcvPOeqUTNJeeytaJhna8PagiEcuq0HhVPeWgH27Cip_bTbbkXg27uU9qj92o',
+'Content-Type: application/json'
+);
+
+       $ch=curl_init();
+       curl_setopt($ch, CURLOPT_URL, $url);
+       curl_setopt($ch, CURLOPT_POST, true);
+       curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+       curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);
+       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+       curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+       $result = curl_exec($ch);
+       if ($result === FALSE) {
+           die('Curl failed: ' . curl_error($ch));
+       }
+       curl_close($ch);
+       return $result;
+
+}
 
 }
 ?>

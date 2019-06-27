@@ -34,6 +34,23 @@ class ClaseBase{
      return $resultados;   
     }
 
+
+    public function getListadoTK(){
+        $sql="select token from $this->tabla ";
+        $resultados=array();
+
+        $resultado =$this->db->query($sql)   
+            or die ("Fallo en la consulta");
+
+        while ( $fila = $resultado->fetch_object() )
+        {
+            
+            $objeto= new $this->modelo($fila);
+            $resultados[]=$objeto;
+        } 
+     return $resultados;   
+    }
+
     public function getListadoProp($pagina)
     {
         $porPag = 9;

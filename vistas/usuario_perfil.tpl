@@ -46,9 +46,10 @@
 <li>Apellido:    {$usuario->getApellido()}</li>
 <li>Nick:    {$usuario->getNick()}</li>
 <li>Correo:    {$usuario->getCorreo()}</li>
+<li><a href="{$url_base}propuesta/otracosa/">otra</a>
+</li>
 </ul>
 </section>
-
    
 
           <div class="col-md-5 probootstrap-animate ">
@@ -155,7 +156,10 @@ function openCity(evt, cityName) {
 </script>
  
 
-
+  {if $usuario->getTipo() == 0}
+  <input type="button" value="Enviar notificaciones a todos" class="btn btn-success" onClick="window.location='{$url_base}propuesta/propuestasNoti/'"/>
+    <input type="button" value="Enviar propuestas por finalizar" class="btn btn-success" onClick="window.location='{$url_base}propuesta/propuestasPorFinal/'"/>
+  {/if}
   <form method="post" action="{$url_base}usuario/notifUsuario">
     {if $usuario->getNotificacion() == 1}
   <input type="checkbox" name="checkNotif" id="checkNotif"> Activar/Desactivar notificaciones<br>

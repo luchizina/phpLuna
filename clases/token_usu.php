@@ -33,7 +33,7 @@ public function agregarToken(){
         $token=$this->getToken();
         $usuario=$this->getUsuario();
         $stmt = $this->getDB()->prepare( 
-            "INSERT INTO token_usu (token,usuario)
+            "REPLACE INTO token_usu (token,usuario)
            VALUES (?,?)" );
         $null = NULL;
         $stmt->bind_param("ss", $token,$usuario);
