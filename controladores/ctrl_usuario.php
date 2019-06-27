@@ -279,7 +279,7 @@ function login(){
 function logout(){
   $usr= new Usuario();
   $usr->logout();
-  $this->redirect("usuario","redirigir");
+  return $this->getUrl("usuario","redirigir");
 }
 
 
@@ -319,8 +319,16 @@ public function nuevoUsuCel(){
     $u->setCelular($_POST['cel']);
     $u->setCorreo($_POST['correo']);
     $u->setPassword($_POST['cont']);
-    $u->setActivo(1);
+    $u->setTipo(1);
+    $u->setActivo(0);
+    $token = md5(uniqid(mt_rand(), false));
+    $u->setToken($token);
     if($u->agregarCel()){
+      $nombreC = $u->getNombre()." ".$u->getApellido();
+      $url="http://localhost/phpLuna/usuario/activarU/".$token;
+      $body = "Para activar su cuenta debe entrar al siguiente enlace: ".$url;
+      $bodyhtml = "Para activar su cuenta haga click aqui <a href='$url'>Activar cuenta</a>";
+      Utils::enviarEmail($u->getCorreo(),$nombreC, $body, $bodyhtml, "Bienvenida a Luna-Activar cuenta");
       $msg = "Usuario registrado";
       $array = ["mensajito"=>$msg];
       $arreglo=["status"=>"ok","message"=>[$array]];
@@ -459,6 +467,55 @@ public function cambiaPass($params=array()){
   $tpl->asignar('token',$token);
   $tpl->mostrar('restablecer',array());
 }
+
+
+
+public function mandarPropsQueVencen(){
+    $propsQueVencen = array();
+    $propuesta = new Propuesta();
+    $props = $propuesta->getListado();
+
+    foreach($props as $p){
+      if($p->traerFechaRestante() >= 7 && $p->traerFechaRestante() <= 14){
+        array_push($propsQueVencen,$p->getNombre());
+      }
+
+    }  
+    $arrlength = count($propsQueVencen);
+     $bodyhtml = "Estas son las propuestas";
+       $bodyhtml = "Hola querido cliente, a continuación, te mostraremos las propuestas que vencen la semana que viene <br>";
+    $bodyhtml = $bodyhtml."<hr>";
+    for($x = 0; $x < $arrlength; $x++) {
+    
+
+    $bodyhtml = $bodyhtml."<h3>".$propsQueVencen[$x]."</h3>";
+    
+}
+  $usuario=new Usuario();
+  $usuarios=$usuario->getListado();
+
+foreach ($usuarios as $usu) {
+$correo = $usu->getCorreo();
+$nombreC = $usu->getNombre()." ".$usu->getApellido();
+      $url="#";
+      $body = "Esto es una prueba";
+    
+      Utils::enviarEmail($correo,$nombreC, $body, $bodyhtml, "Bienvenida a Luna");
+
+}
+
+  
+}
+
+
+
+
+
+
+
+
+
+
 
 }
 ?>

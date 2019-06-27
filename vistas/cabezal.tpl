@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="css/style.min.css">
     <link rel="stylesheet" href="css/busqueda.css">
     <link rel="stylesheet" href="css/custom.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/sweetalert.js"></script>
+        <script src="js/validar.js"></script>
     <link rel="stylesheet" href="css/busca.css">
-    <script src="js/validar.js"></script>
+    
   </head>
       <nav class="navbar navbar-default probootstrap-navbar">
 
@@ -36,7 +39,7 @@
               <li class="dropdown">
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Usuarios</a>
                 <ul class="dropdown-menu">
-                  <li><a href="/phpLuna/usuario/listado/">Listado</a></li>
+                  <li ><a href="/phpLuna/usuario/listado/">Listado</a></li>
                 </ul>
               </li>
               <li class="dropdown">
@@ -78,11 +81,12 @@
               <li class="probootstra-cta-button last"><a href="{$url_regis}" class="btn btn-primary">REGISTRARSE</a></li>
                {else}
                 <li><a href="/phpLuna/usuario/verPerfil/{$usuLogNick}">¡Hola {$usuLogueado}!</a></li>
-                <li class="probootstra-cta-button last"><a href="{$url_logout}" class="btn btn-primary">CERRAR SESIÓN</a></li>
+                <li id="liprueba" class="probootstra-cta-button last cerrarS"><a id="axD" class="btn btn-primary cerrarS2">CERRAR SESIÓN</a></li>
                
                  {/if}
       
             </ul>
           </div>
         </div>
+        
       </nav>

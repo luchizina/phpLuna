@@ -88,7 +88,7 @@
             </table>
           </div>
            <div class="form-group">
-                 <input type="button" name="que" value="Listo!" class="btn btn-primary" onClick="window.location='{$url_base}propuesta/listado'"/>
+                 <input type="button" name="que" value="Listo!" class="btn btn-primary" onClick="window.location='{$url_base}propuesta/menorRecompensa/{$tituloPropuesta}'"/>
               </div>
           </div>
           </div>

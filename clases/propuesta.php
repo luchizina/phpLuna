@@ -326,10 +326,11 @@ $stmt->bind_param("s",$nombre);
 public function actualizarEstadoProp(){
 
     $estado = $this->getEstadoActual();
+    $nombre = $this->getNombre();
     $stmt = $this->getDB()->prepare( 
             "UPDATE propuesta set EstadoActual=? WHERE Nombre=?"); 
            
-        $stmt->bind_param("is", $estado, $this->getNombre());
+        $stmt->bind_param("is", $estado, $nombre);
         return $stmt->execute();
    
 
@@ -427,7 +428,13 @@ public function traerFechaRestante(){
 $now = time();
  
 $datediff = $fechaFin - $now;
-return round($datediff / (60 * 60 * 24));
+$resultado = round($datediff / (60 * 60 * 24))+1;
+   if($resultado == 0){
+  $this->setEstadoActual(5);
+  $this->actualizarEstadoProp();
+
+}
+return $resultado;
 }
 
 

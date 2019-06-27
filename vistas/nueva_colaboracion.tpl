@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -44,8 +43,50 @@
                 <input type="submit" class="btn btn-primary btn-lg" id="guardar" name="guardar" value="Colaborar">
               </div>
             </form>
-            {/if}
+      
           </div>
+          <div class="col-md-6 col-md-push-1 probootstrap-animate">            
+            <h2 style="color:#fff">Recompensas para la propuesta a colaborar</h2>
+            <div class="row">
+            <div class="col-sm-12  col-md-12  main">
+            <div class="table-responsive scrip src">
+            <table class="table table-striped tabla" style=" background-color: #ecececb3">
+              <thead>
+                <tr>
+                  <th style="background-color: #959090; color:#fff">Nombre: </th>
+                  <th style="background-color: #959090; color:#fff">Monto minimo necesario: </th>
+                  <th style="background-color: #959090; color:#fff">Limite de usuarios: </th>
+                  <th style="background-color: #959090; color:#fff">Usuarios actuales: </th>
+                  <th style="background-color: #959090; color:#fff">Descripcion: </th>
+                </tr>
+              </thead>
+              <tbody>
+                 {if $recompensas != null }                 
+                {foreach from=$recompensas item=recompensa}
+                  <tr>
+                    <td>{$recompensa->getNombre()|upper}</td>
+                    <td>{$recompensa->getMontoaSuperar()}</td>
+                    <td>{$recompensa->getLimiteUsuarios()}</td>
+                    <td>{$recompensa->getCantActual()}</td>
+                    <td>{$recompensa->getDescripcion()}</td>
+                  </tr>
+                {/foreach}
+               {/if} 
+               {if  $recompensas == null}                 
+                  <tr>
+                    <td>No hay recompensas para esta propuesta</td>
+                  </tr>
+               {/if} 
+               <tfoot>
+                 <h5 style="color: #fff">Si el limite de usuarios es superado se le otorgara la recompensa anterior a la que el monto ingresado corresponde</h5>
+               </tfoot>
+              </tbody>
+            </table>
+          </div>
+          </div>
+          </div>
+          </div>
+           {/if}
         </div>
         </div>
 

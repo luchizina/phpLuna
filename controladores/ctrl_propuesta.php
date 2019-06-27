@@ -108,9 +108,6 @@ class ControladorPropuesta extends ControladorIndex {
        $tpl->mostrar('propuestas_listado',$datos);
    
    }
-
-
-
    function listadoBusqueda($params = array()){
  $textoBuscado = $params[0];
 $nombreCat = $params[1];
@@ -119,14 +116,11 @@ $nombreCat = $params[1];
        'textoBuscado' => $textoBuscado,
        'nombreCat' => $nombreCat,
        );
-
     $tpl = Template::getInstance();
     $tpl->asignar('textoBuscado',$textoBuscado);
      $tpl->asignar('nombreCat',$nombreCat );
     $tpl->mostrar('propuestas_listadoBusqueda',$datos);
    }
-
-
    
 function listadoPropsAgregadas($params=array()){
   $prop = new Propuesta();
@@ -138,8 +132,6 @@ function listadoPropsAgregadas($params=array()){
        );
    $tpl->mostrar('propuestas_listAgregadas',$datos);
 }
-
-
 function publicarPropuesta($params=array()){
 $prop = new Propuesta();
 $propuesta = $prop->obtenerPorNombreProp($params[0]);
@@ -307,6 +299,12 @@ function nuevaColaboracion($params=array()){
   $recs = $Recompensa->traerRecompensas($params[0]);
   $usu = $Usuario->obtenerPorNick(Session::get('usuario_nick'));
   $prop=$propuesta->obtenerPorNombreProp($params[0]);
+  if($prop == null){
+    $mensaje="La propuesta no existe en el sistema";
+  } else {
+  if($prop->getEstadoActual() == 1 || $prop->getEstadoActual() == 2 || $prop->getEstadoActual() == 5){
+    $mensaje="No puede colaborar con esta propuesta";
+  } else {
   if($col->existeCol($params[0], Session::get('usuario_nick'))){
     $mensaje="Usted ya ha colaborado con esta propuesta";
   } else {
@@ -324,11 +322,9 @@ function nuevaColaboracion($params=array()){
     }
     $this->recursiva($recs, $col, $pos, $prop);
     if($col->agregar()){
-
      
       $usuProp = $Usuario->obtenerPorNick($prop->getUsuario());
       if($usuProp->getNotificacion() == 0){
-
       $this->enviarMailColaboracion($prop,$col);
   }
       array_push($usu->getPropuestasColabora(), $prop);
@@ -346,6 +342,8 @@ function nuevaColaboracion($params=array()){
   
   }
 }
+}
+}
   $tpl = Template::getInstance();
   $tpl->asignar('titulo',"Nueva colaboracion");
   $tpl->asignar('buscar',"");
@@ -355,19 +353,14 @@ function nuevaColaboracion($params=array()){
   $tpl->asignar('recompensas',$recs);
   $tpl->mostrar('nueva_colaboracion',array());
 }
-
 public function enviarMailColaboradores($colabs){
 foreach ($colabs as $usuC) {
 $correo = $usuC->getCorreo();
 $bodyHtml = "Hola Nahuel! este es el correo : $correo";
 $body = "";
 Utils::enviarMail("nambroa@gmail.com","Nahuel Ambroa", $body, $bodyHtml, "Mando correo");
-
-
 }
-
 }
-
 public function enviarMailColaboracion($prop,$col){
   $Usuario = new Usuario();
   $usuProp = $Usuario->obtenerPorNick($prop->getUsuario());
@@ -381,13 +374,15 @@ public function enviarMailColaboracion($prop,$col){
     $nombreC = $nombre." ".$apellido;
       $bodyhtml = "Hola $nombre!, Te han colaborado en $propNomb con $monto pesos, Felicitaciones!";
       Utils::enviarEmail($correo,$nombreC, $body, $bodyhtml, "Aviso de colaboracion");
-
 }
-
-
 public function recursiva($recs, $col, $pos, $prop){
   $r = $recs[$pos];
   $r->setTituloPropuesta($prop);
+  if($r->getLimiteUsuarios() == 0){
+    $r->setCantActual($r->getCantActual() + 1);
+        $col->setRecompensa($r);
+        $r->actualizaCant();
+      } else{
       if($r->getLimiteUsuarios() > $r->getCantActual()){
         $r->setCantActual($r->getCantActual() + 1);
         $col->setRecompensa($r);
@@ -398,6 +393,7 @@ public function recursiva($recs, $col, $pos, $prop){
           $this->recursiva($recs, $col, $pos, $prop);
         }
       }
+    }
   }
 function nuevaColaboracionCel(){
   $col = new Colaboracion();
@@ -486,9 +482,6 @@ function consolita2( $data ) {
         $output = implode( ',', $output);
     echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
 }
-
-
-
 function favoritear(){
     $nomProp = $_POST['nombreProp'];
 $valor = 0;
@@ -496,14 +489,12 @@ $valor = 0;
   $prop = $propuesta->obtenerPorNombreProp($nomProp);
   $usuario = new Usuario();
   $u = $usuario->obtenerPorNick(Session::get('usuario_nick'));
-
   if($prop->isFavoriteada($u->getNick())){
     $propus = array();
     $propus[] = $nomProp;
     $this->desfavoritear($propus);
     
   }else{
-
   if($prop->favoritear($nomProp,Session::get('usuario_nick')))
   {
     $array = $u->getFavoritos();
@@ -535,15 +526,12 @@ function favoritear($params=array()){
   $this->redirect("propuesta","listado");
 } 
 */
-
-
 function detalleProp($params=array()){
 $propuesta = new Propuesta();
 $com = new Comentario();
 $coms = $com->com($params[0]);
 $recom = new recompensa();
 $u = new Usuario();
-
 foreach ($coms as $c) {
   $usu = $u->obtenerPorNick($c->NickUsuario);
   $c->setUsuario($usu);
@@ -553,18 +541,11 @@ foreach ($coms as $c) {
 $prop = $propuesta->obtenerPorNombreProp($params[0]);
 $recompensas = $recom->listarRecompensasPagina($params[0]);
 $imagen = $propuesta->traerImagen($prop->getNombre());
-
-
 $propsCat = $propuesta->propSugeridas($prop->getCategoria(), $prop->getNombre());
-
-
 foreach ($propsCat as $clave => $p) {
     $img = $p->traerImagen($p->getNombre());
     $p->setImagen($img);
-
     } 
-
-
     $tpl = Template::getInstance();
     $prop->setImagen($imagen);
   $tpl->asignar('recompensas', $recompensas);
@@ -573,7 +554,6 @@ foreach ($propsCat as $clave => $p) {
   $tpl->asignar('comentarios', $coms);
   $tpl->mostrar('propuestas_detalle',$prop);
 }
-
 function listComs(){
 $propu = $_POST['prop'];
 $com = new Comentario();
@@ -593,19 +573,15 @@ $c = $coms[0];
   }
 echo $c->getId().'-'.$c->getTexto().'-'.$c->getUsuario()->getNick().'-'.$i.'-'.$c->getLikes()."-".$log;
 }
-
 function listProps(){
   $pag = $_POST['p'];
    $p = new Propuesta();
   if(isset($_POST['nombreCat'])){
     if($_POST['nombreCat'] == "todas"){
-
-
 $propuestasCat = $p->getListadoCat($_POST['nombreProp']);
     $propuestasDesc = $p->getListadoDesc($_POST['nombreProp']);
     $propuestasTit = $p->getListadoTit($_POST['nombreProp']);
     $e = array_unique((array_merge($propuestasCat, $propuestasDesc, $propuestasTit)));
-
   }else{
     $propuestasPorCat = $p->getPropsPorCategoria($_POST['nombreCat'], $_POST['nombreProp']);
   $e = array_unique((array_merge($propuestasPorCat)));
@@ -623,8 +599,6 @@ $propuestasCat = $p->getListadoCat($_POST['nombreProp']);
     } 
   }
   }else{
-
-
  
   $e = $p->getListadoProp($pag);
   foreach ($e as $clave => $p) {
@@ -636,27 +610,22 @@ $propuestasCat = $p->getListadoCat($_POST['nombreProp']);
       $p->UsuFav = "si";
     }
     $p->Tiemrest = $p->traerFechaRestante();
+ 
   }
   
 }
 $json =  json_encode($e);
   echo $json;
  }
-
-
-
-
 function cantPag(){
   $p = new Propuesta();
   $c = $p->cantPagProp();
   echo $c;
 }
-
 function e(){
   $tpl = Template::getInstance();
   $tpl->mostrar('e',array());
 }
-
 function desfavoritear($params=array()){
   $propuesta = new Propuesta();
   $prop = $propuesta->obtenerPorNombreProp($params[0]);
@@ -685,9 +654,6 @@ function desfavoritear($params=array()){
   }
  return true;
 }
-
-
-
 function comentar(){
   $propuesta = new Propuesta();
   $prop = $propuesta->obtenerPorNombreProp($_POST['nombre']); 
@@ -739,9 +705,19 @@ function registrarRecom($params = array())
     $tpl->mostrar('registrar_recomp',array());
   }
 }
+
+function menorRecompensa($a = array()){
+  $propuesta = $a[0];
+  $Recompensa = new Recompensa();
+  $recs = $Recompensa->traerRecompensas($propuesta);
+  $menorRec = $recs[0];
+  $menorRec->setLimiteUsuarios(0);
+  $menorRec->menorRec();
+  $this->redirect("propuesta","listado");
+}
+
 function comentarEnPagina(){
   $propuesta = new Propuesta();
-
   if(isset($_POST["nomPropCom"])){
   $prop = $propuesta->obtenerPorNombreProp($_POST['nomPropCom']);
   $usuario = new Usuario();
@@ -760,7 +736,6 @@ echo '</script>';
      }
 }
 }
-
 function borrarComEnPagina(){
   $comentario = new Comentario();
    $num = (int)$_POST["idCom"];
@@ -771,9 +746,6 @@ function borrarComEnPagina(){
      $this->redirect("propuesta","detalleProp",$algo);
   }
 }
-
-
-
 function likeComentPagina(){
   //var_dump($_POST);
   $num =(int)$_POST['idCom'];
@@ -880,8 +852,6 @@ function filtrar($params=array())
     $array[] = $listaFinal;
     $this->listado($array);
 }
-
-
 function dislikeCometario(){
   $num =(int)$_POST['idCom'];
   $usuario = new Usuario();
@@ -903,7 +873,6 @@ function dislikeCometario(){
     echo json_encode($arreglo);
   }
 }
-
 function verrecPrecio(){
     $r = new Recompensa();
     $recs = $r->traerRecompensasAjax($_POST["propuesta"], $_POST["monto"]);
@@ -913,7 +882,6 @@ function verrecPrecio(){
     echo "No hay recompensa para ese monto";
   }
   }
-
   function dioFav(){
     $nom = $_POST['prop'];
     $p = new Propuesta();
@@ -924,7 +892,6 @@ function verrecPrecio(){
       echo "0";
     }
   }
-
   function traeLog(){
     echo Session::get('usuario_nick');
   }
