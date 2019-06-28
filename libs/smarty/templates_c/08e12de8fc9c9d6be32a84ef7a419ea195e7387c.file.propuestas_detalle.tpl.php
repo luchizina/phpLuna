@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-25 17:58:02
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-28 15:19:31
          compiled from "vistas\propuestas_detalle.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:197275d1285f36e9448-65328692%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '08e12de8fc9c9d6be32a84ef7a419ea195e7387c' => 
     array (
       0 => 'vistas\\propuestas_detalle.tpl',
-      1 => 1561496279,
+      1 => 1561745880,
       2 => 'file',
     ),
   ),
@@ -24,6 +24,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'comentarios' => 0,
     'com' => 0,
     'usuLogNick' => 0,
+    'NickLog' => 0,
     'recompensas' => 0,
     'rec' => 0,
     'propsCatego' => 0,
@@ -125,8 +126,14 @@ propuesta/otracosa/">otra</a>
                  <p name="Desc"></p> 
               </div>
                 <div class="form-group">
-                    <label for="na">Progreso actual:</label>
-                  
+                    <label for="na">Progreso actual: $<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getMontoActual();?>
+</label>
+               <div class="progress" style="max-width: 400px">
+                    <div class="progress-bar progress-bar-s2" data-percent="<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->calc();?>
+"></div>
+                  </div>
+                  <a href="/phpLuna/propuesta/nuevaColaboracion/<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
+" class="btn btn-primary btn-black">Colaborar!</a>
                   </div>
 
           </div>
@@ -161,7 +168,6 @@ $_smarty_tpl->tpl_vars['com']->_loop = true;
 ');">
                          <i class="icon-trash"></i></a>  
          <?php }?>
-
          <a class="btn" onclick="likeComentario('<?php echo $_smarty_tpl->tpl_vars['usuLogNick']->value;?>
 ',<?php echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
 );">
@@ -170,11 +176,11 @@ echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
 "><?php echo $_smarty_tpl->tpl_vars['com']->value->getLikes();?>
 </span></a>
           </div>
- 
       <?php } ?>
 
 </div>
-<div class="jajaja">
+<?php if ($_smarty_tpl->tpl_vars['NickLog']->value!=''||$_smarty_tpl->tpl_vars['NickLog']->value!=null) {?>
+<div class="jajaja"> 
   <div class="jaja">
       <form method="post" class="probootstrap-form">
         <textarea rows="5" cols="57" name="textoComentario" id="textoComentario"></textarea>
@@ -186,6 +192,7 @@ echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
     </form>
     </div>
   </div>
+  <?php }?>
 
 <h2 class="blanca">Recompensas</h2>
 <table class="table table-striped tabla" style=" background-color: #ecececb3">

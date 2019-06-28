@@ -135,8 +135,11 @@ function nuevo(){
       $url="http://localhost/phpLuna/usuario/activarU/".$token;
       $body = "Para activar su cuenta debe entrar al siguiente enlace: ".$url;
       $bodyhtml = "Para activar su cuenta haga click aqui <a href='$url'>Activar cuenta</a>";
-      Utils::enviarEmail($usr->getCorreo(),$nombreC, $body, $bodyhtml, "Bienvenida a Luna-Activar cuenta");
-      $this->redirect("usuario","aviso");
+      if(Utils::enviarEmail($usr->getCorreo(),$nombreC, $body, $bodyhtml, "Bienvenida a Luna-Activar cuenta")){
+        $this->redirect("usuario","aviso");
+      } else {
+        $this->redirect("usuario","correoFalso");
+      }
       exit;
     }else{
       $mensaje="Error! No se pudo agregar el usuario";
@@ -153,6 +156,11 @@ function nuevo(){
 public function aviso(){
   $tpl = Template::getInstance();
   $tpl->mostrar('aviso', array());
+}
+
+public function correoFalso(){
+  $tpl = Template::getInstance();
+  $tpl->mostrar('correoFalso', array());
 }
 
 public function activarU($a = array()){
@@ -205,7 +213,6 @@ public function existeCi(){
   $usuario  = new Usuario();
   if($usuario->ci($_POST['ci'])){
     echo "Cedula en uso";  
-    return true; 
   }
 }
 }
@@ -214,7 +221,6 @@ public function existeCorreo(){
   $usuario  = new Usuario();
   if($usuario->correo($_POST['correo'])){
     echo "Correo en uso";  
-    return true; 
   }
 }
 }
@@ -223,7 +229,6 @@ public function existeNick(){
   $usuario  = new Usuario();
   if($usuario->nick($_POST['nick'])){
     echo "Nick en uso"; 
-    return true;  
   }
 }
 }

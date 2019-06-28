@@ -103,15 +103,14 @@
             <a id="{$com->getId()}" class="btn" onclick="borrarComent('{$com->getId()}','{$propuesta->getNombre()}');">
                          <i class="icon-trash"></i></a>  
          {/if}
-
          <a class="btn" onclick="likeComentario('{$usuLogNick}',{$com->getId()});">
 <i class="fa fa-thumbs-up"></i> <span id="{$usuLogNick}{$com->getId()}">{$com->getLikes()}</span></a>
           </div>
- 
       {/foreach}
 
 </div>
-<div class="jajaja">
+{if $NickLog != "" || $NickLog != null}
+<div class="jajaja"> 
   <div class="jaja">
       <form method="post" class="probootstrap-form">
         <textarea rows="5" cols="57" name="textoComentario" id="textoComentario"></textarea>
@@ -121,6 +120,7 @@
     </form>
     </div>
   </div>
+  {/if}
 
 <h2 class="blanca">Recompensas</h2>
 <table class="table table-striped tabla" style=" background-color: #ecececb3">

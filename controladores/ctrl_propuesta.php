@@ -299,6 +299,9 @@ function nuevaColaboracion($params=array()){
   $recs = $Recompensa->traerRecompensas($params[0]);
   $usu = $Usuario->obtenerPorNick(Session::get('usuario_nick'));
   $prop=$propuesta->obtenerPorNombreProp($params[0]);
+  if($usu == '' || $usu == null){
+    $mensaje="No puedes colaborar a una propuesta sin estar logueado";
+  }else {
   if($prop == null){
     $mensaje="La propuesta no existe en el sistema";
   } else {
@@ -341,6 +344,7 @@ function nuevaColaboracion($params=array()){
     }else $mensaje="Error! No se pudo agregar la colaboracion";
   
   }
+}
 }
 }
 }
@@ -548,6 +552,7 @@ foreach ($propsCat as $clave => $p) {
     } 
     $tpl = Template::getInstance();
     $prop->setImagen($imagen);
+  $tpl->asignar('NickLog', SESSION::get('usuario_nick'));
   $tpl->asignar('recompensas', $recompensas);
   $tpl->asignar('propuesta', $prop);
   $tpl->asignar('propsCatego', $propsCat);

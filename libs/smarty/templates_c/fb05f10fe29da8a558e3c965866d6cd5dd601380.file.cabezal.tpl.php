@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-18 19:36:07
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-28 14:55:50
          compiled from "vistas\cabezal.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:189715d096757cae348-07688405%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'fb05f10fe29da8a558e3c965866d6cd5dd601380' => 
     array (
       0 => 'vistas\\cabezal.tpl',
-      1 => 1560804746,
+      1 => 1561744094,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5d0967582c3078_55964230',
   'variables' => 
   array (
     'usuLogNick' => 0,
@@ -25,11 +27,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'url_login' => 0,
     'url_regis' => 0,
     'usuLogueado' => 0,
-    'url_logout' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5d0967582c3078_55964230',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5d0967582c3078_55964230')) {function content_5d0967582c3078_55964230($_smarty_tpl) {?>
  <head>
@@ -40,10 +39,17 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <link rel="stylesheet" href="css/style.min.css">
     <link rel="stylesheet" href="css/busqueda.css">
     <link rel="stylesheet" href="css/custom.css">
-    <link rel="stylesheet" href="css/busca.css">
     <?php echo '<script'; ?>
+ src="js/jquery.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/sweetalert.js"><?php echo '</script'; ?>
+>
+        <?php echo '<script'; ?>
  src="js/validar.js"><?php echo '</script'; ?>
 >
+    <link rel="stylesheet" href="css/busca.css">
+    
   </head>
       <nav class="navbar navbar-default probootstrap-navbar">
 
@@ -71,7 +77,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
               <li class="dropdown">
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Usuarios</a>
                 <ul class="dropdown-menu">
-                  <li><a href="/phpLuna/usuario/listado/">Listado</a></li>
+                  <li ><a href="/phpLuna/usuario/listado/">Listado</a></li>
                 </ul>
               </li>
               <li class="dropdown">
@@ -124,13 +130,13 @@ $_smarty_tpl->tpl_vars['cat']->_loop = true;
                 <li><a href="/phpLuna/usuario/verPerfil/<?php echo $_smarty_tpl->tpl_vars['usuLogNick']->value;?>
 ">¡Hola <?php echo $_smarty_tpl->tpl_vars['usuLogueado']->value;?>
 !</a></li>
-                <li class="probootstra-cta-button last"><a href="<?php echo $_smarty_tpl->tpl_vars['url_logout']->value;?>
-" class="btn btn-primary">CERRAR SESIÓN</a></li>
+                <li id="liprueba" class="probootstra-cta-button last cerrarS"><a id="axD" class="btn btn-primary cerrarS2">CERRAR SESIÓN</a></li>
                
                  <?php }?>
       
             </ul>
           </div>
         </div>
+        
       </nav>
 <?php }} ?>

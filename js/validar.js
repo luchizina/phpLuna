@@ -63,7 +63,7 @@ function listProp(p,nombreCat,nombreProp){
         html += '<h2><a href="/phpLuna/propuesta/detalleProp/'+res[i]['Nombre']+'/">'+res[i]['Nombre']+'</a>';
        
         html += '</h2>';
-        if(res[i]['Tiemrest'] > 1){
+        if(res[i]['Tiemrest'] > 1){ 
         html += '<div class="probootstrap-date"><i class="fa fa-history"></i>Quedan '+res[i]['Tiemrest']+' dias restantes</div>';
         html += '<p><a href="/phpLuna/propuesta/nuevaColaboracion/'+res[i]['Nombre']+'" class="btn btn-primary btn-black">Colaborar!</a>'
       }
@@ -273,6 +273,8 @@ function dioFav(prop){
 }
 
 function listCom(nombre, url){
+    console.log(nombre);
+    console.log(url),
           $.ajax({
             url: url+'propuesta/listComs/',
             data: 'prop='+nombre,
@@ -366,7 +368,10 @@ function listCom(nombre, url){
 
 
 function likeComentario(usuario, idComent){
-
+  if(usuario === null || usuario === ''){
+    alert("No puedes dar like a un comentario sin estar logueado");
+  }
+  else {
 $.ajax({
 		url:"/phpLuna/propuesta/likeComentPagina",
 		method: "POST",
@@ -381,6 +386,7 @@ $.ajax({
 			//document.getElementById("message1").style.display = "block";
 		}
 	});
+}
 }
 
 
