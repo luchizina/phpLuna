@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-28 15:40:21
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-28 17:10:36
          compiled from "vistas\nueva_colaboracion.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:20143402585d16571b652862-19792326%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'bd8d4aeb4edb11e2b85b54ed7f61b912892d7854' => 
     array (
       0 => 'vistas\\nueva_colaboracion.tpl',
-      1 => 1561747217,
+      1 => 1561751737,
       2 => 'file',
     ),
   ),
@@ -151,7 +151,6 @@ $_smarty_tpl->tpl_vars['recompensa']->_loop = true;
         var propuesta = window.location.pathname;
         var array = propuesta.split('/');
         var nombre = array[4];
-        console.log(monto);
         if(monto < m){
           $('#mensajito').html("Debe colaborar con un monto mayor a "+ m);
           $('#guardar').hide();

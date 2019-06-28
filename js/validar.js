@@ -579,3 +579,35 @@ $("#avisaFor").html("Cedula entre 7 y 8 caracteres");
 }
 catch(ex) {throw(ex)}
 }
+
+function validarLimite(){
+  let limite = $('#limite').val();
+  let monto = $('#monto').val();
+  if(limite < 1){
+    $('#limite').css("border", "3px solid red");
+    $('#botoncito').hide();
+    $('#limiteU').html("No puede ingresar numero menor o igual a 0 o dejar vacio el campo");
+  } else {
+    $('#limite').css("border", "3px solid green");
+    $('#limiteU').html("");
+  }
+  if(monto > 0 && limite > 0){
+    $('#botoncito').show();
+  }
+}
+
+function validarMonto(){
+  let monto = $('#monto').val();
+  let limite = $('#limite').val();
+  if(monto < 1){
+    $('#monto').css("border", "3px solid red");
+    $('#botoncito').hide();
+    $('#montoS').html("No puede ingresar numero menor o igual a 0 o dejar vacio el campo");
+  } else {
+    $('#monto').css("border", "3px solid green");
+    $('#montoS').html("");
+  }
+  if(monto > 0 && limite > 0){
+    $('#botoncito').show();
+  }
+}
