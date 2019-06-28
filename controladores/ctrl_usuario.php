@@ -125,7 +125,7 @@ function nuevo(){
     $usr->setArchivo($_FILES['archivo']['tmp_name']);
     $usr->setImagen($_FILES['archivo']['name']);
     $usr->setTipoImg($_FILES['archivo']['type']);
-     $usr->setTipo(1);
+    $usr->setTipo(1);
     $usr->setCI($_POST["ci"]);
     $usr->setActivo(0);
     $token = md5(uniqid(mt_rand(), false));
@@ -312,13 +312,17 @@ public function nuevoUsuCel(){
       $arreglo=["status"=>"error","message"=>[$array]];
             echo json_encode($arreglo);
         } else {
+    
+    $u->setImagen($_POST['nombreImg']);
+    $u->setTipoImg($_POST['tipoImg']);  
+    $u->setArchivo(base64_decode($_POST['archivo']));
     $u->setNick($_POST['nick']);
     $u->setNombre($_POST['nombre']);
     $u->setApellido($_POST['ape']);
     $u->setCI($_POST['ci']);
     $u->setCelular($_POST['cel']);
     $u->setCorreo($_POST['correo']);
-    $u->setPassword($_POST['cont']);
+    $u->setPassword($_POST['cont']); 
     $u->setTipo(1);
     $u->setActivo(0);
     $token = md5(uniqid(mt_rand(), false));
@@ -339,7 +343,7 @@ public function nuevoUsuCel(){
       $arreglo=["status"=>"error","message"=>[$array]];
             echo json_encode($arreglo);
     }
-    }
+    } 
     }
     }
    // echo json_encode($json_registration);
