@@ -1,18 +1,19 @@
 <?php  
-require "clases/clase_base.php";
-require "clases/propuesta.php";
+require_once "clases/clase_base.php";
+require_once "clases/propuesta.php";
 //require "clases/estados.php";
 //require "clases/list_estado.php";
-require "clases/listaestados.php";
-require "clases/recompensa.php";
-require "clases/usuario.php";
-require "clases/categoria.php";
-require "clases/comentario.php";
-require "clases/colaboracion.php";
+require_once "clases/listaestados.php";
+require_once "clases/recompensa.php";
+require_once "clases/usuario.php";
+require_once "clases/categoria.php";
+require_once "clases/comentario.php";
+require_once "clases/colaboracion.php";
 require_once('clases/template.php');
 require_once('clases/Utils.php');
 require_once('clases/session.php');
 require_once('clases/auth.php');
+require_once('clases/token_usu.php');
 ini_set('display_errors', 'On');
 date_default_timezone_set('UTC');
 date_default_timezone_set("America/Montevideo");
@@ -107,6 +108,20 @@ class ControladorPropuesta extends ControladorIndex {
        $tpl->mostrar('propuestas_listado',$datos);
    
    }
+   function listadoBusqueda($params = array()){
+ $textoBuscado = $params[0];
+$nombreCat = $params[1];
+     $datos = array(
+     
+       'textoBuscado' => $textoBuscado,
+       'nombreCat' => $nombreCat,
+       );
+    $tpl = Template::getInstance();
+    $tpl->asignar('textoBuscado',$textoBuscado);
+     $tpl->asignar('nombreCat',$nombreCat );
+    $tpl->mostrar('propuestas_listadoBusqueda',$datos);
+   }
+   
 function listadoPropsAgregadas($params=array()){
   $prop = new Propuesta();
   $propsAgre = $prop->getListadoAgregadas($params[0]);
@@ -121,7 +136,10 @@ function publicarPropuesta($params=array()){
 $prop = new Propuesta();
 $propuesta = $prop->obtenerPorNombreProp($params[0]);
 $propuesta->setEstadoActual(3);
+$fecha =  date("Y-m-d");
+$propuesta->setFechaPublicada($fecha);
 $propuesta->actualizarEstadoProp();
+$propuesta->actualizarFechaPublicada();
 $this->redirect("propuesta","listado");
 }
 function cancelarPropuesta($params=array()){
@@ -176,11 +194,15 @@ function consolita( $data ) {
     $usr = new Usuario();
   $prop= new Propuesta();
     $categ = new categoria();
+ 
+    
   $prop->setNombre($_POST["nombre"]);
   $prop->setDescripcion($_POST["desc"]);
     $fecha =  date("Y-m-d");
-  $prop->setFechaPublicada($fecha);
+  $prop->setFechaAgregada($fecha);
   $prop->setMonto($_POST["monto"]);
+  $date = date("Y-m-d", strtotime($_POST["fec"]));
+  $prop->setFechaFinalizacion($date);
     $prop->setCategoria($categ->obtenerPorNombreCat($_POST["catego"]));
     $prop->setUsuario($usr->obtenerPorNick(Session::get('usuario_nick')));
   $prop->setMontoActual(0);
@@ -188,11 +210,12 @@ function consolita( $data ) {
     $arch =($_FILES['archivo']['tmp_name']);
     $img =($_FILES['archivo']['name']);
     $tipo = ($_FILES['archivo']['type']);
-    $permitidos = array("image/jpg", "image/jpeg", "image/png");
+    $permitidos = array("image/jpg", "image/jpeg");
         $target='';
         if(in_array($tipo, $permitidos)){
-            //$target = "imgUsus/".basename($img);
-            $extension=end(explode(".", $img));
+            //$target = "imgUsus/".basename($img)
+          $hola = explode(".", $img);
+            $extension=end($hola);
             //rename($target, $nick.".".$extension);
             $target = "imgProps/".$prop->getNombre().".".$extension;
         } else {
@@ -276,13 +299,22 @@ function nuevaColaboracion($params=array()){
   $recs = $Recompensa->traerRecompensas($params[0]);
   $usu = $Usuario->obtenerPorNick(Session::get('usuario_nick'));
   $prop=$propuesta->obtenerPorNombreProp($params[0]);
+  if($prop == null){
+    $mensaje="La propuesta no existe en el sistema";
+  } else {
+  if($prop->getEstadoActual() == 1 || $prop->getEstadoActual() == 2 || $prop->getEstadoActual() == 5){
+    $mensaje="No puede colaborar con esta propuesta";
+  } else {
+  if($col->existeCol($params[0], Session::get('usuario_nick'))){
+    $mensaje="Usted ya ha colaborado con esta propuesta";
+  } else {
   //$rec = $Recompensa->obtenerPorId($_POST['rec']);
   if(isset($_POST["monto"])){
     $col->setMonto($_POST["monto"]);
     $col->setFecha(date("Y-m-d"));
     $col->setUsuario($usu);
     $col->setTituloPropuesta($prop);
-    //$col->setRecompensa($Recompensa->obtenerPorId($_POST['rec']));
+    //$col->setRecompensa($Recompensa->obtenerPorId($_POST['rec']))
     foreach ($recs as $clave=>$r) {
       if($col->getMonto() >= $r->getMontoaSuperar()){
         $pos = $clave;
@@ -290,19 +322,28 @@ function nuevaColaboracion($params=array()){
     }
     $this->recursiva($recs, $col, $pos, $prop);
     if($col->agregar()){
+     
       $usuProp = $Usuario->obtenerPorNick($prop->getUsuario());
       if($usuProp->getNotificacion() == 0){
-
       $this->enviarMailColaboracion($prop,$col);
   }
       array_push($usu->getPropuestasColabora(), $prop);
       $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
       $prop->actualizaMonto();
+       if($prop->getMontoActual()>=$prop->getMonto()){
+        $colaboradores = $usu->traerColaboradores($prop->getNombre());
+        $this->enviarMailColaboradores($colaboradores);
+        $prop->setEstadoActual(4);
+        $prop->actualizarEstadoProp();
+      }
       $this->redirect("propuesta","listado");
       exit;
     }else $mensaje="Error! No se pudo agregar la colaboracion";
   
   }
+}
+}
+}
   $tpl = Template::getInstance();
   $tpl->asignar('titulo',"Nueva colaboracion");
   $tpl->asignar('buscar',"");
@@ -312,28 +353,36 @@ function nuevaColaboracion($params=array()){
   $tpl->asignar('recompensas',$recs);
   $tpl->mostrar('nueva_colaboracion',array());
 }
-
-
-
+public function enviarMailColaboradores($colabs){
+foreach ($colabs as $usuC) {
+$correo = $usuC->getCorreo();
+$bodyHtml = "Hola Nahuel! este es el correo : $correo";
+$body = "";
+Utils::enviarMail("nambroa@gmail.com","Nahuel Ambroa", $body, $bodyHtml, "Mando correo");
+}
+}
 public function enviarMailColaboracion($prop,$col){
   $Usuario = new Usuario();
   $usuProp = $Usuario->obtenerPorNick($prop->getUsuario());
   $correo = $usuProp->getCorreo();
   $nombre = $usuProp->getNombre();
+  $apellido = $usuProp->getApellido();
   $propNomb = $prop->getNombre();
   $monto = $col->getMonto();
   
     $body = "";
     $nombreC = $nombre." ".$apellido;
       $bodyhtml = "Hola $nombre!, Te han colaborado en $propNomb con $monto pesos, Felicitaciones!";
-      Utils::enviarEmail($correo,$nombreC, $body, $bodyhtml);
-
+      Utils::enviarEmail($correo,$nombreC, $body, $bodyhtml, "Aviso de colaboracion");
 }
-
-
 public function recursiva($recs, $col, $pos, $prop){
   $r = $recs[$pos];
   $r->setTituloPropuesta($prop);
+  if($r->getLimiteUsuarios() == 0){
+    $r->setCantActual($r->getCantActual() + 1);
+        $col->setRecompensa($r);
+        $r->actualizaCant();
+      } else{
       if($r->getLimiteUsuarios() > $r->getCantActual()){
         $r->setCantActual($r->getCantActual() + 1);
         $col->setRecompensa($r);
@@ -344,20 +393,17 @@ public function recursiva($recs, $col, $pos, $prop){
           $this->recursiva($recs, $col, $pos, $prop);
         }
       }
+    }
   }
 function nuevaColaboracionCel(){
   $col = new Colaboracion();
   $Usuario = new Usuario();
   $propuesta = new Propuesta();
   $Recompensa = new Recompensa();
-  //$recs = $Recompensa->traerRecompensas($_POST["nombre"]);
-  //$usu = $Usuario->obtenerPorMail($_POST['mail']);
-  //$prop=$propuesta->obtenerPorNombreProp($_POST["nombre"]);
-   //$col->setMonto($_POST["monto"]);
-  $recs = $Recompensa->traerRecompensas("nueva propb");
-  $usu = $Usuario->obtenerPorMail("nambroa@gmail.com");
-  $prop=$propuesta->obtenerPorNombreProp("nueva propb");
-  $col->setMonto(500);
+  $recs = $Recompensa->traerRecompensas($_POST["nombre"]);
+  $usu = $Usuario->obtenerPorMail($_POST['mail']);
+  $prop=$propuesta->obtenerPorNombreProp($_POST["nombre"]);
+  $col->setMonto($_POST["monto"]);
     $col->setFecha(date("Y-m-d"));
     $col->setUsuario($usu);
     $col->setTituloPropuesta($prop);
@@ -368,8 +414,7 @@ function nuevaColaboracionCel(){
     }
     $this->recursiva($recs, $col, $pos, $prop);
     if($col->agregar()){
-     //$prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
-      $prop->setMontoActual($prop->getMontoActual() + 500);
+    $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
       $prop->actualizaMonto();
       $msg = "que rica compa te la jugaste";
       $array = ["mensajito"=>$msg];
@@ -437,9 +482,6 @@ function consolita2( $data ) {
         $output = implode( ',', $output);
     echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
 }
-
-
-
 function favoritear(){
     $nomProp = $_POST['nombreProp'];
 $valor = 0;
@@ -447,14 +489,12 @@ $valor = 0;
   $prop = $propuesta->obtenerPorNombreProp($nomProp);
   $usuario = new Usuario();
   $u = $usuario->obtenerPorNick(Session::get('usuario_nick'));
-
   if($prop->isFavoriteada($u->getNick())){
     $propus = array();
     $propus[] = $nomProp;
     $this->desfavoritear($propus);
     
   }else{
-
   if($prop->favoritear($nomProp,Session::get('usuario_nick')))
   {
     $array = $u->getFavoritos();
@@ -486,13 +526,11 @@ function favoritear($params=array()){
   $this->redirect("propuesta","listado");
 } 
 */
-
-
 function detalleProp($params=array()){
 $propuesta = new Propuesta();
 $com = new Comentario();
 $coms = $com->com($params[0]);
-
+$recom = new recompensa();
 $u = new Usuario();
 foreach ($coms as $c) {
   $usu = $u->obtenerPorNick($c->NickUsuario);
@@ -501,19 +539,27 @@ foreach ($coms as $c) {
   $c->setLike($valor["cant"]);
 }
 $prop = $propuesta->obtenerPorNombreProp($params[0]);
+$recompensas = $recom->listarRecompensasPagina($params[0]);
 $imagen = $propuesta->traerImagen($prop->getNombre());
+$propsCat = $propuesta->propSugeridas($prop->getCategoria(), $prop->getNombre());
+foreach ($propsCat as $clave => $p) {
+    $img = $p->traerImagen($p->getNombre());
+    $p->setImagen($img);
+    } 
     $tpl = Template::getInstance();
     $prop->setImagen($imagen);
+  $tpl->asignar('recompensas', $recompensas);
   $tpl->asignar('propuesta', $prop);
+  $tpl->asignar('propsCatego', $propsCat);
   $tpl->asignar('comentarios', $coms);
   $tpl->mostrar('propuestas_detalle',$prop);
 }
-
-function listComs($params=array()){
+function listComs(){
+$propu = $_POST['prop'];
 $com = new Comentario();
-$coms = $com->com2($params[0]);
+$coms = $com->com2($propu);
 $u = new Usuario();
-$log = $_SESSION['usuario_nick'];
+$log = Session::get('usuario_nick');
 $c = $coms[0];
   $usu = $u->obtenerPorNick($c->NickUsuario);
   $c->setUsuario($usu);
@@ -525,9 +571,61 @@ $c = $coms[0];
   } else {
     $i = "./".$c->getUsuario()->getImagen();
   }
-  echo $c->getId()."-".$c->getTexto()."-".$c->getUsuario()->getNick()."-".$i."-".$c->getLikes()."-".$log;
+echo $c->getId().'-'.$c->getTexto().'-'.$c->getUsuario()->getNick().'-'.$i.'-'.$c->getLikes()."-".$log;
 }
-
+function listProps(){
+  $pag = $_POST['p'];
+   $p = new Propuesta();
+  if(isset($_POST['nombreCat'])){
+    if($_POST['nombreCat'] == "todas"){
+$propuestasCat = $p->getListadoCat($_POST['nombreProp']);
+    $propuestasDesc = $p->getListadoDesc($_POST['nombreProp']);
+    $propuestasTit = $p->getListadoTit($_POST['nombreProp']);
+    $e = array_unique((array_merge($propuestasCat, $propuestasDesc, $propuestasTit)));
+  }else{
+    $propuestasPorCat = $p->getPropsPorCategoria($_POST['nombreCat'], $_POST['nombreProp']);
+  $e = array_unique((array_merge($propuestasPorCat)));
+ 
+  }
+     // $propuestasPorCat = $prop->getPropsPorCategoria($params[0], $texto);
+  foreach ($e as $clave => $p) {
+    $img = $p->traerImagen($p->getNombre());
+    $p->setImagen($img);
+    $propu = $p->obtenerPorNombreProp($p->getNombre());
+    $p->Tiemrest = $p->traerFechaRestante();
+    if($propu->isFavoriteada(Session::get('usuario_nick'))){
+      //$fav = $p->getNombre();
+      $p->UsuFav = "si";
+    } 
+  }
+  }else{
+ 
+  $e = $p->getListadoProp($pag);
+  foreach ($e as $clave => $p) {
+    $img = $p->traerImagen($p->getNombre());
+    $p->setImagen($img);
+    $propu = $p->obtenerPorNombreProp($p->getNombre());
+    if($propu->isFavoriteada(Session::get('usuario_nick'))){
+      //$fav = $p->getNombre();
+      $p->UsuFav = "si";
+    }
+    $p->Tiemrest = $p->traerFechaRestante();
+ 
+  }
+  
+}
+$json =  json_encode($e);
+  echo $json;
+ }
+function cantPag(){
+  $p = new Propuesta();
+  $c = $p->cantPagProp();
+  echo $c;
+}
+function e(){
+  $tpl = Template::getInstance();
+  $tpl->mostrar('e',array());
+}
 function desfavoritear($params=array()){
   $propuesta = new Propuesta();
   $prop = $propuesta->obtenerPorNombreProp($params[0]);
@@ -556,9 +654,6 @@ function desfavoritear($params=array()){
   }
  return true;
 }
-
-
-
 function comentar(){
   $propuesta = new Propuesta();
   $prop = $propuesta->obtenerPorNombreProp($_POST['nombre']); 
@@ -610,9 +705,19 @@ function registrarRecom($params = array())
     $tpl->mostrar('registrar_recomp',array());
   }
 }
+
+function menorRecompensa($a = array()){
+  $propuesta = $a[0];
+  $Recompensa = new Recompensa();
+  $recs = $Recompensa->traerRecompensas($propuesta);
+  $menorRec = $recs[0];
+  $menorRec->setLimiteUsuarios(0);
+  $menorRec->menorRec();
+  $this->redirect("propuesta","listado");
+}
+
 function comentarEnPagina(){
   $propuesta = new Propuesta();
-
   if(isset($_POST["nomPropCom"])){
   $prop = $propuesta->obtenerPorNombreProp($_POST['nomPropCom']);
   $usuario = new Usuario();
@@ -631,7 +736,6 @@ echo '</script>';
      }
 }
 }
-
 function borrarComEnPagina(){
   $comentario = new Comentario();
    $num = (int)$_POST["idCom"];
@@ -728,13 +832,21 @@ function chequearLikePropCel(){
 }
 function filtrar($params=array())
 {
-    $texto = $params[0];
+    $texto = $params[1];
+    //$this->consolita2($params[0]);
     $listaFinal = array();
     $prop = new Propuesta();
+    if($params[0] == "todas"){
     $propuestasCat = $prop->getListadoCat($texto);
     $propuestasDesc = $prop->getListadoDesc($texto);
     $propuestasTit = $prop->getListadoTit($texto);
+    
     $listaFinal = array_unique((array_merge($propuestasCat, $propuestasDesc, $propuestasTit)));
+    }else{
+      $propuestasPorCat = $prop->getPropsPorCategoria($params[0], $texto);
+     
+      $listaFinal = array_unique((array_merge($propuestasPorCat)));
+    }
     $array = array();
     $array[] = "filtrar";
     $array[] = $listaFinal;
@@ -761,5 +873,168 @@ function dislikeCometario(){
     echo json_encode($arreglo);
   }
 }
+function verrecPrecio(){
+    $r = new Recompensa();
+    $recs = $r->traerRecompensasAjax($_POST["propuesta"], $_POST["monto"]);
+    if($recs != null){
+    echo "La recompensa para el monto ingresados es: ".$recs[0]->Nombre;
+  } else {
+    echo "No hay recompensa para ese monto";
+  }
+  }
+  function dioFav(){
+    $nom = $_POST['prop'];
+    $p = new Propuesta();
+    $propu = $p->obtenerPorNombreProp($nom);
+    if($propu->isFavoriteada(Session::get('usuario_nick'))){
+      echo "1";
+    } else {
+      echo "0";
+    }
+  }
+  function traeLog(){
+    echo Session::get('usuario_nick');
+  }
+
+
+function sendRegistrationToServer(){
+$noti = new token_usu();
+
+$token = $_POST['token'];
+$nombre = $_POST['nombre'];
+$noti->setToken($token);
+$noti->setUsuario($nombre);
+ if($noti->agregarToken()){
+      $msg = "bien";
+      $array = ["mensajito"=>$msg];
+      $arreglo=["status"=>"ok","message"=>[$array]];
+            echo json_encode($arreglo);
+    }else{
+      $msg = "mal";
+          $array = ["mensajito"=>$msg];
+          $arreglo=["status"=>"error","message"=>[$array]];
+          echo json_encode($arreglo);
+    }
+}
+
+function sendnotification($tokens = array(), $message, $titl,$mensaje)
+{
+  $noti = new token_usu();
+$url = 'https://fcm.googleapis.com/fcm/send';
+
+$fields = array(
+'registration_ids' => $tokens,
+'data' => $message,
+'notification' => array(
+        'title' => $titl,
+        'body' => sprintf($mensaje.' %s.', date('H:i')),
+        'icon' => 'https://eralash.ru.rsz.io/sites/all/themes/eralash_v5/logo.png?width=192&height=192',
+        'click_action' => 'http://eralash.ru/',
+    )
+);
+
+$headers = array(
+'Authorization:key=AAAAhFFpia8:APA91bFSiGHPTBSXvZmyR8ijvqy9OEQ9KZ7QIhH7c-kNJ3DNi2d_u1S29ucMAfGMPfn2JnnYiMmV49XGcvPOeqUTNJeeytaJhna8PagiEcuq0HhVPeWgH27Cip_bTbbkXg27uU9qj92o',
+'Content-Type: application/json'
+);
+
+       $ch=curl_init();
+       curl_setopt($ch, CURLOPT_URL, $url);
+       curl_setopt($ch, CURLOPT_POST, true);
+       curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+       curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);
+       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+       curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+       $result = curl_exec($ch);
+       if ($result === FALSE) {
+           die('Curl failed: ' . curl_error($ch));
+       }
+       curl_close($ch);
+       return $result;
+}
+
+function propuestasNoti(){
+ $propuestas = array();
+ $propuesta = new propuesta();
+ $propuestas = $propuesta->pFUNS();
+$tok = new token_usu();
+$tokens = $tok->getListado();
+$resultados = array();
+   foreach ($tokens as $p) {
+            $tok =  $p->getToken();
+            $resultados[]=$tok;
+        }
+  
+$message = array("message" => "holi");
+$titl = "jajaja";
+$mensaje = "q te pasa";
+$message_status = $this->sendnotification($resultados, $message, $titl,$mensaje);
+echo $message_status;
+}
+function propuestasPorFinal(){
+ $propuestas = array();
+ $propuesta = new propuesta();
+ $propuestas = $propuesta->pFUNS();
+$tok = new token_usu();
+$tokens = $tok->getListado();
+$resultados = array();
+$resultadosProp = array();
+   foreach ($tokens as $p) {
+            $tok =  $p->getToken();
+            $resultados[]=$tok;
+        }
+foreach ($propuestas as $p) {
+            $prop =  $p->getNombre();
+            $message = array("message" => "holi");
+            $titl = "jajaja";
+            $mensaje = "q te pasa";
+            $message_status = $this->propuestasFinalizar($prop);
+                       
+ }
+
+echo $message_status;
+}
+
+function propuestasFinalizar($prop = "no"){
+  $otra = "/topics/".$prop;
+$noti = new token_usu();
+$message="MUY BIEN";
+$url = 'https://fcm.googleapis.com/fcm/send';
+$titl = "hola";
+$mensaje = "jaja";
+$fields = array(
+'to'  => $otra,
+'data' => $message,
+'notification' => array(
+        'title' => $titl,
+        'body' => sprintf($mensaje.' %s.', date('H:i')),
+        'icon' => 'https://eralash.ru.rsz.io/sites/all/themes/eralash_v5/logo.png?width=192&height=192',
+        'click_action' => 'http://eralash.ru/',
+    )
+);
+
+$headers = array(
+'Authorization:key=AAAAhFFpia8:APA91bFSiGHPTBSXvZmyR8ijvqy9OEQ9KZ7QIhH7c-kNJ3DNi2d_u1S29ucMAfGMPfn2JnnYiMmV49XGcvPOeqUTNJeeytaJhna8PagiEcuq0HhVPeWgH27Cip_bTbbkXg27uU9qj92o',
+'Content-Type: application/json'
+);
+
+       $ch=curl_init();
+       curl_setopt($ch, CURLOPT_URL, $url);
+       curl_setopt($ch, CURLOPT_POST, true);
+       curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+       curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);
+       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+       curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+       $result = curl_exec($ch);
+       if ($result === FALSE) {
+           die('Curl failed: ' . curl_error($ch));
+       }
+       curl_close($ch);
+       return $result;
+
+}
+
 }
 ?>

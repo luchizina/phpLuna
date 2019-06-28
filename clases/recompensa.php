@@ -110,6 +110,24 @@ class Recompensa extends ClaseBase {
         }
         
         return $recompensas;
+ }
+
+
+
+    public function listarRecompensasPagina($propuesta){
+
+        $recompensas = array();
+        $stmt = $this->getDB()->prepare("SELECT * FROM recompensa WHERE TituloPropuesta=? ORDER BY MontoaSuperar ASC");
+        $stmt->bind_param("s", $propuesta);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        while ($fila = $resultado->fetch_object()){
+            $recomp = new recompensa($fila);
+            $recompensas[]=$recomp;
+        }
+    return $recompensas;
+
+
  } 
 
 
@@ -120,6 +138,15 @@ class Recompensa extends ClaseBase {
     "UPDATE recompensa set cantActual=? WHERE id=?"); 
     $stmt->bind_param("ii", $cant, $id);
     return $stmt->execute();
+   }
+
+   public function menorRec(){
+    $cant = 0;
+    $id = $this->getId();
+    $stmt = $this->getDB()->prepare( 
+        "UPDATE recompensa set limiteUsuarios=? WHERE id=?"); 
+        $stmt->bind_param("ii", $cant, $id);
+        return $stmt->execute();
    }
 
 }

@@ -34,11 +34,28 @@ class ClaseBase{
      return $resultados;   
     }
 
+
+    public function getListadoTK(){
+        $sql="select token from $this->tabla ";
+        $resultados=array();
+
+        $resultado =$this->db->query($sql)   
+            or die ("Fallo en la consulta");
+
+        while ( $fila = $resultado->fetch_object() )
+        {
+            
+            $objeto= new $this->modelo($fila);
+            $resultados[]=$objeto;
+        } 
+     return $resultados;   
+    }
+
     public function getListadoProp($pagina)
     {
         $porPag = 9;
         $comienzo = ($pagina-1)*$porPag;
-        $sql="select * from $this->tabla where NickUsuario NOT IN (SELECT Nick from usuario where activo = 0)  ORDER BY Nombre limit $comienzo, $porPag";
+        $sql="select * from $this->tabla where (EstadoActual = 3 OR EstadoActual = 4 OR EstadoActual = 5) AND NickUsuario NOT IN (SELECT Nick from usuario where activo = 0)  ORDER BY Nombre limit $comienzo, $porPag";
         $resultados=array();
 
         $resultado =$this->db->query($sql)   
@@ -54,7 +71,7 @@ class ClaseBase{
     }
 
     public function cantPagProp(){
-        $sql="select * from $this->tabla where NickUsuario NOT IN (SELECT Nick from usuario where activo = 0)  ";
+        $sql="select * from $this->tabla where (EstadoActual = 3 OR EstadoActual = 4 OR EstadoActual = 5) AND NickUsuario NOT IN (SELECT Nick from usuario where activo = 0)  ";
         $resultado =$this->db->query($sql)   
             or die ("Fallo en la consulta");
         $cant = $resultado->num_rows;
@@ -150,6 +167,37 @@ class ClaseBase{
     public function getListadoCat($texto)
     {
         $sql="select * from $this->tabla where Categoria like '%$texto%' AND NickUsuario NOT IN (SELECT Nick from usuario where activo = 0)";
+        $res=array();
+        $resultado=$this->db->query($sql)
+            or die("Fallo en la consulta propuesta cat");
+        while($fila = $resultado->fetch_object())
+        {
+            $objeto = new $this->modelo($fila);
+            $res[]=$objeto;
+        }
+        return $res;
+    }
+
+      public function propSugeridas($nombreCat, $nombreProp)
+    {
+        $sql="select * from $this->tabla where Categoria = '$nombreCat' AND Nombre != '$nombreProp' AND NickUsuario NOT IN (SELECT Nick from usuario where activo = 0)";
+        $res=array();
+        $resultado=$this->db->query($sql)
+            or die("Fallo en la consulta propuesta cat");
+        while($fila = $resultado->fetch_object())
+        {
+            $objeto = new $this->modelo($fila);
+            $res[]=$objeto;
+        }
+        return $res;
+    }
+
+
+
+       public function getPropsPorCategoria($nombreCat, $texto)
+    {
+     $sql="select * from $this->tabla where Categoria = '$nombreCat' AND Nombre like '%$texto%' AND NickUsuario NOT IN (SELECT Nick from usuario where activo = 0)";
+        
         $res=array();
         $resultado=$this->db->query($sql)
             or die("Fallo en la consulta propuesta cat");

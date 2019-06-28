@@ -8,6 +8,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/imagenes.css" rel="stylesheet">
      {include file="cabezal.tpl"}
   </head>
   <body>
@@ -42,10 +43,7 @@
 
             <!-- Text input-->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="fechaA">Seleccione una imagen:</label>  
-              <div class="col-md-4">
-             <input  id="archivo" name="archivo" type="file" class="form-control input-md" accept="image/*"> 
-              </div>
+              <label class="btn btn-primary btn-lg">Elegir imagen<input type="file" name="archivo" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;"></label>
             </div>
 
             
@@ -69,11 +67,14 @@
           </select>
            </div>
             </div> 
-           <!-- Text input-->
+         
+                
+              </div>
+            </div>
             <div class="form-group">
-              <label class="col-md-4 control-label" for="ci">Recompensa</label>  
+              <label class="col-md-4 control-label" for="fec">Fecha realización</label>  
               <div class="col-md-4">
-              <input id="recom" name="recom" type="text" placeholder="Entradas gratis" class="form-control input-md" required="">
+              <input id="fec" name="fec" type="date" class="form-control input-md" required="">
                 
               </div>
             </div>
@@ -100,6 +101,7 @@
     <script src="../../assets/js/vendor/holder.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="js/subirImg.js" type="text/javascript"></script>
   </body>
 </html>
 

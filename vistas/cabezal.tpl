@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="css/style.min.css">
     <link rel="stylesheet" href="css/busqueda.css">
     <link rel="stylesheet" href="css/custom.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/sweetalert.js"></script>
+        <script src="js/validar.js"></script>
     <link rel="stylesheet" href="css/busca.css">
     
   </head>
@@ -36,7 +39,7 @@
               <li class="dropdown">
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Usuarios</a>
                 <ul class="dropdown-menu">
-                  <li><a href="/phpLuna/usuario/listado/">Listado</a></li>
+                  <li ><a href="/phpLuna/usuario/listado/">Listado</a></li>
                 </ul>
               </li>
               <li class="dropdown">
@@ -57,11 +60,16 @@
                   </svg>
 
                   <div class="search-bar">
-                    
+                    <select class="selectita" id="elegirCate">
+                      <option value="todas">Todas las categorías</option>
+                      {foreach from=$categorias item=cat}
+                      <option value="{$cat->getNombreP()}">{$cat->getNombreP()}</option>
+                      {/foreach}
+                    </select>
                     <input type="text" class="input" id="xD" placeholder="&nbsp;">
                     <span class="label">Buscar propuesta</span>
                     <span class="highlight"></span>
-                    <div class="search-btn" onClick="location.href='{$url_base}propuesta/filtrar/'+ document.getElementById('xD').value;">
+                    <div class="search-btn" onclick="filtrarProp('{$url_base}')">
                          <svg class="icon icon-18">
                            <use xlink:href="#magnify"></use>
                           </svg>
@@ -73,11 +81,12 @@
               <li class="probootstra-cta-button last"><a href="{$url_regis}" class="btn btn-primary">REGISTRARSE</a></li>
                {else}
                 <li><a href="/phpLuna/usuario/verPerfil/{$usuLogNick}">¡Hola {$usuLogueado}!</a></li>
-                <li class="probootstra-cta-button last"><a href="{$url_logout}" class="btn btn-primary">CERRAR SESIÓN</a></li>
+                <li id="liprueba" class="probootstra-cta-button last cerrarS"><a id="axD" class="btn btn-primary cerrarS2">CERRAR SESIÓN</a></li>
                
                  {/if}
       
             </ul>
           </div>
         </div>
+        
       </nav>

@@ -6,24 +6,279 @@ function validarci(){
 	var ced = $("#ci").val();
 	$.ajax({
 		url:"/phpLuna/usuario/existeCi",
-		method: "POST",
-		data:{ci:ced},
+		data: 'ci='+ced,
+        type: 'post',
 		//dataType:"text",
 		success:function(html){
 			$("#avisaCe").html(html);
 			Chequear();
 		},
 		error:function(){
-			document.getElementById("message1").style.display = "block";
+			$("#message1").style.display = "block";
 		}
 	});
 }
 
+function redondear(numero, digitos){
+    let base = Math.pow(10, digitos);
+    let entero = Math.round(numero * base);
+    return entero / base;
+}
+
+
+
+function listarPropBien(p){
+listProp(p,'no','no');
+}
+
+function listProp(p,nombreCat,nombreProp){
+  urlList = '/phpLuna/propuesta/listProps/';
+  if(nombreCat == 'no'){
+
+  $.ajax({
+    url: urlList,
+    data: 'p='+p,
+    type: 'post',
+    dataType: 'json', 
+    success:function(res){
+      var html='';
+      for(var i=0; i<res.length; i++){
+        let por = (res[i]['MontoActual'] * 100)/res[i]['Monto'];
+        let porc = redondear(por, 3);
+        let id = traeLog()+res[i]['Nombre'];
+        let otroid = id.replace(/^\s+|\s+$/gm,'');
+        html += '<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12" data-animate-effect="fadeIn">';
+        html += '<div class="probootstrap-image-text-block probootstrap-cause">';
+        html += '<figure class="imk"  width="360" height="200">';
+        html += '<img src="./'+res[i]['Imagen']+'" alt="'+res[i]['Nombre']+'" class="img2">';
+        html += '</figure>';
+        html += '<div class="probootstrap-cause-inner">';
+        html += '<div class="progress">';
+        html += '<div class="progress-bar progress-bar-s2" data-percent="'+porc+'" style="width:'+porc+'%;"><span>'+porc+'%</span></div>';
+        html += '</div>';
+        html += '<div class="row mb30">';
+        html += '<div class="col-md-6 col-sm-6 col-xs-6 probootstrap-raised">Monto actual: <span class="money">'+res[i]['MontoActual']+'</span></div>';
+        html += '<div class="col-md-6 col-sm-6 col-xs-6 probootstrap-goal">Objetivo: <span class="money"> '+res[i]['Monto']+'</span></div>';
+        html += '</div>';
+        html += '<h2><a href="/phpLuna/propuesta/detalleProp/'+res[i]['Nombre']+'/">'+res[i]['Nombre']+'</a>';
+       
+        html += '</h2>';
+        if(res[i]['Tiemrest'] > 1){
+        html += '<div class="probootstrap-date"><i class="fa fa-history"></i>Quedan '+res[i]['Tiemrest']+' dias restantes</div>';
+        html += '<p><a href="/phpLuna/propuesta/nuevaColaboracion/'+res[i]['Nombre']+'" class="btn btn-primary btn-black">Colaborar!</a>'
+      }
+      if(res[i]['Tiemrest'] == 1){
+        html += '<div class="probootstrap-date"><i class="fa fa-history"></i>Queda '+res[i]['Tiemrest']+' dia restante</div>';
+        html += '<p><a href="/phpLuna/propuesta/nuevaColaboracion/'+res[i]['Nombre']+'" class="btn btn-primary btn-black">Colaborar!</a>'
+      }
+      if(res[i]['Tiemrest'] == 0){
+        html += '<div class="probootstrap-date"><i class="fa fa-history"></i>La propuesta finalizara hoy</div>';
+        html += '<p><a href="/phpLuna/propuesta/nuevaColaboracion/'+res[i]['Nombre']+'" class="btn btn-primary btn-black">Colaborar!</a>'
+      }
+      if(res[i]['Tiemrest'] < 0){
+        html += '<div class="probootstrap-date"><i class="fa fa-history"></i>La propuesta esta finalizada</div>';
+      }
+         if(res[i]['UsuFav'] !== null){
+          html += '<a class="btn estrella" onclick="favoritear(\''+res[i]['Nombre']+'\', /phpLuna/ ,\''+traeLog().replace(/^\s+|\s+$/gm,'')+'\');">';
+          html += '<i class="fa fa-star" id="'+otroid+'"></i></a>';
+        } 
+        else{
+          html += '<a class="btn estrella" onclick="favoritear(\''+res[i]['Nombre']+'\', /phpLuna/ ,\''+traeLog().replace(/^\s+|\s+$/gm,'')+'\');">';
+          html += '<i class="fa fa-star-o" id="'+otroid+'"></i></a>';
+        }       
+        html += '</p>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        
+      }
+      $('#propuestitas').html(html);
+    }
+  })
+
+  }else{
+  
+$.ajax({
+ 
+    url: urlList,
+    data: 'p='+p+'&nombreCat='+nombreCat+'&nombreProp='+nombreProp,
+    type: 'post',
+    dataType: 'json', 
+    success:function(res){
+      var html='';
+      for(var i=0; i<res.length; i++){
+        let por = (res[i]['MontoActual'] * 100)/res[i]['Monto'];
+        let porc = redondear(por, 3);
+        let id = traeLog()+res[i]['Nombre'];
+        let otroid = id.replace(/^\s+|\s+$/gm,'');
+        html += '<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12" data-animate-effect="fadeIn">';
+        html += '<div class="probootstrap-image-text-block probootstrap-cause">';
+        html += '<figure class="imk"  width="360" height="200">';
+        html += '<img src="./'+res[i]['Imagen']+'" alt="'+res[i]['Nombre']+'" class="img2">';
+        html += '</figure>';
+        html += '<div class="probootstrap-cause-inner">';
+        html += '<div class="progress">';
+        html += '<div class="progress-bar progress-bar-s2" data-percent="'+porc+'" style="width:'+porc+'%;"><span>'+porc+'%</span></div>';
+        html += '</div>';
+        html += '<div class="row mb30">';
+        html += '<div class="col-md-6 col-sm-6 col-xs-6 probootstrap-raised">Monto actual: <span class="money">'+res[i]['MontoActual']+'</span></div>';
+        html += '<div class="col-md-6 col-sm-6 col-xs-6 probootstrap-goal">Objetivo: <span class="money"> '+res[i]['Monto']+'</span></div>';
+        html += '</div>';
+        html += '<h2><a href="/phpLuna/propuesta/detalleProp/'+res[i]['Nombre']+'/">'+res[i]['Nombre']+'</a>';
+       
+        html += '</h2>';
+        html += '<div class="probootstrap-date"><i class="fa fa-history"></i>Quedan '+res[i]['Tiemrest']+' dias restantes</div>';
+        html += '<p><a href="/phpLuna/propuesta/nuevaColaboracion/'+res[i]['Nombre']+'" class="btn btn-primary btn-black">Colaborar!</a>'
+           if(res[i]['UsuFav'] !== null){
+          html += '<a class="btn estrella" onclick="favoritear(\''+res[i]['Nombre']+'\', /phpLuna/ ,\''+traeLog().replace(/^\s+|\s+$/gm,'')+'\');">';
+          html += '<i class="fa fa-star" id="'+otroid+'"></i></a>';
+        } 
+        else{
+          html += '<a class="btn estrella" onclick="favoritear(\''+res[i]['Nombre']+'\', /phpLuna/ ,\''+traeLog().replace(/^\s+|\s+$/gm,'')+'\');">';
+          html += '<i class="fa fa-star-o" id="'+otroid+'"></i></a>';
+        }
+        html += '</p>';        
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        
+      }
+      $('#propuestitas').html(html);
+    }
+  })
+
+}
+} 
+
+function paginar(){
+  $.ajax({
+    url: '/phpLuna/propuesta/cantPag/',
+    type: 'post',
+    success:function(res){
+      if(res > 1){
+      let html = '';
+      let no = 'no';
+      html += '<ul class="pagination justify-content-center" style="margin:20px 0">';
+      html += '<li class="page-item" id="ant"><a id="anta" class="page-link" onclick="anterior();">Anterior</a></li>';
+      for(let i=1; i<=res; i++){
+        html += '<li class="page-item" id="'+i+'"><a class="page-link" onclick="listarPropBien('+i+'); vuelve(); tomaval('+i+')">'+i+'</a></li>';
+      }
+      html += '<li class="page-item" id="sig"><a class="page-link" id="sigui" onclick="sig();">Siguiente</a></li>';
+      html += '</ul>';
+      $('#pagination').html(html);
+    }
+    if(res == 0){
+      let html = '';
+      html += '<div class="col-md-12 text-center">';
+      html += '<h2 class="caca">Aún no hay propuestas </h2>'; 
+      html += '</div>';
+      $('#propuestitas').html(html);
+    }
+  }
+  })
+}
+
+function obtUltP(){
+  let msg='';
+   $.ajax({
+    url: '/phpLuna/propuesta/cantPag/',
+    type: 'post',
+    async: false,
+    success:function(res){
+      msg=res.replace(/^\s+|\s+$/gm,'');;
+    }
+})
+   return msg;
+}
+
+function vuelve(){
+  $('html, body').animate({scrollTop:0}, 'slow');
+}
+
+function tomaval(p){
+  let ultv = obtUltP();
+  $('#pAct').val(p);
+  if(p > 1){
+    $('#ant').removeClass("disabled");
+    $("#anta").attr("onclick","anterior();");
+  } 
+  if(p < ultv){
+    $('#sig').removeClass("disabled");
+    $("#sigui").attr("onclick","sig();");
+  }
+}
+
+function valAct(){
+  let v = $('#pAct').val();
+  return v;
+}
+
+function sig(){
+  let ult = obtUltP();
+  let p = valAct();
+  console.log(ult);
+  console.log(p);
+  if(ult > p){
+    $('#sig').removeClass("disabled");
+    $("#sigui").attr("onclick","sig();");
+    let v = parseInt(p)+1;
+    console.log(v);
+    tomaval(v);
+    listProp(v);
+  } else {
+    $('#sig').addClass("disabled");
+    $("#sigui").attr("onclick","void(0);");
+  }
+}
+
+function anterior(){
+  let v = valAct();
+  if(v > 1){
+    $('#ant').removeClass("disabled");
+    $("#anta").attr("onclick","anterior();");
+    let p = v-1;
+    tomaval(p);
+    listProp(p);
+  } else {
+    $('#ant').addClass("disabled");
+    $("#anta").attr("onclick","void(0);");
+  }
+}
+
+function traeLog(){
+   var msg = '';
+  $.ajax({
+    url:'/phpLuna/propuesta/traeLog/',
+    async: false,
+    type: 'post',
+    success:function(res){
+      msg = res;
+    }
+  })
+  return msg;
+}
+
+function dioFav(prop){
+  var msg = '';
+  $.ajax({
+    url:'/phpLuna/propuesta/dioFav/',
+    data: 'prop='+prop,
+    async: false,
+    type: 'post',
+    success:function(res){
+      msg = res;
+    }
+  })
+  return msg;
+}
+
 function listCom(nombre, url){
           $.ajax({
-            url: url+'propuesta/listComs/'+nombre,
+            url: url+'propuesta/listComs/',
+            data: 'prop='+nombre,
+            type: 'post',
             success:function(res){
-              var cont = res.split("-");
+             var cont = res.split("-");
               var id = cont[0];
               var texto = cont[1];
               var usu = cont[2];
@@ -31,15 +286,20 @@ function listCom(nombre, url){
               var likes = cont[4];
               var logue = cont[5];
               var html = '';
+              var idLike = logue+id;
+              var idL = idLike.replace(/^\s+|\s+$/gm,'');
+              var otroid = id.replace(/^\s+|\s+$/gm,'');
+              html += '<div class="comment">';
               html+='<img src="'+img+'">';
               html+='<div class="comment-content"><p class="author"><strong>'+usu+'</strong></p>';
               html+='<span>'+texto+'</span></div>';
               if(usu === logue){
-                html+='<a class="btn" onclick="borrarComent('+url+','+id+','+nombre+',this);"><i class="icon-trash"></i></a>';
+                html+='<a id="'+otroid+'" class="btn" onclick="borrarComentNuevo('+otroid+',\''+nombre+'\');"><i class="icon-trash"></i></a>';
               }
-              html+='<a class="btn" onclick="javascript:likeComentario('+logue+','+id+');">';
-              html+='<i class="fa fa-thumbs-up"></i> <span id="'+logue+id+'">'+likes+'</span></a></div>';
-              $('#nuevo').html(html);
+              html+='<a class="btn" onclick="likeComentario(\''+logue+'\','+otroid+');">';
+              html+='<i class="fa fa-thumbs-up"></i> <span id="'+idL+'">'+likes+'</span></a></div>';
+              html += '</div>';
+              $('#coments').append(html);
             }
           })
         }
@@ -52,7 +312,6 @@ function listCom(nombre, url){
               data: 'textoComentario='+texto+'&nomPropCom='+nomPropCom,
               type: 'post',
               success:function(){
-                alert('Comentario agregado');
                 document.getElementById("textoComentario").value = "";
                 listCom(nombre, url);
               }
@@ -60,18 +319,47 @@ function listCom(nombre, url){
           }
 
 
-       function borrarComent(url,id, nombre,e){
-       	var idCom = id;
+          function borrarComentNuevo(id, nombre){
+          	 	var idCom = id;
        	var nomPropCom = nombre;
-
+       	console.log(idCom);
+       	var nuevo = document.getElementById(idCom);
        	$.ajax({
-              url: url+'propuesta/borrarComEnPagina',
+              url: '/phpLuna/propuesta/borrarComEnPagina',
               data: 'idCom='+idCom+'&nomPropCom='+nomPropCom,
               type: 'post',
               success:function(){
                 alert('Comentario eliminado');
-                e.parentNode.parentNode.removeChild(e.parentNode);
+                nuevo.parentNode.parentNode.removeChild(nuevo.parentNode);
+              }
+            })
+
+          }
+
+
+          function filtrarProp(url){
+            var e = document.getElementById("elegirCate");
+            var strUser = e.options[e.selectedIndex].value;
+            textoBuscado = document.getElementById('xD').value;
+           location.href=url+'propuesta/listadoBusqueda/'+textoBuscado+'/'+strUser+'/';
+         // listProp(1,strUser,document.getElementById('xD').value)          
+          }
+
+
+       function borrarComent(id, nombre){
+       	var idCom = id;
+       	var nomPropCom = nombre;
+       	var element = document.getElementById(id);
+       //	var nuevo = document.getElementById("nuevo");
+       	$.ajax({
+              url: '/phpLuna/propuesta/borrarComEnPagina',
+              data: 'idCom='+idCom+'&nomPropCom='+nomPropCom,
+              type: 'post',
+              success:function(){
+                alert('Comentario eliminado');
                 
+                element.parentNode.parentNode.removeChild(element.parentNode);
+                //nuevo.parentNode.removeChild(nuevo);
               }
             })
        }
@@ -134,14 +422,14 @@ function validarnick(){
 	var ced = $("#nick").val();
 	$.ajax({
 		url:"/phpLuna/usuario/existeNick",
-		method: "POST",
-		data:{nick:ced},
+		data: 'nick='+ced,
+        type: 'post',
 		//dataType:"text",
 		success:function(html){
 			$("#avisa").html(html);
 		},
 		error:function(){
-			document.getElementById("message1").style.display = "block";
+			$("#message1").style.display = "block";
 		}
 	});
 }
@@ -150,15 +438,15 @@ function validarcorreo(){
 	var ced = $("#email").val();
 	$.ajax({
 		url:"/phpLuna/usuario/existeCorreo",
-		method: "POST",
-		data:{correo:ced},
+		data: 'correo='+ced,
+        type: 'post',
 		//dataType:"text",
 		success:function(html){
 			$("#avisaC").html(html);
 			Chequear();
 		},
 		error:function(){
-			document.getElementById("message1").style.display = "block";
+			$("#message1").style.display = "block";
 		}
 	});
 }
@@ -181,6 +469,34 @@ function validar(){
         }
 	}
 }
+
+$(document).ready(function(){
+    $("#axD").on("click",function(e){
+      e.preventDefault();
+      Swal.fire({
+  title: 'Cerrar Sesión',
+  text: "Estás seguro?",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  cancelButtonText:'¡Todavía no!',
+  confirmButtonText: 'Estoy seguro'
+}).then((result) => {
+  if (result.value) {
+    $.ajax({
+    url:"/phpLuna/usuario/logout",
+    type: 'post',
+    success:function(html){
+        window.location.replace(html);
+     },
+    error:function(){
+    }
+  });
+  }
+})   
+    });
+});
 
 function Chequear(){
 try
@@ -256,4 +572,4 @@ $("#avisaFor").html("Cedula entre 7 y 8 caracteres");
 }
 }
 catch(ex) {throw(ex)}
-} 
+}

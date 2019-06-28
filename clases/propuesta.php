@@ -5,8 +5,9 @@ class Propuesta extends ClaseBase {
 //estos atributos tienen que tener el mismo nombre que en la bd
 	public $Nombre = '';
 	public $Descripcion = '';
-	public $FechaAgregada = null;
+	public $fechaAgregada = null;
 	public $FechaPublicada = null;
+  public $fechaFinalizacion = null;
 	public $Monto = 0;
 	public $MontoActual = 0;
 	public $NickUsuario = null; //objeto usuario
@@ -18,6 +19,8 @@ class Propuesta extends ClaseBase {
 	public $Imagen;
     public $Archivo;
     public $tipo;
+    public $Tiemrest;
+    public $UsuFav;
 
 	public function __construct($obj=NULL) {
         if(isset($obj)){
@@ -32,6 +35,22 @@ class Propuesta extends ClaseBase {
 
     public function __toString() {
         return $this->Nombre;
+    }
+
+    public function getTiemrest(){
+        return $this->Tiemrest;
+    }
+
+    public function getUsuFav(){
+        return $this->UsuFav;
+    }
+
+    public function setTiemrest($Tiemrest){
+        $this->Tiemrest=$Tiemrest;
+    }
+
+    public function setUsuFav($UsuFav){
+        $this->UsuFav=$UsuFav;
     }
 
     public function getArchivo(){
@@ -85,11 +104,11 @@ class Propuesta extends ClaseBase {
 	}
 
 	public function getFechaAgregada(){
-		return $this->FechaAgregada;
+		return $this->fechaAgregada;
 	}
 
 	public function setFechaAgregada($FechaAgregada){
-		$this->FechaAgregada=$FechaAgregada;
+		$this->fechaAgregada=$FechaAgregada;
 	}
 
 	public function getFechaPublicada(){
@@ -99,6 +118,14 @@ class Propuesta extends ClaseBase {
 	public function setFechaPublicada($FechaPublicada){
 		$this->FechaPublicada=$FechaPublicada;
 	}
+
+  public function getFechaFinalizacion(){
+    return $this->fechaFinalizacion;
+  }
+
+  public function setFechaFinalizacion($FechaFin){
+    $this->fechaFinalizacion=$FechaFin;
+  }
 
 	public function getMonto(){
 		return $this->Monto;
@@ -257,7 +284,10 @@ $propuestas=array();
  public function agregarP(){
         $nombre=$this->getNombre();
         $Descripcion=$this->getDescripcion();
-       	$FechaPublicada=$this->getFechaPublicada();
+
+        $FechaAgregada = $this->getFechaAgregada();
+       	$FechaFin= $this->getFechaFinalizacion();
+
         $Monto = $this->getMonto();
         $MontoActual=0;
         $Usuario = $this->getUsuario()->getNick();
@@ -266,10 +296,11 @@ $propuestas=array();
         
         $stmt = $this->getDB()->prepare( 
             "INSERT INTO propuesta 
-        (Nombre,Descripcion, FechaPublicada,Monto,MontoActual,NickUsuario,Categoria,EstadoActual) 
-           VALUES (?,?,?,?,?,?,?,?)" );
-        $stmt->bind_param("sssiissi",$nombre,
-            $Descripcion,$FechaPublicada,$Monto,$MontoActual,$Usuario,$Categ,$EstadoActual);
+        (Nombre,Descripcion,fechaAgregada,fechaFinalizacion,Monto,MontoActual,NickUsuario,Categoria,EstadoActual) 
+           VALUES (?,?,?,?,?,?,?,?,?)" );
+        $stmt->bind_param("ssssiissi",$nombre,
+            $Descripcion,$FechaAgregada,$FechaFin,$Monto,$MontoActual,$Usuario,$Categ,$EstadoActual);
+
 
         return $stmt->execute();
     }
@@ -295,13 +326,23 @@ $stmt->bind_param("s",$nombre);
 public function actualizarEstadoProp(){
 
     $estado = $this->getEstadoActual();
+    $nombre = $this->getNombre();
     $stmt = $this->getDB()->prepare( 
             "UPDATE propuesta set EstadoActual=? WHERE Nombre=?"); 
            
-        $stmt->bind_param("is", $estado, $this->getNombre());
+        $stmt->bind_param("is", $estado, $nombre);
         return $stmt->execute();
    
 
+}
+
+public function actualizarFechaPublicada(){
+$fecha = $this->getFechaPublicada();
+$stmt = $this->getDB()->prepare( 
+            "UPDATE propuesta set FechaPublicada=? WHERE Nombre=?"); 
+           
+        $stmt->bind_param("ss", $fecha, $this->getNombre());
+        return $stmt->execute();
 }
 
 
@@ -380,6 +421,22 @@ $sql="select count(*) as gusta from likepropuesta where Usuario ='$nombreUsu' an
 }
 
 
+public function traerFechaRestante(){
+
+  $fechaFin = strtotime($this->getFechaFinalizacion());
+ // $fechaActual = date("Y-m-d");
+$now = time();
+ 
+$datediff = $fechaFin - $now;
+$resultado = round($datediff / (60 * 60 * 24))+1;
+   if($resultado == 0){
+  $this->setEstadoActual(5);
+  $this->actualizarEstadoProp();
+
+}
+return $resultado;
+}
+
 
 
 public function totalMontoColaborado($nick){
@@ -411,6 +468,18 @@ public function likeProp($nombreUsu, $nombreProp)
         return $stmt->execute();
    }
 
+public function pFUNS(){
+$propuestas=array();
+        $stmt = $this->getDB()->prepare( 
+            "SELECT * from propuesta WHERE DATEDIFF(fechaFinalizacion,now())<=7 and EstadoActual = 1");
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        while ($fila=$resultado->fetch_object()) {
+            $prop= new propuesta($fila);
+                $propuestas[]=$prop;
+        }
+        return $propuestas;
+ }
 
 }
  ?>

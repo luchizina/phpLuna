@@ -1,4 +1,5 @@
 <?php 
+
 class Categoria extends ClaseBase {
 	public $NombreH = null; //objeto categoria
 	public $NombreP = '';

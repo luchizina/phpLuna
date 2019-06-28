@@ -19,6 +19,8 @@ class Usuario extends ClaseBase {
     private $Activo = 0;
     private $favoritos = array();
     private $token='';
+    private $token_pass = '';
+    private $solicito_pass = 0;
 
 	public function __construct($obj=NULL) {
         if(isset($obj)){
@@ -30,6 +32,23 @@ class Usuario extends ClaseBase {
         parent::__construct($tabla);
 
     }
+
+    public function getSolicitoPass(){
+        return $this->solicito_pass;
+    }
+
+    public function getTokenPass(){
+        return $this->token_pass;
+    }
+
+    public function setTokenPass($tokenPass){
+        $this->token_pass = $tokenPass;
+    }
+
+    public function setSolicitoPass($solPass){
+        $this->solicito_pass = $solPass;
+    }
+
 
     public function getNotificacion(){
         return $this->notificacion;
@@ -225,7 +244,7 @@ public function agregar(){
         $img = $this->getImagen();
         $tip = $this->getTipo();
         $tipoImg = $this->getTipoImg();
-        $permitidos = array("image/jpg", "image/jpeg", "image/png", "");
+        $permitidos = array("image/jpg", "image/jpeg");
         $target='';
         if(in_array($tipoImg, $permitidos)){
             //$target = "imgUsus/".basename($img);
@@ -403,7 +422,7 @@ public function modificar($tipo)
         $arch = $this->getArchivo();
         $img = $this->getImagen();
         $tipoImg = $this->getTipoImg();
-        $permitidos = array("image/jpg", "image/jpeg", "image/png", "");
+        $permitidos = array("image/jpg", "image/jpeg");
         $target='';
         if($arch == "NoModificar"){
             $target = $img;
@@ -473,6 +492,61 @@ public function modificar($tipo)
         $stmt->bind_param("is", $estado, $token);
         return $stmt->execute();
    }
+
+
+   public function solicitoCambCont(){
+    $solicito = $this->getSolicitoPass();
+    $token = $this->getTokenPass();
+    $nick = $this->getNick();
+    $stmt = $this->getDB()->prepare(            
+    "UPDATE usuario set tokenpass=?, solicitoPass=? WHERE Nick=?"); 
+    $stmt->bind_param("sis", $token, $solicito, $nick);
+    return $stmt->execute();
+   }
+
+   public function Solicito($token, $usuario){
+    $solicito = 1;
+        $stmt = $this->getDB()->prepare( 
+            "SELECT * FROM usuario 
+            WHERE Nick =? AND tokenpass = ? AND solicitoPass = ?");
+        $stmt->bind_param("ssi",$usuario, $token, $solicito);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->fetch();
+        //$resultado = $stmt->get_result();
+        $row_cnt = $stmt->num_rows;
+        if($row_cnt > 0) {
+            return true; 
+        }
+    }
+
+    public function CambiaPass($token, $usuario, $pass){
+        $p = sha1($pass);
+         $stmt = $this->getDB()->prepare( 
+            "UPDATE usuario set Password=?, tokenpass='', solicitoPass=0 WHERE Nick=? AND tokenpass=?"); 
+        $stmt->bind_param("sss",$p, $usuario, $token);
+        $stmt->execute();
+    }
+
+    public function traerColaboradores($nombreProp){
+
+
+      $sql="SELECT DISTINCT usuario.* FROM usuario, colaboracion where colaboracion.TituloPropuesta = '$nombreProp' and colaboracion.NickUsuario = usuario.Nick";
+        $resultados=array();
+
+        $resultado =$this->db->query($sql)   
+            or die ("Fallo en la consulta");
+
+        while ( $fila = $resultado->fetch_object() )
+        {
+            
+            $objeto= new $this->modelo($fila);
+            $resultados[]=$objeto;
+        } 
+     return $resultados;  
+
+    }
+
 
 
 

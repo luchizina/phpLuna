@@ -17,7 +17,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     
   </head>
-
+<body>
   {include file="cabezal.tpl"}
     
     <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg);"  data-stellar-background-ratio="0.1">
@@ -46,6 +46,8 @@
         <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required="">
         
         <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button> 
+
+        <a href="{$url_recuperar}">¿Se olvido su contraseña?</a>
         </form>
           </div>
           <div class="col-md-6 col-md-push-1 probootstrap-animate">            
@@ -59,11 +61,10 @@
           </div>
         </div>
         </div>
-        
-
     <script src="js/scripts.min.js"></script>
     <script src="js/main.min.js"></script>
     <script src="js/custom.js"></script>
+    <script src="js/validar.js"></script>
     </section>          
   </section>
       </body></html>

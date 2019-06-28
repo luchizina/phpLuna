@@ -17,12 +17,10 @@
       <script src="js/vendor/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body class="bg">
     {include file="cabezal.tpl"}  
-    <br>
-    <br>
-    <br>        
-      <section class="probootstrap-hero bg" tellar-background-ratio="0.5">
+           
+      <section class="probootstrap-hero" tellar-background-ratio="0.5">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
