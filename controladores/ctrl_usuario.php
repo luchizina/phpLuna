@@ -125,7 +125,7 @@ function nuevo(){
     $usr->setArchivo($_FILES['archivo']['tmp_name']);
     $usr->setImagen($_FILES['archivo']['name']);
     $usr->setTipoImg($_FILES['archivo']['type']);
-     $usr->setTipo(1);
+    $usr->setTipo(1);
     $usr->setCI($_POST["ci"]);
     $usr->setActivo(0);
     $token = md5(uniqid(mt_rand(), false));
@@ -135,8 +135,11 @@ function nuevo(){
       $url="http://localhost/phpLuna/usuario/activarU/".$token;
       $body = "Para activar su cuenta debe entrar al siguiente enlace: ".$url;
       $bodyhtml = "Para activar su cuenta haga click aqui <a href='$url'>Activar cuenta</a>";
-      Utils::enviarEmail($usr->getCorreo(),$nombreC, $body, $bodyhtml, "Bienvenida a Luna-Activar cuenta");
-      $this->redirect("usuario","aviso");
+      if(Utils::enviarEmail($usr->getCorreo(),$nombreC, $body, $bodyhtml, "Bienvenida a Luna-Activar cuenta")){
+        $this->redirect("usuario","aviso");
+      } else {
+        $this->redirect("usuario","correoFalso");
+      }
       exit;
     }else{
       $mensaje="Error! No se pudo agregar el usuario";
@@ -153,6 +156,11 @@ function nuevo(){
 public function aviso(){
   $tpl = Template::getInstance();
   $tpl->mostrar('aviso', array());
+}
+
+public function correoFalso(){
+  $tpl = Template::getInstance();
+  $tpl->mostrar('correoFalso', array());
 }
 
 public function activarU($a = array()){
@@ -205,7 +213,6 @@ public function existeCi(){
   $usuario  = new Usuario();
   if($usuario->ci($_POST['ci'])){
     echo "Cedula en uso";  
-    return true; 
   }
 }
 }
@@ -214,7 +221,6 @@ public function existeCorreo(){
   $usuario  = new Usuario();
   if($usuario->correo($_POST['correo'])){
     echo "Correo en uso";  
-    return true; 
   }
 }
 }
@@ -223,7 +229,6 @@ public function existeNick(){
   $usuario  = new Usuario();
   if($usuario->nick($_POST['nick'])){
     echo "Nick en uso"; 
-    return true;  
   }
 }
 }
@@ -312,13 +317,17 @@ public function nuevoUsuCel(){
       $arreglo=["status"=>"error","message"=>[$array]];
             echo json_encode($arreglo);
         } else {
+    
+    $u->setImagen($_POST['nombreImg']);
+    $u->setTipoImg($_POST['tipoImg']);  
+    $u->setArchivo(base64_decode($_POST['archivo']));
     $u->setNick($_POST['nick']);
     $u->setNombre($_POST['nombre']);
     $u->setApellido($_POST['ape']);
     $u->setCI($_POST['ci']);
     $u->setCelular($_POST['cel']);
     $u->setCorreo($_POST['correo']);
-    $u->setPassword($_POST['cont']);
+    $u->setPassword($_POST['cont']); 
     $u->setTipo(1);
     $u->setActivo(0);
     $token = md5(uniqid(mt_rand(), false));
@@ -339,7 +348,7 @@ public function nuevoUsuCel(){
       $arreglo=["status"=>"error","message"=>[$array]];
             echo json_encode($arreglo);
     }
-    }
+    } 
     }
     }
    // echo json_encode($json_registration);

@@ -1,19 +1,54 @@
-<!DOCTYPE html>
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-06-28 16:56:22
+         compiled from "vistas\registrar_recomp.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:21148578875d1670326e2ad0-90898793%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '871ac5eaba5bac2584c1bbbd51b51116bce58f11' => 
+    array (
+      0 => 'vistas\\registrar_recomp.tpl',
+      1 => 1561751776,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '21148578875d1670326e2ad0-90898793',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5d1670328135d5_39654515',
+  'variables' => 
+  array (
+    'url_base' => 0,
+    'mensaje' => 0,
+    'tituloPropuesta' => 0,
+    'reco' => 0,
+    'recompensa' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5d1670328135d5_39654515')) {function content_5d1670328135d5_39654515($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
-    <base href="{$url_base}">
+    <base href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+">
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
     <!--[if lt IE 9]>
-      <script src="js/vendor/html5shiv.min.js"></script>
-      <script src="js/vendor/respond.min.js"></script>
+      <?php echo '<script'; ?>
+ src="js/vendor/html5shiv.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="js/vendor/respond.min.js"><?php echo '</script'; ?>
+>
     <![endif]-->
   </head>
   <body >
 
-    {include file="cabezal.tpl"}
+    <?php echo $_smarty_tpl->getSubTemplate ("cabezal.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
     <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg); height:100%"  data-stellar-background-ratio="0.1">
         <div class="container">
           <div class="row">
@@ -21,15 +56,17 @@
               <div class="probootstrap-slider-text probootstrap-animate" data-animate-effect="fadeIn">
                 <h1 class="probootstrap-heading probootstrap-animate">Registrar Recompensa</h1>
               </div>
-               {if $mensaje!=""}
-                  <div class="alert alert-danger" role="alert">{$mensaje}</div>
-               {/if}
+               <?php if ($_smarty_tpl->tpl_vars['mensaje']->value!='') {?>
+                  <div class="alert alert-danger" role="alert"><?php echo $_smarty_tpl->tpl_vars['mensaje']->value;?>
+</div>
+               <?php }?>
             </div>
           </div>
         </div>
 
       <section class="probootstrap-section">
-        <input id="tituloPropuesta" name="tituloPropuesta" type="hidden" value={$tituloPropuesta}  class="form-control">
+        <input id="tituloPropuesta" name="tituloPropuesta" type="hidden" value=<?php echo $_smarty_tpl->tpl_vars['tituloPropuesta']->value;?>
+  class="form-control">
         <div class="container">
           <div class="row">
           <div class="col-md-5 probootstrap-animate" style="color: white; font-family: Montserrat,Arial,sans-serif" >
@@ -57,7 +94,9 @@
               </div>
               
               <div class="form-group">
-                <input type="submit" name="jaja" id="botoncito" value="Guardar y agregar otra" class="btn btn-primary" onClick="window.location='{$url_base}propuesta/registrarRecom/{$tituloPropuesta}'"/>
+                <input type="submit" name="jaja" id="botoncito" value="Guardar y agregar otra" class="btn btn-primary" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/registrarRecom/<?php echo $_smarty_tpl->tpl_vars['tituloPropuesta']->value;?>
+'"/>
               </div>
                
             </form>
@@ -74,18 +113,23 @@
                 </tr>
               </thead>
               <tbody>
-                 {if $reco != null }                 
-                {foreach from=$reco item=recompensa}
+                 <?php if ($_smarty_tpl->tpl_vars['reco']->value!=null) {?>                 
+                <?php  $_smarty_tpl->tpl_vars['recompensa'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['recompensa']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['reco']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['recompensa']->key => $_smarty_tpl->tpl_vars['recompensa']->value) {
+$_smarty_tpl->tpl_vars['recompensa']->_loop = true;
+?>
                   <tr>
-                    <td>{$recompensa->getNombre()|upper}</td>
+                    <td><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['recompensa']->value->getNombre(), 'UTF-8');?>
+</td>
                   </tr>
-                {/foreach}
-               {/if} 
-               {if  $reco == null}                 
+                <?php } ?>
+               <?php }?> 
+               <?php if ($_smarty_tpl->tpl_vars['reco']->value==null) {?>                 
                   <tr>
                     <td>Aún no tienes recompensas</td>
                   </tr>
-               {/if} 
+               <?php }?> 
               </tbody>
               <tfoot>
                  <h5 style="color: #fff">Las recompensas son lo que se le otorgara al usuario segun el monto de su colaboracion.</h5>
@@ -93,7 +137,9 @@
             </table>
           </div>
            <div class="form-group">
-                 <input type="button" name="que" value="Listo!" class="btn btn-primary" onClick="window.location='{$url_base}propuesta/menorRecompensa/{$tituloPropuesta}'"/>
+                 <input type="button" name="que" value="Listo!" class="btn btn-primary" onClick="window.location='<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+propuesta/menorRecompensa/<?php echo $_smarty_tpl->tpl_vars['tituloPropuesta']->value;?>
+'"/>
               </div>
           </div>
           </div>
@@ -102,11 +148,20 @@
         </div>
 
 
-    <script src="js/scripts.min.js"></script>
-    <script src="js/main.min.js"></script>
-    <script src="js/custom.js"></script>
-    <script src="js/validar.js" type="text/javascript"></script>
+    <?php echo '<script'; ?>
+ src="js/scripts.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/main.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/custom.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="js/validar.js" type="text/javascript"><?php echo '</script'; ?>
+>
     </section>          
   </section>
       </body></html>
 
+<?php }} ?>

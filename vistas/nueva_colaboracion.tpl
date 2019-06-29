@@ -36,7 +36,7 @@
             <form method="post" class="probootstrap-form">
               <div class="form-group">
                 <label for="monto">Monto</label>
-                <input id="monto" name="monto"  onkeyup="javascript:verRec()" type="number" placeholder="Ej: 500" class="form-control" required="">
+                <input id="monto" name="monto"  onkeyup="javascript:verRec({$recompensas[0]->getMontoaSuperar()})" type="number" placeholder="Ej: 500" class="form-control" required="">
                 <span id="mensajito"></span>
               </div>
               <div class="form-group">
@@ -94,12 +94,16 @@
     <script src="js/main.min.js"></script>
     <script src="js/custom.js"></script>
     <script type="text/javascript">
-      function verRec(){
+      function verRec(m){
         var monto = $('#monto').val();
         var propuesta = window.location.pathname;
         var array = propuesta.split('/');
         var nombre = array[4];
-        console.log(monto);
+        if(monto < m){
+          $('#mensajito').html("Debe colaborar con un monto mayor a "+ m);
+          $('#guardar').hide();
+        } else {
+          $('#guardar').show();
         $.ajax({
           url: '{$url_base}propuesta/verrecPrecio',
           data: 'propuesta='+nombre+'&monto='+monto,
@@ -109,6 +113,7 @@
           }
         })
       }
+    }
     </script>
     </section>          
   </section>

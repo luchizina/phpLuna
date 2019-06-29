@@ -468,6 +468,18 @@ public function likeProp($nombreUsu, $nombreProp)
         return $stmt->execute();
    }
 
+public function pFUNS(){
+$propuestas=array();
+        $stmt = $this->getDB()->prepare( 
+            "SELECT * from propuesta WHERE DATEDIFF(fechaFinalizacion,now())<=7 and EstadoActual = 1");
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        while ($fila=$resultado->fetch_object()) {
+            $prop= new propuesta($fila);
+                $propuestas[]=$prop;
+        }
+        return $propuestas;
+ }
 
 }
  ?>
