@@ -470,6 +470,8 @@ public function cambiaPass($params=array()){
 
 
 
+
+
 public function mandarPropsQueVencen(){
     $propsQueVencen = array();
     $propuesta = new Propuesta();
@@ -496,6 +498,7 @@ public function mandarPropsQueVencen(){
 
 foreach ($usuarios as $usu) {
 $correo = $usu->getCorreo();
+
 $nombreC = $usu->getNombre()." ".$usu->getApellido();
       $url="#";
       $body = "Esto es una prueba";
@@ -503,7 +506,7 @@ $nombreC = $usu->getNombre()." ".$usu->getApellido();
       Utils::enviarEmail($correo,$nombreC, $body, $bodyhtml, "Bienvenida a Luna");
 
 }
-
+ return $this->getUrl("usuario","redirigir");
   
 }
 
