@@ -147,9 +147,9 @@
  
     <li>
       <div class="image_title">
-        <a href="#">{$propC->getNombre()}</a>
+        <a href="{$url_base}propuesta/detalleProp/{$propC->getNombre()}">{$propC->getNombre()}</a>
       </div>
-      <a href="https://ibb.co/gGv6QS"><img src="./{$propC->getImagen()}" height="320" width="640" alt="transformers4_640x320" border="0"></a>
+      <a href="{$url_base}propuesta/detalleProp/{$propC->getNombre()}"><img src="./{$propC->getImagen()}" height="320" width="640" alt="transformers4_640x320" border="0"></a>
     </li>
      {/foreach}
    
