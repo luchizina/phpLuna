@@ -16,7 +16,11 @@ $(document).ready(function(){
     url:"/phpLuna/usuario/mandarPropsQueVencen",
     type: 'get',
     success:function(html){
-        window.location.replace(html);
+        Swal.fire(
+  'Correo enviado!',
+  '¡Genial! Ahora los usuarios sabrán las propuestas que vencen',
+  'success'
+)
      },
     error:function(){
     }

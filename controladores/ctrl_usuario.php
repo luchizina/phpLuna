@@ -536,13 +536,5 @@ $nombreC = $usu->getNombre()." ".$usu->getApellido();
 
 
 
-
-
-
-
-
-
-
-
 }
 ?>

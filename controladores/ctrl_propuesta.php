@@ -217,7 +217,7 @@ function consolita( $data ) {
           $hola = explode(".", $img);
             $extension=end($hola);
             //rename($target, $nick.".".$extension);
-            $target = "imgProps/".$prop->getNombre().".".$extension;
+            $target = "imgProps/".$prop->getNombFre().".".$extension;
         } else {
             echo "El tipo de imagen es incorrecto";
         }
@@ -330,7 +330,8 @@ function nuevaColaboracion($params=array()){
       if($usuProp->getNotificacion() == 0){
       $this->enviarMailColaboracion($prop,$col);
   }
-      array_push($usu->getPropuestasColabora(), $prop);
+      $propsCol = $usu->getPropuestasColabora();
+      array_push($propsCol, $prop);
       $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
       $prop->actualizaMonto();
        if($prop->getMontoActual()>=$prop->getMonto()){
@@ -360,9 +361,10 @@ function nuevaColaboracion($params=array()){
 public function enviarMailColaboradores($colabs){
 foreach ($colabs as $usuC) {
 $correo = $usuC->getCorreo();
-$bodyHtml = "Hola Nahuel! este es el correo : $correo";
+$nombre = $usuC->getNombre();
+$bodyHtml = "Hola $nombre, te avisamos que una de las propuestas en las que colaboraste ha cambiado de estado";
 $body = "";
-Utils::enviarMail("nambroa@gmail.com","Nahuel Ambroa", $body, $bodyHtml, "Mando correo");
+Utils::enviarEmail($correo,"Nahuel Ambroa", $body, $bodyHtml, "Mando correo");
 }
 }
 public function enviarMailColaboracion($prop,$col){
