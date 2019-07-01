@@ -16,6 +16,20 @@ class ControladorUsuario extends ControladorIndex {
        );
           $tpl->mostrar('inicio',$datos);
 }
+
+
+function borrarUsuario(){
+
+$usuario = new Usuario();
+
+    $nick = $_POST['nick'];
+    $usuario->borrarUsu($nick);
+     $usuario->logout();
+
+ return $this->getUrl("usuario","redirigir");
+}
+
+
     function listado($params=array()){
        $buscar="";
        $titulo="Listado";
@@ -23,9 +37,10 @@ class ControladorUsuario extends ControladorIndex {
        if(!empty($params)){
            if($params[0]=="borrar"){
                $usuario=new Usuario();
-               $nickABorrar=$paramheas[1];
-                if($usuario->borrar($nickABorrar)){
+               $nickABorrar=$params[1];
+                if($usuario->borrarUsu($nickABorrar)){
                   $usuario->logout();
+                   return $this->getUrl("usuario","redirigir");
                     //Redirigir al listado
                     //header('Location: index.php');exit;
                     $this->redirect("usuario","listado");

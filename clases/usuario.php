@@ -16,7 +16,7 @@ class Usuario extends ClaseBase {
 	public $PropuestasPropone = array();
 	public $PropuestasColabora = array();
     private $Cedula = '';
-    private $Activo = 0;
+    private $activo = 0;
     private $favoritos = array();
     private $token='';
     private $token_pass = '';
@@ -186,22 +186,23 @@ class Usuario extends ClaseBase {
 
     public function setActivo($activito)
     {
-        $this->Activo = $activito;
+        $this->activo = $activito;
     }
 
     public function isActivo()
     {
-        return $this->Activo;
+        return $this->activo;
     }
 
     public function setFavoritos($favoritos){
         $this->favoritos = $favoritos;
     }
 
-    public function borrar($nick)
+    public function borrarUsu($nick)
     {
-        $activo = 0;
-            $stmt = $this->getDB()->prepare("UPDATE usuario set activo=? WHERE nick=?"); 
+       $this->setActivo(0);
+       $activo = $this->isActivo();
+            $stmt = $this->getDB()->prepare("UPDATE usuario set activo=? WHERE Nick=?"); 
         $stmt->bind_param("is",$activo, $nick);
         return $stmt->execute();
     }
