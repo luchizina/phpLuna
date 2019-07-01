@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-07-01 20:18:33
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-07-01 20:25:01
          compiled from "vistas\propuestas_detalle.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:61458725d1a944146ed60-67105658%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '08e12de8fc9c9d6be32a84ef7a419ea195e7387c' => 
     array (
       0 => 'vistas\\propuestas_detalle.tpl',
-      1 => 1562023054,
+      1 => 1562023498,
       2 => 'file',
     ),
   ),
@@ -21,14 +21,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   array (
     'url_base' => 0,
     'propuesta' => 0,
+    'usuLogNick' => 0,
     'recompensas' => 0,
     'rec' => 0,
     'comentarios' => 0,
     'com' => 0,
-    'usuLogNick' => 0,
     'propsCatego' => 0,
     'propC' => 0,
-    'NickLog' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -93,10 +92,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                                 <?php ob_start();?><?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getEstadoActual();?>
 <?php $_tmp3=ob_get_clean();?><?php ob_start();?><?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getEstadoActual();?>
 <?php $_tmp4=ob_get_clean();?><?php if ($_tmp3==3||$_tmp4==4) {?>
+                                <?php if ($_smarty_tpl->tpl_vars['usuLogNick']->value!=null) {?>
                                 <div> 
                                     <a style="text-align: center; margin-top: 10px; " href="/phpLuna/propuesta/nuevaColaboracion/<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
 " class="btn btn-primary btn-black">Colaborar!</a>  
                                 </div>
+                                <?php }?>
                                 <?php }?>
                             </div>
                             <div style ="margin-left: 10px">
@@ -190,6 +191,7 @@ echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
                 </div>
                 <?php } ?>
             </div>
+            <?php if ($_smarty_tpl->tpl_vars['usuLogNick']->value!=null) {?>
             <div class="jajaja ">
                 <div class="jaja probootstrap-heading probootstrap-animate">
                     <form method="post" class="probootstrap-form">
@@ -202,6 +204,7 @@ echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
                     </form>
                 </div>
             </div>
+            <?php }?>
             <h2 class="probootstrap-heading probootstrap-animate otromasche2"> Quizás te interesen...</h2>
             <div class="accordion probootstrap-heading probootstrap-animate">
                 <ul>
@@ -258,190 +261,4 @@ $_smarty_tpl->tpl_vars['propC']->_loop = true;
 </html>
 
 
-      <section class="probootstrap-section">
-        <div class="container">
-          <div class="row">
-          <div class="col-md-5 probootstrap-animate" style="color: white; font-family: Montserrat,Arial,sans-serif" >
-                       <div class="services">
-                      <section class="pricecol">
-                      <div style="text-align: center;">
-                      <?php ob_start();?><?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getImagen();?>
-<?php $_tmp5=ob_get_clean();?><?php if ($_tmp5!=null) {?>
-                      <img src="./<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getImagen();?>
- " class="imgRedonda" width="400" height="400" />
-                      <?php }?>
-                      <?php ob_start();?><?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getImagen();?>
-<?php $_tmp6=ob_get_clean();?><?php if ($_tmp6==null) {?>
-                     <img src="/img/person_7.jpg" />
-                      <?php }?>
-                      </div>
-                      <h3 style="text-align: center;"><Span>Datos personales:</span></h3>
-                      <ul>
-                      <li>Nombre: <?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
-</li>
-                      <li>Monto:  $<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getMonto();?>
-  </li>
-                      <li>Fecha publicada: <?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getFechaPublicada();?>
-  </li>
-                      <li>Descripción: <?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getDescripcion();?>
-</li>
-                      <li>Progeso actual:  $<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getMontoActual();?>
-</li>
-                      <li> 
-                           <div class="progress" style="max-width: 400px">
-                           <div class="progress-bar progress-bar-s2" data-percent="<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->calc();?>
-"></div>
-                           </div>
-                      </li>
-                      <li><a href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-propuesta/otracosa/">otra</a>
-                      </li>
-                      </ul>
-                      </section>
-                      </div>
-           <div class="col-md-6 col-md-push-1 probootstrap-animate"  style="color: white;">            
-             <div class="form-group" style="max-width: 300px;max-height: 300px">
-                   
-                
-              </div>
-              <div class="form-group">
-                <label for="Desc">Descripcion:</label>
-                 <p name="Desc"></p> 
-              </div>
-                <div class="form-group">
-                    <label for="na">Progreso actual: $<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getMontoActual();?>
-</label>
-               <div class="progress" style="max-width: 400px">
-                    <div class="progress-bar progress-bar-s2" data-percent="<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->calc();?>
-"></div>
-                  </div>
-                  <a href="/phpLuna/propuesta/nuevaColaboracion/<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
-" class="btn btn-primary btn-black">Colaborar!</a>
-                  </div>
-
-          </div>
-        </div>
-        </div>
-
-<div class="jajaja" id="coments">
-        <?php  $_smarty_tpl->tpl_vars['com'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['com']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['comentarios']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['com']->key => $_smarty_tpl->tpl_vars['com']->value) {
-$_smarty_tpl->tpl_vars['com']->_loop = true;
-?>
-        <div class="comment">
-              <?php if ($_smarty_tpl->tpl_vars['com']->value->getUsuario()->getImagen()!=null) {?>
-                <img src="./<?php echo $_smarty_tpl->tpl_vars['com']->value->getUsuario()->getImagen();?>
-">
-                <?php }?>
-                 <?php if ($_smarty_tpl->tpl_vars['com']->value->getUsuario()->getImagen()==null) {?>
-                <img src="./imgUsus/pepito.png">
-                <?php }?>
-               <div class="comment-content"><p class="author"><strong><?php echo $_smarty_tpl->tpl_vars['com']->value->getUsuario()->getNick();?>
-</strong></p>
-                <span>
-                    <?php echo $_smarty_tpl->tpl_vars['com']->value->getTexto();?>
- 
-                </span>
-           </div>
-              <?php if ($_smarty_tpl->tpl_vars['com']->value->getUsuario()->getNick()==$_smarty_tpl->tpl_vars['usuLogNick']->value) {?>
-            <a id="<?php echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
-" class="btn" onclick="borrarComent('<?php echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
-','<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
-');">
-                         <i class="icon-trash"></i></a>  
-         <?php }?>
-         <a class="btn" onclick="likeComentario('<?php echo $_smarty_tpl->tpl_vars['usuLogNick']->value;?>
-',<?php echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
-);">
-<i class="fa fa-thumbs-up"></i> <span id="<?php echo $_smarty_tpl->tpl_vars['usuLogNick']->value;
-echo $_smarty_tpl->tpl_vars['com']->value->getId();?>
-"><?php echo $_smarty_tpl->tpl_vars['com']->value->getLikes();?>
-</span></a>
-          </div>
-      <?php } ?>
-
-</div>
-<?php if ($_smarty_tpl->tpl_vars['NickLog']->value!=''||$_smarty_tpl->tpl_vars['NickLog']->value!=null) {?>
-<div class="jajaja"> 
-  <div class="jaja">
-      <form method="post" class="probootstrap-form">
-        <textarea rows="5" cols="57" name="textoComentario" id="textoComentario"></textarea>
-        <div class="form-group" >
-            <a onclick="javascript:Coment('<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-','<?php echo $_smarty_tpl->tpl_vars['propuesta']->value->getNombre();?>
-');" id="submit" name="submit" class="btn btn-primary btn-lg">COMENTAR</a>
-          </div>
-    </form>
-    </div>
-  </div>
-  <?php }?>
-
-<h2 class="blanca">Recompensas</h2>
-<table class="table table-striped tabla" style=" background-color: #ecececb3">
-  <tr>
-    <th>Nombre</th>
-   <th>Monto a superar</th> 
-  </tr>
-
-     <?php  $_smarty_tpl->tpl_vars['rec'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['rec']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['recompensas']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['rec']->key => $_smarty_tpl->tpl_vars['rec']->value) {
-$_smarty_tpl->tpl_vars['rec']->_loop = true;
-?>
-  <tr>
-    <td><?php echo $_smarty_tpl->tpl_vars['rec']->value->getNombre();?>
-</td>
-    <td><?php echo $_smarty_tpl->tpl_vars['rec']->value->getMontoaSuperar();?>
-</td>
-  </tr>
-  <?php } ?>
-</table>
-  
-
-   
-    </section>  
-
-<div class="accordion">
-  <ul>
-     <?php  $_smarty_tpl->tpl_vars['propC'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['propC']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['propsCatego']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['propC']->key => $_smarty_tpl->tpl_vars['propC']->value) {
-$_smarty_tpl->tpl_vars['propC']->_loop = true;
-?>
- 
-    <li>
-      <div class="image_title">
-        <a href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-propuesta/detalleProp/<?php echo $_smarty_tpl->tpl_vars['propC']->value->getNombre();?>
-"><?php echo $_smarty_tpl->tpl_vars['propC']->value->getNombre();?>
-</a>
-      </div>
-      <a href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-propuesta/detalleProp/<?php echo $_smarty_tpl->tpl_vars['propC']->value->getNombre();?>
-"><img src="./<?php echo $_smarty_tpl->tpl_vars['propC']->value->getImagen();?>
-" height="320" width="640" alt="transformers4_640x320" border="0"></a>
-    </li>
-     <?php } ?>
-   
-  </ul>
-</div>
-          
-  </section>
-   <?php echo '<script'; ?>
- src="js/scripts.min.js"><?php echo '</script'; ?>
->
-   <?php echo '<script'; ?>
- src="js/carrusel.js"><?php echo '</script'; ?>
->
-    <?php echo '<script'; ?>
- src="js/main.min.js"><?php echo '</script'; ?>
->
-    <?php echo '<script'; ?>
- src="js/custom.js"><?php echo '</script'; ?>
->
-     <?php echo '<script'; ?>
- src="js/validar.js" type="text/javascript"><?php echo '</script'; ?>
->
-      </body></html>
-<?php }} ?>
+     <?php }} ?>

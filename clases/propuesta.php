@@ -309,7 +309,7 @@ public function calc(){
   $moT = $this->getMonto();
   $moA = $this->getMontoActual();
   $toT= ($moA * 100)/$moT;
-   return ($toT);
+   return round($toT, 2);
 }
 
 public function traerImagen($nombre){
@@ -427,7 +427,7 @@ $now = time();
  
 $datediff = $fechaFin - $now;
 $resultado = round($datediff / (60 * 60 * 24))+1;
-   if($resultado == 0){
+   if($resultado <= 0){
   $this->setEstadoActual(5);
   $this->actualizarEstadoProp();
 
