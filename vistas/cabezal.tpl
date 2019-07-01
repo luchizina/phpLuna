@@ -10,6 +10,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/sweetalert.js"></script>
         <script src="js/validar.js"></script>
+        <script type="text/javascript" src="js/alertas.js"></script>
     <link rel="stylesheet" href="css/busca.css">
     
   </head>
@@ -49,6 +50,7 @@
                   {if $usuLogNick != "" and $usuLogTipo == 0}
                   <li><a href="/phpLuna/propuesta/listadoPropsAgregadas/1">Aceptar/rechazar propuestas</a></li>
                    <li><a href="/phpLuna/propuesta/listadoCat">Agregar categoría</a></li>
+                   <li><a id="btnPropVencen" href="/phpLuna/usuario/mandarPropsQueVencen">¡Avisá de las propuestas que vencen!</a></li>
                    {/if}
                 </ul>
               </li>

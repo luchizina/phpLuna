@@ -16,6 +16,20 @@ class ControladorUsuario extends ControladorIndex {
        );
           $tpl->mostrar('inicio',$datos);
 }
+
+
+function borrarUsuario(){
+
+$usuario = new Usuario();
+
+    $nick = $_POST['nick'];
+    $usuario->borrarUsu($nick);
+     $usuario->logout();
+
+ return $this->getUrl("usuario","redirigir");
+}
+
+
     function listado($params=array()){
        $buscar="";
        $titulo="Listado";
@@ -23,9 +37,10 @@ class ControladorUsuario extends ControladorIndex {
        if(!empty($params)){
            if($params[0]=="borrar"){
                $usuario=new Usuario();
-               $nickABorrar=$paramheas[1];
-                if($usuario->borrar($nickABorrar)){
+               $nickABorrar=$params[1];
+                if($usuario->borrarUsu($nickABorrar)){
                   $usuario->logout();
+                   return $this->getUrl("usuario","redirigir");
                     //Redirigir al listado
                     //header('Location: index.php');exit;
                     $this->redirect("usuario","listado");
@@ -132,9 +147,13 @@ function nuevo(){
     $usr->setToken($token);
     if($usr->agregar()){
       $nombreC = $usr->getNombre()." ".$usr->getApellido();
-      $url="http://localhost/phpLuna/usuario/activarU/".$token;
-      $body = "Para activar su cuenta debe entrar al siguiente enlace: ".$url;
-      $bodyhtml = "Para activar su cuenta haga click aqui <a href='$url'>Activar cuenta</a>";
+      $tokens = array();
+      array_push($tokens,$token);
+     // $url="http://localhost/phpLuna/usuario/activarU/".$token;
+      $url = $this->getUrl("usuario","activarU",$tokens);
+      $url2 = "http://localhost".$url;
+      $body = "Para activar su cuenta debe entrar al siguiente enlace: ".$url2;
+      $bodyhtml = "Para activar su cuenta haga click aqui <a href='$url2'>Activar cuenta</a>";
       if(Utils::enviarEmail($usr->getCorreo(),$nombreC, $body, $bodyhtml, "Bienvenida a Luna-Activar cuenta")){
         $this->redirect("usuario","aviso");
       } else {
@@ -479,6 +498,8 @@ public function cambiaPass($params=array()){
 
 
 
+
+
 public function mandarPropsQueVencen(){
     $propsQueVencen = array();
     $propuesta = new Propuesta();
@@ -505,6 +526,7 @@ public function mandarPropsQueVencen(){
 
 foreach ($usuarios as $usu) {
 $correo = $usu->getCorreo();
+
 $nombreC = $usu->getNombre()." ".$usu->getApellido();
       $url="#";
       $body = "Esto es una prueba";
@@ -512,17 +534,9 @@ $nombreC = $usu->getNombre()." ".$usu->getApellido();
       Utils::enviarEmail($correo,$nombreC, $body, $bodyhtml, "Bienvenida a Luna");
 
 }
-
+ return $this->getUrl("usuario","redirigir");
   
 }
-
-
-
-
-
-
-
-
 
 
 

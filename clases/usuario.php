@@ -16,7 +16,7 @@ class Usuario extends ClaseBase {
 	public $PropuestasPropone = array();
 	public $PropuestasColabora = array();
     private $Cedula = '';
-    private $Activo = 0;
+    private $activo = 0;
     private $favoritos = array();
     private $token='';
     private $token_pass = '';
@@ -186,22 +186,23 @@ class Usuario extends ClaseBase {
 
     public function setActivo($activito)
     {
-        $this->Activo = $activito;
+        $this->activo = $activito;
     }
 
     public function isActivo()
     {
-        return $this->Activo;
+        return $this->activo;
     }
 
     public function setFavoritos($favoritos){
         $this->favoritos = $favoritos;
     }
 
-    public function borrar($nick)
+    public function borrarUsu($nick)
     {
-        $activo = 0;
-            $stmt = $this->getDB()->prepare("UPDATE usuario set activo=? WHERE nick=?"); 
+       $this->setActivo(0);
+       $activo = $this->isActivo();
+            $stmt = $this->getDB()->prepare("UPDATE usuario set activo=? WHERE Nick=?"); 
         $stmt->bind_param("is",$activo, $nick);
         return $stmt->execute();
     }
@@ -477,8 +478,9 @@ public function modificar($tipo)
 
 
     public function login($email,$pass){
-        $stmt = $this->getDB()->prepare( "SELECT * from  usuario WHERE Correo=? AND Password=? AND activo=1" );
-        $stmt->bind_param("ss",$email,$pass);
+        $stmt = $this->getDB()->prepare( "SELECT * from  usuario WHERE Correo=? AND Password=? AND activo=?" );
+        $activo = 1;
+        $stmt->bind_param("ssi",$email,$pass,$activo);
         $stmt->execute();
         $resultado = $stmt->get_result();
         if($resultado->num_rows<1){
@@ -551,13 +553,13 @@ public function modificar($tipo)
       $sql="SELECT DISTINCT usuario.* FROM usuario, colaboracion where colaboracion.TituloPropuesta = '$nombreProp' and colaboracion.NickUsuario = usuario.Nick";
         $resultados=array();
 
-        $resultado =$this->db->query($sql)   
+        $resultado =$this->getDB()->query($sql)   
             or die ("Fallo en la consulta");
 
         while ( $fila = $resultado->fetch_object() )
         {
             
-            $objeto= new $this->modelo($fila);
+            $objeto= new Usuario($fila);
             $resultados[]=$objeto;
         } 
      return $resultados;  

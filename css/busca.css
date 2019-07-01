@@ -11,7 +11,9 @@
   margin-top:20px;
 }
 
-
+.otrosa{
+  margin-bottom: 15px;
+}
 .input {
   position: absolute;
   left:175px;
@@ -117,12 +119,16 @@
 .jajaja{
   margin: 0 auto;
   max-width:700px;
+  border-radius:10px;
   background-color: #dfe0d4;
+
 }
 .jaja{
+  border-radius:10px;
   margin: 0 auto;
 padding-left: 100px;
   background-color: #dfe0d4;
+
 }
 .comment-content{
   float:left;

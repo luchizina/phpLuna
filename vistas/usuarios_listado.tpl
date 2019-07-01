@@ -45,17 +45,21 @@
               </thead>
               <tbody>
                 {foreach from=$usuarios item=persona}
+                  {if $persona->isActivo() == 1}
                   <tr>
-                    <td>{$persona->getNombre()|upper}</td>
+                    <td>{$persona->getNombre()|upper} + {$persona->isActivo()}</td>
                     <td>{$persona->getApellido()}</td>
                    <td>{$persona->getNick()}</td>
                     <td>{$persona->getCorreo()}</td>
                     <td>
+                    
                        {if $usuLogNick == $persona->getNick()}
-                      <input type="button" value="Borrar" class="btn btn-danger" onClick="window.location='{$url_base}usuario/listado/borrar/{$persona->getNick()}/'"/>
+                     
+                      <input type="button" value="Borrar" class="btn btn-danger" id="{$persona->getNick()}" onClick="borrarUsu('{$persona->getNick()}','{$url_base}')"/>
                       <input type="button" value="Modificar" class="btn btn-success" onClick="window.location='{$url_base}usuario/modificar/{$persona->getNick()}/'"/>
                        {/if}
                          <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#modalLoginAvatar{$persona->getNick()}">Ver perfil</a>
+                         {/if}
                      <!-- <input type="button" value="Ver perfil" class="btn btn-success" onClick="window.location='{$url_base}usuario/verPerfil/{$persona->getNick()}/'"/>-->
                     <!--  <input type="button" value="Favoritos" class="btn btn-submit" onClick="cargarFavoritos();"/>-->
                      <div class="modal fade" id="modalLoginAvatar{$persona->getNick()}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -96,7 +100,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
+    <script type="text/javascript" src="js/alertas.js"></script>
   </body>
 </html>
 
