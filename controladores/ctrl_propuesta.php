@@ -217,7 +217,7 @@ function consolita( $data ) {
           $hola = explode(".", $img);
             $extension=end($hola);
             //rename($target, $nick.".".$extension);
-            $target = "imgProps/".$prop->getNombFre().".".$extension;
+            $target = "imgProps/".$prop->getNombre().".".$extension;
         } else {
             echo "El tipo de imagen es incorrecto";
         }
@@ -254,6 +254,7 @@ function consolita( $data ) {
   $tpl->mostrar('registrar_propuesta',array());
     }
 }
+
 public function modificar($params = array())
    {
     $mensaje = "";

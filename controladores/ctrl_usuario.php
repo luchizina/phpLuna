@@ -147,9 +147,13 @@ function nuevo(){
     $usr->setToken($token);
     if($usr->agregar()){
       $nombreC = $usr->getNombre()." ".$usr->getApellido();
-      $url="http://localhost/phpLuna/usuario/activarU/".$token;
-      $body = "Para activar su cuenta debe entrar al siguiente enlace: ".$url;
-      $bodyhtml = "Para activar su cuenta haga click aqui <a href='$url'>Activar cuenta</a>";
+      $tokens = array();
+      array_push($tokens,$token);
+     // $url="http://localhost/phpLuna/usuario/activarU/".$token;
+      $url = $this->getUrl("usuario","activarU",$tokens);
+      $url2 = "http://localhost".$url;
+      $body = "Para activar su cuenta debe entrar al siguiente enlace: ".$url2;
+      $bodyhtml = "Para activar su cuenta haga click aqui <a href='$url2'>Activar cuenta</a>";
       if(Utils::enviarEmail($usr->getCorreo(),$nombreC, $body, $bodyhtml, "Bienvenida a Luna-Activar cuenta")){
         $this->redirect("usuario","aviso");
       } else {
