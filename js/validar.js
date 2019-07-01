@@ -126,8 +126,21 @@ $.ajax({
         html += '<h2><a href="/phpLuna/propuesta/detalleProp/'+res[i]['Nombre']+'/">'+res[i]['Nombre']+'</a>';
        
         html += '</h2>';
+        if(res[i]['Tiemrest'] > 1){ 
         html += '<div class="probootstrap-date"><i class="fa fa-history"></i>Quedan '+res[i]['Tiemrest']+' dias restantes</div>';
         html += '<p><a href="/phpLuna/propuesta/nuevaColaboracion/'+res[i]['Nombre']+'" class="btn btn-primary btn-black">Colaborar!</a>'
+      }
+      if(res[i]['Tiemrest'] == 1){
+        html += '<div class="probootstrap-date"><i class="fa fa-history"></i>Queda '+res[i]['Tiemrest']+' dia restante</div>';
+        html += '<p><a href="/phpLuna/propuesta/nuevaColaboracion/'+res[i]['Nombre']+'" class="btn btn-primary btn-black">Colaborar!</a>'
+      }
+      if(res[i]['Tiemrest'] == 0){
+        html += '<div class="probootstrap-date"><i class="fa fa-history"></i>La propuesta finalizara hoy</div>';
+        html += '<p><a href="/phpLuna/propuesta/nuevaColaboracion/'+res[i]['Nombre']+'" class="btn btn-primary btn-black">Colaborar!</a>'
+      }
+      if(res[i]['Tiemrest'] < 0){
+        html += '<div class="probootstrap-date"><i class="fa fa-history"></i>La propuesta esta finalizada</div>';
+      }
            if(res[i]['UsuFav'] !== null){
           html += '<a class="btn estrella" onclick="favoritear(\''+res[i]['Nombre']+'\', /phpLuna/ ,\''+traeLog().replace(/^\s+|\s+$/gm,'')+'\');">';
           html += '<i class="fa fa-star" id="'+otroid+'"></i></a>';
@@ -195,11 +208,11 @@ function paginar(nombreCat,nombreProp){
       let html = '';
       let no = 'no';
       html += '<ul class="pagination justify-content-center" style="margin:20px 0">';
-      html += '<li class="page-item" id="ant"><a id="anta" class="page-link" onclick="anteriorFilt(\''+nombreCat+'\',\''+nombreProp+'\');">Anterior</a></li>';
+      html += '<li class="page-item" id="antF"><a id="antaF" class="page-link" onclick="anteriorFilt(\''+nombreCat+'\',\''+nombreProp+'\');">Anterior</a></li>';
       for(let i=1; i<=res; i++){
         html += '<li class="page-item" id="'+i+'"><a class="page-link" onclick="listProp('+i+',\''+nombreCat+'\',\''+nombreProp+'\'); vuelve(); tomaval('+i+')">'+i+'</a></li>';
       }
-      html += '<li class="page-item" id="sig"><a class="page-link" id="sigui" onclick="sigF(\''+nombreCat+'\',\''+nombreProp+'\');">Siguiente</a></li>';
+      html += '<li class="page-item" id="sigF"><a class="page-link" id="siguiF" onclick="sigF(\''+nombreCat+'\',\''+nombreProp+'\');">Siguiente</a></li>';
       html += '</ul>';
       $('#pagination').html(html);
     }
@@ -261,7 +274,7 @@ function sig(){
     let v = parseInt(p)+1;
     console.log(v);
     tomaval(v);
-    listProp(v);
+    listarPropBien(v);
   } else {
     $('#sig').addClass("disabled");
     $("#sigui").attr("onclick","void(0);");
@@ -269,33 +282,31 @@ function sig(){
 }
 
 function sigF(cat, prop){
-  console.log("entra");
   let ult = obtUltP();
   let p = valAct();
   if(ult > p){
-    $('#sig').removeClass("disabled");
-    $("#sigui").attr("onclick","sigF('"+cat+"','"+prop+"');");
+    $('#sigF').removeClass("disabled");
+    $("#siguiF").attr("onclick","sigF('"+cat+"','"+prop+"');");
     let v = parseInt(p)+1;
     tomaval(v);
     listProp(v, cat, prop);
   } else {
-    $('#sig').addClass("disabled");
-    $("#sigui").attr("onclick","void(0);");
+    $('#sigF').addClass("disabled");
+    $("#siguiF").attr("onclick","void(0);");
   }
 }
 
 function anteriorFilt(cat, prop){
-  console.log("entra");
   let v = valAct();
   if(v > 1){
-    $('#ant').removeClass("disabled");
-    $("#anta").attr("onclick","anteriorF('"+cat+"','"+prop+"');");
+    $('#antF').removeClass("disabled");
+    $("#antaF").attr("onclick","anteriorF('"+cat+"','"+prop+"');");
     let p = v-1;
     tomaval(p);
     listProp(p, cat, prop);
   } else {
-    $('#ant').addClass("disabled");
-    $("#anta").attr("onclick","void(0);");
+    $('#antF').addClass("disabled");
+    $("#antaF").attr("onclick","void(0);");
   }
 }
 
@@ -306,7 +317,7 @@ function anterior(){
     $("#anta").attr("onclick","anterior();");
     let p = v-1;
     tomaval(p);
-    listProp(p);
+    listarPropBien(p);
   } else {
     $('#ant').addClass("disabled");
     $("#anta").attr("onclick","void(0);");

@@ -44,9 +44,11 @@
                                 {if {$propuesta->getImagen()}==null}
                                 <img src="/img/person_7.jpg" />
                                 {/if}
+                                {if {$propuesta->getEstadoActual()} == 3 || {$propuesta->getEstadoActual()} == 4}
                                 <div> 
                                     <a style="text-align: center; margin-top: 10px; " href="/phpLuna/propuesta/nuevaColaboracion/{$propuesta->getNombre()}" class="btn btn-primary btn-black">Colaborar!</a>  
                                 </div>
+                                {/if}
                             </div>
                             <div style ="margin-left: 10px">
                                 <ul>
