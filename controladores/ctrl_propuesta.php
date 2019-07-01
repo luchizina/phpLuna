@@ -56,7 +56,7 @@ class ControladorPropuesta extends ControladorIndex {
                     //Redirigir al listado
                     //header('Location: index.php');exit;
                     $this->redirect("propuesta","listado");
-                }else{
+                }else{ 
                     //Mostrar error
                     $usr=$propuesta->obtenerPorId($idABorrar);
                     //$mensaje="Error!! No se pudo borrar el usuario  <b>".$usr->getNombre()." ".$usr->getApellido()."</b>";
@@ -112,7 +112,6 @@ class ControladorPropuesta extends ControladorIndex {
  $textoBuscado = $params[0];
 $nombreCat = $params[1];
      $datos = array(
-     
        'textoBuscado' => $textoBuscado,
        'nombreCat' => $nombreCat,
        );
@@ -120,7 +119,7 @@ $nombreCat = $params[1];
     $tpl->asignar('textoBuscado',$textoBuscado);
      $tpl->asignar('nombreCat',$nombreCat );
     $tpl->mostrar('propuestas_listadoBusqueda',$datos);
-   }
+   } 
    
 function listadoPropsAgregadas($params=array()){
   $prop = new Propuesta();
@@ -583,14 +582,9 @@ function listProps(){
    $p = new Propuesta();
   if(isset($_POST['nombreCat'])){
     if($_POST['nombreCat'] == "todas"){
-$propuestasCat = $p->getListadoCat($_POST['nombreProp']);
-    $propuestasDesc = $p->getListadoDesc($_POST['nombreProp']);
-    $propuestasTit = $p->getListadoTit($_POST['nombreProp']);
-    $e = array_unique((array_merge($propuestasCat, $propuestasDesc, $propuestasTit)));
+    $e = $p->getPropsFiltro($_POST['nombreProp'], $pag);
   }else{
-    $propuestasPorCat = $p->getPropsPorCategoria($_POST['nombreCat'], $_POST['nombreProp']);
-  $e = array_unique((array_merge($propuestasPorCat)));
- 
+    $e = $p->getPropsPorCategoria($_POST['nombreCat'], $_POST['nombreProp'], $pag);
   }
      // $propuestasPorCat = $prop->getPropsPorCategoria($params[0], $texto);
   foreach ($e as $clave => $p) {
@@ -622,11 +616,23 @@ $propuestasCat = $p->getListadoCat($_POST['nombreProp']);
 $json =  json_encode($e);
   echo $json;
  }
+
 function cantPag(){
   $p = new Propuesta();
-  $c = $p->cantPagProp();
-  echo $c;
+  $c = 0;
+  if(isset($_POST['nombreCat'])){
+      if($_POST['nombreCat'] == 'todas'){
+      $c = $p->cantPagPropFiltro($_POST['nombreProp']);
+    } else {
+      $c = $p->cantPagPropC($_POST['nombreCat'], $_POST['nombreProp']);
+    }
+  } else {
+    $c = $p->cantPagProp();
+  }
+  $pg = json_encode($c);
+  echo $pg;
 }
+
 function e(){
   $tpl = Template::getInstance();
   $tpl->mostrar('e',array());

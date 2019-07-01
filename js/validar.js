@@ -29,12 +29,12 @@ function redondear(numero, digitos){
 
 function listarPropBien(p){
 listProp(p,'no','no');
+paginar('no','no');
 }
 
 function listProp(p,nombreCat,nombreProp){
   urlList = '/phpLuna/propuesta/listProps/';
   if(nombreCat == 'no'){
-
   $.ajax({
     url: urlList,
     data: 'p='+p,
@@ -91,13 +91,12 @@ function listProp(p,nombreCat,nombreProp){
         html += '</div>';
         html += '</div>';
         
-      }
+      } 
       $('#propuestitas').html(html);
     }
   })
 
   }else{
-  
 $.ajax({
  
     url: urlList,
@@ -150,11 +149,17 @@ $.ajax({
 }
 } 
 
-function paginar(){
+function paginar(nombreCat,nombreProp){
+  console.log(nombreCat + nombreProp);
+  if(nombreCat == 'no'){
   $.ajax({
     url: '/phpLuna/propuesta/cantPag/',
     type: 'post',
+    dataType: 'json',
     success:function(res){
+      if(res == 1){
+        $('#pagination').html("");
+      }
       if(res > 1){
       let html = '';
       let no = 'no';
@@ -176,6 +181,38 @@ function paginar(){
     }
   }
   })
+} else {
+  $.ajax({
+    url: '/phpLuna/propuesta/cantPag/',
+    data: 'nombreCat='+nombreCat+'&nombreProp='+nombreProp,
+    type: 'post',
+    dataType: 'json',
+    success:function(res){
+      if(res == 1){
+        $('#pagination').html("");
+      }
+      if(res > 1){
+      let html = '';
+      let no = 'no';
+      html += '<ul class="pagination justify-content-center" style="margin:20px 0">';
+      html += '<li class="page-item" id="ant"><a id="anta" class="page-link" onclick="anteriorFilt(\''+nombreCat+'\',\''+nombreProp+'\');">Anterior</a></li>';
+      for(let i=1; i<=res; i++){
+        html += '<li class="page-item" id="'+i+'"><a class="page-link" onclick="listProp('+i+',\''+nombreCat+'\',\''+nombreProp+'\'); vuelve(); tomaval('+i+')">'+i+'</a></li>';
+      }
+      html += '<li class="page-item" id="sig"><a class="page-link" id="sigui" onclick="sigF(\''+nombreCat+'\',\''+nombreProp+'\');">Siguiente</a></li>';
+      html += '</ul>';
+      $('#pagination').html(html);
+    }
+    if(res == 0){
+      let html = '';
+      html += '<div class="col-md-12 text-center">';
+      html += '<h2 class="caca">Aún no hay propuestas </h2>'; 
+      html += '</div>';
+      $('#propuestitas').html(html);
+    }
+  }
+  })
+}
 }
 
 function obtUltP(){
@@ -228,6 +265,37 @@ function sig(){
   } else {
     $('#sig').addClass("disabled");
     $("#sigui").attr("onclick","void(0);");
+  }
+}
+
+function sigF(cat, prop){
+  console.log("entra");
+  let ult = obtUltP();
+  let p = valAct();
+  if(ult > p){
+    $('#sig').removeClass("disabled");
+    $("#sigui").attr("onclick","sigF('"+cat+"','"+prop+"');");
+    let v = parseInt(p)+1;
+    tomaval(v);
+    listProp(v, cat, prop);
+  } else {
+    $('#sig').addClass("disabled");
+    $("#sigui").attr("onclick","void(0);");
+  }
+}
+
+function anteriorFilt(cat, prop){
+  console.log("entra");
+  let v = valAct();
+  if(v > 1){
+    $('#ant').removeClass("disabled");
+    $("#anta").attr("onclick","anteriorF('"+cat+"','"+prop+"');");
+    let p = v-1;
+    tomaval(p);
+    listProp(p, cat, prop);
+  } else {
+    $('#ant').addClass("disabled");
+    $("#anta").attr("onclick","void(0);");
   }
 }
 

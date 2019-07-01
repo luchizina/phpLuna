@@ -1,30 +1,32 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-07-01 16:07:02
-         compiled from "vistas\propuestas_listado.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:113065d096756462472-07512871%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-07-01 17:39:06
+         compiled from "vistas\propuestas_listadoBusqueda.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:10747431375d192e00916fc2-20418833%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    'cb7e98352ffa98b3b2a857e00efc671b603776e0' => 
+    '811794865732a9208721111d4adc2ff2dc1539f5' => 
     array (
-      0 => 'vistas\\propuestas_listado.tpl',
-      1 => 1561995628,
+      0 => 'vistas\\propuestas_listadoBusqueda.tpl',
+      1 => 1562013540,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '113065d096756462472-07512871',
+  'nocache_hash' => '10747431375d192e00916fc2-20418833',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5d09675783de95_01804019',
+  'unifunc' => 'content_5d192e00f0a6d3_90938327',
   'variables' => 
   array (
     'url_base' => 0,
+    'nombreCat' => 0,
+    'textoBuscado' => 0,
     'registrar_propuesta' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5d09675783de95_01804019')) {function content_5d09675783de95_01804019($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5d192e00f0a6d3_90938327')) {function content_5d192e00f0a6d3_90938327($_smarty_tpl) {?><!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -51,7 +53,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 >
     <![endif]-->
   </head>
-  <body class="bg" onload="listarPropBien(1);">
+  <body class="bg" onload="listProp(1,'<?php echo $_smarty_tpl->tpl_vars['nombreCat']->value;?>
+','<?php echo $_smarty_tpl->tpl_vars['textoBuscado']->value;?>
+'); paginar('<?php echo $_smarty_tpl->tpl_vars['nombreCat']->value;?>
+','<?php echo $_smarty_tpl->tpl_vars['textoBuscado']->value;?>
+');">
     <?php echo $_smarty_tpl->getSubTemplate ("cabezal.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
   
  <section class="probootstrap-hero bg" >
