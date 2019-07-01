@@ -427,7 +427,7 @@ $now = time();
  
 $datediff = $fechaFin - $now;
 $resultado = round($datediff / (60 * 60 * 24))+1;
-   if($resultado <= 0){
+   if($resultado == 0){
   $this->setEstadoActual(5);
   $this->actualizarEstadoProp();
 
