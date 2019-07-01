@@ -362,8 +362,6 @@ $stmt->bind_param("s",$nombre);
     return $stmt->execute();
     }
 
-
-
 public function modificar()
    {
         $nombre=$this->getNombre();
@@ -471,7 +469,7 @@ public function likeProp($nombreUsu, $nombreProp)
 public function pFUNS(){
 $propuestas=array();
         $stmt = $this->getDB()->prepare( 
-            "SELECT * from propuesta WHERE DATEDIFF(fechaFinalizacion,now())<=7 and EstadoActual = 1");
+            "SELECT * from propuesta WHERE DATEDIFF(fechaFinalizacion,now())<=7 and EstadoActual = 3");
         $stmt->execute();
         $resultado = $stmt->get_result();
         while ($fila=$resultado->fetch_object()) {

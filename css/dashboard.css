@@ -160,8 +160,7 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
   color:white;
 }
 .imgRedonda {
-    width:150px;
-    height:150px;
+   
     border-radius:106px;
     border:10px solid #ede7e7eb;
     border-style: outset;
