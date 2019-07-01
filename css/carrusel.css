@@ -8,61 +8,8 @@ a {
   color: white; 
 }
 
-nav {
-  width: 100%;
-  height: 70px;
-}
 
-.nav-container {
-  width: 50%;
-  height: 100%;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.nav-item {
-  flex: 1;
-  height: 100%;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.subnav {
-  display: none;
-  position: absolute;
-  top: 100%;
-  color: white; 
-  width: 100%; 
-  animation: BobbySnuggles; 
-  animation-duration: .5s;
-  animation-function: ease-in-out; 
-}
-
-.subnav li {
-  padding: 20px;
-  list-style: none;  
-}
-
-.nav-item.has-subnav:hover .subnav {
-  display: inherit;
-}
-
-.nav-item.has-subnav {
-  position: relative; 
-}
-
-/*Time to apply widths for accordian to work
-Width of image = 640px
-total images = 5
-so width of hovered image = 640px
-width of un-hovered image = 40px - you can set this to anything
-so total container width = 640 + 40*4 = 800px;
-default width = 800/5 = 160px;
-*/
 
 .accordion {
   width: 800px; height: 320px;
@@ -117,8 +64,3 @@ default width = 800/5 = 160px;
   }
 }
 
-@media screen and (max-width: 500px) {
-  nav {
-    background: pink; 
-  }
-}

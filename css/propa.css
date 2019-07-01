@@ -1,26 +1,38 @@
 .services
 {
-width:1000px;
+width:700px;
 overflow:auto;
 margin:0 auto;
-}
-.pricecol
-{
-width:450px;
 background:rgb(38, 48, 52);
 min-height:30%;
 border-radius:10px;
 position:relative;
 padding:30px 0px;
 text-align:left;
-font-family:verdana;
-float:left;
-margin-left:20px;
+
+}
+.otromasche{
+margin-top: 90px;
+text-align: center;
+}
+.otromasche2{
+ text-align: center; 
+}
+.estilo{
+   text-align: justify ; 
+   font-weight: bold;
+  color:#dd0023;
+}
+.divSel{
+  color: white; font-family: Montserrat,Arial,sans-serif;text-align:  center; 
+}
+.conte{
+  text-align:   center;
+  margin: 50px;
 }
 .icon
 {
-width:60px;
-height:60px;
+
 border-radius:100%;
 background:rgb(108, 140, 54);
 color:#fff;
@@ -74,7 +86,7 @@ box-shadow: 0px 0px 1px rgba(255, 255, 255, 0.3) inset, 0px 2px 0px rgba(255, 25
 
 0.1) inset;
 }
-.ul
+.ula
 {
 list-style-type:none;
 padding:0px;
@@ -88,7 +100,7 @@ color:rgb(165, 174, 178);
 border-bottom:1px solid rgb(51, 60, 64);
 border-top:1px solid rgb(25, 31, 34);
 }
-.li
+.lia
 {
 padding:10px 0px;
 border-top:1px solid rgb(51, 60, 64);
