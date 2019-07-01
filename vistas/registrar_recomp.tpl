@@ -36,26 +36,28 @@
             <form method="post" class="probootstrap-form" enctype="multipart/form-data" id="registr">
               <div class="form-group">
                 <label for="nombreR">Nombre</label>
-                <input id="nombreR" name="nombreR" type="text" placeholder="Juan" class="form-control" required="">
+                <input id="nombreR" name="nombreR" type="text" placeholder="Ej: Camisetas, tazas, etc" class="form-control" required="">
               </div>
                <div class="form-group">
                <label for="desc">Descripción:</label>  
             
-              <textarea id="desc" name="desc" type="text" placeholder="Esto es una descripcion de mi tarea" class="form-control input-md" required="">
+              <textarea id="desc" name="desc" type="text" placeholder="Ej: La camiseta tendra el logo del proyecto" class="form-control input-md" required="">
               </textarea>
              
               </div>
               <div class="form-group">
                 <label for="monto">Monto a superar</label>
-                <input id="monto" name="monto" type="number" placeholder="ej: 10,100,1000..." class="form-control" required="">
+                <input id="monto" name="monto" type="number" placeholder="ej: 10,100,1000..." onchange="validarMonto();" class="form-control" required="">
+                <span id="montoS"></span>
               </div>
               <div class="form-group">
                 <label for="limite">Limite Usuario</label>
-                <input id="limite" name="limite" type="number" placeholder="Ej: 10" class="form-control" required="">
+                <input id="limite" name="limite" type="number" placeholder="Ej: 10" onchange="validarLimite()" class="form-control" required="">
+                <span id="limiteU"></span>
               </div>
               
               <div class="form-group">
-                <input type="submit" name="jaja" value="Guardar y agregar otra" class="btn btn-primary" onClick="window.location='{$url_base}propuesta/registrarRecom/{$tituloPropuesta}'"/>
+                <input type="submit" name="jaja" id="botoncito" value="Guardar y agregar otra" class="btn btn-primary" onClick="window.location='{$url_base}propuesta/registrarRecom/{$tituloPropuesta}'"/>
               </div>
                
             </form>
@@ -85,6 +87,9 @@
                   </tr>
                {/if} 
               </tbody>
+              <tfoot>
+                 <h5 style="color: #fff">Las recompensas son lo que se le otorgara al usuario segun el monto de su colaboracion.</h5>
+               </tfoot>
             </table>
           </div>
            <div class="form-group">

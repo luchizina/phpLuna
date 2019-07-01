@@ -16,7 +16,7 @@ class Usuario extends ClaseBase {
 	public $PropuestasPropone = array();
 	public $PropuestasColabora = array();
     private $Cedula = '';
-    private $Activo = 0;
+    private $activo = 0;
     private $favoritos = array();
     private $token='';
     private $token_pass = '';
@@ -186,22 +186,23 @@ class Usuario extends ClaseBase {
 
     public function setActivo($activito)
     {
-        $this->Activo = $activito;
+        $this->activo = $activito;
     }
 
     public function isActivo()
     {
-        return $this->Activo;
+        return $this->activo;
     }
 
     public function setFavoritos($favoritos){
         $this->favoritos = $favoritos;
     }
 
-    public function borrar($nick)
+    public function borrarUsu($nick)
     {
-        $activo = 0;
-            $stmt = $this->getDB()->prepare("UPDATE usuario set activo=? WHERE nick=?"); 
+       $this->setActivo(0);
+       $activo = $this->isActivo();
+            $stmt = $this->getDB()->prepare("UPDATE usuario set activo=? WHERE Nick=?"); 
         $stmt->bind_param("is",$activo, $nick);
         return $stmt->execute();
     }
@@ -288,23 +289,40 @@ public function agregar(){
         $nick=$this->getNick();
         $password = sha1($this->getPassword());
         $email=$this->getCorreo();
+        $arch = $this->getArchivo();
         $ci = $this->getCI();
+        $tokencito = $this->getToken();
         $act = $this->isActivo();
-        $stmt = $this->getDB()->prepare( 
-            "INSERT INTO usuario (Nombre, Apellido,Nick, Correo, Password,Celular, Imagen, ci, activo)
-           VALUES (?,?,?,?,?,?,?,?,?)" );
-        $null = "xD";
-        $stmt->bind_param("ssssssssi", $nombre, $ape, $nick, $email, $password, $cel, $null, $ci, $act);
+        $img = $this->getImagen();
+        $tip = $this->getTipo();
+        $tipoImg = $this->getTipoImg();
+        $tokenpass = '';
+        $solicito = 0;
+        $notificacion = 0;
+        $permitidos = array("image/jpg", "image/jpeg");
+        $target='';
+        echo "<script>console.log( 'Debug Objects: " . $nombre . " " . $ape . " " . $nick . " " . $email . " " . $password . " " . $cel . " " . $target . " " . $ci . " " . $act . " " . $tip . " " . $tokencito . "' );</script>";
+        if(in_array($tipoImg, $permitidos)){
+            //$target = "imgUsus/".basename($img);
+            if($tipoImg != ""){
+                $extension=end(explode(".", $img));
+            //rename($target, $nick.".".$extension);
+                $target = "imgUsus/".$nick.".".$extension;
+            } else {
+                $target = "";
+            }
+        } else {
+            echo "El tipo de imagen es incorrecto";
+        }
+        $this->setImagen($target);
+
+
+        $stmt = $this->getDB()->prepare("INSERT INTO usuario (Nombre, Apellido, Nick, Correo, Password, Celular, Imagen, ci, activo, tipo, token, tokenpass, solicitoPass, notificacion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $stmt->bind_param("ssssssssiissii", $nombre, $ape, $nick, $email, $password, $cel, $target, $ci, $act,$tip, $tokencito, $tokenpass, $solicito, $notificacion);
+        if($target != ''){
+        file_put_contents($target, $arch);
+    }
         return $stmt->execute();
-            
-            //echo json_encode(array("response"=>"success"));
-           // $json['success'] = 1;
-           // $json['message'] = "Usuario registrado";
-            //echo json_encode(array("response"=>"failed"));
-            
-           // $json['success'] = 0;
-           // $json['message'] = "Error al tratar de registrarse";
-        
     }
 
      public function getListadoUsus(){

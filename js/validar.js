@@ -63,7 +63,7 @@ function listProp(p,nombreCat,nombreProp){
         html += '<h2><a href="/phpLuna/propuesta/detalleProp/'+res[i]['Nombre']+'/">'+res[i]['Nombre']+'</a>';
        
         html += '</h2>';
-        if(res[i]['Tiemrest'] > 1){
+        if(res[i]['Tiemrest'] > 1){ 
         html += '<div class="probootstrap-date"><i class="fa fa-history"></i>Quedan '+res[i]['Tiemrest']+' dias restantes</div>';
         html += '<p><a href="/phpLuna/propuesta/nuevaColaboracion/'+res[i]['Nombre']+'" class="btn btn-primary btn-black">Colaborar!</a>'
       }
@@ -273,6 +273,8 @@ function dioFav(prop){
 }
 
 function listCom(nombre, url){
+    console.log(nombre);
+    console.log(url),
           $.ajax({
             url: url+'propuesta/listComs/',
             data: 'prop='+nombre,
@@ -366,7 +368,10 @@ function listCom(nombre, url){
 
 
 function likeComentario(usuario, idComent){
-
+  if(usuario === null || usuario === ''){
+    alert("No puedes dar like a un comentario sin estar logueado");
+  }
+  else {
 $.ajax({
 		url:"/phpLuna/propuesta/likeComentPagina",
 		method: "POST",
@@ -381,6 +386,7 @@ $.ajax({
 			//document.getElementById("message1").style.display = "block";
 		}
 	});
+}
 }
 
 
@@ -572,4 +578,36 @@ $("#avisaFor").html("Cedula entre 7 y 8 caracteres");
 }
 }
 catch(ex) {throw(ex)}
+}
+
+function validarLimite(){
+  let limite = $('#limite').val();
+  let monto = $('#monto').val();
+  if(limite < 1){
+    $('#limite').css("border", "3px solid red");
+    $('#botoncito').hide();
+    $('#limiteU').html("No puede ingresar numero menor o igual a 0 o dejar vacio el campo");
+  } else {
+    $('#limite').css("border", "3px solid green");
+    $('#limiteU').html("");
+  }
+  if(monto > 0 && limite > 0){
+    $('#botoncito').show();
+  }
+}
+
+function validarMonto(){
+  let monto = $('#monto').val();
+  let limite = $('#limite').val();
+  if(monto < 1){
+    $('#monto').css("border", "3px solid red");
+    $('#botoncito').hide();
+    $('#montoS').html("No puede ingresar numero menor o igual a 0 o dejar vacio el campo");
+  } else {
+    $('#monto').css("border", "3px solid green");
+    $('#montoS').html("");
+  }
+  if(monto > 0 && limite > 0){
+    $('#botoncito').show();
+  }
 }
