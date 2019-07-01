@@ -972,8 +972,8 @@ function sendnotification($tokens = array(), $message, $titl,$mensaje)
             }
       
     $message = array("message" => "holi");
-    $titl = "jajaja";
-    $mensaje = "q te pasa";
+    $titl = "Hola!";
+    $mensaje = "¿Ya has visto las últimas novedades de LUNA?";
     $message_status = $this->sendnotification($resultados, $message, $titl,$mensaje);
     echo $message_status;
     }
@@ -1036,10 +1036,7 @@ function sendnotification($tokens = array(), $message, $titl,$mensaje)
            }
            curl_close($ch);
            return $result;
-    
     }
-   
-
 }
 ?>
 

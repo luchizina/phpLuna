@@ -69,7 +69,7 @@
                                  <tr>
                                     <td>{$mProp->getNombre()}</td>
                                     <td>
-                                       <input type="button" value="Modificar" id="modificar" onClick="window.location='{$url_base}propuesta/modificar/{$mProp->getNombre()}/'" class="btn btn-success" >
+                                        <a href="{$url_base}propuesta/modificar/{$mProp->getNombre()}/"><i class="fa fa-edit"></i></a>
                                     </td>
                                     <td>
                                        <a href="{$url_base}propuesta/cancelarPropuesta/{$mProp->getNombre()}/"><i class="fa fa-trash"></i></a>
