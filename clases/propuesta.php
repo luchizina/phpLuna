@@ -309,7 +309,7 @@ public function calc(){
   $moT = $this->getMonto();
   $moA = $this->getMontoActual();
   $toT= ($moA * 100)/$moT;
-   return ($toT);
+   return round($toT, 2);
 }
 
 public function traerImagen($nombre){

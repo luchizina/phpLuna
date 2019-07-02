@@ -20,7 +20,7 @@
       <script src="js/vendor/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="bg" onload="listarPropBien(1); paginar();">
+  <body class="bg" onload="listarPropBien(1);">
     {include file="cabezal.tpl"}  
  <section class="probootstrap-hero bg" >
   <br>

@@ -478,8 +478,9 @@ public function modificar($tipo)
 
 
     public function login($email,$pass){
-        $stmt = $this->getDB()->prepare( "SELECT * from  usuario WHERE Correo=? AND Password=? AND activo=1" );
-        $stmt->bind_param("ss",$email,$pass);
+        $stmt = $this->getDB()->prepare( "SELECT * from  usuario WHERE Correo=? AND Password=? AND activo=?" );
+        $activo = 1;
+        $stmt->bind_param("ssi",$email,$pass,$activo);
         $stmt->execute();
         $resultado = $stmt->get_result();
         if($resultado->num_rows<1){
@@ -552,13 +553,13 @@ public function modificar($tipo)
       $sql="SELECT DISTINCT usuario.* FROM usuario, colaboracion where colaboracion.TituloPropuesta = '$nombreProp' and colaboracion.NickUsuario = usuario.Nick";
         $resultados=array();
 
-        $resultado =$this->db->query($sql)   
+        $resultado =$this->getDB()->query($sql)   
             or die ("Fallo en la consulta");
 
         while ( $fila = $resultado->fetch_object() )
         {
             
-            $objeto= new $this->modelo($fila);
+            $objeto= new Usuario($fila);
             $resultados[]=$objeto;
         } 
      return $resultados;  

@@ -20,7 +20,7 @@
       <script src="js/vendor/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="bg" onload="listProp(1,'{$nombreCat}','{$textoBuscado}'); paginar();">
+  <body class="bg" onload="listProp(1,'{$nombreCat}','{$textoBuscado}'); paginar('{$nombreCat}','{$textoBuscado}');">
     {include file="cabezal.tpl"}  
  <section class="probootstrap-hero bg" >
   <br>

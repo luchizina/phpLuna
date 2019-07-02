@@ -56,7 +56,7 @@ class ControladorPropuesta extends ControladorIndex {
                     //Redirigir al listado
                     //header('Location: index.php');exit;
                     $this->redirect("propuesta","listado");
-                }else{
+                }else{ 
                     //Mostrar error
                     $usr=$propuesta->obtenerPorId($idABorrar);
                     //$mensaje="Error!! No se pudo borrar el usuario  <b>".$usr->getNombre()." ".$usr->getApellido()."</b>";
@@ -112,7 +112,6 @@ class ControladorPropuesta extends ControladorIndex {
  $textoBuscado = $params[0];
 $nombreCat = $params[1];
      $datos = array(
-     
        'textoBuscado' => $textoBuscado,
        'nombreCat' => $nombreCat,
        );
@@ -120,7 +119,7 @@ $nombreCat = $params[1];
     $tpl->asignar('textoBuscado',$textoBuscado);
      $tpl->asignar('nombreCat',$nombreCat );
     $tpl->mostrar('propuestas_listadoBusqueda',$datos);
-   }
+   } 
    
 function listadoPropsAgregadas($params=array()){
   $prop = new Propuesta();
@@ -254,6 +253,7 @@ function consolita( $data ) {
   $tpl->mostrar('registrar_propuesta',array());
     }
 }
+
 public function modificar($params = array())
    {
     $mensaje = "";
@@ -330,7 +330,8 @@ function nuevaColaboracion($params=array()){
       if($usuProp->getNotificacion() == 0){
       $this->enviarMailColaboracion($prop,$col);
   }
-      array_push($usu->getPropuestasColabora(), $prop);
+      $propsCol = $usu->getPropuestasColabora();
+      array_push($propsCol, $prop);
       $prop->setMontoActual($prop->getMontoActual() + $_POST["monto"]);
       $prop->actualizaMonto();
        if($prop->getMontoActual()>=$prop->getMonto()){
@@ -360,9 +361,10 @@ function nuevaColaboracion($params=array()){
 public function enviarMailColaboradores($colabs){
 foreach ($colabs as $usuC) {
 $correo = $usuC->getCorreo();
-$bodyHtml = "Hola Nahuel! este es el correo : $correo";
+$nombre = $usuC->getNombre();
+$bodyHtml = "Hola $nombre, te avisamos que una de las propuestas en las que colaboraste ha cambiado de estado";
 $body = "";
-Utils::enviarMail("nambroa@gmail.com","Nahuel Ambroa", $body, $bodyHtml, "Mando correo");
+Utils::enviarEmail($correo,"Nahuel Ambroa", $body, $bodyHtml, "Mando correo");
 }
 }
 public function enviarMailColaboracion($prop,$col){
@@ -583,14 +585,9 @@ function listProps(){
    $p = new Propuesta();
   if(isset($_POST['nombreCat'])){
     if($_POST['nombreCat'] == "todas"){
-$propuestasCat = $p->getListadoCat($_POST['nombreProp']);
-    $propuestasDesc = $p->getListadoDesc($_POST['nombreProp']);
-    $propuestasTit = $p->getListadoTit($_POST['nombreProp']);
-    $e = array_unique((array_merge($propuestasCat, $propuestasDesc, $propuestasTit)));
+    $e = $p->getPropsFiltro($_POST['nombreProp'], $pag);
   }else{
-    $propuestasPorCat = $p->getPropsPorCategoria($_POST['nombreCat'], $_POST['nombreProp']);
-  $e = array_unique((array_merge($propuestasPorCat)));
- 
+    $e = $p->getPropsPorCategoria($_POST['nombreCat'], $_POST['nombreProp'], $pag);
   }
      // $propuestasPorCat = $prop->getPropsPorCategoria($params[0], $texto);
   foreach ($e as $clave => $p) {
@@ -622,11 +619,23 @@ $propuestasCat = $p->getListadoCat($_POST['nombreProp']);
 $json =  json_encode($e);
   echo $json;
  }
+
 function cantPag(){
   $p = new Propuesta();
-  $c = $p->cantPagProp();
-  echo $c;
+  $c = 0;
+  if(isset($_POST['nombreCat'])){
+      if($_POST['nombreCat'] == 'todas'){
+      $c = $p->cantPagPropFiltro($_POST['nombreProp']);
+    } else {
+      $c = $p->cantPagPropC($_POST['nombreCat'], $_POST['nombreProp']);
+    }
+  } else {
+    $c = $p->cantPagProp();
+  }
+  $pg = json_encode($c);
+  echo $pg;
 }
+
 function e(){
   $tpl = Template::getInstance();
   $tpl->mostrar('e',array());
@@ -997,6 +1006,43 @@ function sendnotification($tokens = array(), $message, $titl,$mensaje)
     
     echo $message_status;
     }
+
+
+    function modificarRecompensa(){
+
+      $nombreR = $_POST['nombreR'];
+      $id = $_POST['id'];
+      $desc = $_POST['descripcion'];
+      $monto = $_POST['monto'];
+      $limUsu = $_POST['limiteUsu'];
+      
+      $recom = new Recompensa();
+      $recompensa = $recom->obtenerPorId($id);
+
+      $recompensa->setDescripcion($desc);
+      $recompensa->setMontoaSuperar($monto);
+      $recompensa->setLimiteUsuarios($limUsu);
+      $recompensa->setNombre($nombreR);
+      $recompensa->modificarReco();
+
+      $nuevoArray = array();
+      array_push($nuevoArray, $nombreR, $desc,$monto,$limUsu);
+      $json =  json_encode($nuevoArray);
+      echo $json;
+
+
+    }
+
+    function borrarRecompensa(){
+      $id = $_POST['id'];
+      $reco = new Recompensa();
+      $reco->borrar($id);
+
+    }
+
+
+
+
     
     function propuestasFinalizar($prop){
       $pro = $prop->getNombre();
