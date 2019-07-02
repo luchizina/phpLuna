@@ -94,3 +94,71 @@ function agregarColaboracion(url_base){
   }
 })   
 }
+
+
+
+async function modificarRecompensa(url_base, nombreRec, id, desc, monto, limUsus, nombreProp){
+
+
+
+  const {value: formValues} = await Swal.fire({
+  title: 'Modificar recompensa',
+  html:
+    'Nombre' +
+    '<input id="swal-input1" class="swal2-input" value="'+nombreRec+'">' +
+    'Descripción' +
+    '<input id="swal-input2" class="swal2-input" value="'+desc+'">' +
+    'Monto a superar' +
+    '<input id="swal-input3" class="swal2-input" value='+monto+'>' +
+     'Límite de usuarios' +
+    '<input id="swal-input4" class="swal2-input" value='+limUsus+'>',
+  focusConfirm: false,
+  preConfirm: () => {
+    return [
+      document.getElementById('swal-input1').value,
+      document.getElementById('swal-input2').value,
+      document.getElementById('swal-input3').value,
+      document.getElementById('swal-input4').value
+    ]
+  }
+})
+
+if (formValues) {
+// Swal.fire(JSON.stringify(formValues[0]))
+ let nombreR = formValues[0];
+ let descripcion = formValues[1];
+ let montoSuperar = formValues[2];
+ let limiteUsus = formValues[3];
+
+ $.ajax({
+    url: url_base+"propuesta/modificarRecompensa",
+    type: 'post',
+    data: 'id='+id+'&nombreR='+nombreR+'&descripcion='+descripcion+'&monto='+montoSuperar+'&limiteUsu='+limiteUsus,
+    success:function(html){
+
+      let nombreTr = document.getElementById("nombre"+nombreRec);
+      nombreTr.innerHTML = nombreR;
+      nombreTr.id = "nombre"+nombreR;
+
+      let montoTr = document.getElementById("monto"+nombreRec);
+      montoTr.innerHTML = montoSuperar;
+      montoTr.id = "monto"+nombreR;
+
+      let botonMod = document.getElementById(id+nombreProp);
+      botonMod.setAttribute("onclick","modificarRecompensa('"+url_base+"','"+nombreR+"',"+id+",'"+descripcion+"',"+montoSuperar+","+limiteUsus+",'"+nombreProp+"')");
+  
+          Swal.fire(
+  'Recompensa modificada!',
+  'La recompensa se actualizó con éxito, querido',
+  'success'
+)
+    
+     },
+    error:function(){
+    }
+  });
+
+
+  
+}
+}

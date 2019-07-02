@@ -140,6 +140,21 @@ class Recompensa extends ClaseBase {
     return $stmt->execute();
    }
 
+
+   public function modificarReco(){
+
+$nombre = $this->getNombre();
+$desc = $this->getDescripcion();
+$monto = $this->getMontoaSuperar();
+$limiteUsu = $this->getLimiteUsuarios();
+$id = $this->getId();
+  $stmt = $this->getDB()->prepare( 
+    "UPDATE recompensa set Nombre=?, Descripcion=?, MontoaSuperar=?, limiteUsuarios=? WHERE id=?"); 
+    $stmt->bind_param("ssiii", $nombre,$desc,$monto,$limiteUsu, $id);
+    return $stmt->execute();
+
+   }
+
    public function menorRec(){
     $cant = 0;
     $id = $this->getId();

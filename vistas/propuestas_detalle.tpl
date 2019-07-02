@@ -76,11 +76,15 @@
                                 <tr>
                                     <th>Nombre</th>
                                     <th>Monto a superar</th>
+                                    <th>Opciones</th>
                                 </tr>
                                 {foreach from=$recompensas item=rec}
                                 <tr>
-                                    <td>{$rec->getNombre()}</td>
-                                    <td>{$rec->getMontoaSuperar()}</td>
+                                    <td id="nombre{$rec->getNombre()}">{$rec->getNombre()}</td>
+                                    <td id="monto{$rec->getNombre()}">{$rec->getMontoaSuperar()}</td>
+
+                                     <td><a class="btn" id="{$rec->getId()}{$propuesta->getNombre()}" onclick="modificarRecompensa('{$url_base}','{$rec->getNombre()}',{$rec->getId()},'{$rec->getDescripcion()}',{$rec->getMontoaSuperar()},{$rec->getLimiteUsuarios()},'{$propuesta->getNombre()}')">
+                  <i class="fa fa-times"></i></a></td>
                                 </tr>
                                 {/foreach}
                             </table>
@@ -155,7 +159,10 @@
         <script src="js/carrusel.js"></script>
         <script src="js/main.min.js"></script>
         <script src="js/custom.js"></script>
+         <script src="js/jquery.min.js"></script>
+    <script src="js/sweetalert.js"></script>
         <script src="js/validar.js" type="text/javascript"></script>
+        <script type="text/javascript" src="js/alertas.js"></script>
     </body>
 </html>
 

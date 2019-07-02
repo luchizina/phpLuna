@@ -1000,6 +1000,36 @@ function sendnotification($tokens = array(), $message, $titl,$mensaje)
     
     echo $message_status;
     }
+
+
+    function modificarRecompensa(){
+
+      $nombreR = $_POST['nombreR'];
+      $id = $_POST['id'];
+      $desc = $_POST['descripcion'];
+      $monto = $_POST['monto'];
+      $limUsu = $_POST['limiteUsu'];
+      
+      $recom = new Recompensa();
+      $recompensa = $recom->obtenerPorId($id);
+
+      $recompensa->setDescripcion($desc);
+      $recompensa->setMontoaSuperar($monto);
+      $recompensa->setLimiteUsuarios($limUsu);
+      $recompensa->setNombre($nombreR);
+      $recompensa->modificarReco();
+
+      $nuevoArray = array();
+      array_push($nuevoArray, $nombreR, $desc,$monto,$limUsu);
+      $json =  json_encode($nuevoArray);
+      echo $json;
+
+
+    }
+
+
+
+
     
     function propuestasFinalizar($prop){
       $pro = $prop->getNombre();
