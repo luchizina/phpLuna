@@ -29,12 +29,12 @@ function redondear(numero, digitos){
 
 function listarPropBien(p){
 listProp(p,'no','no');
+paginar('no','no');
 }
 
 function listProp(p,nombreCat,nombreProp){
   urlList = '/phpLuna/propuesta/listProps/';
   if(nombreCat == 'no'){
-
   $.ajax({
     url: urlList,
     data: 'p='+p,
@@ -91,13 +91,12 @@ function listProp(p,nombreCat,nombreProp){
         html += '</div>';
         html += '</div>';
         
-      }
+      } 
       $('#propuestitas').html(html);
     }
   })
 
   }else{
-  
 $.ajax({
  
     url: urlList,
@@ -127,8 +126,21 @@ $.ajax({
         html += '<h2><a href="/phpLuna/propuesta/detalleProp/'+res[i]['Nombre']+'/">'+res[i]['Nombre']+'</a>';
        
         html += '</h2>';
+        if(res[i]['Tiemrest'] > 1){ 
         html += '<div class="probootstrap-date"><i class="fa fa-history"></i>Quedan '+res[i]['Tiemrest']+' dias restantes</div>';
         html += '<p><a href="/phpLuna/propuesta/nuevaColaboracion/'+res[i]['Nombre']+'" class="btn btn-primary btn-black">Colaborar!</a>'
+      }
+      if(res[i]['Tiemrest'] == 1){
+        html += '<div class="probootstrap-date"><i class="fa fa-history"></i>Queda '+res[i]['Tiemrest']+' dia restante</div>';
+        html += '<p><a href="/phpLuna/propuesta/nuevaColaboracion/'+res[i]['Nombre']+'" class="btn btn-primary btn-black">Colaborar!</a>'
+      }
+      if(res[i]['Tiemrest'] == 0){
+        html += '<div class="probootstrap-date"><i class="fa fa-history"></i>La propuesta finalizara hoy</div>';
+        html += '<p><a href="/phpLuna/propuesta/nuevaColaboracion/'+res[i]['Nombre']+'" class="btn btn-primary btn-black">Colaborar!</a>'
+      }
+      if(res[i]['Tiemrest'] < 0){
+        html += '<div class="probootstrap-date"><i class="fa fa-history"></i>La propuesta esta finalizada</div>';
+      }
            if(res[i]['UsuFav'] !== null){
           html += '<a class="btn estrella" onclick="favoritear(\''+res[i]['Nombre']+'\', /phpLuna/ ,\''+traeLog().replace(/^\s+|\s+$/gm,'')+'\');">';
           html += '<i class="fa fa-star" id="'+otroid+'"></i></a>';
@@ -150,11 +162,17 @@ $.ajax({
 }
 } 
 
-function paginar(){
+function paginar(nombreCat,nombreProp){
+  console.log(nombreCat + nombreProp);
+  if(nombreCat == 'no'){
   $.ajax({
     url: '/phpLuna/propuesta/cantPag/',
     type: 'post',
+    dataType: 'json',
     success:function(res){
+      if(res == 1){
+        $('#pagination').html("");
+      }
       if(res > 1){
       let html = '';
       let no = 'no';
@@ -176,6 +194,38 @@ function paginar(){
     }
   }
   })
+} else {
+  $.ajax({
+    url: '/phpLuna/propuesta/cantPag/',
+    data: 'nombreCat='+nombreCat+'&nombreProp='+nombreProp,
+    type: 'post',
+    dataType: 'json',
+    success:function(res){
+      if(res == 1){
+        $('#pagination').html("");
+      }
+      if(res > 1){
+      let html = '';
+      let no = 'no';
+      html += '<ul class="pagination justify-content-center" style="margin:20px 0">';
+      html += '<li class="page-item" id="antF"><a id="antaF" class="page-link" onclick="anteriorFilt(\''+nombreCat+'\',\''+nombreProp+'\');">Anterior</a></li>';
+      for(let i=1; i<=res; i++){
+        html += '<li class="page-item" id="'+i+'"><a class="page-link" onclick="listProp('+i+',\''+nombreCat+'\',\''+nombreProp+'\'); vuelve(); tomaval('+i+')">'+i+'</a></li>';
+      }
+      html += '<li class="page-item" id="sigF"><a class="page-link" id="siguiF" onclick="sigF(\''+nombreCat+'\',\''+nombreProp+'\');">Siguiente</a></li>';
+      html += '</ul>';
+      $('#pagination').html(html);
+    }
+    if(res == 0){
+      let html = '';
+      html += '<div class="col-md-12 text-center">';
+      html += '<h2 class="caca">Aún no hay propuestas </h2>'; 
+      html += '</div>';
+      $('#propuestitas').html(html);
+    }
+  }
+  })
+}
 }
 
 function obtUltP(){
@@ -224,10 +274,39 @@ function sig(){
     let v = parseInt(p)+1;
     console.log(v);
     tomaval(v);
-    listProp(v);
+    listarPropBien(v);
   } else {
     $('#sig').addClass("disabled");
     $("#sigui").attr("onclick","void(0);");
+  }
+}
+
+function sigF(cat, prop){
+  let ult = obtUltP();
+  let p = valAct();
+  if(ult > p){
+    $('#sigF').removeClass("disabled");
+    $("#siguiF").attr("onclick","sigF('"+cat+"','"+prop+"');");
+    let v = parseInt(p)+1;
+    tomaval(v);
+    listProp(v, cat, prop);
+  } else {
+    $('#sigF').addClass("disabled");
+    $("#siguiF").attr("onclick","void(0);");
+  }
+}
+
+function anteriorFilt(cat, prop){
+  let v = valAct();
+  if(v > 1){
+    $('#antF').removeClass("disabled");
+    $("#antaF").attr("onclick","anteriorF('"+cat+"','"+prop+"');");
+    let p = v-1;
+    tomaval(p);
+    listProp(p, cat, prop);
+  } else {
+    $('#antF').addClass("disabled");
+    $("#antaF").attr("onclick","void(0);");
   }
 }
 
@@ -238,7 +317,7 @@ function anterior(){
     $("#anta").attr("onclick","anterior();");
     let p = v-1;
     tomaval(p);
-    listProp(p);
+    listarPropBien(p);
   } else {
     $('#ant').addClass("disabled");
     $("#anta").attr("onclick","void(0);");
