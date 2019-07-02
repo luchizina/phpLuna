@@ -69,7 +69,7 @@
               <div class="form-group">
                 <div class="imgUp">
                 <div class="imagePreview"></div>
-               <label class="btn btn-primary btn-lg">Elegir imagen<input type="file" name="archivo" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;" required=""></label>
+               <label class="btn btn-primary btn-lg">Elegir imagen<input type="file" name="archivo" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;" required="" accept="image/jpg"></label>
                <span>Solo imagenes jpg</span>
               </div> 
               </div>
