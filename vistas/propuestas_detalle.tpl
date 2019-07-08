@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <link href="css/propa.css" rel="stylesheet">
         <link href="css/pop.css" rel="stylesheet">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        
         <!--[if lt IE 9]>
         <script src="js/vendor/html5shiv.min.js"></script>
         <script src="js/vendor/respond.min.js"></script>
@@ -20,7 +20,7 @@
     </head>
     <body class="bg">
         {include file="cabezal.tpl"}
-        <section class="probootstrap-hero "  data-stellar-background-ratio="0.01">
+        <section class="probootstrap-hero"  data-stellar-background-ratio="0.01">
         <div class="container">
             <div class="row">
                 <div class="col-md-12" >
@@ -77,18 +77,25 @@
                         </div>
                         <div id="London" class="tabcontent">
                             <table class="table table-striped tabla" style=" background-color: #ecececb3">
+                               <thead>
                                 <tr>
                                     <th>Nombre</th>
                                     <th>Monto a superar</th>
-                                    <th>Opciones</th>
+                                    <th colspan="2" class="text-center">Opciones</th>
                                 </tr>
+                            </thead>
                                 {foreach from=$recompensas item=rec}
                                 <tr>
                                     <td id="nombre{$rec->getNombre()}">{$rec->getNombre()}</td>
                                     <td id="monto{$rec->getNombre()}">{$rec->getMontoaSuperar()}</td>
 
                                      <td><a class="btn" id="{$rec->getId()}{$propuesta->getNombre()}" onclick="modificarRecompensa('{$url_base}','{$rec->getNombre()}',{$rec->getId()},'{$rec->getDescripcion()}',{$rec->getMontoaSuperar()},{$rec->getLimiteUsuarios()},'{$propuesta->getNombre()}')">
-                  <i class="fa fa-times"></i></a></td>
+                  <i class="fa fa-edit"></i></a></td>
+
+                            <td><a class="btn fa fa-trash" onclick="borrarRecompensa('{$url_base}',{$rec->getId()},'{$rec->getNombre()}')">
+                  </a></td>
+
+
                                 </tr>
                                 {/foreach}
                             </table>
@@ -161,11 +168,15 @@
               evt.currentTarget.className += " active";
             }
         </script>
-        <script src="js/scripts.min.js"></script>
-        <script src="js/carrusel.js"></script>
-        <script src="js/main.min.js"></script>
-        <script src="js/custom.js"></script>
+     
          <script src="js/jquery.min.js"></script>
+         <script src="js/scripts.min.js"></script>
+        
+        <script src="js/custom.js"></script>
+
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+         <script src="js/carrusel.js"></script>
+        <script src="js/main.min.js"></script>
     <script src="js/sweetalert.js"></script>
         <script src="js/validar.js" type="text/javascript"></script>
         <script type="text/javascript" src="js/alertas.js"></script>

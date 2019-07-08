@@ -410,7 +410,7 @@ function listCom(nombre, url){
               data: 'idCom='+idCom+'&nomPropCom='+nomPropCom,
               type: 'post',
               success:function(){
-                alert('Comentario eliminado');
+                
                 nuevo.parentNode.parentNode.removeChild(nuevo.parentNode);
               }
             })
@@ -437,7 +437,7 @@ function listCom(nombre, url){
               data: 'idCom='+idCom+'&nomPropCom='+nomPropCom,
               type: 'post',
               success:function(){
-                alert('Comentario eliminado');
+              
                 
                 element.parentNode.parentNode.removeChild(element.parentNode);
                 //nuevo.parentNode.removeChild(nuevo);

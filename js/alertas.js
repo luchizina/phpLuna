@@ -162,3 +162,43 @@ if (formValues) {
   
 }
 }
+
+
+
+
+function borrarRecompensa(url_base, id, nombreRec){
+
+let tabla = event.target.parentElement.parentElement.parentElement;
+let tupla = event.target.parentElement.parentElement;
+   Swal.fire({
+  title: '¡Borrar recompensa!',
+  text: "¿Estás seguro?",
+  type: 'question',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  cancelButtonText:'Mejor no',
+  confirmButtonText: 'Dale'
+}).then((result) => {
+  if (result.value) {
+
+
+    $.ajax({
+    url:url_base+"propuesta/borrarRecompensa",
+    type: 'post',
+    data: 'id='+id+'&nombreR='+nombreRec,
+    success:function(html){
+   tabla.removeChild(tupla);
+        Swal.fire(
+  'Recompensa eliminada!',
+  'Has eliminado la recompensa',
+  'success'
+)
+     },
+    error:function(){
+    }
+  });
+  }
+})  
+
+}

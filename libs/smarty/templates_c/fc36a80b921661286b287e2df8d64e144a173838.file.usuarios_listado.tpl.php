@@ -1,17 +1,31 @@
+<<<<<<< HEAD
 <?php /* Smarty version Smarty-3.1.21-dev, created on 2019-07-08 17:47:57
          compiled from "vistas\usuarios_listado.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:3427119525d23abfd3be4d2-35422979%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+=======
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-07-02 18:05:13
+         compiled from "vistas\usuarios_listado.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:201485d1bc709d82dd8-06216925%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+>>>>>>> 2f319b3c07ec8f50c0d51a86a731b5c488a2e71f
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'fc36a80b921661286b287e2df8d64e144a173838' => 
     array (
       0 => 'vistas\\usuarios_listado.tpl',
+<<<<<<< HEAD
       1 => 1562016270,
       2 => 'file',
     ),
   ),
   'nocache_hash' => '3427119525d23abfd3be4d2-35422979',
+=======
+      1 => 1562003935,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '201485d1bc709d82dd8-06216925',
+>>>>>>> 2f319b3c07ec8f50c0d51a86a731b5c488a2e71f
   'function' => 
   array (
   ),
@@ -27,9 +41,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
+<<<<<<< HEAD
   'unifunc' => 'content_5d23abfdb67596_94565144',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5d23abfdb67596_94565144')) {function content_5d23abfdb67596_94565144($_smarty_tpl) {?>
+=======
+  'unifunc' => 'content_5d1bc70a2d4df0_07399086',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5d1bc70a2d4df0_07399086')) {function content_5d1bc70a2d4df0_07399086($_smarty_tpl) {?>
+>>>>>>> 2f319b3c07ec8f50c0d51a86a731b5c488a2e71f
 <!DOCTYPE html>
 <html lang="es">
   <head>

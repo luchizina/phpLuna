@@ -1033,6 +1033,13 @@ function sendnotification($tokens = array(), $message, $titl,$mensaje)
 
     }
 
+    function borrarRecompensa(){
+      $id = $_POST['id'];
+      $reco = new Recompensa();
+      $reco->borrar($id);
+
+    }
+
 
 
 
