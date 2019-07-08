@@ -32,8 +32,9 @@
               <h2 class="caca">Propuestas a las que puedas apoyar </h2>
               <p class="lead">miralas tranqui</p>
             </div>
+            {if $NickLog!= null}
             <button id="agregar" name="agregar" title="Agregar una propuestas" class="btn btn-primary pull-right" onClick="window.location='{$registrar_propuesta}'">Agregar</button>
-
+            {/if}
           </div>
           <div class="row jajejo" id="propuestitas">
             

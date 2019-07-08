@@ -1,31 +1,17 @@
-<<<<<<< HEAD
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-07-08 17:47:56
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-07-08 17:51:15
          compiled from "vistas\cabezal.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:4464920795d23abfcd63cf1-51089832%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
-=======
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-07-02 18:05:12
-         compiled from "vistas\cabezal.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:285515d1bc708e2b3a3-18424256%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
->>>>>>> 2f319b3c07ec8f50c0d51a86a731b5c488a2e71f
+<?php /*%%SmartyHeaderCode:3200634145d23acc307c552-94473755%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'fb05f10fe29da8a558e3c965866d6cd5dd601380' => 
     array (
       0 => 'vistas\\cabezal.tpl',
-<<<<<<< HEAD
       1 => 1562016270,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '4464920795d23abfcd63cf1-51089832',
-=======
-      1 => 1562003935,
-      2 => 'file',
-    ),
-  ),
-  'nocache_hash' => '285515d1bc708e2b3a3-18424256',
->>>>>>> 2f319b3c07ec8f50c0d51a86a731b5c488a2e71f
+  'nocache_hash' => '3200634145d23acc307c552-94473755',
   'function' => 
   array (
   ),
@@ -42,15 +28,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-<<<<<<< HEAD
-  'unifunc' => 'content_5d23abfce947f3_24495350',
+  'unifunc' => 'content_5d23acc3133256_67870696',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5d23abfce947f3_24495350')) {function content_5d23abfce947f3_24495350($_smarty_tpl) {?>
-=======
-  'unifunc' => 'content_5d1bc7093b8443_92706532',
-),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5d1bc7093b8443_92706532')) {function content_5d1bc7093b8443_92706532($_smarty_tpl) {?>
->>>>>>> 2f319b3c07ec8f50c0d51a86a731b5c488a2e71f
+<?php if ($_valid && !is_callable('content_5d23acc3133256_67870696')) {function content_5d23acc3133256_67870696($_smarty_tpl) {?>
  <head>
     <link rel="shortcut icon" href="img/moon.png" type="image/png" />
     <title>LUNA</title>

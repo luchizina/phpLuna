@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-07-08 17:48:54
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2019-07-08 17:50:55
          compiled from "vistas\registrar_propuesta.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:8490884065d23ac363eb0f6-51372146%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '01c181d3b7bf18d145777ee84d60c3f99164a3c8' => 
     array (
       0 => 'vistas\\registrar_propuesta.tpl',
-      1 => 1560388419,
+      1 => 1562619009,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5d23ac36558b06_19132633',
   'variables' => 
   array (
     'url_base' => 0,
@@ -25,114 +27,110 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'persona' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5d23ac36558b06_19132633',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5d23ac36558b06_19132633')) {function content_5d23ac36558b06_19132633($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <base href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 ">
-    <meta charset="utf-8">    
+    <meta charset="utf-8">
     <title><?php echo $_smarty_tpl->tpl_vars['proyecto']->value;?>
 </title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
-    <link href="css/imagenes.css" rel="stylesheet">
-     <?php echo $_smarty_tpl->getSubTemplate ("cabezal.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+    <link href="css/imagenes.css" rel="stylesheet"> <?php echo $_smarty_tpl->getSubTemplate ("cabezal.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
-  </head>
-  <body>
-   <section class="probootstrap-hero bg"  data-stellar-background-ratio="0.1">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-12  col-md-12  main">
-        <br>
-          <h2 class="sub-header"  style="color: #fff ; text-align: center;"><?php echo $_smarty_tpl->tpl_vars['titulo']->value;?>
-</h2>
-          <?php if ($_smarty_tpl->tpl_vars['mensaje']->value!='') {?>
-            <div class="alert alert-danger" role="alert"><?php echo $_smarty_tpl->tpl_vars['mensaje']->value;?>
+</head>
+
+<body>
+    <section class="probootstrap-hero bg" data-stellar-background-ratio="0.1">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12  col-md-12  main">
+                    <br>
+                    <h2 class="sub-header" style="color: #fff ; text-align: center;"><?php echo $_smarty_tpl->tpl_vars['titulo']->value;?>
+</h2> <?php if ($_smarty_tpl->tpl_vars['mensaje']->value!='') {?>
+                    <div class="alert alert-danger" role="alert"><?php echo $_smarty_tpl->tpl_vars['mensaje']->value;?>
 </div>
-          <?php }?>
-          <form class="form-horizontal" enctype="multipart/form-data" method="post">
-            <fieldset style="color: #fff;">
-            <!-- Text input-->
-            <br>
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="nombre">Nombre:</label>  
-              <div class="col-md-4">
-              <input id="nombre" name="nombre" type="text" placeholder="La vela en Pdú" class="form-control input-md" required="">
-              </div>
-            </div>
-
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="desc">Descripción:</label>  
-              <div class="col-md-4">
-              <textarea id="desc" name="desc" type="text" placeholder="Esto es una descripcion de mi tarea" class="form-control input-md" required="">
-              </textarea>
-              </div>
-            </div>
-
-            <!-- Text input-->
-            <div class="form-group">
-              <label class="btn btn-primary btn-lg">Elegir imagen<input type="file" name="archivo" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;"></label>
-            </div>
-
-            
-             <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="monto">Monto</label>  
-              <div class="col-md-4">
-              <input id="monto" name="monto" type="number" class="form-control input-md" required="">
-              </div>
-            </div>
-              <style>
-
-              </style>
-         <div class="form-group">
-              <label class="col-md-4 control-label" for="monto">Categoria</label>  
-              <div class="col-md-4">
-           <select name="catego" class="dis">
-              <?php  $_smarty_tpl->tpl_vars['persona'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['persona']->_loop = false;
+                    <?php }?>
+                    <form class="form-horizontal" enctype="multipart/form-data" method="post">
+                        <fieldset style="color: #fff;">
+                            <!-- Text input-->
+                            <br>
+                           
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="archivo"></label>
+                                <div class="col-md-4">
+                                    <div class="imgUp" style=" margin-left:150px; text-align: center;">
+                                        <div class="imagePreview" style="background-image: url(./img/nodisp.jpg);"></div>
+                                        <label  class="btn btn-primary btn-lg">Elegir imagen
+                                            <input type="file" name="archivo" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;" required="" accept="image/jpeg" />
+                                        </label>
+                                        <span>Solo imagenes jpg</span>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="col-md-4 control-label" for="nombre">Nombre:</label>
+                                <div class="col-md-4">
+                                    <input id="nombre" name="nombre" type="text" placeholder="La vela en Pdú" class="form-control input-md" required="">
+                                </div>
+                            </div>
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="desc">Descripción:</label>
+                                <div class="col-md-4">
+                                    <textarea id="desc" name="desc" type="text" placeholder="Esto es una descripcion de mi tarea" class="form-control input-md" required=""></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="monto">Monto</label>
+                                <div class="col-md-4">
+                                    <input id="monto" name="monto" type="number" class="form-control input-md" required="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="monto">Categoria</label>
+                                <div class="col-md-4">
+                                    <select name="catego" class="dis">
+                                        <?php  $_smarty_tpl->tpl_vars['persona'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['persona']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['categorias']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['persona']->key => $_smarty_tpl->tpl_vars['persona']->value) {
 $_smarty_tpl->tpl_vars['persona']->_loop = true;
 ?>
-            <option value="<?php echo $_smarty_tpl->tpl_vars['persona']->value->getNombreH();?>
+                                        <option value="<?php echo $_smarty_tpl->tpl_vars['persona']->value->getNombreH();?>
 "><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['persona']->value->getNombreH(), 'UTF-8');?>
 </option>
-            <?php } ?>
-          </select>
-           </div>
-            </div> 
-         
-                
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="fec">Fecha realización</label>  
-              <div class="col-md-4">
-              <input id="fec" name="fec" type="date" class="form-control input-md" required="">
-                
-              </div>
-            </div>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="fec">Fecha realización</label>
+                                <div class="col-md-4">
+                                    <input id="fec" name="fec" type="date" class="form-control input-md" required="">
 
-            <!-- Button -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="guardar"></label>
-              <div class="col-md-4">
-                <button id="guardar" name="guardar" class="btn btn-success">Agregar</button>
-              </div>
+                                </div>
+                            </div>
+
+                            <!-- Button -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="guardar"></label>
+                                <div class="col-md-4">
+                                    <button id="guardar" name="guardar" class="btn btn-success">Agregar</button>
+                                </div>
+                            </div>
+                </div>
             </div>
 
             </fieldset>
-          </form>
-      </div>
-    </div>
- </section>
+            </form>
+        </div>
+        </div>
+    </section>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -153,7 +151,6 @@ $_smarty_tpl->tpl_vars['persona']->_loop = true;
     <?php echo '<script'; ?>
  src="js/subirImg.js" type="text/javascript"><?php echo '</script'; ?>
 >
-  </body>
-</html>
+</body>
 
-<?php }} ?>
+</html><?php }} ?>
