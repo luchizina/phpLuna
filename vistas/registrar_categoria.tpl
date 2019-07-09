@@ -13,9 +13,8 @@
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>  
+  
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   </head>
   <body >
     {include file="cabezal.tpl"}
@@ -47,15 +46,17 @@
               <tbody>
                 {foreach from=$categorias item=persona}
                   <tr>
-                    <td>{$persona->getNombreH()|upper}</td>
+                    <td id="nombre{$persona->getNombreH()}">{$persona->getNombreH()|upper}</td>
                   
                     <td>
                        <a class="btn" href="{$url_base}propuesta/borrarCa/{$persona->getNombreP()}/">
                          <i class="icon-trash"></i></a>
+
                       
                      
                     <!--  <input type="button" value="Favoritos" class="btn btn-submit" onClick="cargarFavoritos();"/>-->
                     </td>
+                      <td><a class="btn" id="{$persona->getNombreH()}" onclick="modificarCategoria('{$url_base}','{$persona->getNombreH()}')"><i class="fa fa-edit"></i></a></td>
                   </tr>
                 {/foreach}
               </tbody>
@@ -66,7 +67,10 @@
       </div>
     </div>
      </section>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
+   <script src="js/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script src="js/sweetalert.js"></script> 
+         <script type="text/javascript" src="js/alertas.js"></script>
   </body>
 </html>

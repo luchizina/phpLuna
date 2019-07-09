@@ -89,6 +89,8 @@ class ControladorPropuesta extends ControladorIndex {
           $p->setImagen($img);
           # code...
         }
+
+        $log = Session::get('usuario_nick');
         $tpl = Template::getInstance();
         $datos = array(
        'propuestas' => $propuestas,
@@ -98,6 +100,7 @@ class ControladorPropuesta extends ControladorIndex {
        'paginas' => $cant,
        'est' => $estAnt,
        'sig' => $estSig,
+       'NickLog' => $log,
        );
       
    
@@ -111,9 +114,11 @@ class ControladorPropuesta extends ControladorIndex {
    function listadoBusqueda($params = array()){
  $textoBuscado = $params[0];
 $nombreCat = $params[1];
+$log = Session::get('usuario_nick');
      $datos = array(
        'textoBuscado' => $textoBuscado,
        'nombreCat' => $nombreCat,
+       'NickLog' => $log,
        );
     $tpl = Template::getInstance();
     $tpl->asignar('textoBuscado',$textoBuscado);
@@ -1038,6 +1043,18 @@ function sendnotification($tokens = array(), $message, $titl,$mensaje)
       $reco = new Recompensa();
       $reco->borrar($id);
 
+    }
+
+    function modificarCategoria(){
+      $nombreC = $_POST['nombreC'];
+      $nombreViej = $_POST['nombreViejo'];
+      $cat = new categoria();
+  $cat->modificarCatego($nombreC, $nombreViej);
+
+      $nuevoArray = array();
+      array_push($nuevoArray, $nombreC);
+       $json =  json_encode($nuevoArray);
+      echo $json;
     }
 
 

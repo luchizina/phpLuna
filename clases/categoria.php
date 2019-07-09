@@ -56,6 +56,14 @@ $stmt->bind_param("s",$nombre);
     return $stmt->execute();
     }
 
+    public function modificarCatego($nombreNuevo, $nombreViejo){
+         $stmt = $this->getDB()->prepare( 
+    "UPDATE categoria set NombreH=?, NombreP=? WHERE NombreH=?"); 
+    $stmt->bind_param("sss", $nombreNuevo,$nombreNuevo,$nombreViejo);
+    return $stmt->execute();
+    }
+
+
 
 }
 ?>

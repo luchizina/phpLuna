@@ -61,7 +61,7 @@
                 {if $usuario_log->getImagen() != ""}
                 <div class="imagePreview" style="background-image: url('./{$usuario_log->getImagen()}')"></div>
                 {/if}
-               <label class="btn btn-primary btn-lg">Elegir imagen<input type="file" name="archivo" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;"></label>
+               <label class="btn btn-primary btn-lg">Elegir imagen<input type="file" name="archivo" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;" required="" accept="image/jpeg"></label>
               </div> 
               </div>
               <div class="form-group">

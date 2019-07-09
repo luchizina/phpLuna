@@ -11,10 +11,10 @@
       <script src="js/vendor/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body >
+  <body class="bg">
 
     {include file="cabezal.tpl"}
-    <section class="probootstrap-hero" style="background-image: url(img/hero_bg_bw_1.jpg); height:100%"  data-stellar-background-ratio="0.1">
+    <section class="probootstrap-hero" data-stellar-background-ratio="0.1">
         <div class="container">
           <div class="row">
             <div class="col-md-12" >

@@ -202,3 +202,61 @@ let tupla = event.target.parentElement.parentElement;
 })  
 
 }
+
+
+
+async function modificarCategoria(url_base, nombreCat){
+
+const {value: formValues} = await Swal.fire({
+  title: 'Modificar categoría',
+  html:
+    'Nombre' +
+    '<input id="swal-input1" class="swal2-input" value="'+nombreCat+'">',
+  focusConfirm: false,
+  preConfirm: () => {
+    return [
+      document.getElementById('swal-input1').value
+  
+    ]
+  }
+})
+
+if (formValues) {
+// Swal.fire(JSON.stringify(formValues[0]))
+ let nombreC = formValues[0];
+ 
+ $.ajax({
+    url: url_base+"propuesta/modificarCategoria",
+    type: 'post',
+    data: 'nombreC='+nombreC+'&nombreViejo='+nombreCat,
+    success:function(html){
+      console.log(html);
+
+      let tdCat = document.getElementById("nombre"+nombreCat);
+          tdCat.innerHTML = nombreC;
+      let nombreTr = document.getElementById(nombreCat);
+    
+      tdCat.id = "nombre"+nombreC;    
+      nombreTr.id = nombreC;
+
+      nombreTr.setAttribute("onclick","modificarCategoria('"+url_base+"','"+nombreC+"')");
+  
+          Swal.fire(
+  'Categoría modificada!',
+  'La categoría se actualizó con éxito, querido',
+  'success'
+)
+    
+     },
+    error:function(){
+    }
+  });
+
+
+  
+}
+
+
+
+
+}
